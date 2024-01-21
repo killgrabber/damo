@@ -7,8 +7,8 @@ Bachelorarbeit zur Digitalisierung von additiv gefertigten Bauteilen
 ## Roadmap
 - [ ]  3D Daten von Objekt(teilen) mithilfe eines Scanners erhalten.
 - [ ]  Gesamtes Objekt mithilfe von mehreren Scandateien erstellen.
-  -  Die ursprungs 3D Datei kann dafür verwendet werden.
-  -  Markierungen auf dem Bauteil sind auch möglich.
+  -  Die ursprüngliche 3D Datei kann dafür verwendet werden.
+  -  Markierungen auf dem Bauteil sind möglich.
   -  Vorerst nur eine top-down Ansicht von dem Bauteil nötig.
   -  Vorgang soll mit allen Bauteilen anwendbar sein.
 - [ ] Objekt in geeignetem Datenformat oder Struktur speichern.
