@@ -17,6 +17,7 @@ Bachelorarbeit zur Digitalisierung von additiv gefertigten Bauteilen
   
 ## TODOs
 - [ ] Stand der Technik recherchieren.
+- [ ] Entwicklungsumgebung und build-prozess einrichten.
 - [ ] Scanneraufbau dokumentieren.
 - [ ] Scannerdateien in 2D Top-Down-Ansicht umwandeln.
 - [ ] Scannerdateien stitchen.
