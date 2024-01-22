@@ -15,6 +15,8 @@
 ## Zusammenfügen von 3D Scans (Stitching/Merging)
 * Combine point clouds, mehrere Tools und Libraries existieren
   * [Point cloud cpp library](https://github.com/PointCloudLibrary/pcl)
+  * [Cloud compare](https://github.com/cloudcompare/cloudcompare)
+  * [Trimble-realworks](https://geospatial.trimble.com/en/products/software/trimble-realworks)
 
 
 * Papers:
@@ -27,3 +29,9 @@
   * [Cloud compare](https://github.com/cloudcompare/cloudcompare)
   * [ZEISS INSPECT](https://www.gom.com/de-de/produkte/messtechnik-software/gom-inspect-pro)
   * [Rhinoceros 3D](https://www.rhino3d.com/de/)
+* Papers: 
+  * [Automatic Wear Detection on Normalized Gears Made by Additive Manufacturing from Dense 3D Point Clouds](https://www.scientific.net/AST.132.53)
+  * [Retrieving Matching CAD Models by Using Partial 3D Point Clouds](https://www.cad-journal.net/files/vol_4/CAD_4(5)_2007_629-638.pdf)
+  * [Point Matching Method](https://www.sciencedirect.com/topics/engineering/point-matching-method)
+  * [Automated recognition of 3D CAD model objects in laser scans and calculation of as-built dimensions for dimensional compliance control in construction
+Author links open overlay panel](https://www.sciencedirect.com/science/article/abs/pii/S1474034609000482)
