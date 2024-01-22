@@ -23,7 +23,20 @@ Bachelorarbeit zur Digitalisierung von additiv gefertigten Bauteilen
 - [ ] Scannerdateien stitchen.
 - [ ] Digitale Objektdatei erstellen.
 - [ ] 2 digitale Objektdateien vergleichen.
-
+  
+## Meeting 22.01.2024
+### TO DO
+* Aufgabenbeschreibung ausfüllen
+  * 5 Basisquellen
+  * Aufgabenteile
+  * Titel
+  * Problemstellung und Lösungsansatz
+* Ziel: Bis Mittwoch 24.01. fertig
+### Notes
+* Einstiegspräsentation im März, danach Anmeldung der Prüfung
+* Im Februar bei einem Präsentationstag dabei sein.
+* Laufzettel bei Fr. Schiller, muss in einer Woche von Prof. unterschrieben sein, vorher absprechen.
+* Richtlinien für Studenten -> von Prof. Petra Wiederkehr, unbedingt daran halten.
 
 
 
