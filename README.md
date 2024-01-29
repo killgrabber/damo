@@ -4,6 +4,14 @@ Digitise Additive Manufactured Objects
 ## About The Project
 Bachelorarbeit zur Digitalisierung von additiv gefertigten Bauteilen
 
+## Kernquellen
+1. [Areal Surface Measurement Using Multidirectional Lasers](state-of-the-art/hauptquellen/LAM130.pdf)
+2. [Application of Reverse Engineering Techniques in Mechanics System Services](state-of-the-art/hauptquellen/Application_of_Reverse_Engineering_Techniques_in_M.pdf)
+3. [From point cloud to surface](state-of-the-art/hauptquellen/FromPointCloud2Surface.pdf)
+4. Additve Manufactoring Technologies, Ian Gibson · David Rosen Brent Stucker · Mahyar Khorasani (Buch)
+5. [A new Segmention Method for point cloud data](https://www.sciencedirect.com/science/article/abs/pii/S0890695501001201)
+
+
 ## Roadmap
 - [ ]  3D Daten von Objekt(teilen) mithilfe eines Scanners erhalten.
 - [ ]  Gesamtes Objekt mithilfe von mehreren Scandateien erstellen.
@@ -16,6 +24,7 @@ Bachelorarbeit zur Digitalisierung von additiv gefertigten Bauteilen
 - [ ] Vergleichswerte von Bauteil automatisch ermitteln (und darstellen?).
   
 ## TODOs
+- [x] Sciebo Anmeldung  
 - [ ] Stand der Technik recherchieren.
 - [ ] Entwicklungsumgebung und build-prozess einrichten.
 - [ ] Scanneraufbau dokumentieren.
