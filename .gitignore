@@ -1,3 +1,7 @@
 sciebo/BA_Niklas_Thieme/Daten
 .vagrant/
 *.log
+*.aux
+*.fls
+*.gz
+*.fdb_latexmk
