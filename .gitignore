@@ -1,1 +1,3 @@
-sciebo\BA_Niklas_Thieme\Daten
+sciebo/BA_Niklas_Thieme/Daten
+.vagrant/
+*.log
