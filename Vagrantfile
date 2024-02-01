@@ -91,7 +91,7 @@ Vagrant.configure(2) do |config|
     # libssl-dev is required for the multiwall-backend build
     PACKAGES="${PACKAGES} libssl-dev"
     # is required for pointCloudLib
-    PACKAGES="${PACKAGES} libxext-dev libx11-dev x11proto-gl-dev libglvnd-dev liblz4-dev"
+    PACKAGES="${PACKAGES} libxext-dev libx11-dev x11proto-gl-dev libglvnd-dev liblz4-dev texlive-latex-base"
 
     # Text editor
     PACKAGES="${PACKAGES} atom"

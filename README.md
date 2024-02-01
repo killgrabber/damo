@@ -40,6 +40,7 @@ Bachelorarbeit zur Digitalisierung von additiv gefertigten Bauteilen
   * Aufgabenteile
   * Titel
   * Problemstellung und Lösungsansatz
+  * Ausgangssituation Ziel der Arbeit
 * Ziel: Bis Mittwoch 24.01. fertig
 ### Notes
 * Einstiegspräsentation im März, danach Anmeldung der Prüfung
@@ -48,4 +49,21 @@ Bachelorarbeit zur Digitalisierung von additiv gefertigten Bauteilen
 * Richtlinien für Studenten -> von Prof. Petra Wiederkehr, unbedingt daran halten.
 
 
-
+## Meeting 29.01.2024
+### TODO
+ - [ ] Latex vorlage
+    * mit Quellen Struktur die nach dem Leitfaden struktuiert sind.
+    * Immer mit DOI + Verlinkung
+    * Blocktext
+- [ ] build prozess für latex
+  
+### Notes
+* Immer fragen warum, wieso. 
+* Expose Ziel der Arbeit
+* Buzzwords wie Linienlaser, Digitaliserung in den Titel und die Arbeit
+* Mehr Fokus auf spannbasierte bearbeitung. Warum wird das gemacht? 
+* Was wird mit der Arbeit neu gemacht, was ist noch nicht vorhanden.
+* Quellenverweise und sinnvolle Quellen auch im Expose
+* Quellen mit Kürzel (siehe Beispiele im Leitfaden)
+* Viel weniger umsetzung ins Expose
+* Aufgaben sollten mit (mehreren) Wochen beschrieben werden können.
