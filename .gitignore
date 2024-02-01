@@ -5,3 +5,4 @@ sciebo/BA_Niklas_Thieme/Daten
 *.fls
 *.gz
 *.fdb_latexmk
+build/
