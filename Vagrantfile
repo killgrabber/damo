@@ -65,6 +65,9 @@ Vagrant.configure(2) do |config|
     PACKAGES="${PACKAGES} ubuntu-mate-desktop terminator"
     # Synaptic provides a GUI for package management
     PACKAGES="${PACKAGES} synaptic"
+    # Browser because browser is good
+    PACKAGES="${PACKAGES} firefox"
+    
 
     # Some basic command line tools
     PACKAGES="${PACKAGES} bc bash patch gzip bzip2 tar cpio unzip rsync wget curl parted"
