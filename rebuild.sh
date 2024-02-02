@@ -9,9 +9,11 @@ cd src/ausarbeitung
 pdflatex main.tex
 cd ..
 cd ..
-cp src/ausarbeitung/main.pdf ausarbeitung.pdf
 
 echo "latex files finished..."
+
+echo "Copying latex output..."
+cp src/ausarbeitung/build/main.pdf expose.pdf
 
 if [ ${1:-foo} = "--clear-cache" ]; then
     sudo rm -r ~/.cpm-source-cache
