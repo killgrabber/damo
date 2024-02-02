@@ -95,7 +95,8 @@ Vagrant.configure(2) do |config|
     PACKAGES="${PACKAGES} libssl-dev"
     # is required for pointCloudLib
     PACKAGES="${PACKAGES} libxext-dev libx11-dev x11proto-gl-dev libglvnd-dev liblz4-dev"
-
+    # Latex stuff 
+    PACKAGES="${PACKAGES} texlive-latex-base texlive-latex-extra"
     # Text editor
     PACKAGES="${PACKAGES} atom"
     # C++ IDE
