@@ -1,16 +1,22 @@
 % !TEX root = src/ausarbeitung/main.tex
 \documentclass[]{article}
 
+\usepackage{cite}
 \usepackage{subfiles}
+%\usepackage[showframe]{geometry}
+%\usepackage{layout}
 
-\title{Expose}
+\title{Aufgabenbeschreibung der Bachelorarbeit}
 \author{Niklas Thieme}
-\date{ }
+\date{\today}
 
 \begin{document}
 
 \maketitle
 
-\subfile{sections/introduction}
+\subfile{sections/header.tex}
+
+\bibliography{sectquellen}
+\bibliographystyle{alpha}
 
 \end{document}
