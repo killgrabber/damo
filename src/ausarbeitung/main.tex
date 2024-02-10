@@ -1,14 +1,19 @@
 % !TEX root = src/ausarbeitung/main.tex
-\documentclass[]{article}
+\documentclass[11pt]{article}
 
 \usepackage{cite}
 \usepackage{subfiles}
 %\usepackage[showframe]{geometry}
-%\usepackage{layout}
+\usepackage{layout}
+
+%\usepackage{helvet}
+%\renewcommand{\familydefault}{\sfdefault}
+
+\usepackage[ngerman]{babel}
 
 \title{Aufgabenbeschreibung der Bachelorarbeit}
 \author{Niklas Thieme}
-%\date{\today}
+\date{\today}
 
 \begin{document}
 
@@ -16,6 +21,9 @@
 
 \subfile{sections/header.tex}
 
+\subfile{sections/timeframe.tex}
+
+\newpage
 \bibliography{sections/quellen}
 \bibliographystyle{alpha}
 
