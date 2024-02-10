@@ -96,7 +96,7 @@ Vagrant.configure(2) do |config|
     # is required for pointCloudLib
     PACKAGES="${PACKAGES} libxext-dev libx11-dev x11proto-gl-dev libglvnd-dev liblz4-dev"
     # Latex stuff 
-    PACKAGES="${PACKAGES} texlive-latex-base texlive-latex-extra"
+    PACKAGES="${PACKAGES} texlive-latex-base texlive-latex-extrav sudo apt install texlive-lang-german"
     # Text editor
     PACKAGES="${PACKAGES} atom"
     # C++ IDE
