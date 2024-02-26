@@ -67,3 +67,13 @@ Bachelorarbeit zur Digitalisierung von additiv gefertigten Bauteilen
 * Quellen mit Kürzel (siehe Beispiele im Leitfaden)
 * Viel weniger umsetzung ins Expose
 * Aufgaben sollten mit (mehreren) Wochen beschrieben werden können.
+
+## Meeting 12.02.2024
+### TODO
+ - [ ] Tabelle mit Arbeitspaketen erstellen
+ - [ ] Spezifischer beschreiben wie zB das Stichting funktioniert.
+
+### Notes
+* Vorlage von der TU bzw. Informatik Fakultät für Abschlussarbeiten.
+* Scanner ist der 25er, Quelle von der Herstellerwebsite.
+

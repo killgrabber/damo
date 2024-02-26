@@ -2,7 +2,7 @@
 \begin{document}
 
 \begin{table}[h]
-    \centering
+    %\centering
     \setlength{\tabcolsep}{12pt}
     \begin{tabular}{ll}
     Name      & Niklas Thieme                                                                 \\
@@ -14,57 +14,49 @@
     Thema     & \begin{tabular}[c]{@{}l@{}}Entwicklung einer Methodik zur optischen                \\
                 Spannkraftdeformationsanalyse von additiv \\gefertigten Bauteilen\end{tabular}      \\
     \\
-    Betreuer  & \begin{tabular}[c]{@{}l@{}}Prof. Dr.-Ing. Petra Wiederkehr\\ Jan Liß\end{tabular}  
+    Betreuer  & \begin{tabular}[c]{@{}l@{}}Prof. Dr.-Ing. Petra Wiederkehr\\ Jan Liß,  M.Sc.\end{tabular}  
     \\
 \end{tabular}
 \end{table}
 
-\section*{Ausgangssituation und Ziel der Arbeit}
+\section*{Problemstellung und Lösungsansatz}
 
-\subsection*{Ausgangssituation}
-    Additive Fertigung (AF) ist eine Fertigungsmethode, die es ermöglicht 
-    physische Objekte auf Basis eines digitalen 3D Modells zu erstellen. 
-    Die Objekte werden gefertigt, indem das Material, meistens Plastik oder Metall, 
-    Schicht für Schicht aufgebaut wird.
-    Diese Technologie ist weit verbreitet und hat viele Anwendungszwecke und 
-    Vorteile gegenüber spanenden Fertigungsmethoden. Die Vorteile dieser Technologie
-    liegen vor allem in der Design-Flexibilität, der einfachen Anpassung der Bauteile 
-    und in der Minimierung des Materialverbrauchs \cite{MEHRPOUYA202129}.
+%\cite{SCANNER}
 
-    Das Verfahren wird aufgrund der oben genannten Vorteile insbesondere bei der Herstellung von
-    Prototypen verwendet. Die Flexibilität und einfache Anpassung der Bauteile bringen Vorteile in der
-    Produktentwicklung gegenüber spanenden Fertigungsmethoden \cite{NYS2023}.
-    
-    AF bringt auch Nachteile mit sich. Kumbhar und Mulay beschreiben unter 
-    anderem schlechte Oberflächenqualität, physikalische Limitierungen des Fertigungsprozesses
-    und eine eingeschränkte Material Auswahl \cite{Kumbhar2018}.
-    
-    Um diese Nachteile auszugleichen muss ein Bauteil häufig nachbearbeitet werden. 
-    So können zum Beispiel Oberflächen aufgebessert werden oder Materialreste entfernt werden.
-    Um ein Bauteil zuverlässig nachbearbeiten zu können, kann es nötig sein es zu fixieren.
-    Diese Fixierung kann sich auf die Struktur des Bauteils auswirken.
+Die additive Fertigung gewinnt in der Industrie zunehmend an Bedeutung, da sie im Vergleich zu
+konventionellen Fertigungsverfahren einen höheren Grad an Gestaltungsfreiheit bietet. Je nach
+eingesetztem Verfahren, ermöglicht der schichtweise Materialauftrag eine endkonturnahe
+Herstellung komplexer Bauteilgeometrien wie belastungsoptimierter Leichtbaustrukturen
+[SMB+17]. Allerdings sind die Oberflächenqualität und die Maßhaltigkeit additiv gefertigter
+Werkstücke limitiert, so dass eine Nachbearbeitung beispielsweise durch eine sich anschließende
+Fräsbearbeitung notwendig sein kann [KSV+22].
+\newline
 
-    \subsection*{Ziel der Arbeit}
-    Ziel dieser Arbeit ist es, die Auswirkung einer Fixierung eines Bauteils zu analysieren.
-    Speziell wird die Spannkraftdeformation analysiert, die auf ein Bauteil wirkt, wenn es in einem
-    Schraubstock eingespannt wird.
-    Durch die Analyse sollen Materialen, Fertigungsmethoden und Designentscheidungen verglichen werden. 
-    Insbesondere auf die Bauteilgeometrie und die Unterschiede zwischen den beiden
-    additiven Fertiungsverfahren Fused Deposition Modeling (FDM) und Selektives Laserschmelzen (SLM) 
-    wird geachtet.
-    Konkret wird die Verformung des Bauteils analysiert, die entsteht wenn ein Bauteil
-    in ein Schraubstock eingespannt wird. Hierfuer wird das Bauteil vor und nach dem einspannen gescannt.
-    Aus Unterschieden in diesen beiden Scans kann die Deformierung gemessen.
+Für den Nachbearbeitungsschritt muss das Bauteil in seiner Position und Lage im Bauraum der
+Werkzeugmaschine fixiert werden. Die hierzu aufzubringenden Spannkräfte können die filigranen
+Bauteile elastisch –in Extremfällen auch plastisch– verformen, sodass eine maßhaltige
+spangebende Nachbearbeitung verhindert wird [BAB20]. Um den Spannprozess und dessen
+Auswirkungen auf das Bauteil hinsichtlich der erzielbaren geometrischen Genauigkeit optimieren
+zu können, ist eine Quantifizierung der spannkraftinduzierten Deformation notwendig.
+\newline
 
-    \subsection*{Arbeitsschritte}
-    Damit die Auswirkung auf das Bauteil genau bestimmt werden kann, ist eine genaue Digitaliserung 
-    des Bauteils n"otig.
-    Hierf"ur wird ein 3D Laserscanner der LLT30xx Baureihe von Micro-Epsilon benutzt. Mit einer 
-    maximalen Einzelpunktabweichung von $\pm$0.10 \% ist der Scanner ausreichend genau um die Bauteile
-    vergleichen zu k"onnen \cite{SCANNER}.
-    Der Scanner hat jedoch nur einen begrenzten Messbereich, um auch große Bauteile analysieren 
-    zu k"onnen ist es notwendig mehrere Scans durchzuführen und diese
-    zu einem digitalen Objekt zusammenfügen (Stichting). 
-    Zuerst wird anhand eines definierten Bauteils ein Benchmarking durchgeführt.
+Im Rahmen dieser Bachelorarbeit soll deshalb eine Methodik zur optischen
+Spannkraftdeformationsanalyse entwickelt werden. Auf Basis von geometrischen Ist-Daten eines
+additiv gefertigten Bauteils die mit Hilfe eines Laserscanners (Micro-Epsilon, LLT3000-25/BL
+[MEM20]) aufgezeichnet werden (vgl. siehe [PLW23]), ist eine Berechnung der
+spannkraftinduzierten Verzerrung des Bauteils zu realisieren, indem die Daten eines entspannten
+und gespannten Bauteils automatisiert miteinander verglichen werden sollen.
+\newline
+
+Da der Messbereich des einzusetzenden Lasers bei größeren Bauteilen einen limitierenden Faktor
+darstellt, ist anfänglich eine geeignete Aufbereitung der Messdaten notwendig. Um eine
+vollflächigen Darstellung der Oberfläche/Kontur des zu digitalisierenden Objekts zu erhalten, ist
+deshalb eine Stitching-Methodik zu implementiert, die einzelnen Digitalisierungen ohne
+Informationsverlust zusammenfügt (vgl. siehe \cite{JADHAV20222094}). Das Benchmarking soll hierzu an einem
+additiv gefertigten Demonstratorbauteil aus Edelstahl durchgeführt werden. Final soll die
+entwickelte Methodik an unterschiedlichen Bauteilgeometrien validiert werden. Denkbar ist an
+dieser Stelle auch eine Funktionsprüfung der Methodik anhand eines Vergleichs von Bauteilen aus
+unterschiedlicher Herstellungsverfahren (respektive Werkstoffe) wie dem Laser Powder Bed
+Fusion (Metall, Edelstahl) und dem Fused Deposition Modeling (Kunststoff, PLA).
 
 \end{document}   

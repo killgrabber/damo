@@ -1,0 +1,75 @@
+% !TEX root = src/ausarbeitung/main.tex
+\documentclass[11pt]{article}
+
+\usepackage{cite}
+\usepackage{subfiles}
+
+\usepackage{geometry}
+\usepackage{layout}
+\geometry{
+    left=3cm,
+    right=2cm,
+    top=2cm,
+    bottom=2cm,
+    showframe=false
+    %textwidth=8cm, 
+    %marginpar=3cm
+    }
+
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+
+\usepackage[ngerman]{babel}
+
+\usepackage[]{graphicx}
+
+\title{Präsentationsgliederung}
+\author{Niklas Thieme}
+\date{\today}
+
+\begin{document}
+
+\begin{figure}[t]
+    \includegraphics[width=5cm]{images/1280px-Technische_Universität_Dortmund_Logo.svg.png}\hfill
+    \includegraphics[width=5cm]{images/vmLogo.png}
+\end{figure}
+
+%\centering
+\begin{center}
+    \section*{Präsentation Gliederung}
+\end{center}
+%\maketitle
+
+\begin{itemize}
+    \item Einleitung, Titelseite
+    \item Additive Fertigung
+    \begin{itemize}
+        \item Bedeutung von additiven Fertigungsmethoden
+        \item Limitierungen
+        \item Nachbearbeitung von Bauteilen
+        \item Deformation durch Einspannen
+    \end{itemize}
+    \item Bauteil Digitalisierung
+    \begin{itemize}
+        \item Scanner (Messbereichlimitierung)
+        \item Demonstratorbauteil
+        \item Stitching (Top down)
+    \end{itemize} 
+    \item Optische Spannkraftdeformationsanalyse
+    \begin{itemize}
+        \item Vergleich entspannt und gespannten Zustand
+        \item Optischer Vergleich (Bilder anzeigen)
+        \item Vergleichswerte
+    \end{itemize}
+    \item Automatisierung: Punktwolke rein, Vergleich raus
+    \item Evtl. Vergleich verschiedener Herstellungsverfahren und Werkstoffe
+    \item Zeitplan
+    \item Quellen (auch unter Bildern)
+\end{itemize}
+
+
+\newpage
+\bibliography{sections/quellen}
+\bibliographystyle{alpha}
+
+\end{document}
