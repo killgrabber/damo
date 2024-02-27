@@ -90,14 +90,12 @@
 
 \usepackage{graphicx}
 \usepackage{wrapfig}
-\usepackage{subfig}
+%\usepackage{subfig}
 \usepackage{placeins}
 
-\usepackage[
-colorlinks=true,
-urlcolor=blue,
-linkcolor=green
-]{hyperref}
+\usepackage[ngerman]{babel}
+
+\usepackage[]{hyperref}
 
 \usepackage{subcaption}
 
@@ -156,11 +154,9 @@ linkcolor=green
 
 \begin{document}
 
-\title[]{3D Scanning und automatische
-Neupositionierung von 3D Modellen}
+\title[]{Entwicklung einer Methodik zur optischen Spannkraftdeformationsanalyse von additiv gefertigten Bauteilen}
 %\subtitle{Automated 3D scan based CAD-repositioning for design and verification in one-off construction\\by\\Stephan Mönchinger, RobertSchröder, RainerStark}
-\author[Niklas Thieme]{\small \underline{}}
-\institute[TU Dortmund]{\small Niklas Thieme Proseminar\\
+\institute[TU Dortmund]{\small Niklas Thieme\\
 	TU Dortmund University, Germany
 }
 \date{\today}
@@ -170,45 +166,14 @@ Neupositionierung von 3D Modellen}
   %{\scriptsize This research is supported in parts by the German Research Foundation (DFG) as part of SFB876 and SPP1500.}
 \end{frame}
 
-%
-
-\begin{frame}{3D Scan und Positionierung}
-    \begin{minipage}[b]{.49\textwidth}
-    \begin{block}{Gliederung}
-        \begin{itemize}
-            \item 3D Druck
-            \item 3D Modell
-            \item Photogrammetrie
-            \begin{itemize}
-                \item 3D Scanning
-                \item Verfahren
-                \item Alternativen
-            \end{itemize}
-            \item CAD-Neupositionierung
-            \begin{itemize}
-                \item Einsatzweck und Idee
-                \item Verfahren
-            \end{itemize}
-            \item Zusammenfassung
-        \end{itemize}
-        \end{block}
-        \end{minipage}
-        \begin{minipage}[b]{.49\textwidth}
-        \begin{figure}
-            \centering
-            \includegraphics[width=130pt]{img_niklas/fox.PNG}
-            \label{fig:my_label}
-        \end{figure}
-        \end{minipage}
-
+\begin{frame}[plain]
+  Hello
 \end{frame}
 
-\include{3d_druck}
+\begin{frame}[plain]
+  There
+\end{frame}
 
-\include{3d_modell}
-
-\include{repositioning}
-
-\include{sources}
+%
 
 \end{document} 
