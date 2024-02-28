@@ -93,6 +93,8 @@
 %\usepackage{subfig}
 \usepackage{placeins}
 
+\usepackage{subfiles}
+
 \usepackage[ngerman]{babel}
 
 \usepackage[]{hyperref}
@@ -166,14 +168,10 @@
   %{\scriptsize This research is supported in parts by the German Research Foundation (DFG) as part of SFB876 and SPP1500.}
 \end{frame}
 
-\begin{frame}[plain]
-  Hello
-\end{frame}
+\subfile{src/additive.tex}
 
-\begin{frame}[plain]
-  There
-\end{frame}
+\subfile{src/digitize.tex}
 
-%
+\subfile{src/analyse.tex}
 
 \end{document} 
