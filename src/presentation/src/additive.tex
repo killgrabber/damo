@@ -2,40 +2,40 @@
 \begin{document}
 
 \begin{frame}{Gliederung}
+  \begin{minipage}[]{.49\textwidth}
     \begin{block}{Themen}
-        \begin{itemize}
-            \item Addtive Fertigung
-            \item Digitalisierung von Bauteilen
-            \item Optische Spannkraftdeformationsanalyse
-            \item Automatisierung 
-            \item Ausblick
-        \end{itemize}
-      \end{block}
-\end{frame}
-
-\begin{frame}{Additive Fertigung: Überblick}
-  \begin{minipage}[t]{.40\textwidth}
-    \begin{itemize}[]
-      \item Marktwachstum von 18.3\%
-      \item viele Anwendungsbereiche
-    \end{itemize}  
+      \begin{itemize}
+          \item Addtive Fertigung
+          \item Digitalisierung von Bauteilen
+          \item Optische Spannkraftdeformationsanalyse
+          \item Automatisierung 
+          \item Ausblick
+      \end{itemize}
+    \end{block}
   \end{minipage}
   \hfill
-  \begin{minipage}[t]{.59\textwidth}
+  \begin{minipage}[]{.49\textwidth}
     \begin{figure}[]
       \includegraphics[height=165pt]{img_niklas/Picture3-1-scaled_0FB63A00-D319-40EF-A648-9739A68215D6.jpg}
-      \caption[short]{Global Revenue for additive manufactured products}
+      \caption{\tiny{\url{https://additive.industrie.de/news/wohlers-report-2023-additive-fertigung-legt-um-183-zu/} (07.03.2024)\\}}
+      \label{fig:globalRev}
       %https://additive.industrie.de/news/wohlers-report-2023-additive-fertigung-legt-um-183-zu/
     \end{figure}
   \end{minipage}
 \end{frame}
 
-\begin{frame}{Additive Fertigung: Verfahren}
-  \begin{minipage}[t]{\textwidth}
+\begin{frame}{Additive Fertigung: Verfahren SLM und FDM}
+  \begin{minipage}[]{0.49\textwidth}
     \begin{figure}[]
-      \includegraphics[width=\textwidth]{img_niklas/selecting-additive-manufacturing-technology-sm.png}
-      \caption[short]{Additive Manufacturing System Selection Guide Overview}
-      %https://www.arcweb.com/technology-evaluation-and-selection/additive-manufacturing-system-selection
+      \includegraphics[width=150pt]{img_niklas/csm_h_bearb_LASERTEC_SLM_Blade_Powder_e24c562ac8.jpg}
+      \caption{\tiny{\url{https://www.wdoose.de/en/additive-fertigung/slm-selective-laser-melting/} (07.03.2024)}}
+      \label{fig:slm}
+    \end{figure}
+  \end{minipage}
+  \begin{minipage}[]{0.49\textwidth}
+    \begin{figure}[]
+      \includegraphics[height=140pt]{img_niklas/before_clamping.png}
+      \caption{Eigenes Bild von 3D Druck (Demonstratorbauteil)}
     \end{figure}
   \end{minipage}
 \end{frame}
@@ -44,22 +44,27 @@
   \begin{minipage}[t]{\textwidth}
     \begin{figure}[]
       \includegraphics[width=\textwidth]{img_niklas/image-32-1024x384.png}
-      \label{fig:meine-grafik}
-      \caption[short]{Metal part post-processing: before and after}
-      %https://www.unionfab.com/blog/2023/08/post-processing-methods-metal-3d-printing
+      \caption{\tiny{\url{https://www.unionfab.com/blog/2023/08/post-processing-methods-metal-3d-printing} (07.03.2024)}}
+      \label{fig:post_processing}
     \end{figure}
   \end{minipage}
 \end{frame}
 
-\begin{frame}{Einspannen}
-  
+\begin{frame}{Einspannen und Nachbearbeiten}
+  \begin{figure}[]
+      \includegraphics[height=\textheight-70pt]{img_niklas/TeleSense_mit_Backen_final_93BB1CAF-5AC9-467B-ABD7-22EEFC24189A.jpg}
+      \caption{\tiny{\url{https://mav.industrie.de/werkzeuge/innovativer-schraubstock-vereinfacht-5-achs-bearbeitung/}}(07.03.2024)}
+      \label{fig:schraubstock}
+      %https://mav.industrie.de/werkzeuge/innovativer-schraubstock-vereinfacht-5-achs-bearbeitung/#slider-intro-1
+    \end{figure}
+    
 \end{frame}
 
 \begin{frame}{Demonstratorbauteil}
   \begin{minipage}[h]{.49\textwidth}
     \begin{figure}[]
       \includegraphics[width=150pt]{img_niklas/base_image.png}
-      \caption[short]{STL des Demonstratorbauteils}
+      \caption{STL des Demonstratorbauteils}
       %
     \end{figure}
   \end{minipage}
@@ -67,7 +72,7 @@
   \begin{minipage}[h]{.49\textwidth}
     \begin{figure}[]
       \includegraphics[width=150pt]{img_niklas/base_top_down.png}
-      \caption[short]{TOP-DOWN Ansicht (generiert)}
+      \caption{TOP-DOWN Ansicht (generiert)}
       %
     \end{figure}
   \end{minipage}

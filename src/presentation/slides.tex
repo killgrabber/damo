@@ -20,7 +20,8 @@
 %\setbeameroption{show notes on second screen=right}
 
 \usepackage{caption}
-\captionsetup{font=footnotesize}
+\captionsetup{font=footnotesize, labelfont=footnotesize
+}
 
 \definecolor{1F77B4}{HTML}{1F77B4}
 \definecolor{FF7F0E}{HTML}{FF7F0E}
@@ -40,6 +41,7 @@
 \usepackage{multicol}
 \usepackage{mathtools}
 
+\setbeamertemplate{caption}[numbered]
 \newcounter{countitems}
 \newcounter{nextitemizecount}
 \newcommand{\setupcountitems}{%
@@ -98,6 +100,8 @@
 \usepackage[ngerman]{babel}
 
 \usepackage[]{hyperref}
+
+\PassOptionsToPackage{hyphens}{url}\usepackage{hyperref}
 
 \usepackage{subcaption}
 
