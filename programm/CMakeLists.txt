@@ -1,5 +1,11 @@
 cmake_minimum_required(VERSION 3.14 FATAL_ERROR)
 
+find_program(CCACHE_PROGRAM ccache)
+if(CCACHE_PROGRAM)
+    set(CMAKE_CXX_COMPILER_LAUNCHER "${CCACHE_PROGRAM}")
+    set(CMAKE_CUDA_COMPILER_LAUNCHER "${CCACHE_PROGRAM}") # CMake 3.9+
+endif()
+
 # create project
 project(DAMO)
 
@@ -15,17 +21,21 @@ set(CPM_USE_NAMED_CACHE_DIRECTORIES ON)
 
 include(${CMAKE_CURRENT_BINARY_DIR}/cmake/CPM.cmake)
 
-CPMAddPackage(
-  NAME glvnd
-  GIT_REPOSITORY https://github.com/NVIDIA/libglvnd.git
-  VERSION "1.2.0"
-)
+find_package(OpenCV REQUIRED)
 
-CPMAddPackage(
-  NAME flann
-  GIT_REPOSITORY https://github.com/flann-lib/flann.git
-  GIT_TAG "1.9.2"
-)
+#CPMAddPackage(
+#  NAME glvnd
+#  GIT_REPOSITORY https://github.com/NVIDIA/libglvnd.git
+#  VERSION "1.2.0"
+#)
+
+##CPMAddPackage(
+#  NAME flann
+#  GIT_REPOSITORY https://github.com/flann-lib/flann.git
+#  GIT_TAG "1.9.2"
+#  OPTIONS
+#    "EXAMPLES OFF"
+#)
 
 #CPMAddPackage(
 #  NAME eigen3
@@ -35,6 +45,14 @@ CPMAddPackage(
 #    "EIGEN_TEST_X87 OFF"
 #)
 
+#CPMAddPackage(
+#  NAME OpenCV
+#  GITHUB_REPOSITORY "opencv/opencv"
+#  GIT_TAG "4.9.0"
+#  OPTIONS
+#    "CV_DISABLE_OPTIMIZATION OFF"
+#)
+
 CPMAddPackage(
   NAME Boost
   VERSION 1.81.0
@@ -42,11 +60,11 @@ CPMAddPackage(
   GIT_TAG "boost-1.81.0"
 )
 
-CPMAddPackage(
-  NAME vtk
-  GIT_REPOSITORY https://gitlab.kitware.com/vtk/vtk.git
-  VERSION "9.3.0"
-)
+#CPMAddPackage(
+#  NAME vtk  
+#  GIT_REPOSITORY https://gitlab.kitware.com/vtk/vtk.git
+#  VERSION "9.3.0"
+#)
 
 #CPMAddPackage(
 #  NAME PointCloudLibrary
@@ -55,4 +73,4 @@ CPMAddPackage(
 #  GIT_TAG "pcl-1.14.0"
 #)
 
-add_subdirectory(src/damo)
+add_subdirectory(damo)

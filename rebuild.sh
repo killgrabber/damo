@@ -23,8 +23,5 @@ rm -rf build
 
 #Eigen wants to be build seperate
 
-
-cmake -S . -B build
-cd build
-make
+    
 

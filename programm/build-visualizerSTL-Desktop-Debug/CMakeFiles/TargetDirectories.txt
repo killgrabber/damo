@@ -1,0 +1,3 @@
+/home/vagrant/src/damo/programm/build-visualizerSTL-Desktop-Debug/CMakeFiles/ReadSTL.dir
+/home/vagrant/src/damo/programm/build-visualizerSTL-Desktop-Debug/CMakeFiles/edit_cache.dir
+/home/vagrant/src/damo/programm/build-visualizerSTL-Desktop-Debug/CMakeFiles/rebuild_cache.dir
