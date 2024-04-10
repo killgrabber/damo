@@ -7,9 +7,13 @@ voxel_size = 0.02
 max_correspondence_distance_coarse = voxel_size * 15
 max_correspondence_distance_fine = voxel_size * 1.5
 
-FILES = {"programm/pythonVis/LL_SLM-Probe_1ms_12mirometer_1_neu_ascii.ply",
-         "programm/pythonVis/AM_Part_2_neu_ohne_infill.ply"}
+DATA_DIR = "daten/"
 
+FILES = {
+    DATA_DIR + "file_name_1",
+    DATA_DIR + "file_name_2",
+    DATA_DIR + "file_name_3",
+} 
 
 def display_inlier_outlier(cloud, ind):
     inlier_cloud = cloud.select_by_index(ind)
@@ -177,7 +181,6 @@ def oldStuff():
                                       front=[0.4257, -0.2125, -0.8795],
                                       lookat=[2.6172, 2.0475, 1.532],
                                       up=[-0.0694, -0.9768, 0.2024])
-
 
 if __name__ == "__main__":
     combine()
