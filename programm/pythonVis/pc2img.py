@@ -13,7 +13,7 @@ class imageStructure:
 DATA_DIR = "daten/240405_Messungen_LL/"
 
 FILES = {
-    DATA_DIR + "FDM_1.ply",
+    DATA_DIR + "AM_SP0_1.ply",
     #DATA_DIR + "FDM_2.ply",
 }
 
@@ -54,6 +54,7 @@ def anaylseZ(pcd) :
     z = []
     for point in pcd.points:
         z.append(point[2])
+        
     counter = collections.Counter(z)
     mostCommon = counter.most_common(500)
     minFound = 10000000000000
@@ -90,7 +91,7 @@ def cropPointCloud(pcd, pointAmount = 100000):
     pointCloudToImage(cropped)
     return cropped
 
-def pointCloudToImage(pcd) :
+def pointCloudToImage(pcd, resolution = 1) :
     pcd.translate((0, 0.1, 0))
     maxFound, minFound = anaylseZ(pcd)
     scale = 100
@@ -112,7 +113,7 @@ def pointCloudToImage(pcd) :
     for point in pcd.points:
         amountPixel += 1
         i += 1
-        if(i%1 != 0 or point[2] < minFound or point[2] > maxFound):
+        if(i%resolution != 0 or point[2] < minFound or point[2] > maxFound):
             continue
         x = int(point[0]*scale) + offsetX #negativ offset
         y = int(point[1]*scale)
@@ -125,18 +126,16 @@ def pointCloudToImage(pcd) :
             print("{:.4f}%".format(round((i/amountPoints)*100, 4)), end="\r")
     print("Amount of pixel:" + str(amountPixel))
     small = cv.resize(image, (0,0), fx=0.3, fy=0.3) 
-    cv.imshow('Contour detection using blue channels only', small)
-    cv.waitKey(0)
-    cv.imwrite("test.png", image)
+    #cv.imshow('Image from point cloud', small)
+    #cv.waitKey(0)
+    name = "pcd_" + str(len(pcd.points)) + ".png"
+    cv.imwrite(name, image)
     # add wait key. window waits until user presses a key
-    cv.waitKey(0)
-
 
 if __name__ == "__main__":
     pcds = loadPointClouds(vis = False)
-    maxFound, minFound = anaylseZ(pcds[0])
-    print("Max: " + str(maxFound))
-    print("Min: " + str(minFound))
-    pointCloudToImage(pcds[0])
+    for pcd in pcds:
+        print("Converting cloud...")
+        pointCloudToImage(pcd, 5)
     #cropPointCloud(pcds[0])
     #pcNeighbours(pcds[0])
