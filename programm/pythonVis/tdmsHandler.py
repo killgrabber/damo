@@ -88,7 +88,7 @@ def showPlot(channels, name):
     pois.append(stringLine)
     plt.title(name)
     fig.tight_layout()
-    # plt.show()
+    plt.show()
 
 
 def getGradients(channel):
