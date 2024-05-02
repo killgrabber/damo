@@ -6,3 +6,4 @@ sciebo/BA_Niklas_Thieme/Daten
 *.gz
 *.fdb_latexmk
 build/
+daten/
