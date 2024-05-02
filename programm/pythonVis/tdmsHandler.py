@@ -49,7 +49,8 @@ def showPlot(channels, name):
     for index in range(len(channels[0][:])):
         combined.append(channels[0][index] + channels[1][index])
     ax1.plot(combined, color="tab:pink", label="Kraft Kombiniert")
-    ax1.legend(loc=2)
+    #ax1.legend(loc=2)
+    ax1.legend(bbox_to_anchor=(1.04, 1.15), loc="upper left")
 
     index = getIndexOfSettledAfterMax(combined)
     index_max = np.argmax(combined)
@@ -71,7 +72,7 @@ def showPlot(channels, name):
     ax2.set_ylabel('mm', color=color)
     ax2.plot(channels[2], color=color, label="Taster Verschiebung")
     ax2.tick_params(axis='y', labelcolor=color)
-    ax2.legend(loc=1)
+    ax2.legend(bbox_to_anchor=(1.04, 1.3), loc="upper left")
     time = str(channels[0].properties['wf_start_time'])
     date = time.split("T")[0]
     timeStr = time.split("T")[1].split(".")[0]
@@ -88,7 +89,9 @@ def showPlot(channels, name):
     pois.append(stringLine)
     plt.title(name)
     fig.tight_layout()
-    plt.show()
+    fileName = "plots/" + name + ".png"
+    plt.savefig(fileName)
+    #plt.show()
 
 
 def getGradients(channel):
