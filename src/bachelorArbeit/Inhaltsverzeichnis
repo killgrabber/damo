@@ -1,0 +1,26 @@
+Inhaltsverzeichnis:
+0. Einleitung und Motivation
+1. Stand der Technik
+    1.1 Additive Fertigung (und das Post-Processing)
+    1.2 Laser-Scanning
+    1.3 Reverse Engineering
+2. Ausgangssituation und Ziel der Arbeit
+    2.1 Einspannproblematik
+	 2.2 Erfassung der spannkraftinduzierten Deformation
+3. (Experimentelle Validierung)
+	 3.1 Versuchsaufbau
+	 3.2 Demonstratorbauteil
+	 3.3 Messtechniken
+        3.3.1 Linienlaser (Scanner), 
+        3.3.2 Taktile Wegmesstechnik (Taster am Spannvorrichtung +   Maschinentaster),
+        3.3.3 piezoelektrische Kraftmesstechnik.
+4. Stitching
+    4.1 Problemstellung (Stitching)  
+    4.3 Verschiedene Herangehensweisen beschreiben und darstellen
+    4.4 Vergleich 2D vs. 3D
+    4.5 Akkuranz Einordnung der Ergebnisse … (verschiedene Heransgehensweisen)
+5. Analyse der spannkraftinduzierten Deformation
+    5.1 Aufgenomme Daten auswerten
+    5.2 Deformationen erkennen
+6. Kompletten Algorithmus und Software beschreiben
+7. Zusammenfassung und Ausblick
