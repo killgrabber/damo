@@ -82,11 +82,66 @@ erzeugen. Dieses Abbild wird dann benutzt um die bestehende Struktur zu
 erweitern und auf ihr aufzubauen. Das wird am Beispiel eines Flugzeugs 
 demonstriert, erst wird der Innenraum gescannt und mit dem orginalen Plänen
 abgeglichen, dann ein 3D Objekt erstellt. Mithilfe dieses 3D Objekts können 
-dann passgenaue Bauteile herstellt werden die es ermöglichen aus einer ehemaligen
-Passagiermaschine ein Frachtflugzeug zu machen.
+dann passgenaue Bauteile herstellt werden die es ermöglichen ein ehemaliges 
+Passierflugzeug zu einer Frachtmaschine umzubauen.
+Wie schon erwähnt wird zur erfolgreichen weiterbearbeitung ein möglichst 
+genaues digitales Abbild benötigt.
+Ist dies nicht der Fall müssen nicht passende Teile erneut hergestellt werden, 
+was die Material- und Personalkosten deutlich erhöht. Es ist also im 
+wirtschaftlichen Interesse beim ersten Schritt, dem erstellen der digitalen 
+Version, sehr genau und gewissenhaft vorzugehen um ein möglichst genaues Ergebnis
+zu erzielen. Um eine digitale Version zu erstellen, existieren verschiedene Verfahren.
+Auf einige werde ich im nächsten Abschnitt genauer eingehen.
+
+
+\subsection{3D Rekonstruktion}
+
+Digitale Abbildungen von Flächen, Objekten oder sogar Körperteilen wurden in den
+letzten Jahren mehr und mehr benutzt. Anwendungen sind zum Beispiel in der
+geometrischem Dokumentation, Inspektion, Navigation, Visualisierung und 
+Objekterkennung zu finden \cite{Verykokou.2023}. Je nach Anwendungsfall wird eine bestimme Akkuranz
+der Daten erwartet, im Medizinschen Bereich sind die Ansprüche natürlich ganz 
+andere als zum Beispiel in der Dokumentierung von ganzen Gebirgszügen.
+Aus diesem Grund existieren auch verschiede Herangehensweisen und Technologien  
+zur 3D Rekonstruktion.
+3D Rekonstruktions-Technologien können in 2 Katerogieren eingeteilt werden,
+die Bild basierte Verfahren und die Verfahren die auf Scandaten beruhen \cite{Verykokou.2023}
+Beide Verfahren können auch kombiniert werden. 
+Bei Bild basierten Verfahren, auch Photogrammetry genannt, wird das 3D Objekt aus
+mehreren 2D Bildern erstellt, umso mehr Bilder vorhanden sind umso besser kann das
+3D Objekt rekonstruiert werden. Um das 3D Objekt zu erstellen werden in 
+allen Bildern gemeinsame Punkte gesucht und dann mit der bekannten Kameraposition, 
+die relative Position des Punktes im 3D Objekt ermittelt. Figur x zeigt dies 
+anschaulich.
+Vorteile der Photogrammetry sind die relativ einfache Aufnahme der Daten, schon
+ein Smartphone mit Kamera kann ausreichend hochauflösende Bilder aufnehmen um 
+eine 3D Rekonstruktion zu ermöglichen. Des weiteren sind viele Softwarelösungen
+auch kostenlos vorhanden um automatisiert 3D Objekte, auch ohne viele 
+Vorkenntnisse, zu erzeugen.
+Gründe sich gegen die Photogrammetry zu entscheiden ist die doch limitierte 
+Auflösung beziehungsweise steigt der Arbeitsaufwand drastisch umso akkurater
+das Endergebnis sein soll. Auf der anderen Seite glänzt die Photogrammetry aber 
+bei 3D Rekonstruktionen im großen Stil wie zum Beispiel bei Gebäuden, Stadtteilen
+oder Geografischen Strukturen.
+
+Bei kleinen Objekten wenn eine hinreichende Akkuranz gefordert ist sollte man 
+deswegen zum 2. Verfahren greifen. Hier sind die Ursprungsdaten schon 
+dreidimensional mit einem Scanner aufgenommen. Um an diese Daten zu kommen 
+misst ein Scanner, meistens mithilfe von Lichtstrahlen, den Abstand zu einem 
+Punkt auf dem zu rekonstruierenden Objekt. Dann wird entweder das Objekt oder 
+der Scanner bewegt um so möglichst viele Scanpunkte aufzunehmen.
+Je mehr Punkte vorliegen, desto genauer wird das Ergebnis, allerdings steigt
+auch die vorhandene Datenmenge mit, ab einem Punkt kann der verfügbare 
+Speicher ein limitierender Faktor sein. Außerdem steigt die Rechenzeit auch mit
+der Datenmenge, je nach anschließendem Verfahren sogar exponentiell.
+
+Nachteile von diesem Verfahren sind die hohen initialen Kosten eines Scanners 
+und der begrenzte Messbereich. 
 
 
 
-\subsection{Laser Scanning}
+
+
+
 
 \end{document}
