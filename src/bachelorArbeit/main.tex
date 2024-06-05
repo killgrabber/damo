@@ -1,0 +1,59 @@
+% !TEX root = src/bachelorArbeit/main.tex
+\documentclass[11pt]{article}
+
+\usepackage{cite}
+\usepackage{subfiles}
+\usepackage{url}
+
+\usepackage{geometry}
+\usepackage{layout}
+\geometry{
+    left=3cm,
+    right=2cm,
+    top=2cm,
+    bottom=2cm,
+    showframe=false
+    %textwidth=8cm,  
+    %marginpar=3cm
+    }
+
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+
+\usepackage[ngerman]{babel}
+
+\usepackage[]{graphicx}
+
+\title{Entwicklung einer Methodik zur optischen Analyse
+spannkraftinduzierter Deformationen additiv gefertigter Bauteile}
+\author{Niklas Thieme}
+\date{\today}
+
+\begin{document}
+%\centering
+
+\maketitle
+
+\begin{figure}[t]
+    \includegraphics[width=5cm]{images/1280px-Technische_Universität_Dortmund_Logo.svg.png}\hfill
+    \includegraphics[width=5cm]{images/vmLogo.png}
+\end{figure}
+
+\newpage
+
+\tableofcontents
+
+\newpage
+
+\subfile{sections/1_EinleitungMotivation.tex}
+
+\subfile{sections/2_StandDerTechnik.tex}
+
+\subfile{sections/3_ZielderArbeit.tex}
+
+
+\newpage
+\bibliography{quellen}
+\bibliographystyle{alpha}
+
+\end{document}
