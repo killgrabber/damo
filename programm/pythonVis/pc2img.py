@@ -11,7 +11,7 @@ class imageStructure:
     depth: float
     color: int
 
-DATA_DIR = "daten/240405_Messungen_LL/"
+DATA_DIR = "../../daten/240405_Messungen_LL/"
 
 FILES = {
     DATA_DIR + "FDM2_SP2_2.ply",
@@ -41,9 +41,9 @@ def loadPointClouds(vis = False) :
         i = 0
         for pcd in pcds:
             aabb = pcd.get_axis_aligned_bounding_box()
-            maxX = aabb.get_max_bound()[0] +15
-            pcd.translate((maxX*i, 0, 0))
-            aabb.translate((maxX*i, 0, 0))
+            maxX = aabb.get_max_bound()[0]
+            #pcd.translate((maxX*i, 0, 0))
+            #aabb.translate((maxX*i, 0, 0))
             i = i+1
             aabb.color = (1, 0, 0)
             visPcds.append(aabb)
@@ -111,27 +111,28 @@ def cropPointCloud(pcd, pointAmount = 100000):
 
 DATA_DIR = "output/images/"
 
-IMAGES = {
+IMAGES = [
     DATA_DIR + "pcd_2944702.png",
     DATA_DIR + "pcd_3072377.png",
-}
+]
 
 def pointCloudToImage(pcd, fileName) :
     pcd.translate((0, 0.1, 0))
     maxFound, minFound = anaylseZ(pcd)
     scale = 100
     aabb = pcd.get_axis_aligned_bounding_box()
+    print("size: ",aabb.get_extent())
     size = aabb.get_extent()
-    height = int(size[0]*scale +100)
-    width = int(size[1]*scale +100)
-    depth = int(size[2]*scale +100)
     minX = np.amin(np.asarray(aabb.get_box_points()))
     offsetX  = abs(int(minX*scale))
+    width = int(size[0]*scale+1)
+    height = int(size[1]*scale+1)
+    depth = int(size[2]*scale)
     print("Dimensions are: ", 
-          height, 
           width, 
+          height,
           depth)
-    image = np.zeros((height,width,1), np.uint8)
+    image = np.zeros((width,height,1), np.uint8)
     i = -1
     amountPoints = len(pcd.points)
     amountPixel = -1
@@ -146,15 +147,17 @@ def pointCloudToImage(pcd, fileName) :
         g = int(pcd.colors[i][1]*255)
         b = int(pcd.colors[i][1]*255)
         brightness = conversion(point[2]*1000, minFound*1000, maxFound*1000)
-        image[x, y] = brightness
-        if(i%10000 == 0):
-            print("{:.4f}%".format(round((i/amountPoints)*100, 4)), end="\r")
+        #print("Setting: "+ str(x) +","+ str(y) + " to " + str(brightness))
+        if x < width and y < height:
+            image[x, y] = brightness
+        if i%1000 == 0:
+            print("{:.4f}%".format(round((i/amountPoints)*100, 4)))
     print("Amount of pixel:" + str(amountPixel))
     small = cv.resize(image, (0,0), fx=0.3, fy=0.3) 
     cv.imshow('Image from point cloud', small)
     cv.waitKey(0)
     name = "pcd_" + str(len(pcd.points)) + ".png"
-    cv.imwrite("output/images/"+name, image)
+    cv.imwrite(name, image)
     # add wait key. window waits until user presses a key
 
 if __name__ == "__main__":
