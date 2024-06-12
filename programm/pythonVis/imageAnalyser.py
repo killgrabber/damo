@@ -1,10 +1,14 @@
+import math
+import sys
+
 import cv2
 import random as rng
 import numpy as np
+import numba as nb
 
 IMAGES = [
-    '..\..\output\images\pcd_2944702.png',
-    '..\..\output\images\pcd_3072377.png'
+    'pcd_2944702.png',
+    'pcd_3072377.png'
 ]
 
 
@@ -17,7 +21,7 @@ def importImages():
     return images
 
 
-def getContours(img) -> []:
+def getContours(img):
     # draw contours on the original image
     height, width = img.shape
     image_contour_blue = img.copy()
@@ -26,9 +30,10 @@ def getContours(img) -> []:
     print("Contours found: ", len(contours1))
 
     # remove contour points on the edge
-    all_points = []
+    all_contours = []
     max_distance = 10
     for contour in contours1:
+        all_points = []
         for points in contour:
             for point in points:
                 if not (point[0] < max_distance or point[1] < max_distance or
@@ -37,7 +42,9 @@ def getContours(img) -> []:
                         abs(point[1] - height) < max_distance or
                         abs(point[1] - width) < max_distance):
                     all_points.append(point)
-    return all_points
+        print("Adding points to contours: ", len(all_points))
+        all_contours.append(all_points)
+    return all_contours
 
 
 def drawContours(image, counturs, hierarchy1, x, y):
@@ -63,19 +70,79 @@ def showAndSaveImage(image):
     cv2.destroyAllWindows()
 
 
-def moveContours(contours: np.array, offset):
-    x_offset, y_offset = 0, offset
-    newContours = []
-    for contour in contours:
-        # contour with new offset is created
-        new_contour = contour + (x_offset, y_offset)
-        # draw the new contour on the image
-        newContours.append(new_contour)
-    return newContours
+def move_contour(contour: [(float, float)], transform: (float, float)) -> []:
+    new_contour = []
+    for point in contour:
+        point = point + transform
+        new_contour.append(point)
+    return new_contour
 
 
-def comparePoint(a, b):
-    return np.linalg.norm(a - b)
+@nb.njit(fastmath=True)
+def compare_point(a, b):
+    return math.sqrt((b[0] - a[0]) ** 2 + (b[1] - a[1]) ** 2)
+
+
+# returns the transformation coordinates to match them
+def match2contours(con1: [], con2: []) -> (float, float):
+    if len(con1) != len(con2):
+        print("Warning: Not same amount of points...")
+        return
+    # remove the first and last elements
+    con1 = con1[math.floor(len(con1) * 0.3):]
+    con2 = con2[:math.floor(len(con2) * 0.7)]
+
+    max_iterations = 10000
+    last_icp_sum = sys.maxsize
+    last_transformation = (0, 1)
+    transformation = (0, 0)
+    switched = False
+    # first sum up the distance between every point to the closest point
+    for j in range(max_iterations):
+        new_sum = icp_step(con1, con2)
+        distance = new_sum - last_icp_sum
+        # small enough, go right and left now
+        if abs(distance) < 0.0001:
+            if switched:
+                print("Finished!")
+                break
+            print("Changing to left and right")
+            last_transformation = (1, 0)
+            switched = True
+        # if distance has increased, choose another direction
+        if new_sum > last_icp_sum:
+            print("Distance has increased, go back and decrease step size")
+            last_transformation = (last_transformation[0] * -1, + last_transformation[1] * -1)
+        last_icp_sum = new_sum
+        # move con2 and repeat
+        con2 = move_contour(con2, last_transformation)
+        # accumulate the transformations we did
+        transformation = tuple(np.add(transformation, last_transformation))
+        print("transformation: ", transformation)
+    return transformation
+
+
+def icp_step(con1: [], con2: []) -> float:
+    icp_sum = 0
+    for i in nb.prange(len(con1)):
+        index, distance = find_nearest_point(con1[i], con2)
+        if distance < 10:
+            #print("Distace: ", distance)
+            icp_sum += distance * distance
+    print("Sum: ", icp_sum)
+    return icp_sum
+
+
+# returns the index and distance to the closest point in target
+def find_nearest_point(source, target: []) -> (int, float):
+    min_dist = sys.maxsize
+    last_index = -1
+    for i in range(len(target)):
+        distance = compare_point(source, target[i])
+        if distance < min_dist:
+            last_index = i
+            min_dist = distance
+    return last_index, min_dist
 
 
 def compareContour(con1, con2):
@@ -85,7 +152,7 @@ def compareContour(con1, con2):
     diff = 0
     for i in range(len(con1)):
         for j in range(len(con2)):
-            diff = comparePoint(con1[i][0], con2[j][0])
+            diff = compare_point(con1[i][0], con2[j][0])
             if (diff < minDiff):
                 minDiff = diff
         sum += diff
@@ -108,7 +175,7 @@ def cropImage(image, top, length=1000):
 
 def draw_points(image, points, offset_x, offset_y, color=(255, 255, 255)):
     for p in points:
-        image[p[1] + offset_x, p[0] + offset_y] = color
+        image[round(p[1]) + round(offset_x), round(p[0]) +round(offset_y)] = color
     return image
 
 
@@ -127,18 +194,43 @@ def main():
     images = importImages()
     # images[0] = cropImage(images[0], True)
     # images[1] = cropImage(images[1], False)
-    # showAndSaveImage(images[0])
-    # showAndSaveImage(images[1])
-    crop_top = cropImage(images[0], True)
-    crop_bot = cropImage(images[1], False)
+    crop_top = cropImage(images[0], True, 1000)
+    crop_bot = cropImage(images[1], False, 1000)
+    # showAndSaveImage(crop_top)
+    # showAndSaveImage(crop_bot)
     contours1 = getContours(crop_top)
     contours2 = getContours(crop_bot)
     height, width = images[0].shape
     blank_image1 = np.zeros((height + 200, width + 200, 3), np.uint8)
     new_image = cv2.cvtColor(images[0], cv2.COLOR_GRAY2RGB)
+
+    print("con1[0]: ", len(contours1[0]))
+    print("con1[1]: ", len(contours1[1]))
+    print("con2[0]: ", len(contours2[0]))
+    print("con2[1]: ", len(contours2[1]))
+
+    #match2contours(contours1[0][100:-100], contours2[1])
+    transformation = (0, 250)
+
+    transformation = match2contours(contours1[1], contours2[0])
+    transformation = (transformation[0]*-1,
+                      transformation[1]*-1)
+    print("Final t: ", transformation)
+    new_con = move_contour(contours2[0], transformation)
+
+    yellow = (0, 255, 255)
+    light_blue = (255, 255, 0)
+    pink = (255, 0, 255)
+
     border_image = cv2.copyMakeBorder(new_image, 0, 500, 0, 0, 0)
-    border_image = draw_points(border_image, contours1, height - 1000, 0, (0, 0, 255))
-    border_image = draw_points(border_image, contours2, height - 730, 0, (0, 0, 255))
+    #border_image = draw_points(border_image, contours1[0], height - 1000, 0, (0, 0, 255))
+    #border_image = draw_points(border_image, contours2[1], height - 1000,
+    #                           0, (0, 0, 255))
+
+    border_image = draw_points(border_image, contours1[1], height - 1000, 0, yellow)
+    border_image = draw_points(border_image, contours2[0], height - 1000, 0, light_blue)
+    border_image = draw_points(border_image, new_con, height - 1000, 0, pink)
+
     showAndSaveImage(border_image)
 
     exit()
