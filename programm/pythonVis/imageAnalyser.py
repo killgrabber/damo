@@ -6,11 +6,12 @@ import random as rng
 import numpy as np
 import numba as nb
 
+import contourMatcher
+
 IMAGES = [
     'pcd_2944702.png',
     'pcd_3072377.png'
 ]
-
 
 def importImages():
     images = []
@@ -81,11 +82,6 @@ def move_contour(contour: [(float, float)], transform: (float, float)) -> []:
     return new_contour
 
 
-@nb.njit(fastmath=True)
-def compare_point(a, b):
-    return math.sqrt((b[0] - a[0]) ** 2 + (b[1] - a[1]) ** 2)
-
-
 # returns the transformation coordinates to match them
 # retunrs x, y transformation and confidence
 def match2contours(con1: [], con2: []):
@@ -96,11 +92,17 @@ def match2contours(con1: [], con2: []):
     # con1 = con1[math.floor(len(con1) * 0.1):]
     # con2 = con2[:math.floor(len(con2) * 0.9)]
 
+    # Move the center points on top of each other
+    transformation = (0, 0)
+    basic_transform = basic_align(con1, con2)
+    con2 = move_contour(con2, basic_transform)
+    transformation = tuple(np.add(transformation, basic_transform))
+
+
     max_iterations = 10000
     last_icp_sum = sys.maxsize
     inital_step_size = -100
     last_transformation = (0, inital_step_size)
-    transformation = (0, 0)
     switched = False
     old_distance = 0
     # first sum up the distance between every point to the closest point
@@ -109,7 +111,7 @@ def match2contours(con1: [], con2: []):
         if new_sum != 0 and amount_points > 100:
             distance = new_sum - last_icp_sum
             # small enough, go right and left now
-            print("Diff:", old_distance - distance)
+            print("distance, Diff:", distance, old_distance - distance)
             if abs(old_distance - distance) < 0.001:
                 if switched:
                     #print("Finished!")
@@ -141,16 +143,25 @@ def match2contours(con1: [], con2: []):
     return transformation, last_icp_sum
 
 
+def basic_align(con1: [], con2: []) -> (float, float):
+    # get the center points and align those
+    center_1 = con1[math.floor(len(con1) / 2)]
+    center_2 = con2[math.floor(len(con1) / 2)]
+    t_vector = (center_1[0] - center_2[0],
+                center_1[1] - center_2[1])
+    print("Distance vector: ", t_vector)
+    return t_vector
+
 def icp_step(con1: [], con2: []) -> (float, int):
     icp_sum = 0
     point_amount = 0
     for i in nb.prange(len(con1)):
         index, distance = find_nearest_point(con1[i], con2)
-        if len(con1) * 0.1 < index < len(con1) * 0.9:
+        if len(con1) * 0.15 < index < len(con1) * 0.85:
             #print("Distace, index: ", distance, index)
             icp_sum += distance
             point_amount += 1
-    print("matching points: ")
+    print("matching points: ", point_amount)
     return icp_sum, point_amount
 
 
@@ -164,6 +175,10 @@ def find_nearest_point(source, target: []) -> (int, float):
             last_index = i
             min_dist = distance
     return last_index, min_dist
+
+@nb.njit(fastmath=True)
+def compare_point(a, b):
+    return math.sqrt((b[0] - a[0]) ** 2 + (b[1] - a[1]) ** 2)
 
 
 def compareContour(con1, con2):
@@ -220,6 +235,15 @@ def translate_image(img, x, y):
     return warp_dst
 
 
+def combine_2_images(img1, img2):
+    h1, w1 = img1.shape[:2]
+    h2, w2 = img2.shape[:2]
+    vis = np.zeros((h1 + h2, max(w1, w2)), np.uint8)
+    vis[:h1, :w1] = img1
+    vis[h1:h1 + h2, :w2] = img2
+    vis = cv2.cvtColor(vis, cv2.COLOR_GRAY2BGR)
+    return vis
+
 def main():
     images = importImages()
     # images[0] = cropImage(images[0], True)
@@ -233,36 +257,21 @@ def main():
 
     contours1 = getContours(crop_top)
     contours2 = getContours(crop_bot)
-    for i in range(len(contours2)):
-        contours2[i] = move_contour(contours2[i], tr)
+    bottom_contours = []
+    for con in contours2:
+        bottom_contours.append(move_contour(con, height))
+    if True:
+        t1 = contourMatcher.match_contour(contours1[0], bottom_contours[1], inverted=True)
+        t2 = contourMatcher.match_contour(bottom_contours[0], contours1[1])
+        average_t = ((t1[0] + t2[0]) /2,
+                     (t1[1] + t2[1]) /2)
+        print(f"t1: {t1}, t2: {t2}, average: {average_t}")
 
-    height, width = images[0].shape
-    blank_image1 = np.zeros((height + 200, width + 200, 3), np.uint8)
-    new_image = cv2.cvtColor(images[0], cv2.COLOR_GRAY2RGB)
-
-    print("con1[0]: ", len(contours1[0]))
-    print("con1[1]: ", len(contours1[1]))
-    print("con2[0]: ", len(contours2[0]))
-    print("con2[1]: ", len(contours2[1]))
-
-    transformation_1, distance_1 = match2contours(contours1[1], contours2[0])
-    distance_1 = 0
-    distance_2 = 1
-    transformation_1 = (-7.958984375, 258.935546875)
-    transformation_2 = (-7.958984375, 258.935546875)
-    x = 1000 - math.floor(transformation_1[0])
-    y = math.floor(transformation_1[1])
-    print("Final t: ", transformation_1)
-    #transformation_2, distance_2 = match2contours(contours1[0], contours2[1])
-    print("Final t2: ", transformation_2)
-    transformation = transformation_1
-    if distance_2 > distance_1:
-        transformation = transformation_2
-    t_image = translate_image(cv2.cvtColor(images[1], cv2.COLOR_GRAY2RGB), -x, 0)
-    vis = np.concatenate((cv2.cvtColor(images[0], cv2.COLOR_GRAY2RGB), t_image),
-                         axis=0)
-
+    #move second image
+    moved_image = translate_image(images[1], t1[1], t1[0]+1000)
+    vis = combine_2_images(images[0], moved_image)
     showAndSaveImage(vis)
+
     exit()
 
     new_con = move_contour(contours2[0], transformation)
