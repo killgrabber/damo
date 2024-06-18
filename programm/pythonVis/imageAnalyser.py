@@ -2,15 +2,15 @@ import math
 import sys
 
 import cv2
-import random as rng
+import random
 import numpy as np
 import numba as nb
-
+import string
 import contourMatcher
 
 IMAGES = [
-    'pcd_2944702.png',
-    'pcd_3072377.png'
+    'pcd_2916383.png',
+    'pcd_3061898.png'
 ]
 
 def importImages():
@@ -43,8 +43,8 @@ def getContours(img):
                         abs(point[1] - height) < max_distance or
                         abs(point[1] - width) < max_distance):
                     all_points.append(point)
-        print("Adding points to contours: ", len(all_points))
         all_contours.append(all_points)
+    all_contours.sort(key=len, reverse=True)
     return all_contours
 
 
@@ -62,7 +62,7 @@ def drawContours(image, counturs, hierarchy1, x, y):
     return image
 
 
-def showAndSaveImage(image, wait=0):
+def showAndSaveImage(image, wait=0, name=""):
     scale = 0.5
     if image.shape[0] > 2000 or image.shape[1] > 2000:
         scale = 0.3
@@ -70,7 +70,8 @@ def showAndSaveImage(image, wait=0):
     small = cv2.resize(copy, (0, 0), fx=scale, fy=scale, interpolation=cv2.INTER_AREA)
     cv2.imshow('Contours', small)
     cv2.waitKey(wait)
-    #cv2.imwrite('image.jpg', image)
+    if name != "":
+        cv2.imwrite(name + '.jpg', image)
     #cv2.destroyAllWindows()
 
 
@@ -228,19 +229,19 @@ def cropContour(contour, x1, y1, x2, y2):
 
 def translate_image(img, x, y):
     matrix = np.float32([
-        [1, 0, y],
-        [0, 1, x]
+        [1, 0, round(y)],
+        [0, 1, round(x)]
     ])
     warp_dst = cv2.warpAffine(img, matrix, (img.shape[1], img.shape[0]))
     return warp_dst
 
 
-def combine_2_images(img1, img2):
+def combine_2_images(img1, img2, overlap=200):
     h1, w1 = img1.shape[:2]
     h2, w2 = img2.shape[:2]
     vis = np.zeros((h1 + h2, max(w1, w2)), np.uint8)
-    vis[:h1, :w1] = img1
-    vis[h1:h1 + h2, :w2] = img2
+    vis[:h1-overlap, :w1] = img1[:h1-overlap, :w1]
+    vis[h1-overlap:h1 + h2-overlap, :w2] = img2
     vis = cv2.cvtColor(vis, cv2.COLOR_GRAY2BGR)
     return vis
 
@@ -248,68 +249,34 @@ def main():
     images = importImages()
     # images[0] = cropImage(images[0], True)
     # images[1] = cropImage(images[1], False)
-    crop_top = cropImage(images[0], True, 1000)
-    crop_bot = cropImage(images[1], False, 1000)
+    cut_width = 1000
+    crop_top = cropImage(images[0], True, cut_width)
+    crop_bot = cropImage(images[1], False, cut_width)
     height, width = crop_bot.shape
     tr = (0, height)
-    # showAndSaveImage(crop_top)
+    #showAndSaveImage(crop_top)
     # showAndSaveImage(crop_bot)
 
     contours1 = getContours(crop_top)
     contours2 = getContours(crop_bot)
+
     bottom_contours = []
     for con in contours2:
         bottom_contours.append(move_contour(con, height))
     if True:
-        t1 = contourMatcher.match_contour(contours1[0], bottom_contours[1], inverted=True)
-        t2 = contourMatcher.match_contour(bottom_contours[0], contours1[1])
+        t1 = contourMatcher.match_contour(bottom_contours[0], contours1[0], inverted=False)
+        t2 = contourMatcher.match_contour(contours1[1], bottom_contours[1], inverted=True)
         average_t = ((t1[0] + t2[0]) /2,
                      (t1[1] + t2[1]) /2)
         print(f"t1: {t1}, t2: {t2}, average: {average_t}")
 
-    #move second image
-    moved_image = translate_image(images[1], t1[1], t1[0]+1000)
-    vis = combine_2_images(images[0], moved_image)
-    showAndSaveImage(vis)
+    # move second image
+    overlap = 200
+    moved_image = translate_image(images[1], average_t[1]+overlap, average_t[0]+cut_width)
+    vis = combine_2_images(images[0], moved_image, overlap)
+    showAndSaveImage(vis, name=''.join(random.choices(string.ascii_uppercase + string.digits, k=10)))
 
     exit()
-
-    new_con = move_contour(contours2[0], transformation)
-    new_con2 = move_contour(contours2[1], transformation)
-
-    yellow = (0, 255, 255)
-    light_blue = (255, 255, 0)
-    pink = (255, 0, 255)
-
-    border_image = cv2.copyMakeBorder(new_image, 0, 500, 0, 0, 0)
-    border_image = draw_points(border_image, contours1[0], height - 1000, 0, yellow)
-    border_image = draw_points(border_image, new_con2, height - 1000, 0, pink)
-
-    border_image = draw_points(border_image, contours1[1], height - 1000, 0, yellow)
-    #border_image = draw_points(border_image, contours2[0], height - 1000, 0, light_blue)
-    border_image = draw_points(border_image, new_con, height - 1000, 0, pink)
-
-    showAndSaveImage(border_image)
-
-    exit()
-    for img in images:
-        height, width = img.shape
-        contours, hierarchy = getContours(img)
-        cropped_con = cropContour(contours, 500, 0, height, 500)
-        all_c.append(cropped_con)
-        all_h.append(hierarchy)
-    all_c[1] = moveContours(all_c[1], height)
-    while True:
-        print("--------------------")
-        all_c[1] = moveContours(all_c[1], -100)
-        print("Moved contour")
-        # compareContours(all_c[0], all_c[1])
-        new_blank_image = np.zeros((height * 2 + 100, width + 10, 3), np.uint8)
-        print("blank image size: ", new_blank_image.shape)
-        image = drawPoints(new_blank_image, all_c[0])
-        # image = drawPoints(new_blank_image, all_c[1])
-        showAndSaveImage(image)
-
 
 if __name__ == "__main__":
     main()

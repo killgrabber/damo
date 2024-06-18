@@ -28,10 +28,9 @@ def move_contour(contour: [(float, float)], translation: (float, float)) -> []:
 
 
 def match_contour(source: [(float, float)], target: [(float, float)], inverted=False) -> (float, float):
-    print("Matching contours...")
+    print(f"Matching contours with len: {len(source)} and len: {len(target)}")
     if len(source) != len(target):
-        print("Warning: source and target not equal length, aborting")
-        return
+        print("Warning: source and target not equal length, results may vary")
     i = 100
     translation = (0,0)
     while i < len(target):
@@ -49,9 +48,9 @@ def match_contour(source: [(float, float)], target: [(float, float)], inverted=F
         #display_plots([distances])
         #plt.hist(distances, bins = 1000)
         #plt.show()
-        display_contours([moved_contour, target])
+        #display_contours([moved_contour, target])
         i += 1
-        if i%100 == 0:
+        if i%10 == 0:
             print(f"Done: {i/len(target)}")
     if inverted:
         translation = (translation[0] * -1,
@@ -95,13 +94,21 @@ def compare_point(a, b):
 
 
 def display_contours(contours: [[(float, float)]], color=(255, 255, 255)):
-    max_values = np.max(np.max(contours, axis=0), axis=0)
-    min_values = np.min(np.min(contours, axis=0), axis=0)
-    shape = max_values - min_values
-    new_blank_image = np.zeros((shape[1] + 10, max(shape[0] + 10, 400), 3), np.uint8)
+    max_val = [0,0]
+    min_val = [sys.maxsize, sys.maxsize]
+    for c in contours:
+        max_values = np.max(c, axis=0)
+        min_values = np.min(c, axis=0)
+        if all(max_values > max_val):
+            max_val = max_values
+        if all(min_values < min_val):
+            min_val = min_values
+
+    shape = max_val - min_val
+    new_blank_image = np.zeros((3000, 3000, 3), np.uint8)
     for contour in contours:
         for p in contour:
-            new_blank_image[round(p[1])-min_values[1], round(p[0])-min_values[0]] = color
+            new_blank_image[round(p[1])-min_val[1], round(p[0])-min_val[0]] = color
     show_image(new_blank_image, 1)
 
 def show_image(image, wait=0):

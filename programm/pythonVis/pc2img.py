@@ -4,6 +4,8 @@ import cv2 as cv
 import collections
 from dataclasses import dataclass
 import copy
+from queue import Queue
+import threading
 
 class imageStructure:
     x: int
@@ -14,8 +16,8 @@ class imageStructure:
 DATA_DIR = "../../daten/240405_Messungen_LL/"
 
 FILES = {
-    DATA_DIR + "FDM2_SP2_2.ply",
-    DATA_DIR + "FDM2_SP2_1.ply",
+    DATA_DIR + "FDM_1.ply",
+    DATA_DIR + "FDM_2.ply",
 }
 
 def draw_registration_result(source, target, transformation):
@@ -29,6 +31,8 @@ def draw_registration_result(source, target, transformation):
                                       front=[0.9288, -0.2951, -0.2242],
                                       lookat=[1.6784, 2.0612, 1.4451],
                                       up=[-0.3402, -0.9189, -0.1996])
+
+
 
 def loadPointClouds(vis = False) :
     pcds = []
@@ -109,14 +113,7 @@ def cropPointCloud(pcd, pointAmount = 100000):
     pointCloudToImage(cropped)
     return cropped
 
-DATA_DIR = "output/images/"
-
-IMAGES = [
-    DATA_DIR + "pcd_2944702.png",
-    DATA_DIR + "pcd_3072377.png",
-]
-
-def pointCloudToImage(pcd, fileName) :
+def pointCloudToImage(pcd, fileName, progress: [float]) :
     pcd.translate((0, 0.1, 0))
     maxFound, minFound = anaylseZ(pcd)
     scale = 100
@@ -150,15 +147,24 @@ def pointCloudToImage(pcd, fileName) :
         #print("Setting: "+ str(x) +","+ str(y) + " to " + str(brightness))
         if x < width and y < height:
             image[x, y] = brightness
-        if i%1000 == 0:
-            print("{:.4f}%".format(round((i/amountPoints)*100, 4)))
+        progress[0] = i/amountPoints
+        #if i%1000 == 0:
+            #print("{:.4f}%".format(round((i/amountPoints)*100, 4)))
     print("Amount of pixel:" + str(amountPixel))
     small = cv.resize(image, (0,0), fx=0.3, fy=0.3) 
     cv.imshow('Image from point cloud', small)
     cv.waitKey(0)
-    name = "pcd_" + str(len(pcd.points)) + ".png"
+    name = "pcd_" + fileName + ".png"
     cv.imwrite(name, image)
+    return image
     # add wait key. window waits until user presses a key
+
+
+# returns image
+def convert_point_cloud(file, progress: [float]):
+    pcd = o3d.io.read_point_cloud(file)
+    return pointCloudToImage(pcd, file.split("/")[-1], progress)
+
 
 if __name__ == "__main__":
     pcds = loadPointClouds(vis = True)
