@@ -7,11 +7,13 @@ import numpy as np
 import numba as nb
 import string
 import contourMatcher
+import difflib
 
 IMAGES = [
     'pcd_2916383.png',
     'pcd_3061898.png'
 ]
+
 
 def importImages():
     images = []
@@ -29,10 +31,12 @@ def getContours(img):
     image_contour_blue = cv2.cvtColor(image_contour_blue, cv2.COLOR_GRAY2RGB)
     contours1, hierarchy1 = cv2.findContours(img, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)
     print("Contours found: ", len(contours1))
-
+    cv2.drawContours(image_contour_blue, contours1, -1, (0, 255, 0), 3)
+    cv2.imshow("blue contours", image_contour_blue)
+    cv2.waitKey(0)
     # remove contour points on the edge
     all_contours = []
-    max_distance = 10
+    max_distance = 5
     for contour in contours1:
         all_points = []
         for points in contour:
@@ -61,6 +65,9 @@ def drawContours(image, counturs, hierarchy1, x, y):
                          cv2.LINE_8, hierarchy1, 0, offset=(x, y))
     return image
 
+
+def save_image(image, name: str):
+    cv2.imwrite(name, image)
 
 def showAndSaveImage(image, wait=0, name=""):
     scale = 0.5
@@ -98,7 +105,6 @@ def match2contours(con1: [], con2: []):
     basic_transform = basic_align(con1, con2)
     con2 = move_contour(con2, basic_transform)
     transformation = tuple(np.add(transformation, basic_transform))
-
 
     max_iterations = 10000
     last_icp_sum = sys.maxsize
@@ -153,6 +159,7 @@ def basic_align(con1: [], con2: []) -> (float, float):
     print("Distance vector: ", t_vector)
     return t_vector
 
+
 def icp_step(con1: [], con2: []) -> (float, int):
     icp_sum = 0
     point_amount = 0
@@ -176,6 +183,7 @@ def find_nearest_point(source, target: []) -> (int, float):
             last_index = i
             min_dist = distance
     return last_index, min_dist
+
 
 @nb.njit(fastmath=True)
 def compare_point(a, b):
@@ -201,12 +209,12 @@ def compareContours(contours1: np.array, contours2: np.array):
     print(diff)
 
 
-def cropImage(image, top, length=1000):
+def cropImage(image, top, size=1000, offset=50):
     height, width = image.shape
     if top:
-        crop_img = image[height - length:height, 0:width]
+        crop_img = image[height - size - offset:height-offset, 0:width]
     else:
-        crop_img = image[0:length, 0:width]
+        crop_img = image[offset:size, 0:width]
     return crop_img
 
 
@@ -240,43 +248,69 @@ def combine_2_images(img1, img2, overlap=200):
     h1, w1 = img1.shape[:2]
     h2, w2 = img2.shape[:2]
     vis = np.zeros((h1 + h2, max(w1, w2)), np.uint8)
-    vis[:h1-overlap, :w1] = img1[:h1-overlap, :w1]
-    vis[h1-overlap:h1 + h2-overlap, :w2] = img2
+    vis[:h1 - overlap, :w1] = img1[:h1 - overlap, :w1]
+    vis[h1 - overlap:h1 + h2 - overlap, :w2] = img2
     vis = cv2.cvtColor(vis, cv2.COLOR_GRAY2BGR)
     return vis
 
-def main():
-    images = importImages()
-    # images[0] = cropImage(images[0], True)
-    # images[1] = cropImage(images[1], False)
-    cut_width = 1000
-    crop_top = cropImage(images[0], True, cut_width)
-    crop_bot = cropImage(images[1], False, cut_width)
+def get_matching_name(name1: str, name2: str) -> str:
+    top_name = name1.split('/')[-1].replace('.png', '')
+    bot_name = name2.split('/')[-1].replace('.png', '')
+    matcher = difflib.SequenceMatcher(a=top_name, b=bot_name)
+    match = matcher.find_longest_match(0, len(top_name), 0, len(bot_name))
+    matching_name = matcher.a[match.a:match.a + match.size][:-1]
+    return matching_name
+
+def cut_borders(image: cv2.Mat):
+    # Crop borders
+    print("Cropping ")
+    contours, hierarchy = cv2.findContours(image, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
+    print(f"Found {len(contours)} contours")
+    max_c = max(contours, key=len)
+    x, y, w, h = cv2.boundingRect(max_c)
+    crop = image[y:y + h, x:x + w]
+    return crop
+
+
+
+def stitch_images_path(top_image_path: str, bot_image_path: str, progress: [], result: []):
+    top_image = cv2.imread(top_image_path, cv2.IMREAD_GRAYSCALE)
+    bot_image = cv2.imread(bot_image_path, cv2.IMREAD_GRAYSCALE)
+    stitch_images(top_image, bot_image, progress, result)
+
+
+def stitch_images(top_image: cv2.Mat, bot_image: cv2.Mat, progress: [], result: []):
+    top_image = cv2.blur(top_image, (10, 10))
+    bot_image = cv2.blur(bot_image, (10, 10))
+
+    cut_size = 500
+    crop_top = cropImage(top_image, True, cut_size, 100)
+    crop_bot = cropImage(bot_image, False, cut_size, 100)
     height, width = crop_bot.shape
-    tr = (0, height)
-    #showAndSaveImage(crop_top)
-    # showAndSaveImage(crop_bot)
+    showAndSaveImage(crop_top)
+    showAndSaveImage(crop_bot)
 
-    contours1 = getContours(crop_top)
-    contours2 = getContours(crop_bot)
+    contours_top = getContours(crop_top)
+    contours_bot = getContours(crop_bot)
 
+    # Move bottom contours to the original image can be translated with the same matrix
     bottom_contours = []
-    for con in contours2:
+    for con in contours_bot:
         bottom_contours.append(move_contour(con, height))
-    if True:
-        t1 = contourMatcher.match_contour(bottom_contours[0], contours1[0], inverted=False)
-        t2 = contourMatcher.match_contour(contours1[1], bottom_contours[1], inverted=True)
-        average_t = ((t1[0] + t2[0]) /2,
-                     (t1[1] + t2[1]) /2)
-        print(f"t1: {t1}, t2: {t2}, average: {average_t}")
+
+    transitions = []
+    # Match all contours
+    for c_top in contours_top:
+        for c_bot in bottom_contours:
+            transitions.append(contourMatcher.match_contour(c_top, c_bot, progress))
+
+    final_transition = (0,0)
+    for t in transitions:
+        final_transition = t
 
     # move second image
     overlap = 200
-    moved_image = translate_image(images[1], average_t[1]+overlap, average_t[0]+cut_width)
-    vis = combine_2_images(images[0], moved_image, overlap)
-    showAndSaveImage(vis, name=''.join(random.choices(string.ascii_uppercase + string.digits, k=10)))
-
-    exit()
-
-if __name__ == "__main__":
-    main()
+    moved_image = translate_image(bot_image, final_transition[1] + overlap, final_transition[0] + cut_size)
+    combined_image = combine_2_images(top_image, moved_image, overlap)
+    result.append(combined_image)
+    showAndSaveImage(combined_image, name=get_matching_name(top_image_path, bot_image_path))

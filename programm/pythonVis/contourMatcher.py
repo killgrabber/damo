@@ -27,41 +27,43 @@ def move_contour(contour: [(float, float)], translation: (float, float)) -> []:
     return new_contour
 
 
-def match_contour(source: [(float, float)], target: [(float, float)], inverted=False) -> (float, float):
+def match_contour(source: [(float, float)],
+                  target: [(float, float)],
+                  progress: []) -> (float, float):
     print(f"Matching contours with len: {len(source)} and len: {len(target)}")
     if len(source) != len(target):
         print("Warning: source and target not equal length, results may vary")
-    i = 100
-    translation = (0,0)
-    while i < len(target):
+    if abs(len(source) - len(target)) > 100 or len(source) < 100 or len(source) < 100:
+        print("Difference too high, abort")
+        return 0, 0
+    i = 0
+    translation = (0, 0)
+    best_translation = translation
+    best_match = 0
+    while i < len(source):
         # Move target to index of source and check distances
         translation = get_translation(source[i], target[0])
         moved_contour = move_contour(source, translation)
         distances = collect_distance(target, moved_contour)
-        distance_min_25 = np.percentile(distances, [5, 15, 10, 15, 18, 25], method="normal_unbiased")
-        #print(f"distance percentage: {distance_min_25}")
-        if distance_min_25[4] == 0:
-            #found best match
-            print(f"Found best match at {i}, transformation: {translation}, distance 18%: {distance_min_25}")
-            break
-
+        percentage_of_zero = distances.count(0) / len(distances)
+        print(f"Percentage zeros: {percentage_of_zero*100:.2f}%")
+        if percentage_of_zero > best_match:
+            best_match = percentage_of_zero
+            best_translation = translation
         #display_plots([distances])
         #plt.hist(distances, bins = 1000)
         #plt.show()
-        #display_contours([moved_contour, target])
+        display_contours([moved_contour, target])
         i += 1
-        if i%10 == 0:
-            print(f"Done: {i/len(target)}")
-    if inverted:
-        translation = (translation[0] * -1,
-                       translation[1] * -1)
+        progress[0] = i / len(target)
 
-    return translation
+    return best_translation
+
 
 def display_plots(datas: [[]]):
     x_axis = 1020
     for data in datas:
-        plt.plot( data, color='r')
+        plt.plot(data, color='r')
     plt.show()
 
 
@@ -94,22 +96,20 @@ def compare_point(a, b):
 
 
 def display_contours(contours: [[(float, float)]], color=(255, 255, 255)):
-    max_val = [0,0]
-    min_val = [sys.maxsize, sys.maxsize]
+    x, y, w, h = (sys.maxsize, sys.maxsize, 0, 0)
     for c in contours:
-        max_values = np.max(c, axis=0)
-        min_values = np.min(c, axis=0)
-        if all(max_values > max_val):
-            max_val = max_values
-        if all(min_values < min_val):
-            min_val = min_values
-
-    shape = max_val - min_val
-    new_blank_image = np.zeros((3000, 3000, 3), np.uint8)
+        for point in c:
+            x = min(x, point[0])
+            y = min(y, point[1])
+            w = max(w, point[0])
+            h = max(h, point[1])
+    #print(f"Bounds are [{x},{y}:{w},{h}]")
+    new_blank_image = np.zeros((h + 1, w + 1, 3), np.uint8)
     for contour in contours:
         for p in contour:
-            new_blank_image[round(p[1])-min_val[1], round(p[0])-min_val[0]] = color
+            new_blank_image[round(p[1]), round(p[0])] = color
     show_image(new_blank_image, 1)
+
 
 def show_image(image, wait=0):
     scale = 0.7
