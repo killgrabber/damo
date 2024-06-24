@@ -26,14 +26,14 @@ def importImages():
 
 def getContours(img):
     # draw contours on the original image
-    height, width = img.shape
+    height, width = img.shape[:2]
     image_contour_blue = img.copy()
-    image_contour_blue = cv2.cvtColor(image_contour_blue, cv2.COLOR_GRAY2RGB)
-    contours1, hierarchy1 = cv2.findContours(img, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)
+    image_gray = cv2.cvtColor(image_contour_blue, cv2.COLOR_BGRA2GRAY)
+    contours1, hierarchy1 = cv2.findContours(image_gray, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)
     print("Contours found: ", len(contours1))
-    cv2.drawContours(image_contour_blue, contours1, -1, (0, 255, 0), 3)
-    cv2.imshow("blue contours", image_contour_blue)
-    cv2.waitKey(0)
+    #cv2.drawContours(image_contour_blue, contours1, -1, (0, 255, 0), 3)
+    #cv2.imshow("blue contours", image_contour_blue)
+    #cv2.waitKey(1)
     # remove contour points on the edge
     all_contours = []
     max_distance = 5
@@ -73,6 +73,8 @@ def showAndSaveImage(image, wait=0, name=""):
     scale = 0.5
     if image.shape[0] > 2000 or image.shape[1] > 2000:
         scale = 0.3
+    if image.shape[0] > 5000 or image.shape[1] > 5000:
+        scale = 0.2
     copy = image.copy()
     small = cv2.resize(copy, (0, 0), fx=scale, fy=scale, interpolation=cv2.INTER_AREA)
     cv2.imshow('Contours', small)
@@ -210,7 +212,7 @@ def compareContours(contours1: np.array, contours2: np.array):
 
 
 def cropImage(image, top, size=1000, offset=50):
-    height, width = image.shape
+    height, width = image.shape[:2]
     if top:
         crop_img = image[height - size - offset:height-offset, 0:width]
     else:
@@ -247,10 +249,9 @@ def translate_image(img, x, y):
 def combine_2_images(img1, img2, overlap=200):
     h1, w1 = img1.shape[:2]
     h2, w2 = img2.shape[:2]
-    vis = np.zeros((h1 + h2, max(w1, w2)), np.uint8)
+    vis = np.zeros((h1 + h2, max(w1, w2), 3), np.uint8)
     vis[:h1 - overlap, :w1] = img1[:h1 - overlap, :w1]
     vis[h1 - overlap:h1 + h2 - overlap, :w2] = img2
-    vis = cv2.cvtColor(vis, cv2.COLOR_GRAY2BGR)
     return vis
 
 def get_matching_name(name1: str, name2: str) -> str:
@@ -280,15 +281,15 @@ def stitch_images_path(top_image_path: str, bot_image_path: str, progress: [], r
 
 
 def stitch_images(top_image: cv2.Mat, bot_image: cv2.Mat, progress: [], result: []):
-    top_image = cv2.blur(top_image, (10, 10))
-    bot_image = cv2.blur(bot_image, (10, 10))
+    top_image = cv2.blur(top_image, (5, 5))
+    bot_image = cv2.blur(bot_image, (5, 5))
 
     cut_size = 500
     crop_top = cropImage(top_image, True, cut_size, 100)
     crop_bot = cropImage(bot_image, False, cut_size, 100)
-    height, width = crop_bot.shape
-    showAndSaveImage(crop_top)
-    showAndSaveImage(crop_bot)
+    height, width = crop_bot.shape[:2]
+    #showAndSaveImage(crop_top)
+    #showAndSaveImage(crop_bot)
 
     contours_top = getContours(crop_top)
     contours_bot = getContours(crop_bot)
@@ -313,4 +314,3 @@ def stitch_images(top_image: cv2.Mat, bot_image: cv2.Mat, progress: [], result: 
     moved_image = translate_image(bot_image, final_transition[1] + overlap, final_transition[0] + cut_size)
     combined_image = combine_2_images(top_image, moved_image, overlap)
     result.append(combined_image)
-    showAndSaveImage(combined_image, name=get_matching_name(top_image_path, bot_image_path))

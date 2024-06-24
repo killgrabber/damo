@@ -1,6 +1,7 @@
 import sys
 import time
 
+import cv2
 import open3d as o3d
 import numpy as np
 import cv2 as cv
@@ -8,6 +9,8 @@ import collections
 import numba as nb
 import copy
 import math
+import imageAnalyser
+
 
 class imageStructure:
     x: int
@@ -69,7 +72,7 @@ def remove_outliers(pc):
     print("Statistical oulier removal")
     oldAmount = len(pc.points)
     cl, ind = pc.remove_statistical_outlier(nb_neighbors=50,
-                                            std_ratio=0.6)
+                                            std_ratio=1.0)
     newAmount = len(pc.select_by_index(ind).points)
     print("Reduced from: " + str(oldAmount) + " to " + str(newAmount) + " points")
     cleared = pc.select_by_index(ind)
@@ -79,13 +82,14 @@ def remove_outliers(pc):
 def anaylseZ(pcd):
     MIN_AMOUNT = 5
     counter = collections.Counter(pcd[:, 2])
-    mostCommon = counter.most_common(500)
+    mostCommon = counter.most_common(round(len(counter) * 0.20))
     minFound = sys.maxsize
     maxFound = 0
     for key, val in mostCommon:
         if (val > MIN_AMOUNT):
             maxFound = max(key, maxFound)
             minFound = min(key, minFound)
+    print(f"Max: {maxFound} min: {minFound} ")
     return maxFound, minFound
 
 
@@ -116,24 +120,29 @@ def divide_pointcloud(original, splits: int) -> []:
     return chunked
 
 
-@nb.njit(parallel=False, fastmath=True)
-def convert_chunk(array: np.array):
+@nb.njit(parallel=True, fastmath=True)
+def convert_chunk(array: np.array, max_h, min_h):
+    rgbs = []
+    for r in range(0, 256, 20):
+        for g in range(0, 265, 20):
+            for b in range(0, 256, 20):
+                rgbs.append((r, g, b))
+    print(f"Length rgbs: {len(rgbs)}")
     scale = 100
     x_min = math.floor(np.min(array[:, 0]) * scale)
     abs_x_min = abs(x_min)
     y_min = math.floor(np.min(array[:, 1]) * scale)
-    width = math.ceil(np.amax(array[:, 0])*scale)+1
-    height = math.ceil(np.amax(array[:, 1])*scale)+1
-    image = np.zeros((width+abs_x_min, height, 1), np.uint8)
+    width = math.ceil(np.amax(array[:, 0]) * scale) + 1
+    height = math.ceil(np.amax(array[:, 1]) * scale) + 1
+    image = np.zeros((width + abs_x_min, height, 3), np.uint8)
     length = len(array)
-    #maxFound, minFound = anaylseZ(array)
     for i in nb.prange(length):
-        point = array[i]
-        #print(f"Checking {point[0]},{point[1]},{point[2]}")
-        x = int(point[0] * scale) + abs_x_min
-        y = int(point[1] * scale)
-        #print(f"Setting {x},{y} to {255}....")
-        image[x, y] = 255
+        if min_h < array[i][2] < max_h:
+            x = int(array[i][0] * scale) + abs_x_min
+            y = int(array[i][1] * scale)
+            #print(f"Setting {x},{y} to {255}....")
+            brightness = math.floor(conversion(array[i][2], min_h, max_h, 0, 255))
+            image[x, y] = brightness
     return image
 
 
@@ -149,6 +158,64 @@ def convert_point_cloud(file, progress: [str], result: [], show_pc=False):
         show_pointcloud(pcd)
     np_points = np.asarray(pcd.points)
     print("Converting image....")
-    image = convert_chunk(np_points)
+    max_h, min_h = anaylseZ(np_points)
+    image = convert_chunk(np_points, max_h, min_h)
     result.append(image)
+    print(f"Done with {file.split('/')[-1]}")
+
+
+import pc_stitcher
+
+
+def stitch_pcs(top_file, bot_file):
+    top_pc = o3d.io.read_point_cloud(top_file)
+    bot_pc = o3d.io.read_point_cloud(bot_file)
+    pc_stitcher.stitch_2_pcs(top_pc, bot_pc)
+
+
+import pointcloud_array
+
+def crop_array(array, top, size=1000, offset=50):
+    height, width = array.shape[:2]
+    if top:
+        crop_a = array[height - size - offset:height-offset, offset:width-offset]
+    else:
+        crop_a = array[offset:size, offset:width-offset]
+    return crop_a
+
+def compare_2_arrays(pc_array_1: np.array, pc_array_2, result: []):
+    pc_array_1 = crop_array(pc_array_1, True, 500)
+    pc_array_2 = crop_array(pc_array_2, False, 500)
+
+    print(f"Shape1: {pc_array_1.shape}, shape2: {pc_array_2.shape}")
+    # Resize image 1
+    max_size = (max(pc_array_1.shape[0], pc_array_2.shape[0]),
+                max(pc_array_1.shape[1], pc_array_2.shape[1]),)
+    pc_array_1 = pointcloud_array.resize_array(pc_array_1, max_size[0]*2, max_size[1]+100, 0, 50)
+    pc_array_2 = pointcloud_array.resize_array(pc_array_2, max_size[0]*2, max_size[1]+100, 0, 0)
+    rgbs = [(255, 255, 0)]
+    image_a = pointcloud_array.get_image_fast(pc_array_1, rgbs)
+    imageAnalyser.showAndSaveImage(image_a, 0)
+    image_b = pointcloud_array.get_image_fast(pc_array_2, rgbs)
+    imageAnalyser.showAndSaveImage(image_b, 0)
+    for x in range(0, round(max_size[0]/2), 10):
+        for y in range(0, round(max_size[1]/2), 10):
+            pc_array_2 = np.roll(pc_array_2, 10, axis=0)
+            distances = pointcloud_array.compare_2_2d_images(pc_array_1, pc_array_2)
+            unique, counts = np.unique(distances, return_counts=True)
+            #print(f"Occurrences: {dict(zip(unique, counts / (len(distances) * len(distances[0]))))}")
+            percentage = counts[0]/(len(distances) * len(distances[0]))
+            print(f"Overlap: {percentage * 100:.2f}%, sum: {np.sum(distances)}")
+            image_c = pointcloud_array.get_image_fast(pc_array_1+pc_array_2, rgbs)
+            imageAnalyser.showAndSaveImage(image_c, 1)
+        print("Shifting axis 1...")
+        pc_array_2 = np.roll(pc_array_2, 10, axis=1)
+
+
+
+def get_2d_array_from_file(file: str, result: []):
+    pointcloud = o3d.io.read_point_cloud(file)
+    np_points = np.asarray(pointcloud.points)
+    pc_array = pointcloud_array.get_2d_array(np_points)
+    result[0] = pc_array
     print(f"Done with {file.split('/')[-1]}")

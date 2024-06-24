@@ -25,6 +25,7 @@ def get_file_path_pc(index):
 def show_message(message: str):
     info_label.config(text=message)
 
+
 def save_stitched():
     if stitched_image:
         files = [('Pictures', '*.png*')]
@@ -37,6 +38,7 @@ def save_stitched():
     else:
         show_message("Stitching not done, nothing to save")
 
+
 def save_pointcloud_image(index):
     if pc2img_results[index]:
         files = [('Pictures', '*.png*')]
@@ -45,9 +47,11 @@ def save_pointcloud_image(index):
             return
         image = pc2img_results[index][0]
         pc2img_results[index].clear()
+        imageAnalyser.showAndSaveImage(image)
         imageAnalyser.save_image(image, filename.name)
     else:
         show_message("Conversion not done!, nothing to save")
+
 
 def get_image_file(col, row, index):
     global images
@@ -94,6 +98,12 @@ def start_pcd_2_image():
 
 image_progress = [0]
 stitched_image = []
+convert_result = [[0], [0]]
+
+def image_from_pc(index):
+    thread_st = Thread(target=pc2img.get_2d_array_from_file,
+                       args=(pointclouds[index], convert_result[index]))
+    thread_st.start()
 
 
 def start_stitching():
@@ -103,21 +113,42 @@ def start_stitching():
     stitching_thread.start()
 
 
+def stitch_2_pcs():
+    show_message("Starting Point cloud conversion...")
+    show_message("Loading files....")
+    if len(pointclouds) < 1:
+        show_message("Please select a file first")
+    else:
+        thread_st = Thread(target=pc2img.stitch_pcs,
+                           args=(pointclouds[0], pointclouds[1]))
+        thread_st.start()
+
+
+result_pc_array = []
+def stitch_2_pcs_arrays():
+    show_message("comparing 2d arrays")
+    if len(pointclouds) < 1:
+        show_message("Please select a file first")
+    else:
+        thread_st = Thread(target=pc2img.compare_2_arrays,
+                           args=(convert_result[0][0], convert_result[1][0], result_pc_array))
+        thread_st.start()
+
 def stitching_with_converted():
     show_message("Stitching converted images...")
     stitching_thread = Thread(target=imageAnalyser.stitch_images,
                               args=(pc2img_results[0][0], pc2img_results[1][0], image_progress, stitched_image))
     stitching_thread.start()
 
+
 root = Tk()
-root.geometry("500x300")
+root.geometry("1000x300")
 frm = ttk.Frame(root, padding=10, )
 frm.grid()
 
 # Info label
 info_label = ttk.Label(frm, text="Hello :) ")
 info_label.grid(column=0, row=7)
-
 
 # point clouds
 pc_file_labels = [ttk.Label(frm, text="No file"), ttk.Label(frm, text="No file")]
@@ -150,6 +181,11 @@ image_progress_var = tkinter.IntVar()
 image_progress_bar = ttk.Progressbar(frm, maximum=100, variable=image_progress_var)
 image_progress_bar.grid(column=1, row=6, padx=10, pady=10)
 ttk.Button(frm, text="Save stitched image", command=lambda: save_stitched()).grid(column=2, row=6)
+
+ttk.Button(frm, text="Convert pc1", command=lambda: image_from_pc(0)).grid(column=4, row=0)
+ttk.Button(frm, text="Convert pc2", command=lambda: image_from_pc(1)).grid(column=4, row=1)
+ttk.Button(frm, text="compare the 2", command=lambda: stitch_2_pcs_arrays()).grid(column=4, row=3)
+
 
 while True:
     root.update_idletasks()
