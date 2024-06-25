@@ -279,6 +279,15 @@ def stitch_images_path(top_image_path: str, bot_image_path: str, progress: [], r
     bot_image = cv2.imread(bot_image_path, cv2.IMREAD_GRAYSCALE)
     stitch_images(top_image, bot_image, progress, result)
 
+def match_all_contours(contours_top, bottom_contours, progress: []):
+    transitions = []
+    # Match all contours
+    for c_top in contours_top:
+        for c_bot in bottom_contours:
+            transition = contourMatcher.match_contour(c_top, c_bot, progress)
+            if any(transition) != 0:
+                transitions.append(transition)
+    return transitions
 
 def stitch_images(top_image: cv2.Mat, bot_image: cv2.Mat, progress: [], result: []):
     top_image = cv2.blur(top_image, (5, 5))
@@ -299,18 +308,12 @@ def stitch_images(top_image: cv2.Mat, bot_image: cv2.Mat, progress: [], result: 
     for con in contours_bot:
         bottom_contours.append(move_contour(con, height))
 
-    transitions = []
-    # Match all contours
-    for c_top in contours_top:
-        for c_bot in bottom_contours:
-            transitions.append(contourMatcher.match_contour(c_top, c_bot, progress))
+    transitions = match_all_contours(contours_top, bottom_contours, progress)
 
-    final_transition = (0,0)
-    for t in transitions:
-        final_transition = t
+    print(f"transitions: {transitions}")
 
     # move second image
     overlap = 200
-    moved_image = translate_image(bot_image, final_transition[1] + overlap, final_transition[0] + cut_size)
+    moved_image = translate_image(bot_image, transitions[0][1] + overlap, transitions[0][0] + cut_size)
     combined_image = combine_2_images(top_image, moved_image, overlap)
     result.append(combined_image)

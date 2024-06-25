@@ -18,31 +18,31 @@ def get_translation(source_point: (float, float), target_point: (float, float)) 
 
 
 # Moves a contour by a given translation
+@nb.njit(parallel=False, fastmath=True)
 def move_contour(contour: [(float, float)], translation: (float, float)) -> []:
     new_contour = []
-    for point in contour:
-        point = point + translation
+    for i in nb.prange(len(contour)):
+        point = contour[i][0] + translation[0], contour[i][1] + translation[1]
         new_contour.append(point)
     return new_contour
 
 
+@nb.njit(parallel=False, fastmath=False)
 def match_contour(source: [(float, float)],
                   target: [(float, float)],
                   progress: []) -> (float, float):
     print(f"Matching contours with len: {len(source)} and len: {len(target)}")
     distances = collect_distance(source, target)
-    if statistics.fmean(distances) > 2000:
-        print(f"To far away, abort. Average distance {statistics.fmean(distances)}")
-        return
+    if np.mean(np.array(distances)) > 2000:
+        return 0, 0
     if abs(len(source) - len(target)) > 200 or len(source) < 50 or len(target) < 50:
-        print("Difference too high, abort")
-        return
+        return 0, 0
 
     translation = get_translation(source[0], target[-1])
     final_transition = (0,0)
     best_match = 0
-    for i in range(0, len(source)):
-        for j in range(1, 10):
+    for i in range(len(source)):
+        for j in range(9):
             # Move target to index of source and check distances
             source = move_contour(source, translation)
             final_transition = (final_transition[0] + translation[0],
@@ -54,7 +54,7 @@ def match_contour(source: [(float, float)],
                 best_match = percentage_of_zero
             display_contours([source, target], wait=1)
             progress[0] = i / (len(source) * 10)
-            translation = get_translation(source[i], target[-j])
+            translation = get_translation(source[i], target[-j+1])
     print(f"Best match found: {best_match}")
     if best_match < 0.1:
         final_transition = (0,0)
@@ -109,6 +109,7 @@ def get_boundaries(contours: [[(float, float)]]):
     return x, y, w, h
 
 
+@nb.njit(parallel=False, fastmath=False)
 def display_contours(contours: [[(float, float)]], color=(255, 255, 255), wait=0):
     x, y, w, h = get_boundaries(contours)
     # move the contour to (0,0)
