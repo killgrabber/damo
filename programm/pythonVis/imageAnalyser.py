@@ -294,26 +294,23 @@ def stitch_images(top_image: cv2.Mat, bot_image: cv2.Mat, progress: [], result: 
     bot_image = cv2.blur(bot_image, (5, 5))
 
     cut_size = 500
-    crop_top = cropImage(top_image, True, cut_size, 100)
-    crop_bot = cropImage(bot_image, False, cut_size, 100)
-    height, width = crop_bot.shape[:2]
+    offset = 100
+    crop_top = cropImage(top_image, True, cut_size, offset)
+    crop_bot = cropImage(bot_image, False, cut_size, offset)
+    height, width = crop_top.shape[:2]
     #showAndSaveImage(crop_top)
     #showAndSaveImage(crop_bot)
 
     contours_top = getContours(crop_top)
     contours_bot = getContours(crop_bot)
 
-    # Move bottom contours to the original image can be translated with the same matrix
-    bottom_contours = []
-    for con in contours_bot:
-        bottom_contours.append(move_contour(con, height))
-
-    transitions = match_all_contours(contours_top, bottom_contours, progress)
+    transitions = match_all_contours(contours_top, contours_bot, progress)
 
     print(f"transitions: {transitions}")
 
     # move second image
     overlap = 200
-    moved_image = translate_image(bot_image, transitions[0][1] + overlap, transitions[0][0] + cut_size)
-    combined_image = combine_2_images(top_image, moved_image, overlap)
+    moved_image = translate_image(crop_bot, -transitions[0][1], -transitions[0][0])
+    combined_image = combine_2_images(crop_top, moved_image, 0)
+    showAndSaveImage(combined_image)
     result.append(combined_image)
