@@ -33,11 +33,12 @@ def match_contour(top: [(float, float)],
     green = (0, 255, 0)
     if len(top) == 0 or len(bot) == 0:
         return 0, 0
-    print(f"Matching contours with len: {len(top)} and len: {len(bot)}")
+    #print(f"Matching contours with len: {len(top)} and len: {len(bot)}")
     distances = collect_distance(top, bot)
     if np.mean(np.array(distances)) > 2000:
         return 0, 0
-    if abs(len(top) - len(bot)) > 200 or len(top) < 50 or len(bot) < 50:
+    min_length = 100
+    if abs(len(top) - len(bot)) > 200 or len(top) < min_length or len(bot) < min_length:
         return 0, 0
 
     # Perfomace reasons lol
@@ -45,11 +46,15 @@ def match_contour(top: [(float, float)],
     bot = move_contour(bot, (0, 0))
     #display_contours([top, bot], blue, green, wait=0)
     matching_pair, best_match = check_2_contours(top, bot, progress)
-    print(f"Best match found: {best_match}")
+    matching_pair_reverse, best_match_reverse = check_2_contours(bot, top, progress)
     final_transition = get_translation(bot[matching_pair[0]], top[-matching_pair[1]])
+    if best_match_reverse > best_match:
+        matching_pair, best_match = matching_pair_reverse, best_match_reverse
+        final_transition = get_translation(bot[-matching_pair[1]], top[matching_pair[0]])
     bot = move_contour(bot, final_transition)
-    print(f"Matching pair: {matching_pair}, t: {final_transition}, confidence: {str(best_match).format(5)}")
-    display_contours([top, bot], blue, green, wait=0, name=str(best_match).format(5))
+    print(f"Matching pair: {matching_pair}, t: {final_transition}, confidence: {best_match:.2f}, "
+          f"len top:{len(top)} len bot: {len(bot)}")
+    #display_contours([top, bot], blue, green, wait=0, name=str(best_match).format(5))
 
     if best_match < 0.01:
         final_transition = (0, 0)
@@ -60,7 +65,7 @@ def check_2_contours(top, bot, progress):
     best_match = 0
     matching_pair = (0,0)
     for i in range(0, len(bot)):
-        for j in range(1, 5):
+        for j in range(1, 2):
             # Move target to index of source and check distances
             translation = get_translation(bot[i], top[-j])
             bot = move_contour(bot, translation)
@@ -73,7 +78,7 @@ def check_2_contours(top, bot, progress):
             if percentage_of_zero > best_match:
                 best_match = percentage_of_zero
                 matching_pair = i, j
-            #display_contours([source, target], wait=1)
+            #display_contours([top, bot], wait=1)
             progress[0] = i / (len(bot) * 10)
     return matching_pair, best_match
 def display_plots(datas: [[]]):

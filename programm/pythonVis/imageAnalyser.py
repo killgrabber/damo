@@ -274,9 +274,9 @@ def combine_2_images(img1, img2, overlap=200):
     return vis
 
 
-def get_matching_name(name1: str, name2: str) -> str:
-    top_name = name1.split('/')[-1].replace('.png', '')
-    bot_name = name2.split('/')[-1].replace('.png', '')
+def get_matching_name(name1: str, name2: str, ending = '.png') -> str:
+    top_name = name1.split('/')[-1].replace(ending, '')
+    bot_name = name2.split('/')[-1].replace(ending, '')
     matcher = difflib.SequenceMatcher(a=top_name, b=bot_name)
     match = matcher.find_longest_match(0, len(top_name), 0, len(bot_name))
     matching_name = matcher.a[match.a:match.a + match.size][:-1]
@@ -349,19 +349,24 @@ def stitch_images(top_image: cv2.Mat, bot_image: cv2.Mat, progress: [], result: 
 
     #contourMatcher.display_contours(contours_top + bot_contours)
 
-    transitions = [(-4, 130)]  #match_all_contours(contours_top, bot_contours, progress)
+    transitions = match_all_contours(contours_top, bot_contours, progress)
 
     print(f"transitions: {transitions}")
 
     # move second image
-    overlap = 100
+    stitch_offset = -831
     for transition in transitions:
         print(f"Moving t {transition}")
         moved_image = translate_image(bot_image, transition[0]+1,
-                                      - 806 + transition[1])
+                                      stitch_offset + transition[1])
         combined_image = combine_2_images(top_image, moved_image, 50)
         showAndSaveImage(combined_image)
-        result.append(combined_image)
+
+    moved_image = translate_image(bot_image, round(transitions[0][0]) + 1,
+                                  stitch_offset + round(transitions[0][1]))
+    combined_image = combine_2_images(top_image, moved_image, 50)
+    showAndSaveImage(combined_image)
+    result.append(combined_image)
 
 
 def show_image_tresh(top_image_path, bot_image_path, treshold_min: [], treshold_max: []):

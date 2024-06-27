@@ -30,7 +30,9 @@ def show_message(message: str):
 def save_stitched():
     if stitched_image:
         files = [('Pictures', '*.png*')]
-        name_suggestion = imageAnalyser.get_matching_name(images[0], images[1])
+        name_suggestion = imageAnalyser.get_matching_name(pointclouds[0], pointclouds[1])
+        if len(name_suggestion) == 0:
+            name_suggestion = imageAnalyser.get_matching_name(images[0], images[1], ending=".ply")
         filename = filedialog.asksaveasfile(mode='w', filetypes=files, defaultextension='.png',
                                             initialfile=name_suggestion+"_stitched.png")
         if not filename:

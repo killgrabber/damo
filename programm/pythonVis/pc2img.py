@@ -82,7 +82,7 @@ def remove_outliers(pc):
 def anaylseZ(pcd):
     MIN_AMOUNT = 5
     counter = collections.Counter(pcd[:, 2])
-    mostCommon = counter.most_common(round(len(counter) * 0.90))
+    mostCommon = counter.most_common(round(len(counter) * 0.50))
     minFound = sys.maxsize
     maxFound = 0
     for key, val in mostCommon:
