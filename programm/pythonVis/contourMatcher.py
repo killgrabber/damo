@@ -26,42 +26,61 @@ def move_contour(contour: [(float, float)], translation: (float, float)) -> []:
         new_contour.append(point)
     return new_contour
 
-
-@nb.njit(parallel=False, fastmath=False)
-def match_contour(source: [(float, float)],
-                  target: [(float, float)],
+def match_contour(top: [(float, float)],
+                  bot: [(float, float)],
                   progress: []) -> (float, float):
-    print(f"Matching contours with len: {len(source)} and len: {len(target)}")
-    distances = collect_distance(source, target)
+    blue = (255, 0, 0)
+    green = (0, 255, 0)
+    if len(top) == 0 or len(bot) == 0:
+        return 0, 0
+    #print(f"Matching contours with len: {len(top)} and len: {len(bot)}")
+    distances = collect_distance(top, bot)
     if np.mean(np.array(distances)) > 2000:
         return 0, 0
-    if abs(len(source) - len(target)) > 200 or len(source) < 50 or len(target) < 50:
+    min_length = 100
+    if abs(len(top) - len(bot)) > 200 or len(top) < min_length or len(bot) < min_length:
         return 0, 0
 
-    translation = get_translation(source[0], target[-1])
-    final_transition = (0,0)
-    best_match = 0
-    for i in range(len(source)):
-        for j in range(9):
-            # Move target to index of source and check distances
-            source = move_contour(source, translation)
-            final_transition = (final_transition[0] + translation[0],
-                                final_transition[1] + translation[1],)
-            distances = collect_distance(source, target)
-            percentage_of_zero = distances.count(0) / len(distances)
-            #print(f"Percentage zeros: {percentage_of_zero * 100:.2f}%")
-            if percentage_of_zero > best_match:
-                best_match = percentage_of_zero
-            display_contours([source, target], wait=1)
-            progress[0] = i / (len(source) * 10)
-            translation = get_translation(source[i], target[-j+1])
-    print(f"Best match found: {best_match}")
-    if best_match < 0.1:
-        final_transition = (0,0)
-    print(f"Final translation: {final_transition}")
+    # Perfomace reasons lol
+    top = move_contour(top, (0, 0))
+    bot = move_contour(bot, (0, 0))
+    #display_contours([top, bot], blue, green, wait=0)
+    matching_pair, best_match = check_2_contours(top, bot, progress)
+    matching_pair_reverse, best_match_reverse = check_2_contours(bot, top, progress)
+    final_transition = get_translation(bot[matching_pair[0]], top[-matching_pair[1]])
+    if best_match_reverse > best_match:
+        matching_pair, best_match = matching_pair_reverse, best_match_reverse
+        final_transition = get_translation(bot[-matching_pair[1]], top[matching_pair[0]])
+    bot = move_contour(bot, final_transition)
+    print(f"Matching pair: {matching_pair}, t: {final_transition}, confidence: {best_match:.2f}, "
+          f"len top:{len(top)} len bot: {len(bot)}")
+    #display_contours([top, bot], blue, green, wait=0, name=str(best_match).format(5))
+
+    if best_match < 0.01:
+        final_transition = (0, 0)
     return final_transition
 
-
+@nb.njit(parallel=False, fastmath=True)
+def check_2_contours(top, bot, progress):
+    best_match = 0
+    matching_pair = (0,0)
+    for i in range(0, len(bot)):
+        for j in range(1, 2):
+            # Move target to index of source and check distances
+            translation = get_translation(bot[i], top[-j])
+            bot = move_contour(bot, translation)
+            distances = collect_distance(top, bot)
+            percentage_of_zero = distances.count(0) / len(distances)
+            #print(f"Percentage zeros: {percentage_of_zero * 100:.2f}%, i: {i}, j: {j}")
+            #blue = (255, 0, 0)
+            #green = (0, 255, 0)
+            #display_contours([source, target], [blue, green], wait=1)
+            if percentage_of_zero > best_match:
+                best_match = percentage_of_zero
+                matching_pair = i, j
+            #display_contours([top, bot], wait=1)
+            progress[0] = i / (len(bot) * 10)
+    return matching_pair, best_match
 def display_plots(datas: [[]]):
     x_axis = 1020
     for data in datas:
@@ -109,8 +128,8 @@ def get_boundaries(contours: [[(float, float)]]):
     return x, y, w, h
 
 
-@nb.njit(parallel=False, fastmath=False)
-def display_contours(contours: [[(float, float)]], color=(255, 255, 255), wait=0):
+def display_contours(contours: [[(float, float)]],
+                     color1 = (255, 0,0), color2 = (0,255,0) , wait=0, name="Contour"):
     x, y, w, h = get_boundaries(contours)
     # move the contour to (0,0)
     temp_contours = copy.deepcopy(contours)
@@ -118,18 +137,20 @@ def display_contours(contours: [[(float, float)]], color=(255, 255, 255), wait=0
         t = get_translation((x, y), (0, 0))
         temp_contours[i] = move_contour(temp_contours[i], t)
 
-    new_blank_image = np.zeros((h + 1 - y, w + 1 - x, 3), np.uint8)
-    for contour in temp_contours:
+    new_blank_image = np.zeros((h + 1 -y, max(w + 1 - x, 500), 3), np.uint8)
+    color = color1
+    for contour in contours:
         for p in contour:
-            new_blank_image[round(p[1]), round(p[0])] = color
-    show_image(new_blank_image, wait)
+            new_blank_image[p[1]-y, p[0]-x] = color
+        color = color2
+    show_image(new_blank_image, wait, name)
 
 
-def show_image(image, wait=0):
+def show_image(image, wait=0, name="Damo"):
     scale = 0.7
     if image.shape[0] > 2000 or image.shape[1] > 2000:
-        scale = 0.3
+        scale = 0.7
     copy = image.copy()
     small = cv2.resize(copy, (0, 0), fx=scale, fy=scale, interpolation=cv2.INTER_AREA)
-    cv2.imshow('Contours', small)
+    cv2.imshow(name, small)
     cv2.waitKey(wait)

@@ -69,7 +69,7 @@ def show_pointcloud(pc):
 
 
 def remove_outliers(pc):
-    print("Statistical oulier removal")
+    print("Statistical outlier removal")
     oldAmount = len(pc.points)
     cl, ind = pc.remove_statistical_outlier(nb_neighbors=50,
                                             std_ratio=1.0)
@@ -82,20 +82,21 @@ def remove_outliers(pc):
 def anaylseZ(pcd):
     MIN_AMOUNT = 5
     counter = collections.Counter(pcd[:, 2])
-    mostCommon = counter.most_common(round(len(counter) * 0.20))
+    mostCommon = counter.most_common(round(len(counter) * 0.50))
     minFound = sys.maxsize
     maxFound = 0
     for key, val in mostCommon:
         if (val > MIN_AMOUNT):
             maxFound = max(key, maxFound)
             minFound = min(key, minFound)
-    print(f"Max: {maxFound} min: {minFound} ")
     return maxFound, minFound
 
 
 @nb.njit(parallel=False, fastmath=True)
 def conversion(old_value, old_min, old_max, new_min=10, new_max=255):
-    return ((old_value - old_min) / (old_max - old_min)) * (new_max - new_min) + new_min
+    result = ((old_value - old_min) / (old_max - old_min)) * (new_max - new_min) + new_min
+    #print(f"Converting {int(old_value*1000)} to {math.floor(result)}")
+    return result
 
 
 def pcNeighbours(pcd):
@@ -122,12 +123,7 @@ def divide_pointcloud(original, splits: int) -> []:
 
 @nb.njit(parallel=True, fastmath=True)
 def convert_chunk(array: np.array, max_h, min_h):
-    rgbs = []
-    for r in range(0, 256, 20):
-        for g in range(0, 265, 20):
-            for b in range(0, 256, 20):
-                rgbs.append((r, g, b))
-    print(f"Length rgbs: {len(rgbs)}")
+    print(f"converting with max: {int(max_h*1000)} min: {int(min_h*1000)}...")
     scale = 100
     x_min = math.floor(np.min(array[:, 0]) * scale)
     abs_x_min = abs(x_min)
@@ -147,21 +143,37 @@ def convert_chunk(array: np.array, max_h, min_h):
 
 
 # returns image
-def convert_point_cloud(file, progress: [str], result: [], show_pc=False):
-    pcd = o3d.io.read_point_cloud(file)
-    if len(pcd.points) == 0:
-        print("Loading point cloud failed")
-        return
-    print("Removing outliers...")
-    pcd = remove_outliers(pcd)
-    if show_pc:
-        show_pointcloud(pcd)
-    np_points = np.asarray(pcd.points)
-    print("Converting image....")
-    max_h, min_h = anaylseZ(np_points)
-    image = convert_chunk(np_points, max_h, min_h)
-    result.append(image)
-    print(f"Done with {file.split('/')[-1]}")
+def convert_point_cloud(files: [], progress: [str], result: [], show_pc=False):
+    pcds_points = []
+    for file in files:
+        pcd = o3d.io.read_point_cloud(file)
+        if len(pcd.points) == 0:
+            print("Loading point cloud failed")
+            return
+
+        print("Removing outliers...")
+        pcd = remove_outliers(pcd)
+
+        if show_pc:
+            show_pointcloud(pcd)
+
+        np_points = np.asarray(pcd.points)
+        pcds_points.append(np_points)
+
+    max_hs = []
+    min_hs = []
+    for np_points in pcds_points:
+        print("Getting height boundaries....")
+        max_h, min_h = anaylseZ(np_points)
+        max_hs.append(max_h)
+        min_hs.append(min_h)
+    i = 0
+    for np_points in pcds_points:
+        image = convert_chunk(np_points, np.mean(max_hs), np.mean(min_hs))
+        imageAnalyser.showAndSaveImage(image)
+        result.append(image)
+        print(f"Done with {files[i].split('/')[-1]}")
+        i += 1
 
 
 import pc_stitcher
