@@ -8,6 +8,7 @@ import numba as nb
 import string
 import contourMatcher
 import difflib
+import random as rng
 
 IMAGES = [
     'pcd_2916383.png',
@@ -24,32 +25,49 @@ def importImages():
     return images
 
 
-def getContours(img):
+def getContours(img, min_distance=5):
     # draw contours on the original image
     height, width = img.shape[:2]
     image_contour_blue = img.copy()
     image_gray = cv2.cvtColor(image_contour_blue, cv2.COLOR_BGRA2GRAY)
     contours1, hierarchy1 = cv2.findContours(image_gray, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)
     print("Contours found: ", len(contours1))
-    #cv2.drawContours(image_contour_blue, contours1, -1, (0, 255, 0), 3)
-    #cv2.imshow("blue contours", image_contour_blue)
-    #cv2.waitKey(1)
+    for i in range(len(contours1)):
+        color = (rng.randint(0, 256), rng.randint(0, 256), rng.randint(0, 256))
+        cv2.drawContours(image_contour_blue, contours1, i, color, 2, cv2.LINE_8, hierarchy1, 0)
+    #cv2.imshow("con", image_contour_blue)
+    #cv2.imwrite("test.png", image_gray)
+    #cv2.waitKey(0)
     # remove contour points on the edge
     all_contours = []
-    max_distance = 5
     for contour in contours1:
         all_points = []
         for points in contour:
             for point in points:
-                if not (point[0] < max_distance or point[1] < max_distance or
-                        abs(point[0] - height) < max_distance or
-                        abs(point[0] - width) < max_distance or
-                        abs(point[1] - height) < max_distance or
-                        abs(point[1] - width) < max_distance):
+                if not (point[0] < min_distance or point[1] < min_distance or
+                        abs(point[0] - height) < min_distance or
+                        abs(point[0] - width) < min_distance or
+                        abs(point[1] - height) < min_distance or
+                        abs(point[1] - width) < min_distance):
                     all_points.append(point)
         all_contours.append(all_points)
     all_contours.sort(key=len, reverse=True)
-    return all_contours
+    # seperate contours
+    new_contours = []
+    for i in range(len(all_contours)):
+        new_points = []
+        for j in range(1, len(all_contours[i])):
+            distance = compare_point(all_contours[i][j], all_contours[i][j - 1])
+            if distance < 10:
+                new_points.append(all_contours[i][j])
+            else:
+                print("New segment")
+                new_contours.append(new_points)
+                new_points.clear()
+                new_points.append(all_contours[i][j])
+        new_contours.append(new_points)
+    print(f"Returning {len(new_contours)} contours")
+    return new_contours
 
 
 def drawContours(image, counturs, hierarchy1, x, y):
@@ -69,15 +87,16 @@ def drawContours(image, counturs, hierarchy1, x, y):
 def save_image(image, name: str):
     cv2.imwrite(name, image)
 
-def showAndSaveImage(image, wait=0, name=""):
-    scale = 0.5
+
+def showAndSaveImage(image, wait=0, name="", window_name="test"):
+    scale = 1
     if image.shape[0] > 2000 or image.shape[1] > 2000:
-        scale = 0.3
-    if image.shape[0] > 5000 or image.shape[1] > 5000:
+        scale = 0.5
+    if image.shape[0] > 5000 and image.shape[1] > 5000:
         scale = 0.2
     copy = image.copy()
     small = cv2.resize(copy, (0, 0), fx=scale, fy=scale, interpolation=cv2.INTER_AREA)
-    cv2.imshow('Contours', small)
+    cv2.imshow(window_name, small)
     cv2.waitKey(wait)
     if name != "":
         cv2.imwrite(name + '.jpg', image)
@@ -214,9 +233,9 @@ def compareContours(contours1: np.array, contours2: np.array):
 def cropImage(image, top, size=1000, offset=50):
     height, width = image.shape[:2]
     if top:
-        crop_img = image[height - size - offset:height-offset, 0:width]
+        crop_img = image[height - size - offset:height - offset, offset:width - offset]
     else:
-        crop_img = image[offset:size, 0:width]
+        crop_img = image[offset:size + offset, offset:width - offset]
     return crop_img
 
 
@@ -239,8 +258,8 @@ def cropContour(contour, x1, y1, x2, y2):
 
 def translate_image(img, x, y):
     matrix = np.float32([
-        [1, 0, round(y)],
-        [0, 1, round(x)]
+        [1, 0, round(x)],
+        [0, 1, round(y)]
     ])
     warp_dst = cv2.warpAffine(img, matrix, (img.shape[1], img.shape[0]))
     return warp_dst
@@ -249,10 +268,11 @@ def translate_image(img, x, y):
 def combine_2_images(img1, img2, overlap=200):
     h1, w1 = img1.shape[:2]
     h2, w2 = img2.shape[:2]
-    vis = np.zeros((h1 + h2, max(w1, w2), 3), np.uint8)
+    vis = np.zeros((h1 + h2 - overlap, max(w1, w2), 3), np.uint8)
     vis[:h1 - overlap, :w1] = img1[:h1 - overlap, :w1]
     vis[h1 - overlap:h1 + h2 - overlap, :w2] = img2
     return vis
+
 
 def get_matching_name(name1: str, name2: str) -> str:
     top_name = name1.split('/')[-1].replace('.png', '')
@@ -261,6 +281,7 @@ def get_matching_name(name1: str, name2: str) -> str:
     match = matcher.find_longest_match(0, len(top_name), 0, len(bot_name))
     matching_name = matcher.a[match.a:match.a + match.size][:-1]
     return matching_name
+
 
 def cut_borders(image: cv2.Mat):
     # Crop borders
@@ -273,11 +294,11 @@ def cut_borders(image: cv2.Mat):
     return crop
 
 
-
 def stitch_images_path(top_image_path: str, bot_image_path: str, progress: [], result: []):
     top_image = cv2.imread(top_image_path, cv2.IMREAD_GRAYSCALE)
     bot_image = cv2.imread(bot_image_path, cv2.IMREAD_GRAYSCALE)
     stitch_images(top_image, bot_image, progress, result)
+
 
 def match_all_contours(contours_top, bottom_contours, progress: []):
     transitions = []
@@ -289,28 +310,112 @@ def match_all_contours(contours_top, bottom_contours, progress: []):
                 transitions.append(transition)
     return transitions
 
+
+def show_image_and_contours(image, contours, wait=0, window_name="test"):
+    temp_image = image.copy()
+    for contour in contours:
+        temp_image = draw_points(temp_image, contour, 0, 0, (0, 0, 255))
+
+    showAndSaveImage(temp_image, wait, window_name=window_name)
+
+
 def stitch_images(top_image: cv2.Mat, bot_image: cv2.Mat, progress: [], result: []):
-    top_image = cv2.blur(top_image, (5, 5))
-    bot_image = cv2.blur(bot_image, (5, 5))
+    if isinstance(top_image, str):
+        top_image = cv2.imread(top_image)
+    if isinstance(bot_image, str):
+        bot_image = cv2.imread(bot_image)
+
+    top_image_blur = cv2.blur(top_image, (5, 5))
+    bot_image_blur = cv2.blur(bot_image, (5, 5))
 
     cut_size = 500
-    offset = 100
-    crop_top = cropImage(top_image, True, cut_size, offset)
-    crop_bot = cropImage(bot_image, False, cut_size, offset)
+    offset = 200
+    crop_top = cropImage(top_image_blur, True, cut_size, offset=offset)
+    crop_bot = cropImage(bot_image_blur, False, cut_size, offset=offset)
+
     height, width = crop_top.shape[:2]
+    print(f"Size topcrop: {crop_top.shape}, ")
+    print(f"Size botcrop: {crop_bot.shape}, ")
     #showAndSaveImage(crop_top)
     #showAndSaveImage(crop_bot)
+    min_distance_from_border = 5
+    contours_top = getContours(crop_top, min_distance_from_border)
+    contours_bot = getContours(crop_bot, min_distance_from_border)
 
-    contours_top = getContours(crop_top)
-    contours_bot = getContours(crop_bot)
+    # move bot contour
+    bot_contours = []
+    for bot_c in contours_bot:
+        bot_contours.append(move_contour(bot_c, (0, 0)))
 
-    transitions = match_all_contours(contours_top, contours_bot, progress)
+    #contourMatcher.display_contours(contours_top + bot_contours)
+
+    transitions = [(-4, 130)]  #match_all_contours(contours_top, bot_contours, progress)
 
     print(f"transitions: {transitions}")
 
     # move second image
-    overlap = 200
-    moved_image = translate_image(crop_bot, -transitions[0][1], -transitions[0][0])
-    combined_image = combine_2_images(crop_top, moved_image, 0)
-    showAndSaveImage(combined_image)
-    result.append(combined_image)
+    overlap = 100
+    for transition in transitions:
+        print(f"Moving t {transition}")
+        moved_image = translate_image(bot_image, transition[0]+1,
+                                      - 806 + transition[1])
+        combined_image = combine_2_images(top_image, moved_image, 50)
+        showAndSaveImage(combined_image)
+        result.append(combined_image)
+
+
+def show_image_tresh(top_image_path, bot_image_path, treshold_min: [], treshold_max: []):
+    cv2.namedWindow("loop")
+    cv2.namedWindow("loop2")
+    top_image = cv2.imread(top_image_path)
+    bot_image = cv2.imread(bot_image_path)
+    cut_size = 500
+    offset = 200
+    crop_top = cropImage(top_image, True, cut_size, offset)
+    crop_bot = cropImage(bot_image, False, cut_size, offset)
+
+    #top_image_blur = cv2.blur(crop_top, (5, 5))
+    #bot_image_blur = cv2.blur(crop_bot, (5, 5))
+    small_top = cv2.resize(top_image, (0, 0), fx=0.5, fy=0.5, interpolation=cv2.INTER_AREA)
+    small_bot = cv2.resize(bot_image, (0, 0), fx=0.5, fy=0.5, interpolation=cv2.INTER_AREA)
+    overlap = 50
+    while True:
+        moved_image = translate_image(small_bot, treshold_min[0], treshold_max[0])
+        contours_top = getContours(cv2.blur(small_top, (5, 5)))
+        contours_bot = getContours(cv2.blur(moved_image, (5, 5)))
+        combined_image = combine_2_images(small_top, moved_image, overlap)
+        index = 0
+        for i in range(0):
+            for j in range(len(contours_bot)):
+                if contours_top[i] and contours_bot[j]:
+                    distances = contourMatcher.collect_distance(contours_top[i], contours_bot[j])
+                    if sum(distances) > 100000:
+                        continue
+                    contourMatcher.display_contours([contours_top[i], contours_bot[j]],
+                                                    name=f"{i},{j}", wait=1)
+                    percentage_of_zero = distances.count(0) / len(distances)
+                    match_text = (f"i,j: {i:2.0f},{j:2.0f} zeros: {percentage_of_zero:2.3f}, "
+                                  f"sum: {sum(distances):.3f}, "
+                                  f"lens:{len(contours_top[i])}, {len(contours_bot[j])}")
+                    cv2.putText(combined_image, match_text, (500, (index) * 30 + 80), 1, 2, 255)
+                    index += 1
+
+        text = f"Min: {treshold_min[0]} max {treshold_max[0]}"
+        cv2.putText(combined_image, text, (500, 50), 1, 2, 255)
+        cv2.imshow("loop2", combined_image)
+
+        cv2.waitKey(1)
+
+
+def do_some_threshing(image_gray, treshold_min, treshold_max):
+    print(f"Min: {treshold_min[0]} max {treshold_max[0]}")
+    ret, thresh = cv2.threshold(image_gray, treshold_min[0], treshold_max[0], 0)
+    contours1, hierarchy1 = cv2.findContours(thresh, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+    blank = np.zeros(image_gray.shape)
+    print("Contours found: ", len(contours1))
+    for i in range(len(contours1)):
+        color = (255, 255, 255)
+        cv2.drawContours(blank, contours1, i, color, 2, cv2.LINE_8, hierarchy1, 0)
+    # cv2.imshow("loop", thresh)
+    cv2.imshow("loop2", blank)
+    cv2.waitKey(1)
