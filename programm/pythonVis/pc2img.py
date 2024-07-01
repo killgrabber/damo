@@ -74,13 +74,13 @@ def remove_outliers(pc):
     cl, ind = pc.remove_statistical_outlier(nb_neighbors=50,
                                             std_ratio=1.0)
     newAmount = len(pc.select_by_index(ind).points)
-    print("Reduced from: " + str(oldAmount) + " to " + str(newAmount) + " points")
+    diff = oldAmount - newAmount
+    print(f"Reduced from: {oldAmount} to {newAmount}, diff {diff}, percentage: {diff/oldAmount}")
     cleared = pc.select_by_index(ind)
     return cleared
 
-
 def anaylseZ(pcd):
-    MIN_AMOUNT = 5
+    MIN_AMOUNT = -1
     counter = collections.Counter(pcd[:, 2])
     mostCommon = counter.most_common(round(len(counter) * 0.50))
     minFound = sys.maxsize
