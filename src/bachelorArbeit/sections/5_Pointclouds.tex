@@ -1,14 +1,17 @@
 \documentclass[../main.tex]{subfiles}
 \begin{document}
 
-\section{Verfahren}
+\section{Experimentelle Validierung}
 
 \subsection{Datenerfassung}
-Ziel ist ein digitales Abbild von einem realen Objekt zu erstellen.
-Als Grundlage für dieses Abbild arbeite, ich in diesem Fall mit Pointclouds 
+Ziel ist ein Verfahren zu entwickeln, das ein digitales Abbild von einem realen Objekt
+erstellen kann.
+Als Grundlage für dieses Abbild arbeite ich in diesem Fall mit Pointclouds, 
 die mithilfe eines Laserscanners aufgenommen wurden. Auch andere Möglichkeiten
 Pointclouds zu erhalten sind denkbar und sollten mit dem Verfahren 
-kompatibel sein.
+kompatibel sein. In den folgenden Absatz werde ich das Erstellen von Pointclouds 
+mithilfe eines Laserscanners erläutern und auf ein Verfahren eingehen, dass aus 
+den Pointclouds digitale Objekte erstellt, die miteinander verglichen werden können.
 
 \subsection{Versuchsaufbau}
 
@@ -36,12 +39,6 @@ Der Scanner ist an dem Werkzeugkopf einer CNC-Fräse befestigt und wird
 in Richtung der X und Y Achse verschoben. So kann von dem kompletten Bauteil eine 
 Pointcloud aufgenommen werden.
 
-\subsubsection{Geschwindigkeit}
-Der Parameter `Geschwindigkeit` muss der realen Vorlaufgeschwindigkeit des Scanners
-entsprechen um eine korrekte und akkurate Pointcloud zu erhalten. Ist die 
-Messgeschwindigkeit kleiner als die Bewegung des Scanners werden Profile doppelt 
-aufgenommen, ist sie zu hoch werden Profile übersprungen und das Bauteil wirkt in 
-der resultierende Pointcloud in X-Richtung gestreckt.
 
 \newpage
 
@@ -51,7 +48,7 @@ der resultierende Pointcloud in X-Richtung gestreckt.
     \label{fig:scanparameter}
 \end{wrapfigure}
 
-\subsubsection{Limitierungen der Achsen:}
+\subsubsection{Limitierung der Achsen:}
 
 Die gesamte Länge des Objekts kann also erfasst werden, indem Scanner 
 beziehungsweise Werkzeugkopf in X-Richtung verschoben wird. Mit dem Start der 
@@ -79,7 +76,9 @@ Die y-Achse der Pointcloud wird durch den eingesetzten Scanner limitiert.
 Der Scanner hat Abhängig vom Modell und der angebrachten Höhe eine fixe Länge die 
 er aufnehmen kann. In unserem Fall wurde der Scanner 'LLT 30x0-25' verwendet der 
 eine mittleren Messbreite von 25 mm bietet. 
-(Siehe Abbildung \ref{fig:scanner} \cite{MESSTECHNIK_2020}) 
+In Abbildung \ref{fig:scanner} ist dieser Messbereich sichtbar. Mittig kann 
+in einer Tiefe von 85 mm eine Linie mit der Länge 25 mm gemessen werden. 
+Der komplette messbare Bereich ist rot markiert. \cite{MESSTECHNIK_2020}
 Bauteile mit einer größeren Länge in Y-Richtung können also nicht in einer Pointcloud
 erfasst werden. Damit eine Digitalisierung von größeren Objekten erfolgen kann, müssen
 also mehrere Scans durchgeführt, und später zusammengefügt werden. Zwischen den 
@@ -90,14 +89,35 @@ genutzt werden kann, um die Pointclouds wieder zusammenzufügen. Die Verschiebun
 beliebig klein gewählt werden, jedoch steigt der Arbeitsaufwand und die Dateigröße mit 
 jeder zusätzlichen Pointcloud, während das Ergebnis sich nicht verbessert.
 So können Pointclouds aufgenommen werden die dann in dem zu entwickelnde Verfahren
-wieder zu einem digitalen Abbild zusammengefügt werden. Ist dieser Prozess erfolgreich
-erhält, man eine Pointcloud der Oberfläche des Objekts. 
-In Abbildung \ref{fig:pointcloud_big} ist eine Pointcloud von dem Demonstratorbauteil
-zu sehen, in Abbildung \ref{fig:pointcloud_small} eine Nahaufnahme des mittleren Teils
-derselben Pointcloud in der die einzelnen Punkte sichtbar sind. Hier sieht man wie
-die Pointcloud aufgebaut ist. Dazu aber später noch etwas mehr.
+wieder zu einem digitalen Abbild zusammengefügt werden.
 
-\begin{figure}[h]
+
+\subsubsection{Geschwindigkeit}
+Der Parameter `Geschwindigkeit` in Abbildung \ref{fig:scanparameter} muss der realen Vorlaufgeschwindigkeit des Scanners
+entsprechen um eine korrekte und akkurate Pointcloud zu erhalten. Ist die 
+Messgeschwindigkeit kleiner als die Bewegung des Scanners werden Profile doppelt 
+aufgenommen, ist sie zu hoch werden Profile übersprungen und das Bauteil wirkt in 
+der resultierende Pointcloud in X-Richtung gestreckt.
+
+
+\newpage
+\subsubsection{Endergebnis}
+
+Ist dieser Prozess erfolgreich
+erhält, man eine Pointcloud der Oberfläche des Objekts. 
+In Abbildung \ref{fig:pointcloud_big} ist eine solche Pointcloud eines einzelnes
+Scanverlaufs dargestellt. In Abbildung \ref{fig:pointcloud_small} ist eine Nahaufnahme 
+des mittleren Teils derselben Pointcloud zu sehen.
+Hier sind die einzelnen Punkte sichtbar und man kann erkennen wie die Oberfläche 
+aus tausenden Punkten aufgebaut ist. Bei einem Messbereich von 25 mm und 2048 
+Punkten pro Profil \cite{SCANNER} sind das mehr als 80 Punkte pro mm in einem
+y-Achse-Profil.
+Zusätzlich kann man im rechten oberen 
+Bereich Ausreißer sehen, warum diese das Verfahren erschweren und 
+wie man sie entfernen kann folgt in den kommenden Kapiteln. Außerdem werde ich auch
+auf die Struktur von Pointcloud Dateien noch eingehen.
+
+\begin{figure}[h!]
     \centering
     \begin{minipage}{0.45\textwidth}
         \centering
@@ -113,41 +133,80 @@ die Pointcloud aufgebaut ist. Dazu aber später noch etwas mehr.
     \end{minipage}
 \end{figure}
 
-\needspace{0.4\textwidth}
+\begin{wrapfigure}{r}{0.4\textwidth}
+    \includegraphics[width=0.4\textwidth]{images/piezoelektrische.JPG}
+    \caption{Spannungswandler}
+    \label{fig:piez}
+\end{wrapfigure}
+
+\subsubsection{Zusätzliche Messinstrumente}
+
+Zusätzlich zu dem Scanner werden noch mit weiteren Messinstrumente Daten erfasst.
+In Abbildung \ref{fig:versuchsaufbau} unter der Nummer 5 ist ein mechanischer 
+Verschiebungsmesser zu sehen. Dieser misst die Verschiebung der Backen des 
+Schraubstocks. Der Schraubstock misst zusätzlich mit viel Kraft die Backen 
+aufeinander pressen.
+
+Hierzu wird die piezoelektrische Kraftmesstechnik verwendet.
+Bei Krafteinwirkung auf Piezokristalle (z. B. Quarz, Bariumtitanat, BaTiO3) 
+werden im Kristallgitter negative gegen positive Gitterpunkte
+verschoben, sodass an den Kristalloberflächen
+Ladungsunterschiede Q als Funktion der Kraft F
+gemessen werden.
+Piezoelektrische Kraftaufnehmer sind mechanisch sehr steif, 
+sie erfordern Ladungsverstärker
+zur Messsignalverarbeitung und sind hauptsächlich zur Messung dynamischer Vorgänge
+mit einer kleineren Frequenz als 1 Hz geeignet. \cite{Czichos.2020}. 
+Diese Kraftmesstechnik ist 
+für unseren Einsatzzweck gut geeignet da sie eine hohe Empfindlichkeit bietet 
+und in vielfältigen Formen und Größen hergestellt werden kann. Zur Aufbereitung 
+der Ladung, die der piezoelektrische Sensor, liefert wurde ein Ladungsverstärker 
+eingesetzt.\cite{Schwartz.2006}
+Dieser ist in Spannungsverstärker ist in Abbildung \ref{fig:taster} unten zu sehen.
+
+\newpage
+
 \begin{wrapfigure}{r}{0.4\textwidth}
     \includegraphics[width=0.4\textwidth]{images/taster.JPG}
     \caption{Taster}
     \label{fig:taster}
 \end{wrapfigure}
 
-\subsubsection{Zusätzliche Messinstrumente}
 
-Zusätzlich zu dem Scanner werden noch mit weiteren Elementen Daten erfasst.
-In Abbildung \ref{fig:versuchsaufbau} unter der Nummer 5 ist ein mechanischer 
-Verschiebungsmesser zu sehen. Dieser misst die Verschiebung der Backen des 
-Schraubstocks. Der Schraubstock misst zusätzlich mit viel Kraft die Backen 
-aufeinander pressen. Damit die Scanner-Ergebnisse überprüft werden können 
+Damit die Scanner-Ergebnisse überprüft werden können,
 wird die Bauteilgeometrie zusätzlich nach dem Scanvorgang noch mit einem Taster
 abgetastet. Hierfür wird der Werkzeugkopf gewechselt und der Scanner entfernt.
 Dann wird der Taster in die CNC-Maschine eingesetzt und das Bauteil abgetastet.
 In Abbildung \ref{fig:taster} ist das Tasterwerkzeug zu sehen. Die rote Kugel 
 am Ende des Tasters erkennt, sobald eine Berührung zu dem Bauteil erfolgt ist 
 und benachrichtigt den Steuerungsrechner. Dieser speichert die aktuelle Position 
-dann in einer Protokolldatei. 
+dann in einer Protokolldatei.
 
-Bevor ich mich aber mit dem 2. Schritt des Verfahrens beschäftigen möchte ich auf die 
-Datenstruktur von Pointclouds eingehen. Wie der Name schon sagt bestehende
-Pointclouds aus Punkten. In unserem Fall ca. 3 Millionen für eine einzelne
+\subsubsection{Pointclouds}
+
+Bevor ich mich aber mit dem Zusammenfügen von mehreren Pointclouds beschäftige,
+möchte ich auf die Datenstruktur von Pointclouds eingehen. 
+Wie der Name schon sagt bestehende Pointclouds aus Punkten. 
+In unserem Fall ca. 3 Millionen für eine einzelne
 Bewegung in X-Richtung. In jedem Punkt sind mindestens 3 Koordinaten gespeichert, 
 eine X und Y Koordinate relativ zu Ursprung der Pointcloud und eine Z Koordinate 
-in der die Höhe gespeichert wird. Der Ursprung der Pointcloud liegt in der Mitte 
-der x-Achse, also genau da wo der Scanner verläuft.
+in der die Höhe gespeichert wird. Der Ursprung der Pointcloud liegt am Laserausgang
+des Scanners.
+
+\begin{wrapfigure}{l}{0.15\textwidth}
+    \centering
+    \includegraphics[width=0.15\textwidth]{images/demonstratorbauteil_top.PNG}
+    \includegraphics[width=0.15\textwidth]{images/demonstratorbauteil_bottom.PNG}
+    \caption{Demonstratorbauteil}
+    \label{fig:demonstratorbauteil}
+\end{wrapfigure}
+
 Zusätzlich ist für jeden Punkt auch noch eine Farbe als RGB-Farbwert
 (3 Werte von 0 bis 255) gespeichert. Die Farbe wird relativ zu der Höhe
 berechnet. Punkte bekommen einen Farbwert zugewiesen je nachdem wie nah 
 sie an dem Minimum oder Maximum der Z-Koordinate sind. 
-In \ref{fig:pointclouds} ist die komplette Pointcloud eines Demonstratorbauteils 
-zu sehen, zusammen mit einer BoundingBox, durch diese werden die Randpunkte
+In \ref{fig:pointcloud_big} ist die komplette Pointcloud eines Demonstratorbauteils 
+zu sehen, zusammen mit einer Bounding-Box, durch diese werden die Randpunkte
 der Pointcloud visuell dargestellt. Man sieht außerdem das unten liegende Punkte
 hell und weiter oben liegende Punkte dunkler dargestellt werden.
 Unterhalb ist eine Nahaufnahme des Mittelstücks des gleichen Bauteils zu sehen. 
@@ -158,7 +217,7 @@ Das heißt die X und Y Koordinaten sind nicht zum Beispiel anhand eines Netzes
 angelegt, sondern können einen beliebigen Abstand zwischen einander haben. Das
 werden wir auch später in der weiteren Bearbeitung der Pointclouds sehen.
 
-Wenn nun also alle Pointclouds für ein Objekt erfasst wurden kann zu dem 2.
+Wenn nun also alle Pointclouds für ein Objekt erfasst wurden, kann zu dem 2.
 Schritt des Verfahrens übergegangen werden. Hier müssen die Daten zusammengefügt 
 werden. 
 Hierfür existieren in der Literatur schon verschiedene Verfahren, ein 
@@ -184,16 +243,6 @@ oder die 'Anderson-accelerated' Version die besser mit Ausreißern und nur
 partiell überlappenden Daten umgehen kann und eine gleichwertige oder bessere 
 Transformation errechnen kann. \cite{icp}
 
-\begin{wrapfigure}{l}{0.2\textwidth}
-    \centering
-    \includegraphics[width=0.2\textwidth]{images/demonstratorbauteil_top.PNG}
-    \smallskip\par
-    \includegraphics[width=0.2\textwidth]{images/demonstratorbauteil_bottom.PNG}
-    \caption{Demonstratorbauteil}
-    \label{fig:demonstratorbauteil}
-    \vspace{-20pt}
-\end{wrapfigure}
-
 Aufgrund der Versprechen dieser Varianten und weil dieser Algorithmus in vielen
 Open-Source Bibliotheken schon implementiert ist, war das auch mein erster Ansatz
 und ich habe mir Hoffnungen gemacht, dass das Zusammenfügen der Pointclouds 
@@ -203,15 +252,18 @@ die auf dem Paper von Qian-Yi Zhou, Jaesik Park und Vladlen Koltun basiert. \cit
 Das Globale Registrierung Verfahren wird vor dem ICP-Algorithmus benutzt um eine erste, 
 initiale Transformation zu erstellen, die der IPC-Algorithmus im ersten Schritt braucht.
 
-Das Problem bei dieser Methodik und meinem Datensatz ist, das beide Hälften des
-Demonstratorbauteils symmetrisch sind. In dem Verfahren wird nicht nur eine Transformation
-anhand der X, Y und Z Achsen eingesetzt, sondern auch eine Rotation der Pointcloud.
+Das Problem bei dieser Methodik und unserem Datensatz ist, das beide Hälften des
+Demonstratorbauteils symmetrisch sind. In dem Verfahren wird nicht nur eine 
+Transformation anhand der X, Y und Z Achsen eingesetzt, 
+sondern auch eine Rotation der Pointcloud.
 Wie man in Abbildung \ref{fig:demonstratorbauteil} sehen kann überlappen die beiden Pointclouds 
 schon fast zu 100 Prozent, wenn eine Pointcloud um 180 Grad gedreht, und über die andere
 gelegt wird. Auf dieses Ergebnis ist auch das Global Registrierungsverfahren gekommen. 
 Für unseren Fall ist also ein Verfahren nötig was ausschließlich eine 
 Transformation in X und Y Richtung benutzt. Das sind auch die einzigen Achsen, 
 in der sich der Scanner bewegt hat.
+
+\newpage
 
 \subsection*{Wahl des Demonstratorbauteils}
 
@@ -240,6 +292,8 @@ sondern, wenn die Pointclouds maximal übereinander geschoben sind. Zusätzlich 
 Verschiebung und Berechnung der zweidimensionalen Arrays rechenintensiv und hat zu 
 langen Laufzeiten geführt. Also habe ich dieses Verfahren wieder aufgeben mit einer neuen
 Idee:
+
+\newpage
 
 \subsection*{Pointcloud in Bild konvertieren}
 Um Rechenzeit zu sparen und auf viele Funktionen von schon bestehenden 
@@ -279,13 +333,21 @@ scheitert. Reale Datensets wie wir es vorliegen haben sind nicht perfekt, sonder
 beinhalten Messfehler und Streuungen. 
 
 Abbildung \ref*{fig:brightness} zeigt die Häufigkeit der gleichen Höhenwerte einer
-Pointcloud von dem Demonstratorbauteil als FDM-Druck.
- Auf der y-Achse die relative Häufigkeit.
-Die meisten Höhenwerte sind um die 80, sie gehören zu den Punkten, die auf dem 
-Demonstratorbauteil liegen, es treten allerdings auch Werte darunter und darüber auf. 
+Pointcloud von dem Demonstratorbauteil. In Blau ist die Verteilung der Punkte auf 
+einem Demonstratorbauteil zu sehen das aus Metall gedruckt wurde, Orange zeigt die 
+Verteilung der Punkte auf einem Kunststoffteil.
+In dem oberen Histogramm 
+sind die Häufigkeiten der Höhenwerte zu sehen. Der Datensatz wurde in 500 gleich große
+Teile gruppiert, jeder Balken repräsentiert eine Gruppe.
+Unterhalb ist das Histogramm mit dem gleichen Datensatz, aber mit der y-Achse 
+logarithmisch skaliert um kleine Prozente deutlich zu machen die im
+oberen Diagramm nur schwer oder gar nicht sichtbar sind. 
+Die meisten Höhenwerte treten bei ca. 80 beziehungsweise 85 auf, 
+sie gehören zu den Punkten, die auf dem Demonstratorbauteil liegen, 
+es treten allerdings auch Werte darunter und darüber auf. 
 Die in Abbildung \ref*{calc:brightness} vorgestellte Formel benutzt allerdings 
-das absolute Minimum und Maximum Werte, 
-die Punkte auf dem Bauteil werden also entsprechend wenig
+die absoluten Minimum und Maximum Werte.
+Alle Punkte die tatsächlich auf dem Bauteil werden also entsprechend wenig
 berücksichtigt. Dem kann Abhilfe geschaffen werden, indem Werte, die weniger häufig 
 auftreten entfernt werden. Sortiert man alle Höhenwerte nach der Häufigkeit ihres 
 auftreten in der Pointcloud und entfernt den n-ten Prozentsatz können Ausreißer 
@@ -314,22 +376,23 @@ aber nicht zu viele Höheninformation zu verlieren.
     \label{fig:brightness}
 \end{wrapfigure}
 
-Ziel ist das entwickelte Verfahren bei allen gängigen Additiven Fertigungsmethoden
-angewendet werden kann, das muss bei der Filterung der Daten berücksichtigt werden
-da die Datenverteilung von FDM Bauteilen anders aussieht als bei Metallenen Werkstoffen.
+Ziel ist ein Verfahren zu entwickelen Verfahren bei allen gängigen 
+Additiven Fertigungsmethoden angewendet werden kann.
+Das muss bei der Filterung der Daten berücksichtigt werden
+da die Datenverteilung von FDM Bauteilen anders aussieht als bei Metallenen Werkstoffen, 
+muss eine Pointcloud so gefiltert werden, dass das Zusammenfügen unabhängig von dem 
+gewählten Material zuverlässig funktioniert.
 Wie man in Abbildung \ref{fig:brightness} sehen kann streuen nicht alle Pointclouds 
 gleich, abhängig von dem Werkstoff des Bauteils werden die Laserstrahlen unterschiedlich
-reflektiert und mehr oder weniger Ausreißer sind zu sehen. In dem oberen Histogramm 
-sind die Häufigkeiten der Höhenwerte zu sehen, alle Punkte sind in 500 Teile gruppiert.
-Unterhalb ist das Histogramm mit dem gleichen Datensatz, aber mit der y-Achse 
-logarithmisch
-skaliert um kleine Prozente deutlich zu machen die im oberen Diagramm nur schwer oder 
-gar nicht sichtbar sind. Man sieht das Metallteil deutlich mehr in beide Richtungen 
+reflektiert und mehr oder weniger Ausreißer sind zu sehen. 
+Man sieht das Metallteil deutlich mehr in beide Richtungen 
 streut, während das FDM gedruckte Bauteil weniger nach oben, aber mehr nach unten 
 streut. Es muss also eine Filtermethode gewählt werden die für alle Fertigungsverfahren
 anwendbar ist und nicht bei einer Methode besser funktioniert wie bei einer 
 anderen. Werden zum Beispiel die 10 Prozent häufigst aufkommenden Höhenwerte bei einem
 Metallteil benutzt kommt folgendes Bild heraus.
+
+
 
 \begin{wrapfigure}{l}{0.4\textwidth}
     \centering

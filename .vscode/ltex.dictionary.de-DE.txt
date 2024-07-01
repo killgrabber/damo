@@ -15,3 +15,5 @@ Kotflügelhalterung
 Scanning
 Scandaten
 Akkuranz
+Stitching
+Scanverlaufs
