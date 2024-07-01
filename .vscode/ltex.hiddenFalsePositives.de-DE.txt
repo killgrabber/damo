@@ -1,1 +1,4 @@
 {"rule":"FRAGEZEICHEN_STATT_PUNKT","sentence":"^\\QIst dieser Prozess erfolgreich erhält, man eine Pointcloud der Oberfläche des Objekts.\\E$"}
+{"rule":"FRAGEZEICHEN_STATT_PUNKT","sentence":"^\\QIst dies nicht der Fall müssen nicht passende Teile erneut hergestellt werden, was die Material- und Personalkosten deutlich erhöht.\\E$"}
+{"rule":"WURDEN_WORDEN","sentence":"^\\QBei bildbasierten Verfahren, auch Photogrammetrie genannt, wird das 3D Objekt aus mehreren 2D Bildern erstellt, umso mehr Bilder vorhanden sind umso besser kann das 3D Objekt rekonstruiert werden.\\E$"}
+{"rule":"TEST_F_ANSTATT_PH","sentence":"^\\QBei bildbasierten Verfahren, auch Photogrammetrie genannt, wird das 3D Objekt aus mehreren 2D Bildern erstellt, umso mehr Bilder vorhanden sind umso besser kann das 3D Objekt rekonstruiert werden.\\E$"}

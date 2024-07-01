@@ -9,3 +9,9 @@ Demonstratorbauteils
 ICP-Algorithmus
 Pointcloud
 Spannkraftdeformationserkennung
+sections
+spanenden
+Kotflügelhalterung
+Scanning
+Scandaten
+Akkuranz
