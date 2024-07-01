@@ -1,0 +1,11 @@
+Pointclouds
+Scannerhalterung
+Demonstratorbauteil
+Verschiebungsmesser
+Scanvorgängen
+Scanvorgang
+Tasterwerkzeug
+Demonstratorbauteils
+ICP-Algorithmus
+Pointcloud
+Spannkraftdeformationserkennung

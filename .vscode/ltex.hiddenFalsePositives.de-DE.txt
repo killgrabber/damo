@@ -1,0 +1,1 @@
+{"rule":"FRAGEZEICHEN_STATT_PUNKT","sentence":"^\\QIst dieser Prozess erfolgreich erhält, man eine Pointcloud der Oberfläche des Objekts.\\E$"}
