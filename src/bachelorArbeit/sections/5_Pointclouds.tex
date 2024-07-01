@@ -11,57 +11,125 @@ Pointclouds zu erhalten sind denkdar und sollten mit dem Verfahren
 kompatibel sein.
 
 \subsection{Versuchsaufbau}
-Der von mir eingesetze Scanner kann in einer Linie mit einer maximalen Länge 
-die abstände zu einem Objekt messen.
-Um das ganze Objekt zu erfassen muss der Scanner also linear über das Objekt 
-bewegt werden. 
-Hierfür wurde eine CNC-Fräse benutzt, beziehungsweise die 
-verschiebungseigenschaften von einer.
-Hier ist es wichtig die Vorlaufgeschwindigkeit der Fräse in Abhängigkeit von der
-Frequenz des Scanners zu wählen. 
-Ist die Geschwindigkeit zu gering nimmt der Scanner mehrere Aufnahmen von der
-selben Linie auf, ist sie zu hoch werden Koordinaten auf dem Objekt übersprungen
-und die Auflösung der resultieren Pointcloud sinkt.
-\begin{figure}[h]
-    \centering
-    \includegraphics[height=200pt]{images/versuchsaufbau_sketch.PNG}
+
+\begin{wrapfigure}{r}{0.6\textwidth}
+    \includegraphics[width=0.6\textwidth]{images/versuchsaufbau_foto.png.JPG}
     \caption{Versuchsaufbau}
     \label{fig:versuchsaufbau}
-\end{figure}
+\end{wrapfigure}
 
-\begin{wrapfigure}{l}{0.3\textwidth}
-    \includegraphics[width=0.3\textwidth]{images/Parameter_Scan.png}
+In Abbildung \ref{fig:versuchsaufbau} ist der Versuchsaufbau zur Datenerfassung 
+zu sehen. Alle wichtigen Bestandteile sind nummeriert. Es folgt eine kurze Benennung
+aller vorhandenden und notwendigen Teile:\\
+1: Schraubstockbacken\\
+2: Demonstratorbauteil\\
+3: Scannerhalterung\\
+4: Scanner LLT 30x0-25\\
+5: Verschiebungsmesser\\
+6: Laserlinie (Lila)\\
+7: Schraubstock mit Kraftmesser\\
+X: X-Achse\\
+Y: Y-Achse\\
+Z: Z-Achse\\
+
+Der Scanner ist an dem Werkzeugkopf einer CNC-Fräse befestigt und wird 
+in Richtung der X und Y Achse verschoben. So kann von dem kompletten Bauteil eine 
+Pointcloud aufgenommen werden.
+
+\begin{wrapfigure}{l}{0.25\textwidth}
+    \includegraphics[width=0.25\textwidth]{images/Parameter_Scan.png}
     \caption{Scanparameter}
     \label{fig:scanparameter}
 \end{wrapfigure}
 
-In Abbildung \ref*{fig:versuchsaufbau} ist der Versuchsaufbau skizziert.
-Der Fräsenkopf wird in Richtung der Länge und Breite des Objekts verschoben.
-Die gesamte Länge des Objekts kann also erfasst werden in dem Scanner 
-beziehungsweise Fräsenkopf in X-Richtung bewegt wird. In dieser Bewegung 
-ist die Limiterung einmal die maximale Länge des Fräsenachse, und außerdem der
-verfügbare Speicher auf dem Computer der die Pointcloud aufnimmt.
-In Y-Richtung sind wir durch die maximale Scannerbreite begrenzt. Diese ist, 
-je nach Scanner, relativ klein.
-Um auch Objekte Scannen zu können die breiter sind als die Scannerbreite werden
-mehrere Scans erstellt, zwischen denen der Scanner immer in Y-Richtung 
-verschoben wird. Die Länge der Verschiebung sollte kleiner als die 
-Scannerbreite sein, damit eine überlappung entsteht die genutzt werden kann 
-um die Pointclouds wieder zusammenzufügen. So können Pointclouds aufgenommen 
-werden die dann im 2. Schritt wieder zu einem digitalen Abbild zusammengefügt 
-werden.
+\subsubsection{Limitierungen der Achsen:}
 
-\begin{wrapfigure}{l}{0.4\textwidth}
-    \begin{center}
-        \includegraphics[width=0.4\textwidth]{images/pointcloud_big.PNG}
-        \smallskip\par
-        \includegraphics[width=0.4\textwidth]{images/pointcloud_small.PNG}
-    \end{center}
-    \caption{Pointcloud Komplett}
-    \label{fig:pointclouds}
+Die gesamte Länge des Objekts kann also erfasst werden indem Scanner 
+beziehungsweise Werkzeugkopf in X-Richtung verschoben wird. Mit dem Start der 
+Bewegung muss auch die Aufzeichnung der Scannerdaten beginnen. In unserem Fall wurde
+die Datenerfassung manuell per Hand im richtigen Zeitpunkt über die Software 
+'SCANControl' von micro-epsilon gestartet. 
+Eine mögliche Verbesserung ist es, diesen Vorgang zu automatisieren indem der 
+Scanner automatisch mit dem Start der Bewegnung getriggert wird und die Aufzeichnung
+startet. Die Länge der Aufzeichnung wird auch über die Software eingestellt. 
+In Abbildung \ref{fig:scanparameter} sind die korrekten Parameter für das 
+Demonstratorbauteil zu sehen. über den Parameter 'Anzahl gepufferte Profile' kann 
+die Länge der Aufzeichnung eingestellt werden. Limitiert wird dieser Parameter 
+durch den verfügbaren Speicher auf dem Zielsystem. Es sollte auch darauf geachtet 
+werden das der Scanner mindestens genau so lange bewegt wird wie Aufzeichnung läuft, 
+ist dies nicht der Fall entsteht eine Pointcloud die einmal größer als notwendig ist, 
+und außerdem am Ende der X-Achse nur wiederholende Profile beeinhalten. 
+Die Y-Achse der Pointcloud wird durch den eingesetzen Scanner limitiert. 
+
+\begin{wrapfigure}{r}{0.2\textwidth}
+    \includegraphics[width=0.2\textwidth]{images/Scanner.PNG}
+    \caption{Scanner}
+    \label{fig:scanner}
 \end{wrapfigure}
 
+Der Scanner hat Abhängig vom Modell und der angebrachten Höhe eine fixe Länge die 
+er aufnehmen kann. In unserem Fall wurde der Scanner 'LLT 30x0-25' verwendet der 
+eine mittleren Messbreite von 25mm bietet. 
+(Siehe Abbildung \ref{fig:scanner} \cite{MESSTECHNIK_2020}) 
+Bauteile mit einer größeren Länge in Y-Richtung können also nicht in einer Pointcloud
+erfasst werden. Damit eine Digitalisierung von größeren Objekten erfolgen kann müssen
+also mehrere Scans durchgeführt, und später zusammengefügt werden. Zwischen den 
+Scanvorgängen muss der Scanner in Y-Richtung verschoben werden.
+Die Länge der Verschiebung sollte 
+kleiner als die Scannerbreite sein, damit eine Überlappung entsteht, die 
+genutzt werden kann um die Pointclouds wieder zusammenzufügen. Die Verschiebung kann 
+beliebig klein gewählt werden, jeddoch steigt der Arbeitsaufwand und die Dateigröße mit 
+jeder zusätzlichen Pointcloud, während das Ergebnis sich nicht verbessert.
+So können Pointclouds aufgenommen werden die dann in dem zu entwickelende Verfahren
+wieder zu einem digitalen Abbild zusammengefügt werden. Ist dieser Prozess erfolgreich
+erhält man eine Pointclound der Oberfläche des Objekts. 
+In Abbildung \ref{fig:pointcloud_big} ist eine Pointcloud von dem Demonstratorbauteil
+zu sehen, in Abbildung \ref{fig:pointcloud_small} eine Nahaufnahme des mittleren Teils
+der selben Pointcloud in der die einzelenen Punkte sichtbar sind.
 
+\begin{figure}[h]
+    \centering
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=0.9\textwidth]{images/pointcloud_big.PNG} % first figure itself
+        \caption{Pointcloud}
+        \label{fig:pointcloud_big}
+    \end{minipage}\hfill
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=0.9\textwidth]{images/pointcloud_small.PNG} % second figure itself
+        \caption{Nahaufnahme Pointcloud}
+        \label{fig:pointcloud_small}
+    \end{minipage}
+\end{figure}
+
+\subsubsection{Geschwindigkeit}
+Der Parameter `Geschwindigkeit` muss der realen Vorlaufgeschwindigkeit des Scanners
+entsprechen um eine korrekte und akkurate Pointcloud zu erhalten. Ist die 
+Messgeschwindigkeit kleiner als die Bewegung des Scanners werden Profile doppelt 
+aufgenommen, ist sie zu hoch werden Profile übersprungen und das Bauteil wirkt in 
+der resultierende Pointcloud in X-Richtung gestreckt.
+
+\subsubsection{Zusätzliche Messinstrumente}
+
+\begin{wrapfigure}{r}{0.4\textwidth}
+    \includegraphics[width=0.4\textwidth]{images/taster.JPG}
+    \caption{Taster}
+    \label{fig:taster}
+\end{wrapfigure}
+
+Zusätzlich zu dem Scanner werden noch mit weiteren Elementen Daten erfasst.
+In Abbildung \ref{fig:versuchsaufbau} unter der Nummer 5 ist ein Mechanischer 
+Verschiebungsmesser zu sehen. Dieser misst die Verschiebung der Backen des 
+Schraubstocks. Der Schraubstock misst zusätzlich mit viel Kraft die Backen 
+aufeinander pressen. Damit die Scannerergebnisse überprüft werden können 
+wird die Bauteilgeometrie zusätlich nach dem Scanvorgang noch mit einem Taster
+abgetastet. Hierfür wird der Werkzeugkopf gewechselt und der Scanner entfernt.
+Dann wird der Taster in die CNC-Machine eingesetzt und das Bauteil abgetastet.
+In Abbildung \ref{fig:taster} ist das Tasterwerkzeug zu sehen. Die rote runde
+Kugel am Ende des Tasters erkennt sobald eine Berührung zu dem Bauteil erfolgt ist 
+und benachrichtigt den Steuerungsrechner. Dieser speichert die aktuelle Position 
+dann in einer Protokolldatei. 
 
 Bevor ich mich aber mit dem 2. Schritt des Verfahrens beschäftige möchte ich auf die 
 Datenstruktur von Pointclouds eingehen. Wie der Name schon sagt bestehende
