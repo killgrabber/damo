@@ -6,6 +6,7 @@ import numpy as np
 import time
 from threading import Thread
 from queue import Queue
+from PIL import ImageTk, Image
 
 import pc2img
 import imageAnalyser
@@ -67,8 +68,8 @@ def get_image_file(col, row, index):
 threads = [Thread] * 2
 queues = [Queue()] * 2
 
-status = [""]
-pc2img_results = []
+conversion_progress = [0]
+pc2img_results = [None, None]
 last_update_time = time.time()
 
 
@@ -78,18 +79,29 @@ def update_progress():
         global progress_pc_conversion_var
         last_update_time = time.time()
 
-        image_progress_var.set(image_progress[0] * 100)
+        image_progress_var.set(image_progress[0])
+        progress_pc_conversion_var.set(conversion_progress[0])
 
-        treshold_max[0] = math.floor(tresh_max_slider.get())
-        treshold_min[0] = math.floor(tresh_min_slider.get())
+        #treshold_max[0] = math.floor(tresh_max_slider.get())
+        #treshold_min[0] = math.floor(tresh_min_slider.get())
         # check if image stitching done
-        global stitched_image
         if stitched_image:
             show_message("Stitching done!")
-        if len(pc2img_results) == len(pointclouds):
-            show_message("Converting clouds done!")
-            #stitching_with_converted()
+            save_stitched_button.state(["!disabled"])
+            display_image(stitched_image[0], 2)
 
+        else:
+            save_stitched_button.state(["disabled"])
+        # check if converting clouds done
+        if conversion_progress[0] == 100:
+            show_message("Converting clouds done!")
+            display_image(pc2img_results[0], 0)
+            display_image(pc2img_results[1], 1)
+            for save_button in save_buttons:
+                save_button.state(["!disabled"])
+        else:
+            for save_button in save_buttons:
+                save_button.state(["disabled"])
 
 def start_pcd_2_image():
     show_message("Starting Point cloud conversion...")
@@ -97,9 +109,8 @@ def start_pcd_2_image():
     if len(pointclouds) < 1:
         show_message("Please select a file first")
     else:
-        pc2img_results.clear()
         thread_pc2img = Thread(target=pc2img.convert_point_cloud,
-                               args=(pointclouds, status[0], pc2img_results, show_pointclouds.get()))
+                               args=(pointclouds, conversion_progress, pc2img_results, show_pointclouds.get()))
         thread_pc2img.start()
 
 
@@ -145,6 +156,13 @@ def stitch_2_pcs_arrays():
         thread_st.start()
 
 
+def display_image(image, index):
+    img_s = Image.fromarray(image)
+    img_s.thumbnail(image_size, Image.Resampling.LANCZOS)
+    image_s = ImageTk.PhotoImage(image=img_s)
+    image_displays[index].configure(image=image_s)
+    image_displays[index].image = image_s
+
 def stitching_with_converted():
     show_message("Stitching converted images...")
     stitching_thread = Thread(target=imageAnalyser.stitch_images,
@@ -160,9 +178,28 @@ def show_image_loop():
                           args=(images[0], images[1], treshold_min, treshold_max))
     image_loop_t.start()
 
+def set_image_loop():
+    ttk.Button(frm, text="Start loop", command=lambda: show_image_loop()).grid(column=2, row=7)
+
+    # Treshhold slider
+    tresh_min_slider = ttk.Scale(
+        frm,
+        from_=-500,
+        to=500,
+        orient='horizontal',  # horizontal
+    )
+    tresh_min_slider.grid(column=0, row=8)
+    tresh_max_slider = ttk.Scale(
+        frm,
+        from_=-500,
+        to=500,
+        orient='horizontal',  # vertical
+    )
+    tresh_max_slider.grid(column=1, row=8)
+
 
 root = Tk()
-root.geometry("1000x300")
+root.geometry("700x500")
 frm = ttk.Frame(root, padding=10, )
 frm.grid()
 
@@ -171,23 +208,29 @@ info_label = ttk.Label(frm, text="Hello :) ")
 info_label.grid(column=0, row=7)
 
 # point clouds
-pc_file_labels = [ttk.Label(frm, text="No file"), ttk.Label(frm, text="No file")]
-for i in range(len(pc_file_labels)):
+AMOUNT_POINTCLOUDS = 2
+pc_file_labels = []
+save_buttons = []
+for i in range(AMOUNT_POINTCLOUDS):
+    pc_file_labels.append(ttk.Label(frm, text="No file"))
     pc_file_labels[i].grid(column=1, row=i)
     ttk.Button(frm, text="Select Point Cloud",
                command=lambda i=i: get_file_path_pc(index=i)).grid(column=0, row=i)
+    button = ttk.Button(frm, text="Save image", command=lambda i=i: save_pointcloud_image(i))
+    button.grid(column=2, row=i)
+    save_buttons.append(button)
 
 ttk.Button(frm, text="Start PC conversion", command=lambda: start_pcd_2_image()).grid(column=0, row=3)
 progress_pc_conversion_var = tkinter.IntVar()
-progress_pc_conversion_bar = ttk.Progressbar(frm, maximum=200, variable=progress_pc_conversion_var)
+progress_pc_conversion_bar = ttk.Progressbar(frm, maximum=100, variable=progress_pc_conversion_var)
 progress_pc_conversion_bar.grid(column=1, row=3, padx=10, pady=10)
 
 show_pointclouds = tkinter.BooleanVar()
-ttk.Checkbutton(frm, text="Show pointclouds", variable=show_pointclouds).grid(column=3, row=0)
-ttk.Button(frm, text="Save pc top", command=lambda: save_pointcloud_image(0)).grid(column=2, row=3)
-ttk.Button(frm, text="save pc bottom", command=lambda: save_pointcloud_image(1)).grid(column=3, row=3)
+ttk.Checkbutton(frm, text="Show pointclouds", variable=show_pointclouds).grid(column=0, row=2)
 
-ttk.Button(frm, text="Stitch converted", command=lambda: stitching_with_converted()).grid(column=2, row=2)
+stitch_converted_button = ttk.Button(frm, text="Stitch converted", command=lambda: stitching_with_converted())
+stitch_converted_button.grid(column=2, row=3)
+save_buttons.append(stitch_converted_button)
 
 # images
 image_labels = [ttk.Label(frm, text="No file selected"), ttk.Label(frm, text="No file selected")]
@@ -198,32 +241,27 @@ ttk.Button(frm, text="Select top image",
            command=lambda: get_image_file(0, 4, 0)).grid(column=0, row=4)
 ttk.Button(frm, text="Select bot image",
            command=lambda: get_image_file(0, 5, 1)).grid(column=0, row=5)
-ttk.Button(frm, text="Start stitching", command=lambda: start_stitching()).grid(column=0, row=6)
+start_stitching_button = ttk.Button(frm, text="Start stitching", command=lambda: start_stitching())
+start_stitching_button.grid(column=0, row=6)
+
 image_progress_var = tkinter.IntVar()
 image_progress_bar = ttk.Progressbar(frm, maximum=100, variable=image_progress_var)
 image_progress_bar.grid(column=1, row=6, padx=10, pady=10)
-ttk.Button(frm, text="Save stitched image", command=lambda: save_stitched()).grid(column=2, row=6)
-ttk.Button(frm, text="Start loop", command=lambda: show_image_loop()).grid(column=2, row=7)
 
-ttk.Button(frm, text="Convert pc1", command=lambda: image_from_pc(0)).grid(column=4, row=0)
-ttk.Button(frm, text="Convert pc2", command=lambda: image_from_pc(1)).grid(column=4, row=1)
-ttk.Button(frm, text="compare the 2", command=lambda: stitch_2_pcs_arrays()).grid(column=4, row=3)
+save_stitched_button = ttk.Button(frm, text="Save stitched image", command=lambda: save_stitched())
+save_stitched_button.grid(column=2, row=6)
 
-# Treshhold slider
-tresh_min_slider = ttk.Scale(
-    frm,
-    from_=-500,
-    to=500,
-    orient='horizontal',  # horizontal
-)
-tresh_min_slider.grid(column=0, row=8)
-tresh_max_slider = ttk.Scale(
-    frm,
-    from_=-500,
-    to=500,
-    orient='horizontal',  # vertical
-)
-tresh_max_slider.grid(column=1, row=8)
+# 3 Blank images
+image_size = 128,128
+blank_image = np.zeros(image_size)
+image_displays = []
+for i in range(3):
+    img_t = Image.fromarray(blank_image)
+    image_t = ImageTk.PhotoImage(image=img_t)
+    label_image = ttk.Label(frm, image=image_t, justify="left", anchor="nw")
+    label_image.image = image_t
+    label_image.grid(column=i, row=10)
+    image_displays.append(label_image)
 
 while True:
     root.update_idletasks()

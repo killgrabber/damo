@@ -75,7 +75,7 @@ def remove_outliers(pc):
                                             std_ratio=1.0)
     newAmount = len(pc.select_by_index(ind).points)
     diff = oldAmount - newAmount
-    print(f"Reduced from: {oldAmount} to {newAmount}, diff {diff}, percentage: {diff/oldAmount}")
+    print(f"Reduced from: {oldAmount} to {newAmount}, diff {diff}, percentage: {diff/oldAmount:.2f}")
     cleared = pc.select_by_index(ind)
     return cleared
 
@@ -143,16 +143,20 @@ def convert_chunk(array: np.array, max_h, min_h):
 
 
 # returns image
-def convert_point_cloud(files: [], progress: [str], result: [], show_pc=False):
+def convert_point_cloud(files: [], progress: [], result: [], show_pc=False):
+    start = time.time()
+    progress[0] += 10
     pcds_points = []
     for file in files:
         pcd = o3d.io.read_point_cloud(file)
+        progress[0] += 10
         if len(pcd.points) == 0:
             print("Loading point cloud failed")
             return
 
         print("Removing outliers...")
         pcd = remove_outliers(pcd)
+        progress[0] += 10
 
         if show_pc:
             show_pointcloud(pcd)
@@ -165,16 +169,19 @@ def convert_point_cloud(files: [], progress: [str], result: [], show_pc=False):
     for np_points in pcds_points:
         print("Getting height boundaries....")
         max_h, min_h = anaylseZ(np_points)
+        progress[0] += 10
         max_hs.append(max_h)
         min_hs.append(min_h)
-    i = 0
-    for np_points in pcds_points:
-        image = convert_chunk(np_points, np.mean(max_hs), np.mean(min_hs))
-        imageAnalyser.showAndSaveImage(image)
-        result.append(image)
+    for i in range(len(pcds_points)):
+        image = convert_chunk(pcds_points[i], np.mean(max_hs), np.mean(min_hs))
+        progress[0] += 10
+        #imageAnalyser.showAndSaveImage(image)
+        result[i] = image
         print(f"Done with {files[i].split('/')[-1]}")
-        i += 1
 
+    end = time.time()
+    progress[0] = 100
+    print(f"Converted 2 clouds in: {end - start:.2f}s")
 
 import pc_stitcher
 

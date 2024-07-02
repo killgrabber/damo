@@ -306,6 +306,7 @@ def match_all_contours(contours_top, bottom_contours, progress: []):
     for c_top in contours_top:
         for c_bot in bottom_contours:
             transition = contourMatcher.match_contour(c_top, c_bot, progress)
+            progress[0] += 1
             if any(transition) != 0:
                 transitions.append(transition)
     return transitions
@@ -324,23 +325,25 @@ def stitch_images(top_image: cv2.Mat, bot_image: cv2.Mat, progress: [], result: 
         top_image = cv2.imread(top_image)
     if isinstance(bot_image, str):
         bot_image = cv2.imread(bot_image)
-
+    progress[0] += 10
     top_image_blur = cv2.blur(top_image, (5, 5))
     bot_image_blur = cv2.blur(bot_image, (5, 5))
-
     cut_size = 500
     offset = 200
     crop_top = cropImage(top_image_blur, True, cut_size, offset=offset)
     crop_bot = cropImage(bot_image_blur, False, cut_size, offset=offset)
+    progress[0] += 10
 
     height, width = crop_top.shape[:2]
-    print(f"Size topcrop: {crop_top.shape}, ")
-    print(f"Size botcrop: {crop_bot.shape}, ")
+    #print(f"Size topcrop: {crop_top.shape}, ")
+    #print(f"Size botcrop: {crop_bot.shape}, ")
     #showAndSaveImage(crop_top)
     #showAndSaveImage(crop_bot)
     min_distance_from_border = 5
     contours_top = getContours(crop_top, min_distance_from_border)
+    progress[0] += 5
     contours_bot = getContours(crop_bot, min_distance_from_border)
+    progress[0] += 5
 
     # move bot contour
     bot_contours = []
@@ -355,17 +358,18 @@ def stitch_images(top_image: cv2.Mat, bot_image: cv2.Mat, progress: [], result: 
 
     # move second image
     stitch_offset = -831
-    for transition in transitions:
-        print(f"Moving t {transition}")
-        moved_image = translate_image(bot_image, transition[0]+1,
-                                      stitch_offset + transition[1])
-        combined_image = combine_2_images(top_image, moved_image, 50)
-        showAndSaveImage(combined_image)
+    #for transition in transitions:
+    #    print(f"Moving t {transition}")
+    #    moved_image = translate_image(bot_image, transition[0]+1,
+    #                                  stitch_offset + transition[1])
+    #    combined_image = combine_2_images(top_image, moved_image, 50)
+    #    #showAndSaveImage(combined_image)
 
     moved_image = translate_image(bot_image, round(transitions[0][0]) + 1,
                                   stitch_offset + round(transitions[0][1]))
     combined_image = combine_2_images(top_image, moved_image, 50)
-    showAndSaveImage(combined_image)
+    progress[0] = 100
+    #showAndSaveImage(combined_image)
     result.append(combined_image)
 
 

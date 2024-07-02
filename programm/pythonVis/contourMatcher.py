@@ -79,7 +79,7 @@ def check_2_contours(top, bot, progress):
                 best_match = percentage_of_zero
                 matching_pair = i, j
             #display_contours([top, bot], wait=1)
-            progress[0] = i / (len(bot) * 10)
+            progress[0] += 2
     return matching_pair, best_match
 def display_plots(datas: [[]]):
     x_axis = 1020
