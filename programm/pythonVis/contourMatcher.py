@@ -26,6 +26,7 @@ def move_contour(contour: [(float, float)], translation: (float, float)) -> []:
         new_contour.append(point)
     return new_contour
 
+
 def match_contour(top: [(float, float)],
                   bot: [(float, float)],
                   progress: []) -> (float, float):
@@ -33,7 +34,7 @@ def match_contour(top: [(float, float)],
     green = (0, 255, 0)
     if len(top) == 0 or len(bot) == 0:
         return 0, 0
-    #print(f"Matching contours with len: {len(top)} and len: {len(bot)}")
+    print(f"Matching contours with len: {len(top)} and len: {len(bot)}")
     distances = collect_distance(top, bot)
     if np.mean(np.array(distances)) > 2000:
         return 0, 0
@@ -44,7 +45,7 @@ def match_contour(top: [(float, float)],
     # Perfomace reasons lol
     top = move_contour(top, (0, 0))
     bot = move_contour(bot, (0, 0))
-    #display_contours([top, bot], blue, green, wait=0)
+    display_contours([top, bot], [blue, green], wait=1)
     matching_pair, best_match = check_2_contours(top, bot, progress)
     matching_pair_reverse, best_match_reverse = check_2_contours(bot, top, progress)
     final_transition = get_translation(bot[matching_pair[0]], top[-matching_pair[1]])
@@ -63,7 +64,7 @@ def match_contour(top: [(float, float)],
 @nb.njit(parallel=False, fastmath=True)
 def check_2_contours(top, bot, progress):
     best_match = 0
-    matching_pair = (0,0)
+    matching_pair = (0, 0)
     for i in range(0, len(bot)):
         for j in range(1, 2):
             # Move target to index of source and check distances
@@ -81,6 +82,8 @@ def check_2_contours(top, bot, progress):
             #display_contours([top, bot], wait=1)
             progress[0] += 2
     return matching_pair, best_match
+
+
 def display_plots(datas: [[]]):
     x_axis = 1020
     for data in datas:
@@ -90,6 +93,7 @@ def display_plots(datas: [[]]):
 
 @nb.njit(parallel=False, fastmath=True)
 def collect_distance(source: [(float, float)], target: [(float, float)]):
+    print(f"Getting some juice distances")
     distances = []
     for i in nb.prange(len(source)):
         index, distance = find_nearest_point(source[i], target)
@@ -100,9 +104,10 @@ def collect_distance(source: [(float, float)], target: [(float, float)]):
 
 @nb.njit(parallel=False, fastmath=True)
 def find_nearest_point(source, target: []) -> (int, float):
+    #print(f"Finding nearest point")
     min_dist = sys.maxsize
     last_index = -1
-    for i in range(len(target)):
+    for i in nb.prange(len(target)):
         distance = compare_point(source, target[i])
         if distance < min_dist:
             last_index = i
@@ -128,28 +133,41 @@ def get_boundaries(contours: [[(float, float)]]):
     return x, y, w, h
 
 
-def display_contours(contours: [[(float, float)]],
-                     color1 = (255, 0,0), color2 = (0,255,0) , wait=0, name="Contour"):
+def display_contours(contours: [[(float, float)]], colors: [], wait=0, name="Contour"):
     x, y, w, h = get_boundaries(contours)
     # move the contour to (0,0)
     temp_contours = copy.deepcopy(contours)
     for i in range(len(temp_contours)):
         t = get_translation((x, y), (0, 0))
         temp_contours[i] = move_contour(temp_contours[i], t)
-
-    new_blank_image = np.zeros((h + 1 -y, max(w + 1 - x, 500), 3), np.uint8)
-    color = color1
+    new_blank_image = np.zeros((h + 1 - y, max(w + 1 - x, 500), 3), np.uint8)
+    index = 0
     for contour in contours:
         for p in contour:
-            new_blank_image[p[1]-y, p[0]-x] = color
-        color = color2
+            new_blank_image[p[1] - y, p[0] - x] = colors[index % len(colors)]
+        index += 1
     show_image(new_blank_image, wait, name)
+
+
+def display_contours_in_image(contours: [[(float, float)]], image, colors: [], offset=(0, 0),
+                              wait=0, name="Contour",
+                              save_name=""):
+    tmp_image = image.copy()
+    index = 0
+    for contour in contours:
+        for p in contour:
+            tmp_image[p[1] + offset[0], p[0] + offset[1]] = colors[index % len(colors)]
+        index += 1
+    show_image(tmp_image, wait, name)
+    if save_name != "":
+        print(f"Trying to save to:...: {save_name}")
+        cv2.imwrite(save_name, tmp_image)
 
 
 def show_image(image, wait=0, name="Damo"):
     scale = 0.7
     if image.shape[0] > 2000 or image.shape[1] > 2000:
-        scale = 0.7
+        scale = 0.3
     copy = image.copy()
     small = cv2.resize(copy, (0, 0), fx=scale, fy=scale, interpolation=cv2.INTER_AREA)
     cv2.imshow(name, small)

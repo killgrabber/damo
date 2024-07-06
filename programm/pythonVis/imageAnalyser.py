@@ -32,12 +32,13 @@ def getContours(img, min_distance=5):
     image_gray = cv2.cvtColor(image_contour_blue, cv2.COLOR_BGRA2GRAY)
     contours1, hierarchy1 = cv2.findContours(image_gray, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)
     print("Contours found: ", len(contours1))
-    for i in range(len(contours1)):
-        color = (rng.randint(0, 256), rng.randint(0, 256), rng.randint(0, 256))
-        cv2.drawContours(image_contour_blue, contours1, i, color, 2, cv2.LINE_8, hierarchy1, 0)
-    #cv2.imshow("con", image_contour_blue)
+    #for i in range(len(contours1)):
+    #    color = (rng.randint(0, 256), rng.randint(0, 256), rng.randint(0, 256))
+    #    cv2.drawContours(image_contour_blue, contours1, i, color, 2, cv2.LINE_8, hierarchy1, 0)
+
+    #cv2.imshow("con", cv2.resize(image_contour_blue, (0, 0), fx=0.3, fy=0.3, interpolation=cv2.INTER_AREA))
     #cv2.imwrite("test.png", image_gray)
-    #cv2.waitKey(0)
+    cv2.waitKey(0)
     # remove contour points on the edge
     all_contours = []
     for contour in contours1:

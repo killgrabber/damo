@@ -138,7 +138,7 @@ def convert_chunk(array: np.array, max_h, min_h):
     length = len(array)
     for i in nb.prange(length):
         #print(f"Checking {array[i]}....")
-        if min_h <= array[i][2] <= max_h or True:
+        if min_h <= array[i][2] <= max_h:
             x = int(array[i][0] * scale) + abs_x_min
             y = int(array[i][1] * scale) + abs_y_min
             #print(f"Setting {x},{y} to {255}....")
