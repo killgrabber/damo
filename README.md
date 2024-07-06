@@ -77,3 +77,13 @@ Bachelorarbeit zur Digitalisierung von additiv gefertigten Bauteilen
 * Vorlage von der TU bzw. Informatik Fakultät für Abschlussarbeiten.
 * Scanner ist der 25er, Quelle von der Herstellerwebsite.
 
+## Meeting 03.07.2024
+* Titelseite anpassen, mit Name des Betreuers
+* Keinerlei 'Ich' oder 'Wir' formulierungen
+* Machinen 'machen' nichts. 
+* Weniger informal und mehr wissenschaftlich formulieren.
+* Bilder immer am Anfang oder Ende einer Seite
+* Ein Paper kann verstanden werden wenn man nur die Bilder und unterschriften sieht.
+* Einheitliche formulierungen
+* Ganz viel Zeug in Stand der Technik packen
+* Roten Faden mehr ersichtlich machen 

@@ -358,12 +358,12 @@ def stitch_images(top_image: cv2.Mat, bot_image: cv2.Mat, progress: [], result: 
 
     # move second image
     stitch_offset = -831
-    #for transition in transitions:
-    #    print(f"Moving t {transition}")
-    #    moved_image = translate_image(bot_image, transition[0]+1,
-    #                                  stitch_offset + transition[1])
-    #    combined_image = combine_2_images(top_image, moved_image, 50)
-    #    #showAndSaveImage(combined_image)
+    for transition in transitions:
+        print(f"Moving t {transition}")
+        moved_image_tmp = translate_image(bot_image, transition[0]+1,
+                                      stitch_offset + transition[1])
+        combined_image_tmp = combine_2_images(top_image, moved_image_tmp, 50)
+        showAndSaveImage(combined_image_tmp)
 
     moved_image = translate_image(bot_image, round(transitions[0][0]) + 1,
                                   stitch_offset + round(transitions[0][1]))

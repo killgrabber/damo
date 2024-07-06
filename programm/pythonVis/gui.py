@@ -8,6 +8,7 @@ from threading import Thread
 from queue import Queue
 from PIL import ImageTk, Image
 
+import stl_converter
 import pc2img
 import imageAnalyser
 
@@ -178,6 +179,11 @@ def show_image_loop():
                           args=(images[0], images[1], treshold_min, treshold_max))
     image_loop_t.start()
 
+
+def load_stl_file():
+    file = filedialog.askopenfilename()
+    stl_converter.convert_stl(file)
+
 def set_image_loop():
     ttk.Button(frm, text="Start loop", command=lambda: show_image_loop()).grid(column=2, row=7)
 
@@ -250,6 +256,10 @@ image_progress_bar.grid(column=1, row=6, padx=10, pady=10)
 
 save_stitched_button = ttk.Button(frm, text="Save stitched image", command=lambda: save_stitched())
 save_stitched_button.grid(column=2, row=6)
+
+stl_button = ttk.Button(frm, text="Convert .stl", command=lambda: load_stl_file())
+stl_button.grid(column=2, row=8)
+
 
 # 3 Blank images
 image_size = 128,128

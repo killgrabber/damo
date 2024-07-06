@@ -65,7 +65,9 @@ def loadPointClouds(vis=False):
 def show_pointcloud(pc):
     aabb = pc.get_axis_aligned_bounding_box()
     aabb.color = (1, 0, 0)
-    o3d.visualization.draw_geometries([aabb, pc])
+    mesh_frame = o3d.geometry.TriangleMesh.create_coordinate_frame(
+        size=0.6, origin=[0, 0, 0])
+    o3d.visualization.draw_geometries([aabb, pc, mesh_frame])
 
 
 def remove_outliers(pc):
@@ -121,23 +123,26 @@ def divide_pointcloud(original, splits: int) -> []:
     return chunked
 
 
-@nb.njit(parallel=True, fastmath=True)
+#@nb.njit(parallel=True, fastmath=True)
 def convert_chunk(array: np.array, max_h, min_h):
     print(f"converting with max: {int(max_h*1000)} min: {int(min_h*1000)}...")
     scale = 100
     x_min = math.floor(np.min(array[:, 0]) * scale)
     abs_x_min = abs(x_min)
     y_min = math.floor(np.min(array[:, 1]) * scale)
+    abs_y_min = abs(y_min)
     width = math.ceil(np.amax(array[:, 0]) * scale) + 1
     height = math.ceil(np.amax(array[:, 1]) * scale) + 1
-    image = np.zeros((width + abs_x_min, height, 3), np.uint8)
+    image = np.zeros((width + abs_x_min, height + abs_y_min, 3), np.uint8)
+    print(f"Mins are: x:{abs_x_min},y:{abs_y_min}")
     length = len(array)
     for i in nb.prange(length):
-        if min_h < array[i][2] < max_h:
+        #print(f"Checking {array[i]}....")
+        if min_h <= array[i][2] <= max_h or True:
             x = int(array[i][0] * scale) + abs_x_min
-            y = int(array[i][1] * scale)
+            y = int(array[i][1] * scale) + abs_y_min
             #print(f"Setting {x},{y} to {255}....")
-            brightness = math.floor(conversion(array[i][2], min_h, max_h, 0, 255))
+            brightness = 255 #math.floor(conversion(array[i][2], min_h, max_h, 0, 255))
             image[x, y] = brightness
     return image
 
