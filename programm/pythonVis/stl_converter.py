@@ -30,6 +30,7 @@ def convert_stl(filepath: str, progress: [], result: []):
 
 
 def find_contours_in_image(image, progress: [], result: []):
+    print('Starting contour search')
     image_blur = cv2.blur(image, (2, 2))
     contours = imageAnalyser.getContours(image_blur, 0)
     contours = contours[:4]
@@ -54,7 +55,7 @@ def get_center_of_mass(contour: []):
 
 
 @nb.njit(parallel=False, fastmath=True)
-def find_clostest_point(i, j, arr_2, search_radius):
+def find_closest_point(i, j, arr_2, search_radius):
     max_distance = 500
     smallest_dist = max_distance
     best_match = 0, 0
@@ -91,13 +92,13 @@ def check_2_contours(arr_1, arr_2, progress, search_radius, result: []):
     for i in range(len1):
         for j in range(len2):
             if arr_1[i, j]:
-                smallest_dist, t1, t2 = find_clostest_point(i, j, arr_2, search_radius)
+                smallest_dist, t1, t2 = find_closest_point(i, j, arr_2, search_radius)
                 if smallest_dist != -1:
                     vectors.append((t1, t2))
                     distance += smallest_dist
         #print(f"Progress: {i/len1:.3f}, distance: {distance:.2f}")
     result[0] = distance
-    return distance, vectors
+    return distance / len(arr_1), vectors
 
 
 def convert_to_2d_array(contour: []):
@@ -111,6 +112,7 @@ def convert_to_2d_array(contour: []):
 
 
 def move_and_check(con1, con2, progress, init_translation, search_area=50):
+    print(f"Checking contours with size {len(con1)} and {len(con2)}, diff: {abs(len(con1) - len(con2))}")
     moved_c = con2
     contour_a1 = convert_to_2d_array(con1)
     translation = init_translation
@@ -144,7 +146,6 @@ def move_and_check(con1, con2, progress, init_translation, search_area=50):
             #contourMatcher.display_contours([con1, moved_c], name="final", wait=0,
             #                                colors=[(255, 255, 0), (255, 0, 255)])
             break
-
     return final_translation, distance
 
 
@@ -205,6 +206,13 @@ def compare_images(image_paths: [], progress: []):
             all_results.append((index_1, index_2, final_translation, distance))
 
     print("Index1, Index2, Translation, Distance")
+    distances = [sys.maxsize]
     for i in range(len(all_results)):
         if all_results[i][3] != 0:
+            if len(distances) <= all_results[i][0]:
+                distances.append(sys.maxsize)
             print(f"{all_results[i]}")
+            distances[all_results[i][0]] = min(distances[all_results[i][0]], (all_results[i][3]))
+
+    print(f"Final: {distances} average: {np.mean(distances)}")
+    cv2.destroyWindow("without")

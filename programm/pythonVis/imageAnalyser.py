@@ -38,7 +38,7 @@ def getContours(img, min_distance=5):
 
     #cv2.imshow("con", cv2.resize(image_contour_blue, (0, 0), fx=0.3, fy=0.3, interpolation=cv2.INTER_AREA))
     #cv2.imwrite("test.png", image_gray)
-    cv2.waitKey(0)
+    #cv2.waitKey(0)
     # remove contour points on the edge
     all_contours = []
     for contour in contours1:
