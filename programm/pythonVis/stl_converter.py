@@ -53,35 +53,51 @@ def get_center_of_mass(contour: []):
     return mean_x, mean_y
 
 
-#@nb.njit(parallel=False, fastmath=True)
-def check_2_contours(arr_1, arr_2, progress, search_radius):
-    print(f"Comparing contour arrays...")
+@nb.njit(parallel=False, fastmath=True)
+def find_clostest_point(i, j, arr_2, search_radius):
+    max_distance = 500
+    smallest_dist = max_distance
+    best_match = 0, 0
+    #print(f"Arr2 is: {arr_2}")
+    for x in range(-search_radius, search_radius):
+        for y in range(-search_radius, search_radius):
+            a = i + x
+            b = j + y
+            #print(f"i, j: {i}, {j}: point to check: {a},{b} arr2: len: {len(arr_2)},{len(arr_2[a])}")
+            if 0 <= a < len(arr_2) and 0 <= b < len(arr_2[a]):
+                if arr_2[a, b]:
+                    point_dist = contourMatcher.compare_point((a, b), (i, j))
+                    #print(f"Smallest distance is: {int(smallest_dist*1000)}")
+                    if point_dist == 0:
+                        return 0, i - a, j - b
+                    if point_dist < smallest_dist:
+                        smallest_dist = point_dist
+                        best_match = i - a, j - b
+            else:
+                pass
+                #print(f"Skipped because of arr boundries")
+    if smallest_dist >= max_distance:
+        return -1, 0, 0
+    return smallest_dist, best_match[0], best_match[1]
+
+
+@nb.njit(parallel=False, fastmath=True)
+def check_2_contours(arr_1, arr_2, progress, search_radius, result: []):
+    #print(f"Comparing contour arrays...")
     distance = 0
+    vectors = []
     len1 = len(arr_1)
     len2 = len(arr_1[-1])
     for i in range(len1):
         for j in range(len2):
-            if not arr_1[i, j]:
-                continue
-            # Find the closest '1' in arr2
-            closest_match = (i, j)
-            smallest_dist = sys.maxsize
-            x_range_min = max(-search_radius, i-search_radius)
-            x_range_max = min(search_radius, len(arr_2)-i)
-            y_range_min = max(-search_radius, j - search_radius)
-            y_range_max = min(search_radius, len(arr_2) - j)
-            for x in range(x_range_min, x_range_max):
-                for y in range(y_range_min, y_range_max):
-                    if arr_2[i + x, j + y]:
-                        point_dist = contourMatcher.compare_point((i + x, j + y), (i, j))
-                        if point_dist < smallest_dist:
-                            closest_match = i + x, j + y
-                            smallest_dist = point_dist
-            if smallest_dist != sys.maxsize:
-                distance += contourMatcher.compare_point(closest_match, (i, j))
-            #print(f"Progress: {i/len1:.3f}, distance: {distance}")
-
-    return distance
+            if arr_1[i, j]:
+                smallest_dist, t1, t2 = find_clostest_point(i, j, arr_2, search_radius)
+                if smallest_dist != -1:
+                    vectors.append((t1, t2))
+                    distance += smallest_dist
+        #print(f"Progress: {i/len1:.3f}, distance: {distance:.2f}")
+    result[0] = distance
+    return distance, vectors
 
 
 def convert_to_2d_array(contour: []):
@@ -92,6 +108,44 @@ def convert_to_2d_array(contour: []):
         y = point[1]
         array[x, y] = True
     return array
+
+
+def move_and_check(con1, con2, progress, init_translation, search_area=50):
+    moved_c = con2
+    contour_a1 = convert_to_2d_array(con1)
+    translation = init_translation
+    final_translation = translation
+    while True:
+        moved_c = contourMatcher.move_contour(moved_c, translation)
+        contour_a2 = convert_to_2d_array(moved_c)
+
+        contourMatcher.display_contours([con1, moved_c], name="without", wait=1,
+                                        colors=[(255, 255, 0), (255, 0, 255)])
+        result = [0]
+        distance, vectors = check_2_contours(contour_a1, contour_a2, progress, search_radius=50, result=result)
+        if len(vectors) == 0:
+            print(f"Found no matches: distances {distance}")
+            return (0, 0), 0
+
+        sum1 = 0
+        sum2 = 0
+        for vector in vectors:
+            sum1 += vector[0]
+            sum2 += vector[1]
+        sum1 = sum1 / len(vectors)
+        sum2 = sum2 / len(vectors)
+        #print(f"Distance: {distance}, transformation average: {sum1},{sum2}")
+        translation = (round(sum1), round(sum2))
+        final_translation = (final_translation[0] + translation[0],
+                             final_translation[1] + translation[1])
+        print(f"Next translation is: {translation}")
+        if translation[0] == 0 and translation[1] == 0:
+            print(f"Checking done. complete translation: {final_translation}")
+            #contourMatcher.display_contours([con1, moved_c], name="final", wait=0,
+            #                                colors=[(255, 255, 0), (255, 0, 255)])
+            break
+
+    return final_translation, distance
 
 
 def compare_images(image_paths: [], progress: []):
@@ -120,36 +174,37 @@ def compare_images(image_paths: [], progress: []):
     get_c2_t.join()
     print(f"Threads done, found {len(contours_1[0])} and {len(contours_2[0])} contours")
 
-    x1, y1 = get_center_of_mass(contours_1[0][0])
-    print(f"Average is: {x1:.2f};{y1:.2f}")
-    x2, y2 = get_center_of_mass(contours_2[0][0])
-    print(f"Average is: {x2:.2f};{y2:.2f}")
-    all_c = contours_1[0] + contours_2[0]
+    cons_1 = contours_1[0]
+    cons_2 = contours_2[0]
 
-    for i in range(-5, 5):
-        for j in range(-5, 5):
-            all_c += [[(int(x1 + i), int(y1 + j))]]
-            all_c += [[(int(x2 + i), int(y2 + j))]]
-    colors_1 = [(255, 255, 0)] * len(contours_1[0])
-    colors_2 = [(0, 255, 255)] * len(contours_2[0])
+    all_results = []
+    for index_1 in range(len(cons_1)):
+        for index_2 in range(len(cons_2)):
+            x1, y1 = get_center_of_mass(cons_1[index_1])
+            #print(f"Average is: {x1:.2f};{y1:.2f}")
+            x2, y2 = get_center_of_mass(cons_2[index_2])
+            #print(f"Average is: {x2:.2f};{y2:.2f}")
 
-    #contourMatcher.display_contours(all_c, name="without1", wait=1,
-    #                                colors=colors_1 + colors_2)
+            #all_c = [cons_1[index_1], cons_2[index_2]]
+            #for i in range(-5, 5):
+            #    for j in range(-5, 5):
+            #        all_c += [[(int(x1 + i), int(y1 + j))]]
+            #        all_c += [[(int(x2 + i), int(y2 + j))]]
+            #colors_1 = [(255, 255, 0)] * len(cons_1)
+            #colors_2 = [(0, 255, 255)] * len(cons_2)
 
-    translation = (int(x1 - x2), int(y1 - y2))
-    print(f"Translation is: {translation}")
+            #contourMatcher.display_contours(all_c, name="without1", wait=0,
+            #                                colors=colors_1 + colors_2)
 
-    contour_a1 = convert_to_2d_array(contours_1[0][0])
+            translation = (int(x1 - x2), int(y1 - y2))
+            print(f"Translation is: {translation}")
 
-    #contourMatcher.display_contours([contours_1[0][0], moved_c], name="without", wait=0,
-    #                                colors=[(255, 255, 0), (255, 0, 255)])
-    for i in range(0, 100, 10):
-        for ii in range(0, 100, 10):
-            moved_c = contourMatcher.move_contour(contours_2[0][0], (i, ii))
-            contour_a2 = convert_to_2d_array(moved_c)
-            distance = check_2_contours(contour_a1, contour_a2, progress, search_radius=50)
-            contourMatcher.display_contours([contours_1[0][0], moved_c], name="without", wait=1,
-                                            colors=[(255, 255, 0), (255, 0, 255)])
-            print(f"Distance is: {distance:.4f}")
+            final_translation, distance = move_and_check(cons_1[index_1],
+                                                         cons_2[index_2],
+                                                         progress, translation, search_area=25)
+            all_results.append((index_1, index_2, final_translation, distance))
 
-    print(f"Done with comparing")
+    print("Index1, Index2, Translation, Distance")
+    for i in range(len(all_results)):
+        if all_results[i][3] != 0:
+            print(f"{all_results[i]}")
