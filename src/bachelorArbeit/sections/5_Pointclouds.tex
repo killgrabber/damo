@@ -13,31 +13,7 @@ kompatibel sein. In den folgenden Absatz werde ich das Erstellen von Pointclouds
 mithilfe eines Laserscanners erläutern und auf ein Verfahren eingehen, dass aus 
 den Pointclouds digitale Objekte erstellt, die miteinander verglichen werden können.
 
-\subsection{Versuchsaufbau}
 
-\begin{wrapfigure}{r}{0.6\textwidth}
-    \includegraphics[width=0.6\textwidth]{images/versuchsaufbau_foto.png.JPG}
-    \caption{Versuchsaufbau}
-    \label{fig:versuchsaufbau}
-\end{wrapfigure}
-
-In Abbildung \ref{fig:versuchsaufbau} ist der Versuchsaufbau zur Datenerfassung 
-zu sehen. Alle wichtigen Bestandteile sind nummeriert. Es folgt eine kurze Benennung
-aller vorhandenen und notwendigen Teile:\\
-1: Schraubstock Backen\\
-2: Demonstratorbauteil\\
-3: Scannerhalterung\\
-4: Scanner LLT 30x0-25\\
-5: Verschiebungsmesser\\
-6: Laserlinie (Lila)\\
-7: Schraubstock mit Kraftmesser\\
-X: x-Achse\\
-Y: y-Achse\\
-Z: z-Achse\\
-
-Der Scanner ist an dem Werkzeugkopf einer CNC-Fräse befestigt und wird 
-in Richtung der X und Y Achse verschoben. So kann von dem kompletten Bauteil eine 
-Pointcloud aufgenommen werden.
 
 
 \newpage
@@ -67,30 +43,6 @@ ist dies nicht der Fall entsteht eine Pointcloud die einmal größer als notwend
 und außerdem am Ende der x-Achse nur wiederholende Profile beinhalten. 
 Die y-Achse der Pointcloud wird durch den eingesetzten Scanner limitiert. 
 
-\begin{wrapfigure}{r}{0.2\textwidth}
-    \includegraphics[width=0.2\textwidth]{images/Scanner.PNG}
-    \caption{Scanner}
-    \label{fig:scanner}
-\end{wrapfigure}
-
-Der Scanner hat Abhängig vom Modell und der angebrachten Höhe eine fixe Länge die 
-er aufnehmen kann. In unserem Fall wurde der Scanner 'LLT 30x0-25' verwendet der 
-eine mittleren Messbreite von 25 mm bietet. 
-In Abbildung \ref{fig:scanner} ist dieser Messbereich sichtbar. Mittig kann 
-in einer Tiefe von 85 mm eine Linie mit der Länge 25 mm gemessen werden. 
-Der komplette messbare Bereich ist rot markiert. \cite{MESSTECHNIK_2020}
-Bauteile mit einer größeren Länge in Y-Richtung können also nicht in einer Pointcloud
-erfasst werden. Damit eine Digitalisierung von größeren Objekten erfolgen kann, müssen
-also mehrere Scans durchgeführt, und später zusammengefügt werden. Zwischen den 
-Scanvorgängen muss der Scanner in Y-Richtung verschoben werden.
-Die Länge der Verschiebung sollte 
-kleiner als die Scannerbreite sein, damit eine Überlappung entsteht, die 
-genutzt werden kann, um die Pointclouds wieder zusammenzufügen. Die Verschiebung kann 
-beliebig klein gewählt werden, jedoch steigt der Arbeitsaufwand und die Dateigröße mit 
-jeder zusätzlichen Pointcloud, während das Ergebnis sich nicht verbessert.
-So können Pointclouds aufgenommen werden die dann in dem zu entwickelnde Verfahren
-wieder zu einem digitalen Abbild zusammengefügt werden.
-
 
 \subsubsection{Geschwindigkeit}
 Der Parameter `Geschwindigkeit` in Abbildung \ref{fig:scanparameter} muss der realen Vorlaufgeschwindigkeit des Scanners
@@ -99,8 +51,6 @@ Messgeschwindigkeit kleiner als die Bewegung des Scanners werden Profile doppelt
 aufgenommen, ist sie zu hoch werden Profile übersprungen und das Bauteil wirkt in 
 der resultierende Pointcloud in X-Richtung gestreckt.
 
-
-\newpage
 \subsubsection{Endergebnis}
 
 Ist dieser Prozess erfolgreich
@@ -133,138 +83,6 @@ auf die Struktur von Pointcloud Dateien noch eingehen.
     \end{minipage}
 \end{figure}
 
-\begin{wrapfigure}{r}{0.4\textwidth}
-    \includegraphics[width=0.4\textwidth]{images/piezoelektrische.JPG}
-    \caption{Spannungswandler}
-    \label{fig:piez}
-\end{wrapfigure}
-
-\subsubsection{Zusätzliche Messinstrumente}
-
-Zusätzlich zu dem Scanner werden noch mit weiteren Messinstrumente Daten erfasst.
-In Abbildung \ref{fig:versuchsaufbau} unter der Nummer 5 ist ein mechanischer 
-Verschiebungsmesser zu sehen. Dieser misst die Verschiebung der Backen des 
-Schraubstocks. Der Schraubstock misst zusätzlich mit viel Kraft die Backen 
-aufeinander pressen.
-
-Hierzu wird die piezoelektrische Kraftmesstechnik verwendet.
-Bei Krafteinwirkung auf Piezokristalle (z. B. Quarz, Bariumtitanat, BaTiO3) 
-werden im Kristallgitter negative gegen positive Gitterpunkte
-verschoben, sodass an den Kristalloberflächen
-Ladungsunterschiede Q als Funktion der Kraft F
-gemessen werden.
-Piezoelektrische Kraftaufnehmer sind mechanisch sehr steif, 
-sie erfordern Ladungsverstärker
-zur Messsignalverarbeitung und sind hauptsächlich zur Messung dynamischer Vorgänge
-mit einer kleineren Frequenz als 1 Hz geeignet. \cite{Czichos.2020}. 
-Diese Kraftmesstechnik ist 
-für unseren Einsatzzweck gut geeignet da sie eine hohe Empfindlichkeit bietet 
-und in vielfältigen Formen und Größen hergestellt werden kann. Zur Aufbereitung 
-der Ladung, die der piezoelektrische Sensor, liefert wurde ein Ladungsverstärker 
-eingesetzt.\cite{Schwartz.2006}
-Dieser ist in Spannungsverstärker ist in Abbildung \ref{fig:taster} unten zu sehen.
-
-\newpage
-
-\begin{wrapfigure}{r}{0.4\textwidth}
-    \includegraphics[width=0.4\textwidth]{images/taster.JPG}
-    \caption{Taster}
-    \label{fig:taster}
-\end{wrapfigure}
-
-
-Damit die Scanner-Ergebnisse überprüft werden können,
-wird die Bauteilgeometrie zusätzlich nach dem Scanvorgang noch mit einem Taster
-abgetastet. Hierfür wird der Werkzeugkopf gewechselt und der Scanner entfernt.
-Dann wird der Taster in die CNC-Maschine eingesetzt und das Bauteil abgetastet.
-In Abbildung \ref{fig:taster} ist das Tasterwerkzeug zu sehen. Die rote Kugel 
-am Ende des Tasters erkennt, sobald eine Berührung zu dem Bauteil erfolgt ist 
-und benachrichtigt den Steuerungsrechner. Dieser speichert die aktuelle Position 
-dann in einer Protokolldatei.
-
-\subsubsection{Pointclouds}
-
-Bevor ich mich aber mit dem Zusammenfügen von mehreren Pointclouds beschäftige,
-möchte ich auf die Datenstruktur von Pointclouds eingehen. 
-Wie der Name schon sagt bestehende Pointclouds aus Punkten. 
-In unserem Fall ca. 3 Millionen für eine einzelne
-Bewegung in X-Richtung. In jedem Punkt sind mindestens 3 Koordinaten gespeichert, 
-eine X und Y Koordinate relativ zu Ursprung der Pointcloud und eine Z Koordinate 
-in der die Höhe gespeichert wird. Der Ursprung der Pointcloud liegt am Laserausgang
-des Scanners.
-
-\begin{wrapfigure}{l}{0.15\textwidth}
-    \centering
-    \includegraphics[width=0.15\textwidth]{images/demonstratorbauteil_top.PNG}
-    \includegraphics[width=0.15\textwidth]{images/demonstratorbauteil_bottom.PNG}
-    \caption{Demonstratorbauteil}
-    \label{fig:demonstratorbauteil}
-\end{wrapfigure}
-
-Zusätzlich ist für jeden Punkt auch noch eine Farbe als RGB-Farbwert
-(3 Werte von 0 bis 255) gespeichert. Die Farbe wird relativ zu der Höhe
-berechnet. Punkte bekommen einen Farbwert zugewiesen je nachdem wie nah 
-sie an dem Minimum oder Maximum der Z-Koordinate sind. 
-In \ref{fig:pointcloud_big} ist die komplette Pointcloud eines Demonstratorbauteils 
-zu sehen, zusammen mit einer Bounding-Box, durch diese werden die Randpunkte
-der Pointcloud visuell dargestellt. Man sieht außerdem das unten liegende Punkte
-hell und weiter oben liegende Punkte dunkler dargestellt werden.
-Unterhalb ist eine Nahaufnahme des Mittelstücks des gleichen Bauteils zu sehen. 
-Hier sind die einzelnen Punkte sichtbar.
-
-Die Koordinaten sind als Float gespeichert haben keinerlei Bezug zueinander.
-Das heißt die X und Y Koordinaten sind nicht zum Beispiel anhand eines Netzes
-angelegt, sondern können einen beliebigen Abstand zwischen einander haben. Das
-werden wir auch später in der weiteren Bearbeitung der Pointclouds sehen.
-
-Wenn nun also alle Pointclouds für ein Objekt erfasst wurden, kann zu dem 2.
-Schritt des Verfahrens übergegangen werden. Hier müssen die Daten zusammengefügt 
-werden. 
-Hierfür existieren in der Literatur schon verschiedene Verfahren, ein 
-besonders beliebtes ist der ICP-Algorithmus.
-Dieser Algorithmus existiert schon seit dem Beginn der 90er Jahre und ist 
-die klassische Methode, wenn es um die Registrierung von Pointclouds und 
-anderen Punkt-Sets geht. \cite[]{icp}
-Der Algorithmus errechnet eine lokale, optimale Transformation die ein Datenset
-dem anderen annähern kann. \cite{icp_og}
-Um diese Transformation zu bestimmen werden zuerst die Distanzen von allen 
-Punkten in Datenset A zu dem jeweils nächsten Punkt in Datenset B aufsummiert 
-werden. Dann wird eins der Datensets verschoben und rotiert und wieder die 
-Distanzen gebildet. Dies wird so lange gemacht bis die Änderung der Distanzen 
-konvergiert. Die entstehende Transformation ist dann optimal.
-Für identische Datensets die sich nur in einer Transformation und Rotation 
-unterscheiden, funktioniert dieser Algorithmus sehr gut. Bei Datensätzen die 
-Messfehler oder Überlappungen beinhalten kann häufig keine optimale 
-Transformation bestimmt werden.
-Deswegen wurden seit der ersten Vorstellung des Algorithmus viele Varianzen
-entwickelt, die mit diesem Schwächen umgehen. 
-Zum Beispiel der 'Sparse Iterative Closest Point' Algorithmus von \cite{Bouaziz.2013}
-oder die 'Anderson-accelerated' Version die besser mit Ausreißern und nur 
-partiell überlappenden Daten umgehen kann und eine gleichwertige oder bessere 
-Transformation errechnen kann. \cite{icp}
-
-Aufgrund der Versprechen dieser Varianten und weil dieser Algorithmus in vielen
-Open-Source Bibliotheken schon implementiert ist, war das auch mein erster Ansatz
-und ich habe mir Hoffnungen gemacht, dass das Zusammenfügen der Pointclouds 
-damit schnell abgehakt ist. 
-Dafür habe ich die Methode der Global Registrierung aus der Open3D Bibliothek genutzt
-die auf dem Paper von Qian-Yi Zhou, Jaesik Park und Vladlen Koltun basiert. \cite{Zhou.}
-Das Globale Registrierung Verfahren wird vor dem ICP-Algorithmus benutzt um eine erste, 
-initiale Transformation zu erstellen, die der IPC-Algorithmus im ersten Schritt braucht.
-
-Das Problem bei dieser Methodik und unserem Datensatz ist, das beide Hälften des
-Demonstratorbauteils symmetrisch sind. In dem Verfahren wird nicht nur eine 
-Transformation anhand der X, Y und Z Achsen eingesetzt, 
-sondern auch eine Rotation der Pointcloud.
-Wie man in Abbildung \ref{fig:demonstratorbauteil} sehen kann überlappen die beiden Pointclouds 
-schon fast zu 100 Prozent, wenn eine Pointcloud um 180 Grad gedreht, und über die andere
-gelegt wird. Auf dieses Ergebnis ist auch das Global Registrierungsverfahren gekommen. 
-Für unseren Fall ist also ein Verfahren nötig was ausschließlich eine 
-Transformation in X und Y Richtung benutzt. Das sind auch die einzigen Achsen, 
-in der sich der Scanner bewegt hat.
-
-\newpage
-
 \subsection*{Wahl des Demonstratorbauteils}
 
 Man könnte sich jetzt hier die Frage stellen, warum das Demonstratorbauteil dann so gewählt 
@@ -293,79 +111,6 @@ Verschiebung und Berechnung der zweidimensionalen Arrays rechenintensiv und hat 
 langen Laufzeiten geführt. Also habe ich dieses Verfahren wieder aufgeben mit einer neuen
 Idee:
 
-\newpage
-
-\subsection*{Pointcloud in Bild konvertieren}
-Um Rechenzeit zu sparen und auf viele Funktionen von schon bestehenden 
-Bilderkennungs-Bibliotheken zurückgreifen zu können habe ich die Pointclouds in ein
-Bild konvertiert. Hierfür wird zuerst in leeres Bild mit den gleichen Maßen einer 
-Pointcloud erstellt. Dann wird über alle Punkte der Pointcloud iteriert und jeweils
-der Pixel an der X und Y Koordinate des Punktes auf einen Helligkeitswert gesetzt.
-Um Rechenzeit und Speicherkapazitäten zu schonen, und weil es für die Berechnung 
-ausreichend ist, habe ich mich für 8 Bit Single-Channel Bilder die nur Helligkeitswerte 
-abbilden entschieden. Hier kann also jede Pixel einen Wert zwischen 0 und 255 annehmen.
-Der entsprechende Wert kann wie folgt berechnet werden:
-
-\begin{wrapfigure}{r}{0.5\textwidth}
-    \centering
-    $value_p = \frac{Z - min_y}{max_y - min_y} \cdot (max_b - min_b) + min_b$
-    \caption{Berechnung Pixelwert}
-    \label{calc:brightness}
-\end{wrapfigure}
-Der resultierende Wert ist die Helligkeit, die dem Pixel zugewiesen wird.
-$Z$ ist die Z-Koordinate des Punktes in der Pointcloud. $min_y$ und $max_y$ sind 
-die Grenzen der Z-Koordinate, diese werden gebraucht um die Helligkeit relativ 
-zu der Höhe zu berechnen. $min_b$ und $max_b$ sind die gewünschten Grenzen der 
-Helligkeit. In unserem Fall sind $min_b = 0$ und $max_b = 255$ da ein 8 Bit Bild
-verwendet wird.
-
-\begin{wrapfigure}{l}{0.5\textwidth}
-    \centering
-    \includegraphics[width=0.5\textwidth]{images/fdm_top_100p.png}
-    \includegraphics[width=0.5\textwidth]{images/fdm_top_10p.png}
-    \caption{Konvertierung Pointcloud zu Bild}
-    \label{fig:image_from_pc}
-\end{wrapfigure}
-
-Wie man in Abbildung \ref{fig:image_from_pc} sehen kann, sind kaum Helligkeitsveränderungen
-im Bild sichtbar. Das liegt an derselben Problematik, an der der ICP-Algorithmus häufig
-scheitert. Reale Datensets wie wir es vorliegen haben sind nicht perfekt, sondern
-beinhalten Messfehler und Streuungen. 
-
-Abbildung \ref*{fig:brightness} zeigt die Häufigkeit der gleichen Höhenwerte einer
-Pointcloud von dem Demonstratorbauteil. In Blau ist die Verteilung der Punkte auf 
-einem Demonstratorbauteil zu sehen das aus Metall gedruckt wurde, Orange zeigt die 
-Verteilung der Punkte auf einem Kunststoffteil.
-In dem oberen Histogramm 
-sind die Häufigkeiten der Höhenwerte zu sehen. Der Datensatz wurde in 500 gleich große
-Teile gruppiert, jeder Balken repräsentiert eine Gruppe.
-Unterhalb ist das Histogramm mit dem gleichen Datensatz, aber mit der y-Achse 
-logarithmisch skaliert um kleine Prozente deutlich zu machen die im
-oberen Diagramm nur schwer oder gar nicht sichtbar sind. 
-Die meisten Höhenwerte treten bei ca. 80 beziehungsweise 85 auf, 
-sie gehören zu den Punkten, die auf dem Demonstratorbauteil liegen, 
-es treten allerdings auch Werte darunter und darüber auf. 
-Die in Abbildung \ref*{calc:brightness} vorgestellte Formel benutzt allerdings 
-die absoluten Minimum und Maximum Werte.
-Alle Punkte die tatsächlich auf dem Bauteil werden also entsprechend wenig
-berücksichtigt. Dem kann Abhilfe geschaffen werden, indem Werte, die weniger häufig 
-auftreten entfernt werden. Sortiert man alle Höhenwerte nach der Häufigkeit ihres 
-auftreten in der Pointcloud und entfernt den n-ten Prozentsatz können Ausreißer 
-entfernt werden. Wenn nur die häufigsten 10 Prozent übernommen werden erhält man 
-das untere Bild in Abbildung \ref{fig:image_from_pc}
-
-Features auf dem Bauteil können jetzt deutlich besser erkannt werden. Auch zu sehen
-sind jetzt die Markierungen auf der linken und Rechten Seite die bei der Registrierung
-helfen sollen. Auch schön zu sehen sind die Spuren und Lücken die durch den FDM 
-Herstellungsprozess entstehen.
-
-Durch das Filtern der Höheninformationen sind Oberflächenstrukturen nicht nur besser
-erkennbar, auch die Ränder treten genauer hervor. Das ist sehr wichtig für das korrekte
-zusammenfügen.
-
-Doch wo soll die Grenze gezogen werden, um die Oberfläche möglichst genau zu erkennen,
-aber nicht zu viele Höheninformation zu verlieren.
-
 \subsection{Pointcloud filtern}
 
 \begin{wrapfigure}{r}{0.5\textwidth}
@@ -391,8 +136,6 @@ streut. Es muss also eine Filtermethode gewählt werden die für alle Fertigungs
 anwendbar ist und nicht bei einer Methode besser funktioniert wie bei einer 
 anderen. Werden zum Beispiel die 10 Prozent häufigst aufkommenden Höhenwerte bei einem
 Metallteil benutzt kommt folgendes Bild heraus.
-
-
 
 \begin{wrapfigure}{l}{0.4\textwidth}
     \centering

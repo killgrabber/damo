@@ -1,8 +1,7 @@
 % !TEX root = src/bachelorArbeit/main.tex
-\documentclass[11pt]{article}
+\documentclass[german,report]{tudo-raumplanung-thesis-report}
 
 \usepackage{cite}
-\usepackage{subfiles}
 \usepackage{url}
 \usepackage{wrapfig}
 \usepackage{needspace}
@@ -25,20 +24,24 @@
 
 \usepackage[]{graphicx}
 
+% Provide your title
 \title{Entwicklung einer Methodik zur optischen Analyse
 spannkraftinduzierter Deformationen additiv gefertigter Bauteile}
-\author{Niklas Thieme}
-\date{\today}
+
+% Author name(s)
+% organised into two columns if more than 10 authors are provided
+\storeauthors\authors{
+    {Thieme, Niklas}
+}
+
+% Provide the examiners' names.
+\storereviewers\reviewers{
+    {Jun.-Prof.\ Dr.\ rer.\ nat.\ Great Examiner}
+    {Prof.\ Dr.-Ing.\ Fantastic Examiner}
+}
 
 \begin{document}
 %\centering
-
-\maketitle
-
-\begin{figure}[t]
-    \includegraphics[width=5cm]{images/1280px-Technische_Universität_Dortmund_Logo.svg.png}\hfill
-    \includegraphics[width=5cm]{images/vmLogo.png}
-\end{figure}
 
 \newpage
 
@@ -46,39 +49,43 @@ spannkraftinduzierter Deformationen additiv gefertigter Bauteile}
 
 \newpage
 
-\subfile{sections/1_EinleitungMotivation.tex}
+\input{sections/1_EinleitungMotivation.tex}
 
 \newpage
 
-\subfile{sections/2_StandDerTechnik.tex}
+\input{sections/2_StandDerTechnik.tex}
 
 \newpage
 
-\subfile{sections/3_ZielderArbeit.tex}
+\input{sections/3_ZielderArbeit.tex}
 
 \newpage
 
-\subfile{sections/4_Versuchsaufbau.tex}
+%\input{sections/5_Pointclouds.tex}
+
+%\newpage
+
+\input{sections/6_Datenaufbereitung.tex}
 
 \newpage
 
-\subfile{sections/5_Pointclouds.tex}
+\input{sections/6_5_stitchting.tex}
 
 \newpage
 
-\subfile{sections/6_Stitching.tex}
+\input{sections/7_deformation.tex}
 
 \newpage
 
-\subfile{sections/7_deformation.tex}
+\input{sections/8_Software.tex}
 
 \newpage
 
-\subfile{sections/8_Software.tex}
+\input{sections/10_Zusammenfassung.tex}
 
 \newpage
 
-\subfile{sections/9_Zusammenfassung.tex}
+\input{sections/9_Validierung.tex}
 
 \newpage
 \bibliography{quellen}

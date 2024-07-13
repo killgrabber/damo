@@ -7,7 +7,7 @@
 
 Additive Fertigung, unabhängig von dem Werkstoff, ist ein Bereich im dem viel
 geforscht und innoviert wird. In fast jedem Industriebereich wird versucht ein
-bestehendes Design oder Modell zu optimieren und verbessern. \cite{newMethod}
+bestehendes Design oder Modell zu optimieren und verbessern.
 Sei es hinsichtlich Qualität oder Kosteneffizienz. Additive Fertigung bietet bei 
 dieser Optimierung viele Vorteile gegenüber spanenden Fertigungsverfahren, da 
 Additive Fertigung einen höheren Grad der Gestaltungsfreiheit bietet. 
@@ -31,20 +31,17 @@ höhere Hitzebeständigkeit und eine stabilere Grundstruktur, was sie weniger an
 für Verformungen macht.
 
 Aufgrund dieser Vorteile wird AF in vielen Industriebereichen genutzt. Die folgende
-Sektion zeigt einige Fälle in denen AF erfolgreich benutzt wurde.
-
-\subsubsection*{Automobil-Branche}
-
-Eine der führenden Branchen in der AF-Entwicklung ist die Automobil-Branche. 
-Durch den Herstellungsprozess
-könne Teile gefertigt werden die leichter, belastbarer und sicherer sind. Die 
-einfache Anpassbarkeit für geringen Entwicklungszeiten und Kosten. 
+Sektion zeigt einige Fälle in denen AF erfolgreich benutzt wird.
+Die Automobilbranche ist ein Bereich in der AF schon viel und erfolgreich 
+eingesetzt wird:
+Durch AF könne Teile gefertigt werden die leichter, belastbarer und sicherer sind. 
+Die einfache Anpassbarkeit sorgt für geringen Entwicklungszeiten und Kosten. 
 BWM zum Beispiel benutzt für den i8 Roadster viele AF gefertigte Teile.
-Darunter die Befestigung für das Soft-Top, die 44 \% leichter als das Spritzgussteil
+Darunter die Befestigung für das Soft-Top, die 44\% leichter als das Spritzgussteil
 ist, und dennoch 10 Mal steifer. \cite{Vafadar.2021} 
-Die Führung für das Fenster wurde auch additiv gefertigt, durch den "HP Multi Jet Fusion" 
-konnten 100 Teile in 24 Stunden gefertigt werden. Selbst teile des Zylinderkopfs für den 
-S58 Motor sind auch additiv gefertigt. \cite{Anusci.2019}
+Fensterführungen wurde auch additiv gefertigt. Mithilfe des "HP Multi Jet Fusion" 
+konnten 100 Teile in 24 Stunden gefertigt werden. Selbst Teile des Zylinderkopfs für den 
+S58 Motor wurden additiv gefertigt. \cite{Anusci.2019}
 
 Auch bei älteren Fahrzeugen kann additive Fertigung Verwendung finden.
 Gerade bei älteren Fabrikaten sind Ersatzteile häufig nicht mehr vom 
@@ -55,19 +52,28 @@ Kotflügelhalterung für ein Matra 530 aus 1973 erfolgreich hergestellt, nachdem
 kein Originalteil gefunden wurde \cite{AMExpo365.03.06.2024}. Zusätzlich war
 bei diesem Beispiel die Herausforderung, das keine digitale Version des
 Bauteils existiert hat. Zuerst musste das also als Grundlage für die
-additive Fertigung erzeugt werden. Dies bringt mich zu meinem nächsten Punkt:
+additive Fertigung erzeugt werden.
+
+\subsection{Limitierungen von AF}
+
+AF kann trotz seiner Vorteile nicht überall eingesetzt werden. Limitierungen 
+in der Materialvielfalt, hohe Material und Anschaffungskosten, begrenzte
+Bauraumgröße, verminderte Oberflächenqualität und aufwändige Nachbearbeitung
+können einen Einsatz von AF verhindern. \cite{inproceedings}
+Einige von diesen Limitierungen können umgangen oder gelöst werden.
+Die verminderte Oberflächenqualität kann durch eine anschließende Fräsbearbeitung
+verbessert werden. 
+Diese Nachbearbeitung macht eine Fixierung des Bauteils notwendig. Auch für andere
+Nachbearbeitungen wie das Entfernen von Stützstrukturen kann sich das fixieren 
+positiv auswirken und Zeit gespart werden.
+
 
 \subsection{Reverse Engineering}
 
-Reverse Engineering beschreibt dem Prozess aus einem bestehenden Produkt 
+Reverse Engineering beschreibt den Prozess aus einem bestehenden Produkt 
 oder Objekt ein digitales Abbild zu erzeuge \cite{Helle.2021}.
 Dabei sind meistens wenig oder keine technischen Details über das Objekt
-verfügbar. Gründe dafür können sein das der ursprüngliche Hersteller die 
-Baupläne nicht veröffentlicht hat, um nicht der Konkurrenz in die Hände
-zu spielen. Auch denkbar ist ein militärischer Hintergrund, hier werden
-die Baupläne aus offensichtlichen Gründen auch nicht öffentlich zugänglich
-sein. Das ist zum Beispiel in der Luftfahrtbranche, unter anderem bei dem
-Hersteller Boeing, der Fall. 
+verfügbar. \cite{Helle.2021}  
 Selbst wenn Baupläne vorhanden sind kann es trotzdem notwendig sein 
 Reverse Engineering zu betreiben, denn das tatsächliche Produkt kann von
 den Bauplänen abweichen, zum Beispiel durch jahrelange Benutzung oder
@@ -144,7 +150,7 @@ deswegen zum 2. Verfahren greifen. Hier sind die Ursprungsdaten schon
 dreidimensional mit einem Scanner aufgenommen. Um an diese Daten zu kommen, 
 misst ein Scanner, meistens mithilfe von Lichtstrahlen, den Abstand zu einem 
 Punkt auf dem zu rekonstruierenden Objekt. Dann wird entweder das Objekt oder 
-der Scanner bewegt, um so möglichst viele Scan punkte aufzunehmen.
+der Scanner bewegt, um so möglichst viele Scanpunkte aufzunehmen.
 Je mehr Punkte vorliegen, desto genauer wird das Ergebnis, allerdings steigt
 auch die vorhandene Datenmenge mit, ab einem Punkt kann der verfügbare 
 Speicher ein limitierender Faktor sein. Außerdem steigt die Rechenzeit auch mit
@@ -153,5 +159,136 @@ der Datenmenge, je nach anschließendem Verfahren sogar exponentiell.
 Nachteile von diesem Verfahren sind die hohen initialen Kosten eines Scanners 
 und der begrenzte Messbereich. 
 
+\subsection{Digitales Abbild}
+
+Das schon vorhandene oder erstellte 3D Objekt muss für die weitere Nutzung
+in einem geeigneten Datenformat gespeichert werden. Hierfür haben sich mehrere
+Formate etabliert. Die Geometrie eines Objekts wird häufig als Sammlung von Punkten 
+gespeichert. Die Oberfläche eines Objekts wird als Serie von Polygonen beschrieben. 
+Der Grad des Polygons kann variieren, häufig werden Dreiecke verwendet. Die Akkuranz
+mit der das Polygon-Netz die gewünschte Oberfläche abbildet kann gewählt werden. 
+Je kleiner die Oberfläche der Polygonen ist, desto genauer wird die Oberfläche 
+abgebildet. Mit kleineren Oberflächen steigt die Anzahl der zu speichernden 
+Eckpunkte, was eine größere Datei zur Folge hat.
+Ein in der akademischen Welt beliebtes Dateiformat für Polygon-Netze ist das 
+Polygon File Format (ply).\cite{KentonMchenry.2008}
+Das Format kann vom Nutzer beliebig angepasst werden. Eine ply-Datei beginnt mit 
+einem Header in dem die Inhaltsstruktur beschrieben wird. 
+Für 3D-Objekte besteht diese meistens aus X, Y und Z Koordinaten. 
+Zusätzlich können weitere Informationen gespeichert werden. Das ply Dateiformat 
+unterstützt standardmäßig: "vertices/edges/faces, vertex colors, textures and
+material" \cite{KentonMchenry.2008}. Weitere Informationen können durch den Nutzer 
+hinzugefügt werden, 
+diese können dann aber unter Umständen nicht von anderen Programmen oder Benutzern
+benutzt werden.
+Im Dateiheader wird zu jedem Attribut auch der Datentyp festgelegt. Durch diesen 
+kann die Akkuranz und Dateigröße beeinflusst werden. Häufig werden hier floats oder
+Integer in verschiedener Bit tiefe gewählt.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[height=150pt]{images/polgyonMeshes.jpg}
+    \caption{Akkuranz des 3D Objekts ist abhängig von der Anzahl der Polygonen}
+    \label{fig:meshes}
+\end{figure}
+
+
+\subsection{Scanner und Datenerfassung}
+
+Datenerfassung durch einen Laserscanners.
+Der Scanner hat Abhängig vom Modell und der angebrachten Höhe einen limitierten
+Bereich den er erfassen kann.
+In unserem Fall wurde der Scanner 'LLT 30x0-25' verwendet der 
+eine mittleren Messbreite von 25 mm bietet. 
+In Abbildung \ref{fig:scanner} ist dieser Messbereich sichtbar. Mittig kann 
+in einer Tiefe von 85 mm eine Linie mit der Länge 25 mm gemessen werden. 
+Der komplette messbare Bereich ist rot markiert. \cite{MESSTECHNIK_2020}
+Bauteile mit einer größeren Länge in Y-Richtung können also nicht in einer Pointcloud
+erfasst werden. Damit eine Digitalisierung von größeren Objekten erfolgen kann, müssen
+also mehrere Scans durchgeführt, und später zusammengefügt werden. Zwischen den 
+Scanvorgängen muss der Scanner in Y-Richtung verschoben werden.
+Die Länge der Verschiebung sollte 
+kleiner als die Scannerbreite sein, damit eine Überlappung entsteht, die 
+genutzt werden kann, um die Pointclouds wieder zusammenzufügen. Die Verschiebung kann 
+beliebig klein gewählt werden, jedoch steigt der Arbeitsaufwand und die Dateigröße mit 
+jeder zusätzlichen Pointcloud, während das Ergebnis sich nicht verbessert.
+So können Pointclouds aufgenommen werden die dann in dem zu entwickelnde Verfahren
+wieder zu einem digitalen Abbild zusammengefügt werden.
+
+\begin{figure}[h]
+    \includegraphics[width=0.2\textwidth]{images/Scanner.PNG}
+    \caption{Funktionsweise eines Laserscanners}
+    \label{fig:scanner}
+\end{figure}
+
+\subsection{ICP-Algorithmus}
+
+Dieser Algorithmus existiert schon seit dem Beginn der 90er Jahre und ist 
+die klassische Methode, wenn es um die Registrierung von Pointclouds und 
+anderen Punkt-Sets geht. \cite[]{icp}
+Der Algorithmus errechnet eine lokale, optimale Transformation die ein Datenset
+dem anderen annähern kann. \cite{icp_og}
+Um diese Transformation zu bestimmen werden zuerst die Distanzen von allen 
+Punkten in Datenset A zu dem jeweils nächsten Punkt in Datenset B aufsummiert 
+werden. Dann wird eins der Datensets verschoben und rotiert und wieder die 
+Distanzen gebildet. Dies wird so lange gemacht bis die Änderung der Distanzen 
+konvergiert. Die entstehende Transformation ist dann optimal.
+Für identische Datensets die sich nur in einer Transformation und Rotation 
+unterscheiden, funktioniert dieser Algorithmus sehr gut. Bei Datensätzen die 
+Messfehler oder Überlappungen beinhalten kann häufig keine optimale 
+Transformation bestimmt werden.
+Deswegen wurden seit der ersten Vorstellung des Algorithmus viele Varianzen
+entwickelt, die mit diesem Schwächen umgehen. 
+Zum Beispiel der 'Sparse Iterative Closest Point' Algorithmus von \cite{Bouaziz.2013}
+oder die 'Anderson-accelerated' Version die besser mit Ausreißern und nur 
+partiell überlappenden Daten umgehen kann und eine gleichwertige oder bessere 
+Transformation errechnen kann. \cite{icp}
+
+\subsection{Zusätzliche Messinstrumente}
+
+Zusätzlich zu dem Scanner werden noch mit weiteren Messinstrumente Daten erfasst.
+In Abbildung \ref{fig:versuchsaufbau} unter der Nummer 5 ist ein mechanischer 
+Verschiebungsmesser zu sehen. Dieser misst die Verschiebung der Backen des 
+Schraubstocks. Der Schraubstock misst zusätzlich mit viel Kraft die Backen 
+aufeinander pressen.
+
+Hierzu wird die piezoelektrische Kraftmesstechnik verwendet.
+Bei Krafteinwirkung auf Piezokristalle (z. B. Quarz, Bariumtitanat, BaTiO3) 
+werden im Kristallgitter negative gegen positive Gitterpunkte
+verschoben, sodass an den Kristalloberflächen
+Ladungsunterschiede Q als Funktion der Kraft F
+gemessen werden.
+Piezoelektrische Kraftaufnehmer sind mechanisch sehr steif, 
+sie erfordern Ladungsverstärker
+zur Messsignalverarbeitung und sind hauptsächlich zur Messung dynamischer Vorgänge
+mit einer kleineren Frequenz als 1 Hz geeignet. \cite{Czichos.2020}. 
+Diese Kraftmesstechnik ist 
+für unseren Einsatzzweck gut geeignet da sie eine hohe Empfindlichkeit bietet 
+und in vielfältigen Formen und Größen hergestellt werden kann. Zur Aufbereitung 
+der Ladung, die der piezoelektrische Sensor, liefert wurde ein Ladungsverstärker 
+eingesetzt.\cite{Schwartz.2006}
+Dieser ist in Spannungsverstärker ist in Abbildung \ref{fig:taster} unten zu sehen.
+
+\begin{figure}[h]
+    \includegraphics[width=0.4\textwidth]{images/taster.JPG}
+    \caption{Taster}
+    \label{fig:taster}
+\end{figure}
+
+\begin{figure}[h]
+    \includegraphics[width=0.4\textwidth]{images/piezoelektrische.JPG}
+    \caption{Spannungswandler}
+    \label{fig:piez}
+\end{figure}
+
+
+Damit die Scanner Ergebnisse überprüft werden können,
+wird die Bauteilgeometrie zusätzlich nach dem Scanvorgang noch mit einem Taster
+abgetastet. Hierfür wird der Werkzeugkopf gewechselt und der Scanner entfernt.
+Dann wird der Taster in die CNC-Maschine eingesetzt und das Bauteil abgetastet.
+In Abbildung \ref{fig:taster} ist das Tasterwerkzeug zu sehen. Die rote Kugel 
+am Ende des Tasters erkennt, sobald eine Berührung zu dem Bauteil erfolgt ist 
+und benachrichtigt den Steuerungsrechner. Dieser speichert die aktuelle Position 
+dann in einer Protokolldatei.
 
 \end{document}
