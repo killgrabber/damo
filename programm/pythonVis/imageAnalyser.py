@@ -303,6 +303,11 @@ def stitch_images_path(top_image_path: str, bot_image_path: str, progress: [], r
 
 def match_all_contours(contours_top, bottom_contours, progress: []):
     transitions = []
+    blue = (255, 255, 100)
+    green = (200, 255, 200)
+    contourMatcher.display_contours(contours_top, colors=[blue, green], wait=0,
+                                    name="top_contours",
+                                    save_name="top_contours.png")
     # Match all contours
     for c_top in contours_top:
         for c_bot in bottom_contours:

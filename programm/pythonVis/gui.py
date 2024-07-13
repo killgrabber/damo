@@ -138,7 +138,7 @@ def update_progress():
             contourMatcher.display_contours_in_image(stl_points[0], stitched_image[0],
                                                      offset=(int(tresh_min_slider.get()),
                                                              int(tresh_max_slider.get())),
-                                                     wait=1)
+                                                     wait=1, colors=[(255, 255, 0)])
 
 
 def save_current_overlap_images():

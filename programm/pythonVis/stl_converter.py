@@ -33,9 +33,11 @@ def find_contours_in_image(image, progress: [], result: []):
     print('Starting contour search')
     image_blur = cv2.blur(image, (2, 2))
     contours = imageAnalyser.getContours(image_blur, 0)
-    contours = contours[:4]
-    #contourMatcher.display_contours_in_image(contours, image, name="with image", wait=1)
-    #contourMatcher.display_contours(contours, name="without", wait=0)
+    contours = contours[:10]
+    contourMatcher.display_contours_in_image(contours, image, name="with image", wait=1,
+                                             colors=[255, 255, 0], save_name="with_con.jpg")
+    contourMatcher.display_contours(contours, name="without", wait=0,
+                                    colors=[255, 255, 255], save_name="only_con.jpg")
 
     print(f"Getting contours done")
     result[0] = contours
@@ -186,16 +188,16 @@ def compare_images(image_paths: [], progress: []):
             x2, y2 = get_center_of_mass(cons_2[index_2])
             #print(f"Average is: {x2:.2f};{y2:.2f}")
 
-            #all_c = [cons_1[index_1], cons_2[index_2]]
-            #for i in range(-5, 5):
-            #    for j in range(-5, 5):
-            #        all_c += [[(int(x1 + i), int(y1 + j))]]
-            #        all_c += [[(int(x2 + i), int(y2 + j))]]
-            #colors_1 = [(255, 255, 0)] * len(cons_1)
-            #colors_2 = [(0, 255, 255)] * len(cons_2)
+            all_c = [cons_1[index_1], cons_2[index_2]]
+            for i in range(-5, 5):
+                for j in range(-5, 5):
+                    all_c += [[(int(x1 + i), int(y1 + j))]]
+                    all_c += [[(int(x2 + i), int(y2 + j))]]
+            colors_1 = [(255, 255, 0)] * len(cons_1)
+            colors_2 = [(0, 255, 255)] * len(cons_2)
 
-            #contourMatcher.display_contours(all_c, name="without1", wait=0,
-            #                                colors=colors_1 + colors_2)
+            contourMatcher.display_contours(all_c, name="without1", wait=0,
+                                            colors=colors_1 + colors_2)
 
             translation = (int(x1 - x2), int(y1 - y2))
             print(f"Translation is: {translation}")

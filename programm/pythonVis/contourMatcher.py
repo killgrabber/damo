@@ -55,7 +55,8 @@ def match_contour(top: [(float, float)],
     bot = move_contour(bot, final_transition)
     print(f"Matching pair: {matching_pair}, t: {final_transition}, confidence: {best_match:.2f}, "
           f"len top:{len(top)} len bot: {len(bot)}")
-    #display_contours([top, bot], blue, green, wait=0, name=str(best_match).format(5))
+    display_contours([top, bot], colors=[blue, green], wait=0, name=str(best_match).format(5),
+                     save_name=str(best_match).format(5)+"contours.png")
 
     if best_match < 0.01:
         final_transition = (0, 0)
@@ -133,7 +134,7 @@ def get_boundaries(contours: [[(float, float)]]):
     return x, y, w, h
 
 
-def display_contours(contours: [[(float, float)]], colors: [], wait=0, name="Contour"):
+def display_contours(contours: [[(float, float)]], colors: [], wait=0, name="Contour", save_name=""):
     x, y, w, h = get_boundaries(contours)
     # move the contour to (0,0)
     temp_contours = copy.deepcopy(contours)
@@ -146,7 +147,7 @@ def display_contours(contours: [[(float, float)]], colors: [], wait=0, name="Con
         for p in contour:
             new_blank_image[p[1] - y, p[0] - x] = colors[index % len(colors)]
         index += 1
-    show_image(new_blank_image, wait, name)
+    show_image(new_blank_image, wait, name, save_name)
 
 
 def display_contours_in_image(contours: [[(float, float)]], image, colors: [], offset=(0, 0),
@@ -158,13 +159,10 @@ def display_contours_in_image(contours: [[(float, float)]], image, colors: [], o
         for p in contour:
             tmp_image[p[1] + offset[0], p[0] + offset[1]] = colors[index % len(colors)]
         index += 1
-    show_image(tmp_image, wait, name)
-    if save_name != "":
-        print(f"Trying to save to:...: {save_name}")
-        cv2.imwrite(save_name, tmp_image)
+    show_image(tmp_image, wait, name, save_name)
 
 
-def show_image(image, wait=0, name="Damo"):
+def show_image(image, wait=0, name="Damo", save_name=""):
     scale = 0.7
     if image.shape[0] > 2000 or image.shape[1] > 2000:
         scale = 0.3
@@ -172,3 +170,6 @@ def show_image(image, wait=0, name="Damo"):
     small = cv2.resize(copy, (0, 0), fx=scale, fy=scale, interpolation=cv2.INTER_AREA)
     cv2.imshow(name, small)
     cv2.waitKey(wait)
+    if save_name != "":
+        print(f"Trying to save to:...: {save_name}")
+        cv2.imwrite(save_name, copy)

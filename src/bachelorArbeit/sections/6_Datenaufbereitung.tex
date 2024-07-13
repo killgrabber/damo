@@ -13,18 +13,18 @@ Oberflächenhöhen nicht korrekt analysiert werden können.
 Die Daten des eingespannten Bauteils liegen inform von mehreren Pointclouds vor.
 Diese Daten wurden mithilfe eines Laserscanners aufgenommen. Durch diesen Prozess 
 entstehen Messfehler und Ausreißer. Diese Punkte verfälschen das Verfahren da sie 
-nicht auf dem eingespannte Bauteil liegen. Die akkuranz des Verfahren profitiert, 
+nicht auf dem eingespannte Bauteil liegen. Die Akkuranz des Verfahrens profitiert, 
 wenn diese Punkte entfernt werden.
 
 \subsection{Pointcloud filtern}
 
-\begin{wrapfigure}{r}{0.5\textwidth}
+\begin{figure}[h]
     \centering
     \includegraphics[width=0.5\textwidth]{images/height_occurange.png}
     \includegraphics[width=0.5\textwidth]{images/height_occurange_log.png}
     \caption{Auftreten Höhe}
     \label{fig:brightness}
-\end{wrapfigure}
+\end{figure}
 
 Wie man in Abbildung \ref{fig:brightness} sehen kann streuen nicht alle Pointclouds 
 gleich, abhängig von dem Werkstoff des Bauteils werden die Laserstrahlen unterschiedlich
@@ -36,11 +36,11 @@ anwendbar ist und nicht bei einer Methode besser funktioniert wie bei einer
 anderen. Werden zum Beispiel die 10 Prozent häufigst aufkommenden Höhenwerte bei einem
 Metallteil benutzt kommt folgendes Bild heraus.
 
-\begin{wrapfigure}{l}{0.4\textwidth}
+\begin{figure}[h]
     \centering
     \includegraphics[width=0.4\textwidth]{images/am_sp0_top_10p.png}
     \caption{Metallteil gefiltert}\label{fig:metall_image}
-\end{wrapfigure}
+\end{figure}
 
 Man sieht vor allem auf der rechten Seite, dass Ränder nicht mehr klar erkennbar sind, 
 da sie durch die Filterung Lücken aufweisen. Praxistest haben gezeigt das ein 
@@ -85,12 +85,13 @@ ausreichend ist, habe ich mich für 8 Bit Single-Channel Bilder die nur Helligke
 abbilden entschieden. Hier kann also jede Pixel einen Wert zwischen 0 und 255 annehmen.
 Der entsprechende Wert kann wie folgt berechnet werden:
 
-\begin{wrapfigure}{r}{0.5\textwidth}
+\begin{figure}[h]
     \centering
     $value_p = \frac{Z - min_y}{max_y - min_y} \cdot (max_b - min_b) + min_b$
     \caption{Berechnung Pixelwert}
     \label{calc:brightness}
-\end{wrapfigure}
+\end{figure}
+
 Der resultierende Wert ist die Helligkeit, die dem Pixel zugewiesen wird.
 $Z$ ist die Z-Koordinate des Punktes in der Pointcloud. $min_y$ und $max_y$ sind 
 die Grenzen der Z-Koordinate, diese werden gebraucht um die Helligkeit relativ 
@@ -98,13 +99,13 @@ zu der Höhe zu berechnen. $min_b$ und $max_b$ sind die gewünschten Grenzen der
 Helligkeit. In unserem Fall sind $min_b = 0$ und $max_b = 255$ da ein 8 Bit Bild
 verwendet wird.
 
-\begin{wrapfigure}{l}{0.5\textwidth}
+\begin{figure}[h]
     \centering
     \includegraphics[width=0.5\textwidth]{images/fdm_top_100p.png}
     \includegraphics[width=0.5\textwidth]{images/fdm_top_10p.png}
     \caption{Konvertierung Pointcloud zu Bild}
     \label{fig:image_from_pc}
-\end{wrapfigure}
+\end{figure}
 
 Wie man in Abbildung \ref{fig:image_from_pc} sehen kann, sind kaum Helligkeitsveränderungen
 im Bild sichtbar. Das liegt an derselben Problematik, an der der ICP-Algorithmus häufig
@@ -139,10 +140,7 @@ helfen sollen. Auch schön zu sehen sind die Spuren und Lücken die durch den FD
 Herstellungsprozess entstehen.
 
 Durch das Filtern der Höheninformationen sind Oberflächenstrukturen nicht nur besser
-erkennbar, auch die Ränder treten genauer hervor. Das ist sehr wichtig für das korrekte
-zusammenfügen.
-
-Doch wo soll die Grenze gezogen werden, um die Oberfläche möglichst genau zu erkennen,
-aber nicht zu viele Höheninformation zu verlieren.
+erkennbar, auch die Ränder treten genauer hervor. 
+Dadurch können mehrere Bilder korrekt zusammengefügt werden.
 
 \end{document}
