@@ -69,8 +69,56 @@ die Konturen aus dem oberen Bild, mit denen aus dem unteren Bild vergleicht und 
 Distanz zwischen den Punkten minimiert. 
 Der Grad der Überlappung ist unbekannt und kann nicht im Vorhinein bestimmt werden.
 Dadurch kann der ICP-Algorithmus nicht eingesetzt werden. 
-Eine andere wichtige Annahme kann aber getroffen werden: Jeweils eine Kontur aus 
+Eine andere wichtige Annahme kann getroffen werden: Jeweils eine Kontur aus 
 dem oberen und unteren Bild haben mindestens einen gemeinsamen Punkt.
 
+\subsubsection{Differenzierung von Punkten}
+
+Die Distanz zwischen zwei Punkten kann über den euklidischen Abstand gemessen werden.
+\cite{Dokmanic.2015}. Sei A ein Punkt in einer Kontur aus dem oberen Bild und K eine 
+Kontur aus dem unteren Bild.  
+Um den Punkt aus K zu finden, der am nächsten an A liegt, muss A mit jedem Punkt aus 
+K verglichen werden. Das Punktepaar mit dem kleinsten gefunden Euklidischen Abstand 
+wird als "Best Match" gespeichert. Wenn die Euklidische Distanz null beträgt, kann 
+die Suche abgebrochen werden, da kein kleinerer Wert mehr gefunden werden kann.
+Dieser Ansatz ist dem ICP-Algorithmus ähnlich. Die Differenz zwischen zwei Konturen 
+K1 und K2 kann verglichen werden, indem für jeden Punkt A aus K1 der näheste Punkt aus 
+K2 gefunden wird. In dem ICP-Algorithmus werden alle Distanzen von der "Best Matches" 
+aufsummiert und beschreiben den Unterschied der beiden Distanzen. Diese Summe kann dann 
+minimiert werden. Dieser Ansatz funktioniert bei einem sich nur partiell
+überlappenden Datensatz nicht. 
+Statt die Summe zu bilden, wird jede beste Distanz zusammen mit ihren korrespondieren 
+Punkten gespeichert. Um den Grad der Überlappung zu bestimmen, werden die Distanzen 
+gezählt die gleich null sind. Dieser Wert in Relation zu der Länge von K1 gibt, 
+in Prozent, an zu welchem Anteil sich die beiden Konturen überlappen.
+
+\subsubsection*{Transformation bestimmen}
+
+Gesucht ist die Transformation welche die maximale Überlappung der beiden 
+Konturen K1 und K2 bietet. Um diese Transformation zu berechnen, muss der 
+Grad der Überlappung für jede mögliche Positionierung ermittelt werden. Jeder
+Punkt aus K2 muss auf die Koordinaten eines beliebigen aber festen Punkts aus K1 
+verschoben werden.
+Die Transformation zwischen zwei Punkten A und B kann über die Vektorberechnung erfolgen:
+
+\begin{equation}
+    T_{a,b} = \begin{pmatrix}a_x\\a_y\end{pmatrix} - \begin{pmatrix}b_x\\b_y\end{pmatrix}
+\end{equation}
+
+Kontur K2 kann über Kontur K1 verschoben werden, indem Punkt A festgehalten wird, 
+während Punkt B sukzessive jeden Punkt aus K2 annimmt. 
+Die daraus resultierende Punkttransformation wird auf jeden Punkt von K1 angewendet, 
+um die nächstgelegenen Nachbarpunkte zu ermitteln. Für jede Transformation wird der 
+Überlappungsanteil berechnet, wobei das Ergebnis mit der maximalen Überlappung
+als die optimale Transformation gespeichert wird.
+Dieses Verfahren ist nur anwendbar, wenn Punkt A im überlappenden Bereich liegt. 
+Befindet sich Punkt A nicht in der Kontur K2, 
+kann das Verfahren nicht erfolgreich angewendet werden.
+Zur Berechnung der optimalen Transformation werden verschiedene Punkte aus K1 
+ausgewählt und das Verfahren jeweils angewendet. 
+Die Transformation mit dem größten Verhältnis von Nullen zur
+Gesamtlänge der Kontur wird als optimal angesehen. 
+Aufgrund des exponentiellen Laufzeitverhaltens ist es ineffizient, 
+jeden Punkt A aus K1 mit jedem Punkt B aus K2 zu vergleichen.
 
 \end{document}
