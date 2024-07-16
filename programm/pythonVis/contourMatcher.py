@@ -146,6 +146,7 @@ def display_contours(contours: [[(float, float)]], colors: [],
     for i in range(len(temp_contours)):
         t = get_translation((x, y), (0, 0))
         temp_contours[i] = move_contour(temp_contours[i], t)
+
     new_blank_image = np.zeros((h + 1 - y, max(w + 1 - x, 500), 3), np.uint8)
     font = cv2.FONT_HERSHEY_SIMPLEX
     cv2.putText(new_blank_image,
@@ -174,9 +175,9 @@ def display_contours_in_image(contours: [[(float, float)]], image, colors: [], o
 
 
 def show_image(image, wait=0, name="Damo", save_name=""):
-    scale = 1
-    if image.shape[0] > 2000 or image.shape[1] > 2000:
-        scale = 0.5
+    scale = 0.7
+    if image.shape[0] > 1000 or image.shape[1] > 1000:
+        scale = 0.3
     copy = image.copy()
     small = cv2.resize(copy, (0, 0), fx=scale, fy=scale, interpolation=cv2.INTER_AREA)
     cv2.imshow(name, small)

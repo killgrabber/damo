@@ -34,10 +34,10 @@ def find_contours_in_image(image, progress: [], result: []):
     image_blur = cv2.blur(image, (2, 2))
     contours = imageAnalyser.getContours(image_blur, 0)
     contours = contours[:10]
-    contourMatcher.display_contours_in_image(contours, image, name="with image", wait=1,
-                                             colors=[255, 255, 0], save_name="with_con.jpg")
-    contourMatcher.display_contours(contours, name="without", wait=0,
-                                    colors=[255, 255, 255], save_name="only_con.jpg")
+    #contourMatcher.display_contours_in_image(contours, image, name="with image", wait=1,
+    #                                         colors=[255, 255, 0], save_name="with_con.jpg")
+    #contourMatcher.display_contours(contours, name="without", wait=0,
+    #                                colors=[255, 255, 255], save_name="only_con.jpg")
 
     print(f"Getting contours done")
     result[0] = contours
@@ -142,11 +142,12 @@ def move_and_check(con1, con2, progress, init_translation, search_area=50):
         translation = (round(sum1), round(sum2))
         final_translation = (final_translation[0] + translation[0],
                              final_translation[1] + translation[1])
-        print(f"Next translation is: {translation}")
+        #print(f"Next translation is: {translation}")
         if translation[0] == 0 and translation[1] == 0:
             print(f"Checking done. complete translation: {final_translation}")
-            #contourMatcher.display_contours([con1, moved_c], name="final", wait=0,
-            #                                colors=[(255, 255, 0), (255, 0, 255)])
+            contourMatcher.display_contours([con1, moved_c], name="final", wait=1,
+                                            colors=[(255, 255, 0), (255, 0, 255)],
+                                            save_name=f"matched_{len(con1)}_{len(con2)}_{distance:.2f}.png")
             break
     return final_translation, distance
 
@@ -196,7 +197,7 @@ def compare_images(image_paths: [], progress: []):
             colors_1 = [(255, 255, 0)] * len(cons_1)
             colors_2 = [(0, 255, 255)] * len(cons_2)
 
-            contourMatcher.display_contours(all_c, name="without1", wait=0,
+            contourMatcher.display_contours(all_c, name="without1", wait=1,
                                             colors=colors_1 + colors_2)
 
             translation = (int(x1 - x2), int(y1 - y2))
