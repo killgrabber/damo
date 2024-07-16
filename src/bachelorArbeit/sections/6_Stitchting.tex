@@ -101,9 +101,9 @@ Punkt aus K2 muss auf die Koordinaten eines beliebigen aber festen Punkts aus K1
 verschoben werden.
 Die Transformation zwischen zwei Punkten A und B kann über die Vektorberechnung erfolgen:
 
-\begin{equation}
+\begin{equation*}
     T_{a,b} = \begin{pmatrix}a_x\\a_y\end{pmatrix} - \begin{pmatrix}b_x\\b_y\end{pmatrix}
-\end{equation}
+\end{equation*}
 
 Kontur K2 kann über Kontur K1 verschoben werden, indem Punkt A festgehalten wird, 
 während Punkt B sukzessive jeden Punkt aus K2 annimmt. 
@@ -120,5 +120,116 @@ Die Transformation mit dem größten Verhältnis von Nullen zur
 Gesamtlänge der Kontur wird als optimal angesehen. 
 Aufgrund des exponentiellen Laufzeitverhaltens ist es ineffizient, 
 jeden Punkt A aus K1 mit jedem Punkt B aus K2 zu vergleichen.
+
+In Abbildung \ref{fig:before_matching} sind zwei Beispielkonturen zu sehen. 
+Diese sind nicht angeordnet. Der ICP-Algorithmus würde diese beiden Konturen 
+annähren ohne sie zu überlappen. 
+Das Ergebnis des vorgestellten Stitching Verfahrens ist in Abbildung 
+\ref{fig:after_matching} zu sehen. Es ist zu erkennen das, trotz Messfehler und 
+kleineren unterschieden im überlappenden Bereich die korrekte Transformation 
+ermittelt werden konnte. Diese Konturen stammen von einem additiv gefertigten 
+Metallbauteil.
+
+\begin{figure}[h]
+    \centering
+    \begin{minipage}{0.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{images/before_matching.png} % first figure itself
+        \caption{Konturen, vor der Transformation}
+        \label{fig:before_matching}
+    \end{minipage}
+    \begin{minipage}{0.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{images/0.24225865209471767contours.png} % first figure itself
+        \caption{Konturen, transformiert mit größter Überlappung, 
+        Grad der Überlappung: 24,26\%}
+        \label{fig:after_matching}
+    \end{minipage}\hfill
+\end{figure}
+
+\subsubsection*{Stitching visuell dargestellt}
+
+In Abbildung \ref{fig:stitching_beginn} bis Abbildung \ref{fig:stitching_end}
+ist der Prozess des Verfahrens zu sehen. K1 ist in Blau dargestellt, K2 in Grün.
+In jeden Bild ist der Grad der Überlappung dargestellt. Es ist dargestellt wie 
+Kontur K2 über K1 geschoben wird um den besten Grad der Übereinstimmung zu ermitteln. 
+
+\begin{figure}[h]
+    \centering
+    \begin{minipage}{0.24\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{images/stitching_beginn.PNG} % first figure itself
+        \caption{Konturen K1 und K2 beim Beginn des Verfahrens}
+        \label{fig:stitching_beginn}
+    \end{minipage}
+    \begin{minipage}{0.24\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{images/stitching_middle.PNG} % first figure itself
+        \caption{Konturen K1 und K2 nach n Schritten}
+        \label{fig:stitching_middle}
+    \end{minipage}\hfill
+    \begin{minipage}{0.24\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{images/stitching_match.PNG} % first figure itself
+        \caption{Konturen K1 und K2 beim einer guten Übereinstimmung}
+        \label{fig:stitching_match}
+    \end{minipage}\hfill
+    \begin{minipage}{0.24\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{images/stitching_end.PNG} % first figure itself
+        \caption{Konturen K1 und K2 beim Ende des Verfahrens}
+        \label{fig:stitching_end}
+    \end{minipage}\hfill
+\end{figure}
+
+\subsubsection*{Bilder zusammenfügen}
+
+Wenn alle Transformationen vorliegen wird die Transformation mit der besten 
+Übereinstimmung gewählt. Diese wird genutzt, um die beiden Bilder zusammenzufügen.
+Das zugehörige Bild der Konturen K2 wird transformiert, indem die Transformation 
+auf jeden Pixel angewendet wird.  
+Die Transformation ist nur korrekt, wenn die beiden Bilder die gleichen 
+Ursprungskoordinaten haben, die auch bei den Konturen K1 und K2 verwendet wurden.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/AM_SP0_stitched_2.png} % first figure itself
+    \caption{Zusammengefügtes Bild}
+    \label{fig:stitched_image}
+\end{figure}
+
+\subsubsection*{Probleme und Lösungen im Verfahren}
+
+Durch die Funktionsweise treten am Randbereich der Scannerdaten vermehrt Messfehler auf, 
+die nicht vollständig durch vorheriges Filtern entfernt werden können. 
+Damit diese Messfehler das Stitching nicht verfälschen, werden alle Konturen nochmals 
+gefiltert. Alle Punkte in einer Kontur, die sich in einem konfigurierbaren 
+Abstand zu den Bildrändern befinden, werden entfernt. Dadurch werden sie bei der 
+Berechnung der Transformation nicht verwendet. 
+Der konfigurierbare Abstand muss beim Stitching des finalen Bilds berücksichtigt 
+werden und von der Transformation abgezogen werden.
+
+Wenn Konturen mit einer großen unterschiedlichen Länge verglichen werden, 
+kann eine sehr hohe Übereinstimmung ermittelt werden, die aber keine 
+tatsächliche Übereinstimmung ist. Das kann zum Beispiel vorkommen, wenn Konturen 
+die am linken und rechten Bildrand in Abbildung \ref{fig:cons} zu sehen sind, 
+verglichen werden. Um dies zu vermeiden wird eine Bedienung eingeführt, dass die Länge
+der Konturen nicht zu sehr voneinander abweichen darf. Bei einer Abweichung von mehr als
+200 Punkten in einer Kontur sollte die Konturen nicht miteinander verglichen werden.
+
+Auch Konturen mit einer Länge von weniger als 100 Punkten sollten nicht berücksichtigt 
+werden. Diese beschreiben keine Features in einem Bild, die für das Stitching verwendet 
+werden sollten. Diese Konturen beschreiben meist nur Messfehler oder 
+Oberflächenstrukturen, die nicht konsistent in beiden Bildern von dem Scanner erkannt 
+werden können.
+
+Um das Ergebnis noch weiter zu verbessern, können zwei Konturen zweimal miteinander 
+verglichen werden. Während des zweiten Vergleichs wird die Zielkontur mit der 
+Ursprungskontur vertauscht. So wird aus beiden Konturen jeweils einmal ein fester 
+Punkt gewählt. Wieder wird die Transformation gespeichert mit der besten Überlappung.
+Wenn die Überlappung im zweiten Vergleich eine höhere Übereinstimmung hat, muss die 
+berechnete Transformation invertiert werden. Geschieht dies nicht, kann die 
+Transformation nicht für den finalen Stitchprozess eingesetzt werden, weil dort 
+das Ziel und Ursprungsbild fest gesetzt ist.
 
 \end{document}

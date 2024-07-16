@@ -148,7 +148,8 @@ def save_current_overlap_images():
     contourMatcher.display_contours_in_image(stl_points[0], stitched_image[0],
                                              offset=(int(tresh_min_slider.get()),
                                                      int(tresh_max_slider.get())),
-                                             wait=1, save_name=filename.name)
+                                             wait=1, save_name=filename.name,
+                                             colors=[(255, 255, 0), (0, 255, 255)])
 
 
 def start_pcd_2_image():

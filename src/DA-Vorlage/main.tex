@@ -1,0 +1,42 @@
+% main.tex
+\include{header}
+\begin{document}
+\selectlanguage{german}
+\include{kapitel/titelseite}
+\blankpage
+\pagenumbering{roman}
+\tableofcontents
+\cleardoublepage
+\pagenumbering{arabic}
+% Kapitel
+\include{kapitel/1_EinleitungMotivation}
+\include{kapitel/2_StandDerTechnik}
+\include{kapitel/3_ZielderArbeit}
+\include{kapitel/6_Stitchting}
+\include{kapitel/6_Datenaufbereitung}
+\include{kapitel/7_Deformation}
+\include{kapitel/8_Software}
+\include{kapitel/9_Validierung}
+\include{kapitel/10_Zusammenfassung}
+% Anhang
+\appendix
+% Abbildungsverzeichnis
+\listoffigures
+\addcontentsline{toc}{chapter}{Abbildungsverzeichnis}
+\cleardoublepage
+% Algorithmenverzeichnis
+\listofalgorithms
+\addcontentsline{toc}{chapter}{Algorithmenverzeichnis}
+\cleardoublepage
+% Literaturverzeichnis
+\bibliographystyle{alpha}
+\bibliography{literatur/quellen}
+\addcontentsline{toc}{chapter}{\bibname}
+% Erklaerung
+\thispagestyle{myheadings}
+\markboth{}{ERKLÄRUNG}
+\addcontentsline{toc}{chapter}{Erklärung}
+\include{kapitel/erklaerung}
+\cleardoublepage
+\end{document}
+

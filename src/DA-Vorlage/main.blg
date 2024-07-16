@@ -1,0 +1,73 @@
+This is BibTeX, Version 0.99d
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: .\main.aux
+Reallocating 'name_of_file' (item size: 1) to 23 items.
+A level-1 auxiliary file: kapitel/titelseite.aux
+Reallocating 'name_of_file' (item size: 1) to 35 items.
+A level-1 auxiliary file: kapitel/1_EinleitungMotivation.aux
+Reallocating 'name_of_file' (item size: 1) to 30 items.
+A level-1 auxiliary file: kapitel/2_StandDerTechnik.aux
+Reallocating 'name_of_file' (item size: 1) to 28 items.
+A level-1 auxiliary file: kapitel/3_ZielderArbeit.aux
+Reallocating 'name_of_file' (item size: 1) to 25 items.
+A level-1 auxiliary file: kapitel/6_Stitchting.aux
+Reallocating 'name_of_file' (item size: 1) to 32 items.
+A level-1 auxiliary file: kapitel/6_Datenaufbereitung.aux
+Reallocating 'name_of_file' (item size: 1) to 26 items.
+A level-1 auxiliary file: kapitel/7_Deformation.aux
+Reallocating 'name_of_file' (item size: 1) to 23 items.
+A level-1 auxiliary file: kapitel/8_Software.aux
+Reallocating 'name_of_file' (item size: 1) to 26 items.
+A level-1 auxiliary file: kapitel/9_Validierung.aux
+Reallocating 'name_of_file' (item size: 1) to 31 items.
+A level-1 auxiliary file: kapitel/10_Zusammenfassung.aux
+Reallocating 'name_of_file' (item size: 1) to 6 items.
+The style file: alpha.bst
+Reallocating 'name_of_file' (item size: 1) to 18 items.
+Reallocating 'name_of_file' (item size: 1) to 23 items.
+A level-1 auxiliary file: kapitel/erklaerung.aux
+Database file #1: literatur/quellen.bib
+Warning--empty booktitle in inproceedings
+Warning--empty publisher in KentonMchenry.2008
+You've used 16 entries,
+            2543 wiz_defined-function locations,
+            680 strings with 7480 characters,
+and the built_in function-call counts, 6658 in all, are:
+= -- 656
+> -- 335
+< -- 7
++ -- 118
+- -- 114
+* -- 472
+:= -- 1087
+add.period$ -- 47
+call.type$ -- 16
+change.case$ -- 101
+chr.to.int$ -- 16
+cite$ -- 18
+duplicate$ -- 252
+empty$ -- 485
+format.name$ -- 134
+if$ -- 1369
+int.to.chr$ -- 1
+int.to.str$ -- 0
+missing$ -- 13
+newline$ -- 80
+num.names$ -- 52
+pop$ -- 107
+preamble$ -- 1
+purify$ -- 118
+quote$ -- 0
+skip$ -- 233
+stack$ -- 0
+substring$ -- 361
+swap$ -- 45
+text.length$ -- 7
+text.prefix$ -- 4
+top$ -- 0
+type$ -- 124
+warning$ -- 2
+while$ -- 64
+width$ -- 18
+write$ -- 201
+(There were 2 warnings)

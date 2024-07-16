@@ -1,0 +1,96 @@
+\begin{thebibliography}{VGRH21}
+
+\bibitem[AKS15]{inproceedings}
+Bhrigu Ahuja, Michael Karg, and Michael Schmidt.
+\newblock Additive manufacturing in production: challenges and opportunities.
+\newblock page 935304, 03 2015.
+
+\bibitem[{AM }24]{AMExpo365.03.06.2024}
+{AM Expo 365}.
+\newblock 3d-druck: Neues leben f{\"u}r den oldtimer, 03.06.2024.
+
+\bibitem[Anu19]{Anusci.2019}
+Victor Anusci.
+\newblock Bmw's new s58 engine features cylinder head made with 3d printing,
+  2019.
+
+\bibitem[BM92]{icp_og}
+P.J. Besl and Neil~D. McKay.
+\newblock A method for registration of 3-d shapes.
+\newblock {\em IEEE Transactions on Pattern Analysis and Machine Intelligence},
+  14(2):239--256, 1992.
+
+\bibitem[BTP13]{Bouaziz.2013}
+Sofien Bouaziz, Andrea Tagliasacchi, and Mark Pauly.
+\newblock Sparse iterative closest point.
+\newblock {\em Computer Graphics Forum}, 32(5):113--123, 2013.
+
+\bibitem[CD20]{Czichos.2020}
+Horst Czichos and Werner Daum.
+\newblock Messgr{\"o}{\ss}en und messverfahren.
+\newblock In Beate Bender, Dietmar G{\"o}hlich, and Heinrich Dubbel, editors,
+  {\em Dubbel Taschenbuch f{\"u}r den Maschinenbau}, pages 693--732. {Springer
+  Vieweg}, Berlin, 2020.
+
+\bibitem[DPRV]{Dokmanic.2015}
+Ivan Dokmanic, Reza Parhizkar, Juri Ranieri, and Martin Vetterli.
+\newblock Euclidean distance matrices: Essential theory, algorithms, and
+  applications.
+
+\bibitem[HL21]{Helle.2021}
+Robin~H. Helle and Hirpa~G. Lemu.
+\newblock A case study on use of 3d scanning for reverse engineering and
+  quality control.
+\newblock {\em Materials Today: Proceedings}, 45:5255--5262, 2021.
+
+\bibitem[KP08]{KentonMchenry.2008}
+{Kenton Mchenry} and {Peter Bajcsy}.
+\newblock {\em An overview of 3D data content, file formats and viewers}.
+\newblock 2008.
+
+\bibitem[LHYJ23]{10004712}
+Qingquan Li, Hui Huang, Wenshuai Yu, and San Jiang.
+\newblock Optimized views photogrammetry: Precision analysis and a large-scale
+  case study in qingdao.
+\newblock {\em IEEE Journal of Selected Topics in Applied Earth Observations
+  and Remote Sensing}, 16:1144--1159, 2023.
+
+\bibitem[MES20]{MESSTECHNIK_2020}
+MICRO-EPSILON MESSTECHNIK.
+\newblock Präzision. - scancontrol // 2d/3d laser-profil-sensoren, 2020.
+\newblock
+  \url{https://www.micro-epsilon.de/fileadmin/download/products/cat--scanCONTROL--de.pdf}
+  [Accessed: 26.02.2024].
+
+\bibitem[MSS21]{Monchinger.2021}
+Stephan M{\"o}nchinger, Robert Schr{\"o}der, and Rainer Stark.
+\newblock Automated 3d scan based cad-repositioning for design and verification
+  in one-off construction.
+\newblock {\em Procedia CIRP}, 100:530--535, 2021.
+
+\bibitem[Sch06]{Schwartz.2006}
+Roman Schwartz.
+\newblock Kraft, masse, drehmoment.
+\newblock In Hans-J{\"u}rgen Gevatter, editor, {\em Handbuch der Mess- und
+  Automatisierungstechnik in der Produktion}, VDI-Buch, pages 55--92. Springer,
+  Berlin [u.a.], 2006.
+
+\bibitem[VGRH21]{Vafadar.2021}
+Ana Vafadar, Ferdinando Guzzomi, Alexander Rassau, and Kevin Hayward.
+\newblock Advances in metal additive manufacturing: A review of common
+  processes, industrial applications, and current challenges.
+\newblock {\em Applied Sciences}, 11(3):1213, 2021.
+
+\bibitem[VI23]{Verykokou.2023}
+Styliani Verykokou and Charalabos Ioannidis.
+\newblock An overview on image-based and scanner-based 3d modeling
+  technologies.
+\newblock {\em Sensors}, 23(2):596, 2023.
+
+\bibitem[ZYD22]{icp}
+Juyong Zhang, Yuxin Yao, and Bailin Deng.
+\newblock Fast and robust iterative closest point.
+\newblock {\em IEEE Transactions on Pattern Analysis and Machine Intelligence},
+  44(7):3450--3466, 2022.
+
+\end{thebibliography}

@@ -407,7 +407,8 @@ def show_image_tresh(top_image_path, bot_image_path, treshold_min: [], treshold_
                     if sum(distances) > 100000:
                         continue
                     contourMatcher.display_contours([contours_top[i], contours_bot[j]],
-                                                    name=f"{i},{j}", wait=1)
+                                                    name=f"{i},{j}", wait=1,
+                                                    save_name="start_cons.png")
                     percentage_of_zero = distances.count(0) / len(distances)
                     match_text = (f"i,j: {i:2.0f},{j:2.0f} zeros: {percentage_of_zero:2.3f}, "
                                   f"sum: {sum(distances):.3f}, "

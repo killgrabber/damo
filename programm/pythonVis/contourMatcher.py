@@ -10,6 +10,8 @@ import matplotlib.pyplot as plt
 import statistics
 import collections
 
+import skvideo.io
+
 
 # Returns the translation needed from a contour to a given point
 @nb.njit(parallel=False, fastmath=True)
@@ -45,7 +47,8 @@ def match_contour(top: [(float, float)],
     # Perfomace reasons lol
     top = move_contour(top, (0, 0))
     bot = move_contour(bot, (0, 0))
-    display_contours([top, bot], [blue, green], wait=1)
+    #display_contours([top, bot], [blue, green], wait=1,
+    #                 save_name="before_matching.png")
     matching_pair, best_match = check_2_contours(top, bot, progress)
     matching_pair_reverse, best_match_reverse = check_2_contours(bot, top, progress)
     final_transition = get_translation(bot[matching_pair[0]], top[-matching_pair[1]])
@@ -67,16 +70,18 @@ def check_2_contours(top, bot, progress):
     best_match = 0
     matching_pair = (0, 0)
     for i in range(0, len(bot)):
-        for j in range(1, 2):
+        for j in range(0, 50, 1):
             # Move target to index of source and check distances
             translation = get_translation(bot[i], top[-j])
             bot = move_contour(bot, translation)
             distances = collect_distance(top, bot)
             percentage_of_zero = distances.count(0) / len(distances)
             #print(f"Percentage zeros: {percentage_of_zero * 100:.2f}%, i: {i}, j: {j}")
-            #blue = (255, 0, 0)
-            #green = (0, 255, 0)
-            #display_contours([source, target], [blue, green], wait=1)
+            blue = (255, 255, 0)
+            green = (0, 255, 0)
+            #display_contours([top, bot], [blue, green], wait=1,
+            #                         text=f"{percentage_of_zero:.4f}")
+
             if percentage_of_zero > best_match:
                 best_match = percentage_of_zero
                 matching_pair = i, j
@@ -94,7 +99,6 @@ def display_plots(datas: [[]]):
 
 @nb.njit(parallel=False, fastmath=True)
 def collect_distance(source: [(float, float)], target: [(float, float)]):
-    print(f"Getting some juice distances")
     distances = []
     for i in nb.prange(len(source)):
         index, distance = find_nearest_point(source[i], target)
@@ -134,7 +138,8 @@ def get_boundaries(contours: [[(float, float)]]):
     return x, y, w, h
 
 
-def display_contours(contours: [[(float, float)]], colors: [], wait=0, name="Contour", save_name=""):
+def display_contours(contours: [[(float, float)]], colors: [],
+                     wait=0, name="Contour", save_name="", text=""):
     x, y, w, h = get_boundaries(contours)
     # move the contour to (0,0)
     temp_contours = copy.deepcopy(contours)
@@ -142,13 +147,19 @@ def display_contours(contours: [[(float, float)]], colors: [], wait=0, name="Con
         t = get_translation((x, y), (0, 0))
         temp_contours[i] = move_contour(temp_contours[i], t)
     new_blank_image = np.zeros((h + 1 - y, max(w + 1 - x, 500), 3), np.uint8)
+    font = cv2.FONT_HERSHEY_SIMPLEX
+    cv2.putText(new_blank_image,
+                text,
+                (250-len(text)-10, 100),
+                font, 1,
+                (0, 255, 0), 2)
     index = 0
     for contour in contours:
         for p in contour:
             new_blank_image[p[1] - y, p[0] - x] = colors[index % len(colors)]
         index += 1
     show_image(new_blank_image, wait, name, save_name)
-
+    return new_blank_image
 
 def display_contours_in_image(contours: [[(float, float)]], image, colors: [], offset=(0, 0),
                               wait=0, name="Contour",
@@ -163,9 +174,9 @@ def display_contours_in_image(contours: [[(float, float)]], image, colors: [], o
 
 
 def show_image(image, wait=0, name="Damo", save_name=""):
-    scale = 0.7
+    scale = 1
     if image.shape[0] > 2000 or image.shape[1] > 2000:
-        scale = 0.3
+        scale = 0.5
     copy = image.copy()
     small = cv2.resize(copy, (0, 0), fx=scale, fy=scale, interpolation=cv2.INTER_AREA)
     cv2.imshow(name, small)

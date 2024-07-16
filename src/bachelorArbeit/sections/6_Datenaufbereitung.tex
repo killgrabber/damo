@@ -85,12 +85,9 @@ ausreichend ist, habe ich mich für 8 Bit Single-Channel Bilder die nur Helligke
 abbilden entschieden. Hier kann also jede Pixel einen Wert zwischen 0 und 255 annehmen.
 Der entsprechende Wert kann wie folgt berechnet werden:
 
-\begin{figure}[h]
-    \centering
-    $value_p = \frac{Z - min_y}{max_y - min_y} \cdot (max_b - min_b) + min_b$
-    \caption{Berechnung Pixelwert}
-    \label{calc:brightness}
-\end{figure}
+\begin{equation*}
+    value_p = \frac{Z - min_z}{max_z - min_z} \cdot (max_{brightness} - min_{brightness}) + min_{brightness}
+\end{equation*}
 
 Der resultierende Wert ist die Helligkeit, die dem Pixel zugewiesen wird.
 $Z$ ist die Z-Koordinate des Punktes in der Pointcloud. $min_y$ und $max_y$ sind 
