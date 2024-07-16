@@ -200,37 +200,41 @@ Integer in verschiedener Bit tiefe gewählt.
 
 \subsection{Scanner und Datenerfassung}
 
-Datenerfassung durch einen Laserscanners.
+Wie schon beschrieben können dreidimensionale Daten direkt mit einem 
+Scanner aufgenommen werden. 
 Der Scanner hat Abhängig vom Modell und der angebrachten Höhe einen limitierten
-Bereich den er erfassen kann.
-In unserem Fall wurde der Scanner 'LLT 30x0-25' verwendet der 
-eine mittleren Messbreite von 25 mm bietet. 
-In Abbildung \ref{fig:scanner} ist dieser Messbereich sichtbar. Mittig kann 
+Bereich den er erfassen kann. 
+Je nach Scannertyp und Modell kann sich der Messbereich ändern.
+In Abbildung \ref{fig:scanner} ist ein Beispiel Messbereich sichtbar. Mittig kann 
 in einer Tiefe von 85 mm eine Linie mit der Länge 25 mm gemessen werden. 
 Der komplette messbare Bereich ist rot markiert. \cite{MESSTECHNIK_2020}
-Bauteile mit einer größeren Länge in Y-Richtung können also nicht in einer Pointcloud
-erfasst werden. Damit eine Digitalisierung von größeren Objekten erfolgen kann, müssen
+Bauteile die breiter sind als die maximale Breite der Scanebene, in Abbildung \ref{fig:scanner} mittig 25mm, 
+können also nicht in einer Pointcloud erfasst werden. 
+Damit eine Digitalisierung von größeren Objekten erfolgen kann, müssen
 also mehrere Scans durchgeführt, und später zusammengefügt werden. Zwischen den 
-Scanvorgängen muss der Scanner in Y-Richtung verschoben werden.
-Die Länge der Verschiebung sollte 
-kleiner als die Scannerbreite sein, damit eine Überlappung entsteht, die 
+Scanvorgängen muss der Scanner in Richtung der Breitenachse verschoben werden.
+Die Länge der Verschiebung sollte kleiner als die Scannerbreite sein, 
+damit eine Überlappung entsteht, die 
 genutzt werden kann, um die Pointclouds wieder zusammenzufügen. Die Verschiebung kann 
 beliebig klein gewählt werden, jedoch steigt der Arbeitsaufwand und die Dateigröße mit 
 jeder zusätzlichen Pointcloud, während das Ergebnis sich nicht verbessert.
+Das Ergebnis verbessert sich nicht, da nicht mehr Daten aufgenommen werden, sondern nur 
+die gleichen Daten mehrfach.
 So können Pointclouds aufgenommen werden die dann in dem zu entwickelnde Verfahren
 wieder zu einem digitalen Abbild zusammengefügt werden.
 
 \begin{figure}[h]
-    \includegraphics[width=0.2\textwidth]{images/Scanner.PNG}
+    \centering
+    \includegraphics[width=0.3\textwidth]{images/Scanner.PNG}
     \caption{Funktionsweise eines Laserscanners}
     \label{fig:scanner}
 \end{figure}
 
-\subsection{ICP-Algorithmus}
+\section{ICP-Algorithmus}
 
-Dieser Algorithmus existiert schon seit dem Beginn der 90er Jahre und ist 
+Der Iterative-Closest-Point-Algorithmus(ICP-Algorithmus) existiert schon seit dem Beginn der 90er Jahre und ist 
 die klassische Methode, wenn es um die Registrierung von Pointclouds und 
-anderen Punkt-Sets geht. \cite[]{icp}
+anderen Punkt-Sets geht. \cite{icp}
 Der Algorithmus errechnet eine lokale, optimale Transformation die ein Datenset
 dem anderen annähern kann. \cite{icp_og}
 Um diese Transformation zu bestimmen werden zuerst die Distanzen von allen 
@@ -248,50 +252,17 @@ Zum Beispiel der 'Sparse Iterative Closest Point' Algorithmus von \cite{Bouaziz.
 oder die 'Anderson-accelerated' Version die besser mit Ausreißern und nur 
 partiell überlappenden Daten umgehen kann und eine gleichwertige oder bessere 
 Transformation errechnen kann. \cite{icp}
+Der Algorithmus geht iterativ vor und berechnet immer eine optimale lokale Transformation.
+Die beiden Datensätze sollten schon vor dem Anwenden des ICP-Algorithmus grob angenähert sein, 
+das beschleunigt die Konvergenz und damit die Laufzeit des Algorithmus.
+Eine grobe Annäherung kann ermittelt werden, indem die Massenmittelpunkte der beiden Datensätze
+übereinander gelegt werden. In Abbildung \ref{fig:ipc_princip} ist das Prinzip visuell 
+dargestellt. Die grünen Linien sind jeweils die kürzeste Distanz von Q nach R. 
 
-\subsection{Zusätzliche Messinstrumente}
-
-Zusätzlich zu dem Scanner werden noch mit weiteren Messinstrumente Daten erfasst.
-In Abbildung \ref{fig:versuchsaufbau} unter der Nummer 5 ist ein mechanischer 
-Verschiebungsmesser zu sehen. Dieser misst die Verschiebung der Backen des 
-Schraubstocks. Der Schraubstock misst zusätzlich mit viel Kraft die Backen 
-aufeinander pressen.
-
-Hierzu wird die piezoelektrische Kraftmesstechnik verwendet.
-Bei Krafteinwirkung auf Piezokristalle (z. B. Quarz, Bariumtitanat, BaTiO3) 
-werden im Kristallgitter negative gegen positive Gitterpunkte
-verschoben, sodass an den Kristalloberflächen
-Ladungsunterschiede Q als Funktion der Kraft F
-gemessen werden.
-Piezoelektrische Kraftaufnehmer sind mechanisch sehr steif, 
-sie erfordern Ladungsverstärker
-zur Messsignalverarbeitung und sind hauptsächlich zur Messung dynamischer Vorgänge
-mit einer kleineren Frequenz als 1 Hz geeignet. \cite{Czichos.2020}. 
-Diese Kraftmesstechnik ist 
-für unseren Einsatzzweck gut geeignet da sie eine hohe Empfindlichkeit bietet 
-und in vielfältigen Formen und Größen hergestellt werden kann. Zur Aufbereitung 
-der Ladung, die der piezoelektrische Sensor, liefert wurde ein Ladungsverstärker 
-eingesetzt.\cite{Schwartz.2006}
-Dieser ist in Spannungsverstärker ist in Abbildung \ref{fig:taster} unten zu sehen.
-
-\begin{figure}[b]
-    \includegraphics[width=0.4\textwidth]{images/taster.JPG}
-    \caption{Taster}
-    \label{fig:taster}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.3\textwidth]{images/Principle-of-ICP-algorithm.png}
+    \caption{Prinzip des ICP-Algorithmus}
+    \label{fig:ipc_princip}
 \end{figure}
-
-\begin{figure}[b]
-    \includegraphics[width=0.4\textwidth]{images/piezoelektrische.JPG}
-    \caption{Spannungswandler}
-    \label{fig:piez}
-\end{figure}
-
-Damit die Scanner Ergebnisse überprüft werden können,
-wird die Bauteilgeometrie zusätzlich nach dem Scanvorgang noch mit einem Taster
-abgetastet. Hierfür wird der Werkzeugkopf gewechselt und der Scanner entfernt.
-Dann wird der Taster in die CNC-Maschine eingesetzt und das Bauteil abgetastet.
-In Abbildung \ref{fig:taster} ist das Tasterwerkzeug zu sehen. Die rote Kugel 
-am Ende des Tasters erkennt, sobald eine Berührung zu dem Bauteil erfolgt ist 
-und benachrichtigt den Steuerungsrechner. Dieser speichert die aktuelle Position 
-dann in einer Protokolldatei.
 

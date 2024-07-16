@@ -1,8 +1,5 @@
+\newcommand{\etalchar}[1]{$^{#1}$}
 \begin{thebibliography}{VGRH21}
-
-\bibitem[.1624]{.16072024}
-Accuracy of digital technologies for the scanning of facial, skeletal, and
-  intraoral tissues: A systematic review, 16/07/2024.
 
 \bibitem[AKS15]{inproceedings}
 Bhrigu Ahuja, Michael Karg, and Michael Schmidt.
@@ -17,6 +14,13 @@ Bhrigu Ahuja, Michael Karg, and Michael Schmidt.
 Victor Anusci.
 \newblock Bmw's new s58 engine features cylinder head made with 3d printing,
   2019.
+
+\bibitem[BGH{\etalchar{+}}19]{Bohner.2019}
+Lauren Bohner, Diego~Diaz Gamba, Marcel Hanisch, Bruno~Silva Marcio, Pedro
+  {Tortamano Neto}, Dalva~Cruz Lagan{\'a}, and Newton Sesma.
+\newblock Accuracy of digital technologies for the scanning of facial,
+  skeletal, and intraoral tissues: A systematic review.
+\newblock {\em The Journal of Prosthetic Dentistry}, 121(2):246--251, 2019.
 
 \bibitem[BM92]{icp_og}
 P.J. Besl and Neil~D. McKay.
@@ -55,13 +59,6 @@ Robin~H. Helle and Hirpa~G. Lemu.
 {Kenton Mchenry} and {Peter Bajcsy}.
 \newblock {\em An overview of 3D data content, file formats and viewers}.
 \newblock 2008.
-
-\bibitem[LHYJ23]{10004712}
-Qingquan Li, Hui Huang, Wenshuai Yu, and San Jiang.
-\newblock Optimized views photogrammetry: Precision analysis and a large-scale
-  case study in qingdao.
-\newblock {\em IEEE Journal of Selected Topics in Applied Earth Observations
-  and Remote Sensing}, 16:1144--1159, 2023.
 
 \bibitem[MES20]{MESSTECHNIK_2020}
 MICRO-EPSILON MESSTECHNIK.

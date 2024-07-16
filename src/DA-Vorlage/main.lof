@@ -6,26 +6,27 @@
 \contentsline {figure}{\numberline {2.1}{\ignorespaces Accurancy Photogrammetry}}{6}{}%
 \contentsline {figure}{\numberline {2.2}{\ignorespaces Akkuranz des 3D Objekts ist abhängig von der Anzahl der Polygonen}}{7}{}%
 \contentsline {figure}{\numberline {2.3}{\ignorespaces Funktionsweise eines Laserscanners}}{8}{}%
-\contentsline {figure}{\numberline {2.4}{\ignorespaces Taster}}{9}{}%
-\contentsline {figure}{\numberline {2.5}{\ignorespaces Spannungswandler}}{10}{}%
+\contentsline {figure}{\numberline {2.4}{\ignorespaces Prinzip des ICP-Algorithmus}}{9}{}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Oberes Bild eines Scanvorgangs, FDM Bauteil}}{14}{}%
-\contentsline {figure}{\numberline {4.2}{\ignorespaces Extrahierte Kontouren des Bildes ohne Pre-Processing}}{14}{}%
-\contentsline {figure}{\numberline {4.3}{\ignorespaces Extrahierte Kontouren des Bildes ohne Pre-Processing, zugeschnitten auf den (vermutlich) überlappenden Bereich}}{14}{}%
-\contentsline {figure}{\numberline {4.4}{\ignorespaces Konturen, vor der Transformation}}{16}{}%
-\contentsline {figure}{\numberline {4.5}{\ignorespaces Konturen, transformiert mit größter Überlappung, Grad der Überlappung: 24,26\%}}{16}{}%
-\contentsline {figure}{\numberline {4.6}{\ignorespaces Konturen K1 und K2 beim Beginn des Verfahrens}}{17}{}%
-\contentsline {figure}{\numberline {4.7}{\ignorespaces Konturen K1 und K2 nach n Schritten}}{17}{}%
-\contentsline {figure}{\numberline {4.8}{\ignorespaces Konturen K1 und K2 beim einer guten Übereinstimmung}}{17}{}%
-\contentsline {figure}{\numberline {4.9}{\ignorespaces Konturen K1 und K2 beim Ende des Verfahrens}}{17}{}%
-\contentsline {figure}{\numberline {4.10}{\ignorespaces Zusammengefügtes Bild}}{18}{}%
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Auftreten Höhe}}{14}{}%
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Metallteil gefiltert}}{14}{}%
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Konvertierung Pointcloud zu Bild}}{15}{}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {5.1}{\ignorespaces Auftreten Höhe}}{20}{}%
-\contentsline {figure}{\numberline {5.2}{\ignorespaces Metallteil gefiltert}}{20}{}%
-\contentsline {figure}{\numberline {5.3}{\ignorespaces Konvertierung Pointcloud zu Bild}}{21}{}%
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Oberes Bild eines Scanvorgangs, FDM Bauteil}}{18}{}%
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Extrahierte Kontouren des Bildes ohne Pre-Processing}}{18}{}%
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Extrahierte Kontouren des Bildes ohne Pre-Processing, zugeschnitten auf den (vermutlich) überlappenden Bereich}}{18}{}%
+\contentsline {figure}{\numberline {5.4}{\ignorespaces Konturen, vor der Transformation}}{20}{}%
+\contentsline {figure}{\numberline {5.5}{\ignorespaces Konturen, transformiert mit größter Überlappung, Grad der Überlappung: 24,26\%}}{20}{}%
+\contentsline {figure}{\numberline {5.6}{\ignorespaces Konturen K1 und K2 beim Beginn des Verfahrens}}{21}{}%
+\contentsline {figure}{\numberline {5.7}{\ignorespaces Konturen K1 und K2 nach n Schritten}}{21}{}%
+\contentsline {figure}{\numberline {5.8}{\ignorespaces Konturen K1 und K2 beim einer guten Übereinstimmung}}{21}{}%
+\contentsline {figure}{\numberline {5.9}{\ignorespaces Konturen K1 und K2 beim Ende des Verfahrens}}{21}{}%
+\contentsline {figure}{\numberline {5.10}{\ignorespaces Zusammengefügtes Bild}}{22}{}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {8.1}{\ignorespaces Versuchsaufbau}}{27}{}%
+\contentsline {figure}{\numberline {8.2}{\ignorespaces Taster}}{28}{}%
+\contentsline {figure}{\numberline {8.3}{\ignorespaces Spannungswandler}}{29}{}%
 \addvspace {10\p@ }

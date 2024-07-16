@@ -1,6 +1,6 @@
 This is BibTeX, Version 0.99d
 Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
-The top-level auxiliary file: .\main.aux
+The top-level auxiliary file: main.aux
 Reallocating 'name_of_file' (item size: 1) to 23 items.
 A level-1 auxiliary file: kapitel/titelseite.aux
 Reallocating 'name_of_file' (item size: 1) to 35 items.
@@ -9,10 +9,10 @@ Reallocating 'name_of_file' (item size: 1) to 30 items.
 A level-1 auxiliary file: kapitel/2_StandDerTechnik.aux
 Reallocating 'name_of_file' (item size: 1) to 28 items.
 A level-1 auxiliary file: kapitel/3_ZielderArbeit.aux
+Reallocating 'name_of_file' (item size: 1) to 32 items.
+A level-1 auxiliary file: kapitel/5_Datenaufbereitung.aux
 Reallocating 'name_of_file' (item size: 1) to 25 items.
 A level-1 auxiliary file: kapitel/6_Stitchting.aux
-Reallocating 'name_of_file' (item size: 1) to 32 items.
-A level-1 auxiliary file: kapitel/6_Datenaufbereitung.aux
 Reallocating 'name_of_file' (item size: 1) to 26 items.
 A level-1 auxiliary file: kapitel/7_Deformation.aux
 Reallocating 'name_of_file' (item size: 1) to 23 items.
@@ -27,48 +27,47 @@ Reallocating 'name_of_file' (item size: 1) to 18 items.
 Reallocating 'name_of_file' (item size: 1) to 23 items.
 A level-1 auxiliary file: kapitel/erklaerung.aux
 Database file #1: literatur/quellen.bib
-Warning--to sort, need author or key in .16072024
 Warning--empty booktitle in inproceedings
 Warning--empty publisher in KentonMchenry.2008
-You've used 18 entries,
+You've used 17 entries,
             2543 wiz_defined-function locations,
-            687 strings with 7742 characters,
-and the built_in function-call counts, 7216 in all, are:
-= -- 707
-> -- 361
+            685 strings with 7692 characters,
+and the built_in function-call counts, 7094 in all, are:
+= -- 693
+> -- 374
 < -- 7
-+ -- 128
-- -- 123
-* -- 506
-:= -- 1166
-add.period$ -- 50
-call.type$ -- 18
-change.case$ -- 112
-chr.to.int$ -- 18
-cite$ -- 22
-duplicate$ -- 272
-empty$ -- 537
-format.name$ -- 144
-if$ -- 1488
++ -- 133
+- -- 128
+* -- 509
+:= -- 1162
+add.period$ -- 49
+call.type$ -- 17
+change.case$ -- 111
+chr.to.int$ -- 17
+cite$ -- 19
+duplicate$ -- 262
+empty$ -- 509
+format.name$ -- 148
+if$ -- 1450
 int.to.chr$ -- 1
 int.to.str$ -- 0
 missing$ -- 13
-newline$ -- 87
+newline$ -- 85
 num.names$ -- 55
-pop$ -- 127
+pop$ -- 121
 preamble$ -- 1
-purify$ -- 131
+purify$ -- 129
 quote$ -- 0
-skip$ -- 258
+skip$ -- 244
 stack$ -- 0
-substring$ -- 377
-swap$ -- 47
+substring$ -- 367
+swap$ -- 46
 text.length$ -- 7
 text.prefix$ -- 4
 top$ -- 0
-type$ -- 140
-warning$ -- 3
-while$ -- 67
-width$ -- 20
-write$ -- 219
-(There were 3 warnings)
+type$ -- 132
+warning$ -- 2
+while$ -- 68
+width$ -- 19
+write$ -- 212
+(There were 2 warnings)
