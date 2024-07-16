@@ -4,14 +4,14 @@
 \contentsline {chapter}{\numberline {1}Einleitung}{1}{}%
 \contentsline {section}{\numberline {1.1}Einleitung und Motivation}{1}{}%
 \contentsline {chapter}{\numberline {2}Stand der Technik}{3}{}%
-\contentsline {subsection}{\numberline {2.0.1}Additive Fertigung}{3}{}%
-\contentsline {subsection}{\numberline {2.0.2}Limitierungen von AF}{4}{}%
-\contentsline {subsection}{\numberline {2.0.3}Reverse Engineering}{4}{}%
-\contentsline {subsection}{\numberline {2.0.4}3D Rekonstruktion}{5}{}%
-\contentsline {subsection}{\numberline {2.0.5}Digitales Abbild}{6}{}%
-\contentsline {subsection}{\numberline {2.0.6}Scanner und Datenerfassung}{7}{}%
-\contentsline {subsection}{\numberline {2.0.7}ICP-Algorithmus}{7}{}%
-\contentsline {subsection}{\numberline {2.0.8}Zusätzliche Messinstrumente}{8}{}%
+\contentsline {section}{\numberline {2.1}Additive Fertigung}{3}{}%
+\contentsline {section}{\numberline {2.2}Limitierungen von AF}{4}{}%
+\contentsline {section}{\numberline {2.3}Reverse Engineering}{4}{}%
+\contentsline {section}{\numberline {2.4}3D Rekonstruktion}{5}{}%
+\contentsline {subsection}{\numberline {2.4.1}Digitales Abbild}{6}{}%
+\contentsline {subsection}{\numberline {2.4.2}Scanner und Datenerfassung}{7}{}%
+\contentsline {subsection}{\numberline {2.4.3}ICP-Algorithmus}{8}{}%
+\contentsline {subsection}{\numberline {2.4.4}Zusätzliche Messinstrumente}{8}{}%
 \contentsline {chapter}{\numberline {3}Ziel der Arbeit}{11}{}%
 \contentsline {subsection}{\numberline {3.0.1}Einspannproblematik}{11}{}%
 \contentsline {subsection}{\numberline {3.0.2}Erfassung der spannkraftinduzierten Deformation}{11}{}%

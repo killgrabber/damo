@@ -1,5 +1,9 @@
 \begin{thebibliography}{VGRH21}
 
+\bibitem[.1624]{.16072024}
+Accuracy of digital technologies for the scanning of facial, skeletal, and
+  intraoral tissues: A systematic review, 16/07/2024.
+
 \bibitem[AKS15]{inproceedings}
 Bhrigu Ahuja, Michael Karg, and Michael Schmidt.
 \newblock Additive manufacturing in production: challenges and opportunities.
@@ -36,6 +40,10 @@ Horst Czichos and Werner Daum.
 Ivan Dokmanic, Reza Parhizkar, Juri Ranieri, and Martin Vetterli.
 \newblock Euclidean distance matrices: Essential theory, algorithms, and
   applications.
+
+\bibitem[EAA23]{Elaksher.2023}
+Ahmed Elaksher, Tarig Ali, and {Abdullatif Alharthy}.
+\newblock A quantitative assessment of lidar data accuracy, 2023.
 
 \bibitem[HL21]{Helle.2021}
 Robin~H. Helle and Hirpa~G. Lemu.

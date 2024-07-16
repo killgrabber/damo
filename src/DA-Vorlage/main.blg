@@ -27,47 +27,48 @@ Reallocating 'name_of_file' (item size: 1) to 18 items.
 Reallocating 'name_of_file' (item size: 1) to 23 items.
 A level-1 auxiliary file: kapitel/erklaerung.aux
 Database file #1: literatur/quellen.bib
+Warning--to sort, need author or key in .16072024
 Warning--empty booktitle in inproceedings
 Warning--empty publisher in KentonMchenry.2008
-You've used 16 entries,
+You've used 18 entries,
             2543 wiz_defined-function locations,
-            680 strings with 7480 characters,
-and the built_in function-call counts, 6658 in all, are:
-= -- 656
-> -- 335
+            687 strings with 7742 characters,
+and the built_in function-call counts, 7216 in all, are:
+= -- 707
+> -- 361
 < -- 7
-+ -- 118
-- -- 114
-* -- 472
-:= -- 1087
-add.period$ -- 47
-call.type$ -- 16
-change.case$ -- 101
-chr.to.int$ -- 16
-cite$ -- 18
-duplicate$ -- 252
-empty$ -- 485
-format.name$ -- 134
-if$ -- 1369
++ -- 128
+- -- 123
+* -- 506
+:= -- 1166
+add.period$ -- 50
+call.type$ -- 18
+change.case$ -- 112
+chr.to.int$ -- 18
+cite$ -- 22
+duplicate$ -- 272
+empty$ -- 537
+format.name$ -- 144
+if$ -- 1488
 int.to.chr$ -- 1
 int.to.str$ -- 0
 missing$ -- 13
-newline$ -- 80
-num.names$ -- 52
-pop$ -- 107
+newline$ -- 87
+num.names$ -- 55
+pop$ -- 127
 preamble$ -- 1
-purify$ -- 118
+purify$ -- 131
 quote$ -- 0
-skip$ -- 233
+skip$ -- 258
 stack$ -- 0
-substring$ -- 361
-swap$ -- 45
+substring$ -- 377
+swap$ -- 47
 text.length$ -- 7
 text.prefix$ -- 4
 top$ -- 0
-type$ -- 124
-warning$ -- 2
-while$ -- 64
-width$ -- 18
-write$ -- 201
-(There were 2 warnings)
+type$ -- 140
+warning$ -- 3
+while$ -- 67
+width$ -- 20
+write$ -- 219
+(There were 3 warnings)
