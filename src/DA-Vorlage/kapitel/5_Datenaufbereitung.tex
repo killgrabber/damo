@@ -37,7 +37,7 @@ Dieses Filtern bezieht sich aber nur auf zweidimensionale Bildinformationen.
 Um bei dem Konvertieren noch weniger Punkte,
 die nicht auf dem Bauteil liegen nicht in das Bild zu übernehmen, 
 kann auch noch die Pointcloud gefiltert werden.
-Hier kann ein einzelner Punkt relativ zu seinem Nachbarn im dreidimensionalen 
+Hier kann ein einzelner Punkt relativ zu seinen Nachbarn im dreidimensionalen 
 Raum betrachtet werden, um so Ausreißer zu erkennen. Dafür sind in der Open-Source
 Bibliothek 'Open3D' zwei Methoden vorhanden: Radius basierte Entfernung,
 oder auf Basis von statistischen Werten.
@@ -79,15 +79,18 @@ bleiben sie im resultierenden Bild schwarz.
 
 \section{Pointcloud in Bild konvertieren}
 
-Um Rechenzeit zu sparen und auf viele Funktionen von schon bestehenden 
-Bilderkennungs-Bibliotheken zurückgreifen zu können habe ich die Pointclouds in ein
-Bild konvertiert. Hierfür wird zuerst in leeres Bild mit den gleichen Maßen einer 
-Pointcloud erstellt. Dann wird über alle Punkte der Pointcloud iteriert und jeweils
-der Pixel an der X und Y Koordinate des Punktes auf einen Helligkeitswert gesetzt.
-Um Rechenzeit und Speicherkapazitäten zu schonen, und weil es für die Berechnung 
-ausreichend ist, habe ich mich für 8 Bit Single-Channel Bilder die nur Helligkeitswerte 
-abbilden entschieden. Hier kann also jede Pixel einen Wert zwischen 0 und 255 annehmen.
-Der entsprechende Wert kann wie folgt berechnet werden:
+Um Rechenzeit zu sparen und die zahlreichen Funktionen bereits bestehender
+ Bilderkennungsbibliotheken nutzen zu können, wurden die Punktwolken in Bilder 
+ konvertiert. Hierfür wird zunächst ein leeres Bild mit den gleichen 
+ Maßen der Pointcloud erstellt. Anschließend wird über alle Punkte der
+ Pointcloud iteriert und der Pixel an den 
+ entsprechenden X- und Y-Koordinaten des Punktes auf einen Helligkeitswert gesetzt.
+
+Um Rechenzeit und Speicherkapazitäten zu schonen und 
+da es für die Berechnungen ausreichend ist, wurden 
+8-Bit-Single-Channel-Bilder verwendet, die nur Helligkeitswerte abbilden. 
+In diesen Bildern kann jeder Pixel einen Wert zwischen 0 und 255 annehmen. 
+Der entsprechende Helligkeitswert kann wie folgt berechnet werden:
 
 \begin{equation*}
     value_p = \frac{Z - min_z}{max_z - min_z} \cdot (max_{brightness} - min_{brightness}) + min_{brightness}
@@ -104,14 +107,15 @@ verwendet wird.
     \centering
     \includegraphics[width=0.5\textwidth]{images/fdm_top_100p.png}
     \includegraphics[width=0.5\textwidth]{images/fdm_top_10p.png}
-    \caption{Konvertierung Pointcloud zu Bild}
+    \caption{Konvertierung Pointcloud zu Bild, Oberhalb ohne Filter, unterhalb 
+    mit den zehn Prozent häufigsten Höhenwerten}
     \label{fig:image_from_pc}
 \end{figure}
 
 Wie man in Abbildung \ref{fig:image_from_pc} sehen kann, sind kaum Helligkeitsveränderungen
 im Bild sichtbar. Das liegt an derselben Problematik, an der der ICP-Algorithmus häufig
-scheitert. Reale Datensets wie wir es vorliegen haben sind nicht perfekt, sondern
-beinhalten Messfehler und Streuungen. 
+scheitert. Reale Datensets widerspiegeln die Realität nicht absolut korrekt, sondern
+beinhalten Messfehler und Streuungen.
 
 Abbildung \ref*{fig:brightness} zeigt die Häufigkeit der gleichen Höhenwerte einer
 Pointcloud von dem Demonstratorbauteil. In Blau ist die Verteilung der Punkte auf 
@@ -132,13 +136,13 @@ Alle Punkte die tatsächlich auf dem Bauteil werden also entsprechend wenig
 berücksichtigt. Dem kann Abhilfe geschaffen werden, indem Werte, die weniger häufig 
 auftreten entfernt werden. Sortiert man alle Höhenwerte nach der Häufigkeit ihres 
 auftreten in der Pointcloud und entfernt den n-ten Prozentsatz können Ausreißer 
-entfernt werden. Wenn nur die häufigsten 10 Prozent übernommen werden erhält man 
+entfernt werden. Wenn nur die häufigsten zehn Prozent übernommen werden erhält man 
 das untere Bild in Abbildung \ref{fig:image_from_pc}
 
 Features auf dem Bauteil können jetzt deutlich besser erkannt werden. Auch zu sehen
 sind jetzt die Markierungen auf der linken und Rechten Seite die bei der Registrierung
-helfen sollen. Auch schön zu sehen sind die Spuren und Lücken die durch den FDM 
-Herstellungsprozess entstehen.
+helfen sollen. Zusätzlich sind die Spuren und Lücken die durch den FDM 
+Herstellungsprozess entstehen zu sehen.
 
 Durch das Filtern der Höheninformationen sind Oberflächenstrukturen nicht nur besser
 erkennbar, auch die Ränder treten genauer hervor. 
