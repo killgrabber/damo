@@ -10,9 +10,6 @@ import matplotlib.pyplot as plt
 import statistics
 import collections
 
-import skvideo.io
-
-
 # Returns the translation needed from a contour to a given point
 @nb.njit(parallel=False, fastmath=True)
 def get_translation(source_point: (float, float), target_point: (float, float)) -> (float, float):
@@ -175,13 +172,13 @@ def display_contours_in_image(contours: [[(float, float)]], image, colors: [], o
 
 
 def show_image(image, wait=0, name="Damo", save_name=""):
-    scale = 0.7
+    scale = 0.5
     if image.shape[0] > 1000 or image.shape[1] > 1000:
-        scale = 0.3
+        scale = 0.2
     copy = image.copy()
     small = cv2.resize(copy, (0, 0), fx=scale, fy=scale, interpolation=cv2.INTER_AREA)
     cv2.imshow(name, small)
     cv2.waitKey(wait)
     if save_name != "":
-        print(f"Trying to save to:...: {save_name}")
-        cv2.imwrite(save_name, copy)
+        print(f"Trying to save to: {save_name}...")
+        cv2.imwrite(f"output/{save_name}", copy)

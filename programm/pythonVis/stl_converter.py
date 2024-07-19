@@ -114,7 +114,12 @@ def convert_to_2d_array(contour: []):
 
 
 def move_and_check(con1, con2, progress, init_translation, search_area=50):
-    print(f"Checking contours with size {len(con1)} and {len(con2)}, diff: {abs(len(con1) - len(con2))}")
+    diff = abs(len(con1) - len(con2))
+    min_len = 1000
+    if diff > 20000 or len(con1) < min_len or len(con2) < min_len:
+        print(f"Diff {diff} to high, abort")
+        return (0, 0), 0
+    print(f"Checking contours with size {len(con1)} and {len(con2)}, diff: {diff}")
     moved_c = con2
     contour_a1 = convert_to_2d_array(con1)
     translation = init_translation
@@ -147,7 +152,8 @@ def move_and_check(con1, con2, progress, init_translation, search_area=50):
             print(f"Checking done. complete translation: {final_translation}")
             contourMatcher.display_contours([con1, moved_c], name="final", wait=1,
                                             colors=[(255, 255, 0), (255, 0, 255)],
-                                            save_name=f"matched_{len(con1)}_{len(con2)}_{distance:.2f}.png")
+                                            save_name=f"matched_{len(con1)}_{len(con2)}_{distance:.2f}.png",
+                                            text=f"Avg. Pixel distance: {distance:.4f}")
             break
     return final_translation, distance
 
