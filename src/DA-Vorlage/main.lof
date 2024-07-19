@@ -4,7 +4,7 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {2.1}{\ignorespaces Accurancy Photogrammetry}}{6}{}%
-\contentsline {figure}{\numberline {2.2}{\ignorespaces Akkuranz des 3D Objekts ist abhängig von der Anzahl der Polygonen}}{7}{}%
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Akkuranz einer 3D-Datei ist abhängig von der Anzahl der gespeicherten Eckpunkte am Beispiel des Demonstratorbauteils. (a) 1512 Punkte (b) 52 Punkte (c) 30 Punkte}}{7}{}%
 \contentsline {figure}{\numberline {2.3}{\ignorespaces Funktionsweise eines Laserscanners}}{8}{}%
 \contentsline {figure}{\numberline {2.4}{\ignorespaces Prinzip des ICP-Algorithmus}}{9}{}%
 \addvspace {10\p@ }
@@ -16,10 +16,9 @@
 \contentsline {figure}{\numberline {5.1}{\ignorespaces Oberes Bild eines Scanvorgangs, FDM Bauteil}}{20}{}%
 \contentsline {figure}{\numberline {5.2}{\ignorespaces Extrahierte Kontouren des Bildes ohne Pre-Processing}}{20}{}%
 \contentsline {figure}{\numberline {5.3}{\ignorespaces Extrahierte Kontouren des Bildes ohne Pre-Processing, zugeschnitten auf den (vermutlich) überlappenden Bereich}}{20}{}%
-\contentsline {figure}{\numberline {5.4}{\ignorespaces Konturen, vor der Transformation}}{22}{}%
-\contentsline {figure}{\numberline {5.5}{\ignorespaces Konturen, transformiert mit größter Überlappung, Grad der Überlappung: 24,26\%}}{22}{}%
-\contentsline {figure}{\numberline {5.6}{\ignorespaces Verfahren im Verlauf dargestellt, a am Anfang, b nach n-durchgängen, c }}{23}{}%
-\contentsline {figure}{\numberline {5.7}{\ignorespaces Zusammengefügtes Bild}}{24}{}%
+\contentsline {figure}{\numberline {5.4}{\ignorespaces (a) Konturen K1 und K2 so positioniert wie sie in den Ursprungsbildern gefunden wurde. (b) Konturen, transformiert mit größter Überlappung, Grad der Überlappung: 24,26\%}}{22}{}%
+\contentsline {figure}{\numberline {5.5}{\ignorespaces Verfahren im Verlauf dargestellt, a am Anfang, b nach n-durchgängen, c }}{23}{}%
+\contentsline {figure}{\numberline {5.6}{\ignorespaces Zusammengefügtes Bild}}{24}{}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }

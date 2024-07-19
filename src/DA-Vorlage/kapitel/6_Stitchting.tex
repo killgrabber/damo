@@ -124,11 +124,11 @@ Gesamtlänge der Kontur wird als optimal angesehen.
 Aufgrund des exponentiellen Laufzeitverhaltens ist es ineffizient, 
 jeden Punkt A aus K1 mit jedem Punkt B aus K2 zu vergleichen.
 
-In Abbildung \ref{fig:before_matching} sind zwei Beispielkonturen zu sehen. 
+In Abbildung \ref{fig:k1_and_k2} (a) sind zwei Beispielkonturen zu sehen. 
 Diese sind nicht angeordnet. Der ICP-Algorithmus würde diese beiden Konturen 
 annähern, ohne sie zu überlappen. 
 Das Ergebnis des vorgestellten Stitching Verfahrens ist in Abbildung 
-\ref{fig:after_matching} zu sehen. Es ist zu erkennen das, trotz Messfehler und 
+\ref{fig:k1_and_k2} (b) zu sehen. Es ist zu erkennen das, trotz Messfehler und 
 kleineren unterschieden im überlappenden Bereich die korrekte Transformation 
 ermittelt werden konnte. Diese Konturen stammen von einem additiv gefertigten 
 Metallbauteil.
@@ -138,19 +138,21 @@ Metallbauteil.
     \begin{minipage}{0.49\textwidth}
         \centering
         \includegraphics[width=\textwidth]{images/before_matching.png} % first figure itself
-        \caption{Konturen, vor der Transformation}
-        \label{fig:before_matching}
-    \end{minipage}
+        \caption*{(a)} 
+    \end{minipage}\hfill
     \begin{minipage}{0.49\textwidth}
         \centering
         \includegraphics[width=\textwidth]{images/0.24225865209471767contours.png} % first figure itself
-        \caption{Konturen, transformiert mit größter Überlappung, 
-        Grad der Überlappung: 24,26\%}
-        \label{fig:after_matching}
+        \caption*{(b)}
     \end{minipage}\hfill
+    \caption{(a) Konturen K1 und K2 so positioniert wie sie in den
+    Ursprungsbildern gefunden wurde.
+    (b) Konturen, transformiert mit größter Überlappung, 
+        Grad der Überlappung: 24,26\%}
+        \label{fig:k1_and_k2}
 \end{figure}
 
-\section{Stitching visuell dargestellt}
+\section{Visuelle Darstellung des Stitching Prozesses}
 
 In Abbildung \ref{fig:stitching_all} ist der Prozess des Verfahrens zu sehen.
 K1 ist in Blau dargestellt, K2 in Grün.
@@ -165,7 +167,7 @@ Die Bilder sind repräsentativ ausgewählt, im tatsächlichen Prozess wird K1 ko
         \centering
         \includegraphics[width=\textwidth]{images/stitching_beginn.PNG} % first figure itself
         \caption*{(a)}
-    \end{minipage}
+    \end{minipage}\hfill
     \begin{minipage}{0.24\textwidth}
         \centering
         \includegraphics[width=\textwidth]{images/stitching_middle.PNG} % first figure itself

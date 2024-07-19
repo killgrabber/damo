@@ -38,6 +38,33 @@ Eingabe akzeptiert und damit umgegangen werden.
 
 \section{Vorgehen}
 
+Das Verfahren, um eine Deformation in einem eingespannten additiv gefertigten
+Bauteil, zu erkennen umfasst folgenden Schritte:
+
+\begin{itemize}
+    \item \textbf{Digitalisierung des Bauteils:}\\
+        In diesem Schritt werden Messfehler und Ausreißer
+        in den Scannerdaten entfernt. Anschließend werden die dreidimensionalen 
+        Eingangsdaten in eine zweidimensionale Ansicht umgewandelt.
+        Nach diesem Schritt liegen für jedes Bauteil mehrere Datensätze als 
+        zweidimensionale schwarz weiß Bilder vor.
+    \item \textbf{Stitching Methodik}\\
+        Diese Bilder müssen nun zu einem einzelnen Bild zusammengefügt werden.
+        Hierfür werden Gemeinsamkeiten in den sich 
+        teilweise überlappenden Bildern gesucht und eine Transformation ermittelt,
+        die auf eines von zwei Bildern angewendet werden kann, um sie zusammenzufügen.
+    \item \textbf{Deformationserkennung}\\
+        Sobald ein Bild für ein eingespanntes Bauteil vorliegt, können verschiedene 
+        Zustände des Bauteils verglichen werden. Deformationen werden erkannt, in dem 
+        die Länge und Breite des Bauteils verglichen wird, zusätzlich wird der 
+        Abstand zwischen den Rändern des Bauteils berechnet. Es können verschiedene
+        Spannungszustände verglichen werden, ein Vergleich mit dem initialen 
+        3D-Design ist auch möglich. Hier werden auch Fehler erkannt die im 
+        Fertigungsprozess entstehen erkannt. Der Unterschied zwischen Bauteilzuständen
+        wird auch visuell ausgegeben und als Bild gespeichert.
+        
+\end{itemize}
+
 
 
 

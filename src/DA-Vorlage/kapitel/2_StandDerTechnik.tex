@@ -108,14 +108,14 @@ Objekterkennung zu finden \cite{Verykokou.2023}. Je nach Anwendungsfall wird ein
 bestimmte Akkuranz
 der Daten erwartet, im Medizinischen Bereich sind die Ansprüche natürlich ganz 
 andere als zum Beispiel in der Dokumentierung von ganzen Gebirgszügen.
-Das Scannen von Gesichtstexturen zeigte Abweichungswerte zwischen 140$\mu$m und 
-1330$\mu$m, während die 3D-Rekonstruktion des Kieferknochens Werte zwischen 106$\mu$m 
-und 760$\mu$m aufwies. 
+Das Scannen von Gesichtstexturen zeigte Abweichungswerte zwischen 140 $\mu$m und 
+1330 $\mu$m, während die 3D-Rekonstruktion des Kieferknochens Werte zwischen 106 $\mu$m 
+und 760 $\mu$m aufwies. 
 Das Scannen eines bezahnten Bogens durch intraorale und laborbasierte
-Scanner variierte zwischen 17$\mu$m und 378$\mu$m und bei der 
-digitalen Abtastung von Zahnimplantaten zwischen 19,32$\mu$m
-und 112$\mu$m \cite{Bohner.2019}.
-Bei Lidar-Scans eines Sportkomplexes wurde eine Standardabweichung von ±0.10m 
+Scanner variierte zwischen 17 $\mu$m und 378 $\mu$m und bei der 
+digitalen Abtastung von Zahnimplantaten zwischen 19,32 $\mu$m
+und 112 $\mu$m \cite{Bohner.2019}.
+Bei Lidar-Scans eines Sportkomplexes wurde eine Standardabweichung von ±0.10 Metern
 gemessen. Es wurde aus 600 Meter Höhe vermessen und die Scandaten mit 
 Referenzpunkten auf dem Boden verglichen. \cite{Elaksher.2023}
 Aus diesem Grund existieren auch verschiedene Herangehensweisen und Technologien  
@@ -133,7 +133,7 @@ allen Bildern gemeinsame Punkte gesucht und dann mit der bekannten Kamerapositio
 die relative Position des Punktes im 3D Objekt ermittelt. Figur x zeigt dies 
 anschaulich.
 Vorteil bei der Photogrammetrie ist, dass die Daten relativ einfach aufgenommen werden
-können. Eine Smartphonekamera kann ausreichend hochauflösende Bilder aufnehmen, um 
+können. Die Kamera eines Smartphones kann ausreichend hochauflösende Bilder aufnehmen, um 
 eine 3D-Rekonstruktion zu ermöglichen. Des Weiteren sind viele Softwarelösungen,
 auch kostenlose, vorhanden um automatisiert 3D Objekte zu erzeugen.
 Gründe, sich gegen den Einsatz von Photogrammetrie zu entscheiden, 
@@ -192,11 +192,27 @@ Integer in verschiedener Bit tiefe gewählt.
 
 \begin{figure}[h]
     \centering
-    \includegraphics[height=150pt]{images/polgyonMeshes.jpg}
-    \caption{Akkuranz des 3D Objekts ist abhängig von der Anzahl der Polygonen}
-    \label{fig:meshes}
-\end{figure}
+    \begin{minipage}{0.32\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{images/image_demo.PNG} % first figure itself
+        \caption*{(a)}
+    \end{minipage}\hfill
+    \begin{minipage}{0.32\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{images/image_demo_medium.PNG} % first figure itself
+        \caption*{(b)}
+    \end{minipage}\hfill
+    \begin{minipage}{0.32\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{images/image_demo_low.PNG} % first figure itself
+        \caption*{(c)}
+    \end{minipage}\hfill
 
+    \caption{Akkuranz einer 3D-Datei ist abhängig von der Anzahl der gespeicherten
+    Eckpunkte am Beispiel des Demonstratorbauteils. (a) 1512 Punkte
+    (b) 52 Punkte (c) 30 Punkte}
+    \label{fig:3d_design}
+\end{figure}
 
 \subsection{Scanner und Datenerfassung}
 
