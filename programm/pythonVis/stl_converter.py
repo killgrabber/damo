@@ -32,8 +32,7 @@ def convert_stl(filepath: str, progress: [], result: []):
 def find_contours_in_image(image, progress: [], result: []):
     print('Starting contour search')
     image_blur = cv2.blur(image, (2, 2))
-    contours = imageAnalyser.getContours(image_blur, 0)
-    contours = contours[:10]
+    contours = imageAnalyser.getContours(image_blur, 0, limit=10)
     #contourMatcher.display_contours_in_image(contours, image, name="with image", wait=1,
     #                                         colors=[255, 255, 0], save_name="with_con.jpg")
     #contourMatcher.display_contours(contours, name="without", wait=0,
@@ -131,7 +130,7 @@ def move_and_check(con1, con2, progress, init_translation, search_area=50):
         contourMatcher.display_contours([con1, moved_c], name="without", wait=1,
                                         colors=[(255, 255, 0), (255, 0, 255)])
         result = [0]
-        distance, vectors = check_2_contours(contour_a1, contour_a2, progress, search_radius=50, result=result)
+        distance, vectors = check_2_contours(contour_a1, contour_a2, progress, search_radius=100, result=result)
         if len(vectors) == 0:
             print(f"Found no matches: distances {distance}")
             return (0, 0), 0

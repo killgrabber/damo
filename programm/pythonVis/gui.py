@@ -107,8 +107,8 @@ def update_progress():
         image_progress_var.set(image_progress[0])
         progress_pc_conversion_var.set(compare_progress[0])
 
-        #treshold_max[0] = math.floor(tresh_max_slider.get())
-        #treshold_min[0] = math.floor(tresh_min_slider.get())
+        treshold_max[0] = math.floor(tresh_max_slider.get())
+        treshold_min[0] = math.floor(tresh_min_slider.get())
         # check if image stitching done
         if stitched_image:
             show_message("Stitching done!")
@@ -264,23 +264,6 @@ def load_stl_image():
 def set_image_loop():
     ttk.Button(frm, text="Start loop", command=lambda: show_image_loop()).grid(column=2, row=7)
 
-    # Treshhold slider
-    tresh_min_slider = ttk.Scale(
-        frm,
-        from_=-500,
-        to=500,
-        orient='horizontal',  # horizontal
-    )
-    tresh_min_slider.grid(column=0, row=8)
-    tresh_max_slider = ttk.Scale(
-        frm,
-        from_=-500,
-        to=500,
-        orient='horizontal',  # vertical
-    )
-    tresh_max_slider.grid(column=1, row=8)
-
-
 root = Tk()
 root.geometry("1000x500")
 frm = ttk.Frame(root, padding=10, )
@@ -389,6 +372,8 @@ for i in range(3):
     label_image.image = image_t
     label_image.grid(column=i, row=10)
     image_displays.append(label_image)
+
+set_image_loop()
 
 while True:
     root.update_idletasks()

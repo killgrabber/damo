@@ -9,6 +9,7 @@ import string
 import contourMatcher
 import difflib
 import random as rng
+from collections import Counter
 
 IMAGES = [
     'pcd_2916383.png',
@@ -25,7 +26,7 @@ def importImages():
     return images
 
 
-def getContours(img, min_distance=5):
+def getContours(img, min_distance=5, limit=100):
     # draw contours on the original image
     height, width = img.shape[:2]
     image_contour_blue = img.copy()
@@ -53,6 +54,8 @@ def getContours(img, min_distance=5):
                     all_points.append(point)
         all_contours.append(all_points)
     all_contours.sort(key=len, reverse=True)
+
+    # return all_contours
     # seperate contours
     new_contours = []
     for i in range(len(all_contours)):
@@ -60,14 +63,16 @@ def getContours(img, min_distance=5):
         for j in range(1, len(all_contours[i])):
             distance = compare_point(all_contours[i][j], all_contours[i][j - 1])
             if distance < 10:
-                new_points.append(all_contours[i][j])
+                new_points.append(all_contours[i][j].copy())
             else:
                 print("New segment")
-                new_contours.append(new_points)
+                new_contours.append(new_points.copy())
                 new_points.clear()
-                new_points.append(all_contours[i][j])
-        new_contours.append(new_points)
+                new_points.append(all_contours[i][j].copy())
+        new_contours.append(new_points.copy())
     print(f"Returning {len(new_contours)} contours")
+    if limit < len(new_contours):
+        return new_contours[:limit]
     return new_contours
 
 
@@ -269,9 +274,16 @@ def translate_image(img, x, y):
 def combine_2_images(img1, img2, overlap=200):
     h1, w1 = img1.shape[:2]
     h2, w2 = img2.shape[:2]
+    print(f"Shape1: {h1},{w1}, shape2: {h2},{w2}")
     vis = np.zeros((h1 + h2 - overlap, max(w1, w2), 3), np.uint8)
     vis[:h1 - overlap, :w1] = img1[:h1 - overlap, :w1]
     vis[h1 - overlap:h1 + h2 - overlap, :w2] = img2
+    for i in range(0, overlap):
+        for j in range(0, min(w1, w2)):
+            r1, g1, b1 = img1[h1 - i - 1, j]
+            r2, g2, b2 = img2[overlap - i, j]
+            vis[h1-i-1, j] = (max(r1, r2), max(g1, g2), max(b1, b2))
+
     return vis
 
 
@@ -305,9 +317,9 @@ def match_all_contours(contours_top, bottom_contours, progress: []):
     transitions = []
     blue = (255, 255, 100)
     green = (200, 255, 200)
-    contourMatcher.display_contours(contours_top, colors=[blue, green], wait=0,
-                                    name="top_contours",
-                                    save_name="top_contours.png")
+    #contourMatcher.display_contours(contours_top, colors=[blue, green], wait=0,
+     #                               name="top_contours",
+     #                               save_name="top_contours.png")
     # Match all contours
     for c_top in contours_top:
         for c_bot in bottom_contours:
@@ -346,9 +358,11 @@ def stitch_images(top_image: cv2.Mat, bot_image: cv2.Mat, progress: [], result: 
     #showAndSaveImage(crop_top)
     #showAndSaveImage(crop_bot)
     min_distance_from_border = 5
-    contours_top = getContours(crop_top, min_distance_from_border)
+    contours_top = getContours(crop_top, min_distance_from_border, limit=5)
+    print(f"Len of con: {len(contours_top)}")
     progress[0] += 5
-    contours_bot = getContours(crop_bot, min_distance_from_border)
+    contours_bot = getContours(crop_bot, min_distance_from_border, limit=5)
+    print(f"Len of con: {len(contours_bot)}")
     progress[0] += 5
 
     # move bot contour
@@ -359,28 +373,30 @@ def stitch_images(top_image: cv2.Mat, bot_image: cv2.Mat, progress: [], result: 
     #contourMatcher.display_contours(contours_top + bot_contours)
 
     transitions = match_all_contours(contours_top, bot_contours, progress)
+    transitions_dict = Counter(transitions)
 
-    print(f"transitions: {transitions}")
+    print(f"transitions: {transitions_dict}")
 
     # move second image
     stitch_offset = -831
-    for transition in transitions:
+    overlap = 100
+    for transition, amount in sorted(transitions_dict.items(), key=lambda item: item[1], reverse=True):
         print(f"Moving t {transition}")
         moved_image_tmp = translate_image(bot_image, transition[0]+1,
                                       stitch_offset + transition[1])
-        combined_image_tmp = combine_2_images(top_image, moved_image_tmp, 50)
-        showAndSaveImage(combined_image_tmp)
+        combined_image_tmp = combine_2_images(top_image, moved_image_tmp, 100)
+        showAndSaveImage(combined_image_tmp, name="stitched")
 
     moved_image = translate_image(bot_image, round(transitions[0][0]) + 1,
                                   stitch_offset + round(transitions[0][1]))
-    combined_image = combine_2_images(top_image, moved_image, 50)
+    combined_image = combine_2_images(top_image, moved_image, overlap)
     progress[0] = 100
     #showAndSaveImage(combined_image)
     result.append(combined_image)
 
 
 def show_image_tresh(top_image_path, bot_image_path, treshold_min: [], treshold_max: []):
-    cv2.namedWindow("loop")
+    #cv2.namedWindow("loop")
     cv2.namedWindow("loop2")
     top_image = cv2.imread(top_image_path)
     bot_image = cv2.imread(bot_image_path)
@@ -391,32 +407,33 @@ def show_image_tresh(top_image_path, bot_image_path, treshold_min: [], treshold_
 
     #top_image_blur = cv2.blur(crop_top, (5, 5))
     #bot_image_blur = cv2.blur(crop_bot, (5, 5))
-    small_top = cv2.resize(top_image, (0, 0), fx=0.5, fy=0.5, interpolation=cv2.INTER_AREA)
-    small_bot = cv2.resize(bot_image, (0, 0), fx=0.5, fy=0.5, interpolation=cv2.INTER_AREA)
+    small_top = cv2.resize(top_image, (0, 0), fx=0.2, fy=0.2, interpolation=cv2.INTER_AREA)
+    small_bot = cv2.resize(bot_image, (0, 0), fx=0.2, fy=0.2, interpolation=cv2.INTER_AREA)
     overlap = 50
     while True:
         moved_image = translate_image(small_bot, treshold_min[0], treshold_max[0])
-        contours_top = getContours(cv2.blur(small_top, (5, 5)))
-        contours_bot = getContours(cv2.blur(moved_image, (5, 5)))
+        #contours_top = getContours(cv2.blur(small_top, (5, 5)))
+        #contours_bot = getContours(cv2.blur(moved_image, (5, 5)))
         combined_image = combine_2_images(small_top, moved_image, overlap)
-        index = 0
-        for i in range(0):
-            for j in range(len(contours_bot)):
-                if contours_top[i] and contours_bot[j]:
-                    distances = contourMatcher.collect_distance(contours_top[i], contours_bot[j])
-                    if sum(distances) > 100000:
-                        continue
-                    contourMatcher.display_contours([contours_top[i], contours_bot[j]],
-                                                    name=f"{i},{j}", wait=1,
-                                                    save_name="start_cons.png")
-                    percentage_of_zero = distances.count(0) / len(distances)
-                    match_text = (f"i,j: {i:2.0f},{j:2.0f} zeros: {percentage_of_zero:2.3f}, "
-                                  f"sum: {sum(distances):.3f}, "
-                                  f"lens:{len(contours_top[i])}, {len(contours_bot[j])}")
-                    cv2.putText(combined_image, match_text, (500, (index) * 30 + 80), 1, 2, 255)
-                    index += 1
+        #index = 0
+        #for i in range(0):
+        #    for j in range(len(contours_bot)):
+        #        if contours_top[i] and contours_bot[j]:
+        #            distances = contourMatcher.collect_distance(contours_top[i], contours_bot[j])
+        #            if sum(distances) > 100000:
+        #                continue
+        #            contourMatcher.display_contours([contours_top[i], contours_bot[j]],
+        #                                            name=f"{i},{j}", wait=1,
+        #                                            save_name="start_cons.png")
+        #            percentage_of_zero = distances.count(0) / len(distances)
+        #            match_text = (f"i,j: {i:2.0f},{j:2.0f} zeros: {percentage_of_zero:2.3f}, "
+        #                          f"sum: {sum(distances):.3f}, "
+        #                          f"lens:{len(contours_top[i])}, {len(contours_bot[j])}")
+        #            cv2.putText(combined_image, match_text, (500, (index) * 30 + 80), 1, 2, 255)
+        #            index += 1
 
         text = f"Min: {treshold_min[0]} max {treshold_max[0]}"
+        print(text)
         cv2.putText(combined_image, text, (500, 50), 1, 2, 255)
         cv2.imshow("loop2", combined_image)
 

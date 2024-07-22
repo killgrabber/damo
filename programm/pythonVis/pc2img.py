@@ -73,8 +73,8 @@ def show_pointcloud(pc):
 def remove_outliers(pc):
     print("Statistical outlier removal")
     oldAmount = len(pc.points)
-    cl, ind = pc.remove_statistical_outlier(nb_neighbors=50,
-                                            std_ratio=1.0)
+    cl, ind = pc.remove_statistical_outlier(nb_neighbors=100,
+                                            std_ratio=0.5)
     newAmount = len(pc.select_by_index(ind).points)
     diff = oldAmount - newAmount
     print(f"Reduced from: {oldAmount} to {newAmount}, diff {diff}, percentage: {diff/oldAmount:.2f}")
@@ -84,7 +84,7 @@ def remove_outliers(pc):
 def anaylseZ(pcd):
     MIN_AMOUNT = -1
     counter = collections.Counter(pcd[:, 2])
-    mostCommon = counter.most_common(round(len(counter) * 0.50))
+    mostCommon = counter.most_common(round(len(counter) * 0.7))
     minFound = sys.maxsize
     maxFound = 0
     for key, val in mostCommon:
@@ -181,6 +181,7 @@ def convert_point_cloud(files: [], progress: [], result: [], show_pc=False):
         image = convert_chunk(pcds_points[i], np.mean(max_hs), np.mean(min_hs))
         progress[0] += 10
         #imageAnalyser.showAndSaveImage(image)
+        #image = cv2.blur(image, (5, 5))
         result[i] = image
         print(f"Done with {files[i].split('/')[-1]}")
 

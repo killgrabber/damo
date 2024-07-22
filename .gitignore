@@ -7,3 +7,4 @@ sciebo/BA_Niklas_Thieme/Daten
 *.fdb_latexmk
 build/
 daten/
+programm/pythonVis/output/

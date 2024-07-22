@@ -44,8 +44,7 @@ def match_contour(top: [(float, float)],
     # Perfomace reasons lol
     top = move_contour(top, (0, 0))
     bot = move_contour(bot, (0, 0))
-    #display_contours([top, bot], [blue, green], wait=1,
-    #                 save_name="before_matching.png")
+    #display_contours([top, bot], [blue, green], wait=1)
     matching_pair, best_match = check_2_contours(top, bot, progress)
     matching_pair_reverse, best_match_reverse = check_2_contours(bot, top, progress)
     final_transition = get_translation(bot[matching_pair[0]], top[-matching_pair[1]])
@@ -55,8 +54,8 @@ def match_contour(top: [(float, float)],
     bot = move_contour(bot, final_transition)
     print(f"Matching pair: {matching_pair}, t: {final_transition}, confidence: {best_match:.2f}, "
           f"len top:{len(top)} len bot: {len(bot)}")
-    display_contours([top, bot], colors=[blue, green], wait=0, name=str(best_match).format(5),
-                     save_name=str(best_match).format(5)+"contours.png")
+    #display_contours([top, bot], colors=[blue, green], wait=0, name=str(best_match).format(5),
+    #                 save_name=str(best_match).format(5)+"contours.png")
 
     if best_match < 0.01:
         final_transition = (0, 0)
@@ -67,7 +66,7 @@ def check_2_contours(top, bot, progress):
     best_match = 0
     matching_pair = (0, 0)
     for i in range(0, len(bot)):
-        for j in range(0, 50, 1):
+        for j in range(0, 25, 1):
             # Move target to index of source and check distances
             translation = get_translation(bot[i], top[-j])
             bot = move_contour(bot, translation)
