@@ -36,11 +36,12 @@ def get_compare_files(index):
     compare_labels[index].config(text=file.split("/")[-1])
 
 compare_progress = [0]
+result_distances = [[]]
 def compare_images():
-    comparer_thread = Thread(target=stl_converter.compare_images,
-                             args=(images_paths_to_compare, compare_progress))
-    comparer_thread.start()
-
+    stl_converter.compare_images(images_paths_to_compare, compare_progress, result_distances)
+    #comparer_thread = Thread(target=stl_converter.compare_images,
+    #                         args=(images_paths_to_compare, compare_progress, result_distances))
+    #comparer_thread.start()
 
 def show_message(message: str):
     info_label.config(text=message)
