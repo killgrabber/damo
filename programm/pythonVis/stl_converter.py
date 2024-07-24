@@ -174,13 +174,14 @@ def get_vertical_distance(con1, con2):
     print(f"Smallest distance: {smallest_distance[0][0]}, {smallest_distance[0][1]}")
     y1_val = [x[0] for x in all_vectors]
     y2_val = [x[1] for x in all_vectors]
+    both_val = [x[0]-x[1] for x in all_vectors]
     y_line = [0, len(all_vectors)]
     x_val = [x for x in range(len(all_vectors))]
     # plotting the line 1 points
     plt.plot([0, len(all_vectors)], [0, 0], color='black')
-    plt.scatter(x_val, y1_val, label="top_distance", s=1)
-    plt.scatter(x_val, y2_val, label="bot_distance", s=1)
-
+    #plt.scatter(x_val, y1_val, label="top_distance", s=1)
+    #plt.scatter(x_val, y2_val, label="bot_distance", s=1)
+    plt.scatter(x_val, both_val, label="sum of distance", s=1)
     plt.ylabel('Deformation in Pixel')
     plt.xlabel('Pixel - X-Achse')
     plt.ylim((-100, 100))
@@ -235,14 +236,14 @@ def find_distance_in_line(contour_a1, contour_a2, scanline_index):
 def move_and_check(con1, con2, progress, init_translation, result_distances: [], search_area=50):
     diff = abs(len(con1) - len(con2))
     min_len = 2500
-    if diff > 13000 or len(con1) < min_len or len(con2) < min_len:
-        #print(f"Diff {diff} to high, abort")
+    if diff > 20000 or len(con1) < min_len or len(con2) < min_len:
+        print(f"Diff {diff} to high, abort")
         return (0, 0), 0
     #print(f"Checking contours with size {len(con1)} and {len(con2)}, diff: {diff}")
     moved_c = con2
     contour_a1 = convert_to_2d_array(con1)
     translation = init_translation
-    length_init_t = min(max(100, contourMatcher.compare_point(translation, (0, 0)) * 1.5), 250)
+    length_init_t = min(max(100, contourMatcher.compare_point(translation, (0, 0)) * 1.5), 300)
     #print(f"Search radius is: {length_init_t}")
     if length_init_t > 500:
         #print(f"Search radius too big, abort")
