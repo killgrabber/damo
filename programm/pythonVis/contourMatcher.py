@@ -9,6 +9,9 @@ import numba as nb
 import matplotlib.pyplot as plt
 import statistics
 import collections
+import stl_converter
+from threading import Thread
+
 
 # Returns the translation needed from a contour to a given point
 @nb.njit(parallel=False, fastmath=True)
@@ -26,8 +29,10 @@ def move_contour(contour: [(float, float)], translation: (float, float)) -> []:
     return new_contour
 
 
+@nb.njit(parallel=False, fastmath=True)
 def match_contour(top: [(float, float)],
                   bot: [(float, float)],
+                  transitions: [],
                   progress: []) -> (float, float):
     blue = (255, 0, 0)
     green = (0, 255, 0)
@@ -44,21 +49,23 @@ def match_contour(top: [(float, float)],
     # Perfomace reasons lol
     top = move_contour(top, (0, 0))
     bot = move_contour(bot, (0, 0))
-    #display_contours([top, bot], [blue, green], wait=1)
+    #display_contours([top, bot], [blue, green], wait=0, name="matching_cons")
     matching_pair, best_match = check_2_contours(top, bot, progress)
     matching_pair_reverse, best_match_reverse = check_2_contours(bot, top, progress)
     final_transition = get_translation(bot[matching_pair[0]], top[-matching_pair[1]])
     if best_match_reverse > best_match:
         matching_pair, best_match = matching_pair_reverse, best_match_reverse
         final_transition = get_translation(bot[-matching_pair[1]], top[matching_pair[0]])
-    bot = move_contour(bot, final_transition)
-    print(f"Matching pair: {matching_pair}, t: {final_transition}, confidence: {best_match:.2f}, "
-          f"len top:{len(top)} len bot: {len(bot)}")
+    #bot = move_contour(bot, final_transition)
+    #print(f"Matching pair: {matching_pair}, t: {final_transition}, confidence: {best_match:.2f}, "
+    #      f"len top:{len(top)} len bot: {len(bot)}")
     #display_contours([top, bot], colors=[blue, green], wait=0, name=str(best_match).format(5),
     #                 save_name=str(best_match).format(5)+"contours.png")
 
     if best_match < 0.01:
         final_transition = (0, 0)
+    else:
+        transitions.append(final_transition)
     return final_transition
 
 @nb.njit(parallel=False, fastmath=True)
@@ -66,7 +73,7 @@ def check_2_contours(top, bot, progress):
     best_match = 0
     matching_pair = (0, 0)
     for i in range(0, len(bot)):
-        for j in range(0, 25, 1):
+        for j in range(0, 50, 1):
             # Move target to index of source and check distances
             translation = get_translation(bot[i], top[-j])
             bot = move_contour(bot, translation)
@@ -96,11 +103,21 @@ def display_plots(datas: [[]]):
 @nb.njit(parallel=False, fastmath=True)
 def collect_distance(source: [(float, float)], target: [(float, float)]):
     distances = []
-    for i in nb.prange(len(source)):
+    length = len(source)
+    for i in nb.prange(length):
         index, distance = find_nearest_point(source[i], target)
+        #index, distance = find_nearest_point_fast(source[i], target)
         distances.append(distance)
         #get the vectors as well
     return distances
+
+
+
+def find_nearest_point_fast(source, target: []) -> (int, float):
+    target_arr = stl_converter.convert_to_2d_array(target)
+    i, j = source
+    best_match, x, y = stl_converter.find_closest_point(i, j, target_arr, 10)
+    return x, best_match
 
 
 @nb.njit(parallel=False, fastmath=True)
@@ -147,13 +164,18 @@ def display_contours(contours: [[(float, float)]], colors: [],
     font = cv2.FONT_HERSHEY_SIMPLEX
     cv2.putText(new_blank_image,
                 text,
-                (250-len(text)-10, 100),
-                font, 1,
-                (0, 255, 0), 2)
+                (250-len(text)-10, 200),
+                font, 5,
+                (0, 255, 0), 4)
     index = 0
     for contour in contours:
         for p in contour:
-            new_blank_image[p[1] - y, p[0] - x] = colors[index % len(colors)]
+            c1 = p[1] - y
+            c2 = p[0] - x
+            for i in range(-1, 1):
+                for j in range(-1, 1):
+                    new_blank_image[c1+i, c2+j] = colors[index % len(colors)]
+
         index += 1
     show_image(new_blank_image, wait, name, save_name)
     return new_blank_image
@@ -171,11 +193,16 @@ def display_contours_in_image(contours: [[(float, float)]], image, colors: [], o
 
 
 def show_image(image, wait=0, name="Damo", save_name=""):
-    scale = 0.5
+    scale = 0.8
     if image.shape[0] > 1000 or image.shape[1] > 1000:
+        scale = 0.6
+    if image.shape[0] > 2000 or image.shape[1] > 2000:
+        scale = 0.4
+    if image.shape[0] > 4000 or image.shape[1] > 4000:
         scale = 0.2
     copy = image.copy()
     small = cv2.resize(copy, (0, 0), fx=scale, fy=scale, interpolation=cv2.INTER_AREA)
+    #name += str(image.shape)
     cv2.imshow(name, small)
     cv2.waitKey(wait)
     if save_name != "":

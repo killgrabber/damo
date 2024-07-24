@@ -10,6 +10,8 @@ import contourMatcher
 import difflib
 import random as rng
 from collections import Counter
+from threading import Thread
+
 
 IMAGES = [
     'pcd_2916383.png',
@@ -314,19 +316,27 @@ def stitch_images_path(top_image_path: str, bot_image_path: str, progress: [], r
 
 
 def match_all_contours(contours_top, bottom_contours, progress: []):
-    transitions = []
+    transitions = [(0,0)]
     blue = (255, 255, 100)
     green = (200, 255, 200)
     #contourMatcher.display_contours(contours_top, colors=[blue, green], wait=0,
      #                               name="top_contours",
      #                               save_name="top_contours.png")
     # Match all contours
+    matcher_threads = []
+
     for c_top in contours_top:
         for c_bot in bottom_contours:
-            transition = contourMatcher.match_contour(c_top, c_bot, progress)
-            progress[0] += 1
-            if any(transition) != 0:
-                transitions.append(transition)
+            print(f"Starting contour matcher thread...")
+            transitions.append(contourMatcher.match_contour(c_top, c_bot, transitions, progress))
+            #matcher_thread = Thread(target=contourMatcher.match_contour,
+            #                        args=(c_top, c_bot, transitions, progress))
+            #matcher_thread.start()
+            #matcher_threads.append(matcher_thread)
+
+    #for t in matcher_threads:
+        #t.join()
+
     return transitions
 
 
@@ -344,8 +354,9 @@ def stitch_images(top_image: cv2.Mat, bot_image: cv2.Mat, progress: [], result: 
     if isinstance(bot_image, str):
         bot_image = cv2.imread(bot_image)
     progress[0] += 10
-    top_image_blur = cv2.blur(top_image, (5, 5))
-    bot_image_blur = cv2.blur(bot_image, (5, 5))
+    blur_size = 2
+    top_image_blur = cv2.blur(top_image, (blur_size, blur_size))
+    bot_image_blur = cv2.blur(bot_image, (blur_size, blur_size))
     cut_size = 500
     offset = 200
     crop_top = cropImage(top_image_blur, True, cut_size, offset=offset)
@@ -358,10 +369,10 @@ def stitch_images(top_image: cv2.Mat, bot_image: cv2.Mat, progress: [], result: 
     #showAndSaveImage(crop_top)
     #showAndSaveImage(crop_bot)
     min_distance_from_border = 5
-    contours_top = getContours(crop_top, min_distance_from_border, limit=5)
+    contours_top = getContours(crop_top, min_distance_from_border, limit=20)
     print(f"Len of con: {len(contours_top)}")
     progress[0] += 5
-    contours_bot = getContours(crop_bot, min_distance_from_border, limit=5)
+    contours_bot = getContours(crop_bot, min_distance_from_border, limit=20)
     print(f"Len of con: {len(contours_bot)}")
     progress[0] += 5
 
@@ -370,7 +381,9 @@ def stitch_images(top_image: cv2.Mat, bot_image: cv2.Mat, progress: [], result: 
     for bot_c in contours_bot:
         bot_contours.append(move_contour(bot_c, (0, 0)))
 
-    #contourMatcher.display_contours(contours_top + bot_contours)
+    blue = (255, 255, 100)
+    green = (200, 255, 200)
+    contourMatcher.display_contours(contours_top + bot_contours, wait=0, colors=[blue, green])
 
     transitions = match_all_contours(contours_top, bot_contours, progress)
     transitions_dict = Counter(transitions)
@@ -411,6 +424,8 @@ def show_image_tresh(top_image_path, bot_image_path, treshold_min: [], treshold_
     small_bot = cv2.resize(bot_image, (0, 0), fx=0.2, fy=0.2, interpolation=cv2.INTER_AREA)
     overlap = 50
     while True:
+        do_some_threshing(small_bot, treshold_min, treshold_max)
+        continue
         moved_image = translate_image(small_bot, treshold_min[0], treshold_max[0])
         #contours_top = getContours(cv2.blur(small_top, (5, 5)))
         #contours_bot = getContours(cv2.blur(moved_image, (5, 5)))
@@ -443,12 +458,12 @@ def show_image_tresh(top_image_path, bot_image_path, treshold_min: [], treshold_
 def do_some_threshing(image_gray, treshold_min, treshold_max):
     print(f"Min: {treshold_min[0]} max {treshold_max[0]}")
     ret, thresh = cv2.threshold(image_gray, treshold_min[0], treshold_max[0], 0)
-    contours1, hierarchy1 = cv2.findContours(thresh, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
-    blank = np.zeros(image_gray.shape)
-    print("Contours found: ", len(contours1))
-    for i in range(len(contours1)):
-        color = (255, 255, 255)
-        cv2.drawContours(blank, contours1, i, color, 2, cv2.LINE_8, hierarchy1, 0)
+    #contours1, hierarchy1 = cv2.findContours(thresh, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+    #blank = np.zeros(image_gray.shape)
+    #print("Contours found: ", len(contours1))
+    #for i in range(len(contours1)):
+    #    color = (255, 255, 255)
+    #    cv2.drawContours(blank, contours1, i, color, 2, cv2.LINE_8, hierarchy1, 0)
     # cv2.imshow("loop", thresh)
-    cv2.imshow("loop2", blank)
+    cv2.imshow("loop2", thresh)
     cv2.waitKey(1)

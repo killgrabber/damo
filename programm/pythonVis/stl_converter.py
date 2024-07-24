@@ -112,25 +112,116 @@ def convert_to_2d_array(contour: []):
     return array
 
 
+def get_horizontal_distance(con1, con2):
+    contour_a1 = convert_to_2d_array(con1)
+    contour_a2 = convert_to_2d_array(con2)
+    center_x1, center_y1 = get_center_of_mass(con1)
+    center_x2, center_y2 = get_center_of_mass(con2)
+    length1 = len(contour_a1)
+    length2 = len(contour_a2)
+    depth1 = len(contour_a1[int(length1 / 2)])
+    depth2 = len(contour_a2[int(length2 / 2)])
+    # Horizontal (middle)
+    search_index_horizontal = math.floor((center_y1 + center_y1) / 2)
+    matches_a1_hor = []
+    matches_a2_hor = []
+    line_con = []
+    for i in range(max(length1, length2)):
+        line_con.append((i, search_index_horizontal))
+        if i < len(contour_a1) and contour_a1[i, search_index_horizontal]:
+            matches_a1_hor.append((i, search_index_horizontal))
+        if i < len(contour_a2) and contour_a2[i, search_index_horizontal]:
+            matches_a2_hor.append((i, search_index_horizontal))
+
+    if not (len(matches_a1_hor) >= 2 and len(matches_a2_hor) >= 2):
+        print(f"Didnt find 2 or more matches per line hor, abort")
+        return
+    top_distance_hor = contourMatcher.compare_point(matches_a1_hor[0], matches_a2_hor[0])
+    bot_distance_hor = contourMatcher.compare_point(matches_a1_hor[1], matches_a2_hor[1])
+    print(f"Distance top hor: {top_distance_hor}")
+    print(f"Distance bot hor: {bot_distance_hor}")
+
+def get_vertical_distance(con1, con2):
+    print(f"Getting vertical distances")
+    contour_a1 = convert_to_2d_array(con1)
+    contour_a2 = convert_to_2d_array(con2)
+
+    center_x1, center_y1 = get_center_of_mass(con1)
+    center_x2, center_y2 = get_center_of_mass(con2)
+    scanline_index = int((center_x1 + center_x2)/2)
+    for scanline in range(scanline_index-20, scanline_index+20):
+        line_con, vectors = find_distance_in_line(contour_a1, contour_a2, scanline)
+
+        contourMatcher.display_contours([con1, con2, line_con], name="with_line", wait=1,
+                                        colors=[(255, 255, 0), (255, 0, 255), (0, 255, 255)],
+                                        text=f"Top {vectors}")
+
+
+@nb.njit(parallel=False, fastmath=True)
+def find_distance_in_line(contour_a1, contour_a2, scanline_index):
+    matches_a1 = []
+    matches_a2 = []
+    line_con = []
+    length1 = len(contour_a1)
+    length2 = len(contour_a2)
+    depth1 = len(contour_a1[int(length1 / 2)])
+    depth2 = len(contour_a2[int(length2 / 2)])
+    #vertical
+    for i in range(max(depth1, depth2)):
+        line_con.append((scanline_index, i))
+        if i < len(contour_a1[scanline_index]) and contour_a1[scanline_index, i]:
+            matches_a1.append((scanline_index, i))
+        if i < len(contour_a2[scanline_index]) and contour_a2[scanline_index, i]:
+            matches_a2.append((scanline_index, i))
+
+    if not (len(matches_a1) == 2 and len(matches_a2) == 2):
+        print(f"Didnt find 2 or more matches per line ver, abort")
+        return line_con, [(0, 0)]
+
+    # find smallest dist
+    smallest_dists = []
+    vectors = []
+    vector = (0,0)
+    for a1 in matches_a1:
+        smallest_dist = sys.maxsize
+        for a2 in matches_a2:
+            dist = contourMatcher.compare_point(a1, a2)
+            if dist < smallest_dist:
+                vector = contourMatcher.get_translation(a1, a2)
+                smallest_dist = dist
+            smallest_dist = min(smallest_dist, contourMatcher.compare_point(a1, a2))
+        smallest_dists.append(smallest_dist)
+        if vector != (0, 0):
+            vectors.append(vector)
+
+    return line_con, vectors
+
+
 def move_and_check(con1, con2, progress, init_translation, search_area=50):
     diff = abs(len(con1) - len(con2))
-    min_len = 1000
-    if diff > 20000 or len(con1) < min_len or len(con2) < min_len:
+    min_len = 2500
+    if diff > 13000 or len(con1) < min_len or len(con2) < min_len:
         print(f"Diff {diff} to high, abort")
         return (0, 0), 0
     print(f"Checking contours with size {len(con1)} and {len(con2)}, diff: {diff}")
     moved_c = con2
     contour_a1 = convert_to_2d_array(con1)
     translation = init_translation
+    length_init_t = max(100, contourMatcher.compare_point(translation, (0,0)))
+    print(f"Search radius is: {length_init_t}")
     final_translation = translation
+    last_translations = []
     while True:
+        if len(last_translations) > 4:
+            last_translations.pop(0)
         moved_c = contourMatcher.move_contour(moved_c, translation)
         contour_a2 = convert_to_2d_array(moved_c)
 
         contourMatcher.display_contours([con1, moved_c], name="without", wait=1,
                                         colors=[(255, 255, 0), (255, 0, 255)])
+
         result = [0]
-        distance, vectors = check_2_contours(contour_a1, contour_a2, progress, search_radius=100, result=result)
+        distance, vectors = check_2_contours(contour_a1, contour_a2, progress, search_radius=length_init_t, result=result)
         if len(vectors) == 0:
             print(f"Found no matches: distances {distance}")
             return (0, 0), 0
@@ -142,18 +233,29 @@ def move_and_check(con1, con2, progress, init_translation, search_area=50):
             sum2 += vector[1]
         sum1 = sum1 / len(vectors)
         sum2 = sum2 / len(vectors)
-        #print(f"Distance: {distance}, transformation average: {sum1},{sum2}")
-        translation = (round(sum1), round(sum2))
+        last_translations.append((sum1, sum2))
+        print(f"Distance: {distance}, transformation average: {sum1},{sum2}")
+        t1 = math.ceil(sum1)
+        t2 = math.ceil(sum2)
+        if sum1 < 0:
+            t1 = math.floor(sum1)
+        if sum2 < 0:
+            t2 = math.floor(sum2)
+        translation = (t1, t2)
         final_translation = (final_translation[0] + translation[0],
                              final_translation[1] + translation[1])
         #print(f"Next translation is: {translation}")
-        if translation[0] == 0 and translation[1] == 0:
+        looping = (len(last_translations) > 3 and (sum1 == last_translations[-3][0] and
+                                                   sum2 == last_translations[-3][1]))
+        if looping or (abs(sum1) < 0.2 and abs(sum2) < 0.2):
             print(f"Checking done. complete translation: {final_translation}")
             contourMatcher.display_contours([con1, moved_c], name="final", wait=1,
                                             colors=[(255, 255, 0), (255, 0, 255)],
                                             save_name=f"matched_{len(con1)}_{len(con2)}_{distance:.2f}.png",
                                             text=f"Avg. Pixel distance: {distance:.4f}")
             break
+    final_moved = contourMatcher.move_contour(con2, final_translation)
+    get_vertical_distance(con1, final_moved)
     return final_translation, distance
 
 
@@ -199,11 +301,11 @@ def compare_images(image_paths: [], progress: []):
                 for j in range(-5, 5):
                     all_c += [[(int(x1 + i), int(y1 + j))]]
                     all_c += [[(int(x2 + i), int(y2 + j))]]
-            colors_1 = [(255, 255, 0)] * len(cons_1)
-            colors_2 = [(0, 255, 255)] * len(cons_2)
 
-            contourMatcher.display_contours(all_c, name="without1", wait=1,
-                                            colors=colors_1 + colors_2)
+            #colors_1 = [(255, 255, 0)] * len(cons_1)
+            #colors_2 = [(0, 255, 255)] * len(cons_2)
+            #contourMatcher.display_contours(all_c, name="without1", wait=1,
+            #                                colors=colors_1 + colors_2)
 
             translation = (int(x1 - x2), int(y1 - y2))
             print(f"Translation is: {translation}")
