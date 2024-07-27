@@ -28,7 +28,7 @@ def importImages():
     return images
 
 
-def getContours(img, min_distance=5, limit=100):
+def getContours(img, min_distance=5, limit=100, segment_distance=10):
     # draw contours on the original image
     height, width = img.shape[:2]
     image_contour_blue = img.copy()
@@ -64,7 +64,7 @@ def getContours(img, min_distance=5, limit=100):
         new_points = []
         for j in range(1, len(all_contours[i])):
             distance = compare_point(all_contours[i][j], all_contours[i][j - 1])
-            if distance < 10:
+            if distance < segment_distance:
                 new_points.append(all_contours[i][j].copy())
             else:
                 print("New segment")
@@ -328,14 +328,14 @@ def match_all_contours(contours_top, bottom_contours, progress: []):
     for c_top in contours_top:
         for c_bot in bottom_contours:
             print(f"Starting contour matcher thread...")
-            transitions.append(contourMatcher.match_contour(c_top, c_bot, transitions, progress))
-            #matcher_thread = Thread(target=contourMatcher.match_contour,
-            #                        args=(c_top, c_bot, transitions, progress))
-            #matcher_thread.start()
-            #matcher_threads.append(matcher_thread)
+            #transitions.append(contourMatcher.match_contour(c_top, c_bot, transitions, progress))
+            matcher_thread = Thread(target=contourMatcher.match_contour,
+                                    args=(c_top, c_bot, transitions, progress))
+            matcher_thread.start()
+            matcher_threads.append(matcher_thread)
 
-    #for t in matcher_threads:
-        #t.join()
+    for t in matcher_threads:
+        t.join()
 
     return transitions
 

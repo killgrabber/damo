@@ -1,5 +1,6 @@
 import math
 import sys
+import os
 
 import open3d as o3d
 import pc2img
@@ -32,7 +33,7 @@ def convert_stl(filepath: str, progress: [], result: []):
 def find_contours_in_image(image, progress: [], result: []):
     print('Starting contour search')
     image_blur = cv2.blur(image, (2, 2))
-    contours = imageAnalyser.getContours(image_blur, 0, limit=10)
+    contours = imageAnalyser.getContours(image_blur, 10, limit=10, segment_distance=1000000)
     #contourMatcher.display_contours_in_image(contours, image, name="with image", wait=1,
     #                                         colors=[255, 255, 0], save_name="with_con.jpg")
     #contourMatcher.display_contours(contours, name="without", wait=0,
@@ -142,7 +143,7 @@ def get_horizontal_distance(con1, con2):
     print(f"Distance bot hor: {bot_distance_hor}")
 
 
-def get_vertical_distance(con1, con2):
+def get_vertical_distance(con1, con2, image_paths: [], index_1, index_2):
     print(f"Getting vertical distances")
     contour_a1 = convert_to_2d_array(con1)
     contour_a2 = convert_to_2d_array(con2)
@@ -177,18 +178,25 @@ def get_vertical_distance(con1, con2):
     both_val = [x[0]-x[1] for x in all_vectors]
     y_line = [0, len(all_vectors)]
     x_val = [x for x in range(len(all_vectors))]
-    # plotting the line 1 points
-    plt.plot([0, len(all_vectors)], [0, 0], color='black')
-    #plt.scatter(x_val, y1_val, label="top_distance", s=1)
-    #plt.scatter(x_val, y2_val, label="bot_distance", s=1)
-    plt.scatter(x_val, both_val, label="sum of distance", s=1)
-    plt.ylabel('Deformation in Pixel')
-    plt.xlabel('Pixel - X-Achse')
-    plt.ylim((-100, 100))
-    plt.show()
-    contourMatcher.display_contours([con1, con2, smallest_distance[0][2]], name="with_line", wait=0,
+    # saving data to file:
+    image_name_1 = image_paths[0].split('/')[-1].split('.')[0]
+    image_name_2 = image_paths[1].split('/')[-1].split('.')[0]
+    try:
+        os.mkdir(f"deformation_data")
+    except FileExistsError:
+        pass
+    file_name = f'deformation_data/{image_name_1}_{image_name_2}_{index_1}_{index_2}'
+    file1 = open(f'{file_name}.txt', 'w')
+    index = 0
+    for val in both_val:
+        file1.write(f"{index}, {val}\n")
+        index += 1
+    file1.close()
+
+    contourMatcher.display_contours([con1, con2], name="with_line", wait=1,
                                     colors=[(255, 255, 0), (255, 0, 255), (0, 255, 255)],
-                                    text=f"Difference {average_top:.2f}, {average_bot:.2f}")
+                                    text=f"Difference {average_top:.2f}, {average_bot:.2f}",
+                                    save_name=f"{file_name}.png")
 
     return all_vectors
 
@@ -233,7 +241,8 @@ def find_distance_in_line(contour_a1, contour_a2, scanline_index):
     return line_con, vectors
 
 
-def move_and_check(con1, con2, progress, init_translation, result_distances: [], search_area=50):
+def move_and_check(con1, con2, progress, init_translation, result_distances: [], image_paths: [],
+                   index_1, index_2, search_area=50, ):
     diff = abs(len(con1) - len(con2))
     min_len = 2500
     if diff > 20000 or len(con1) < min_len or len(con2) < min_len:
@@ -243,11 +252,12 @@ def move_and_check(con1, con2, progress, init_translation, result_distances: [],
     moved_c = con2
     contour_a1 = convert_to_2d_array(con1)
     translation = init_translation
-    length_init_t = min(max(100, contourMatcher.compare_point(translation, (0, 0)) * 1.5), 300)
-    #print(f"Search radius is: {length_init_t}")
+    length_init_t = max(100, contourMatcher.compare_point(translation, (0, 0)) * 1.5)
+    print(f"Search radius is: {length_init_t}")
     if length_init_t > 500:
-        #print(f"Search radius too big, abort")
-        return (0, 0), 0
+        length_init_t = 200
+        print(f"Search radius too big, abort")
+        #return (0, 0), 0
     final_translation = translation
     last_translations = []
     while True:
@@ -256,7 +266,7 @@ def move_and_check(con1, con2, progress, init_translation, result_distances: [],
         moved_c = contourMatcher.move_contour(moved_c, translation)
         contour_a2 = convert_to_2d_array(moved_c)
 
-        contourMatcher.display_contours([con1, moved_c], name="without", wait=1,
+        contourMatcher.display_contours([con1, moved_c], name="matching", wait=1,
                                         colors=[(255, 255, 0), (255, 0, 255)])
 
         result = [0]
@@ -289,13 +299,13 @@ def move_and_check(con1, con2, progress, init_translation, result_distances: [],
                                                    sum2 == last_translations[-3][1]))
         if looping or (abs(sum1) < 0.1 and abs(sum2) < 0.1):
             print(f"Checking done. complete translation: {final_translation}")
-            contourMatcher.display_contours([con1, moved_c], name="final", wait=1,
-                                            colors=[(255, 255, 0), (255, 0, 255)],
-                                            save_name=f"matched_{len(con1)}_{len(con2)}_{distance:.2f}.png",
-                                            text=f"Avg. Pixel distance: {distance:.4f}")
+            #contourMatcher.display_contours([con1, moved_c], name="final", wait=1,
+            #                                colors=[(255, 255, 0), (255, 0, 255)],
+            #                                save_name=f"matched_{len(con1)}_{len(con2)}_{distance:.2f}.png",
+            #                                text=f"Avg. Pixel distance: {distance:.4f}")
             break
     final_moved = contourMatcher.move_contour(con2, final_translation)
-    all_distances_vertical = get_vertical_distance(con1, final_moved)
+    all_distances_vertical = get_vertical_distance(con1, final_moved, image_paths, index_1, index_2)
     result_distances[0] = all_distances_vertical
     return final_translation, distance
 
@@ -353,7 +363,9 @@ def compare_images(image_paths: [], progress: [], result_distances: []):
 
             final_translation, distance = move_and_check(cons_1[index_1],
                                                          cons_2[index_2],
-                                                         progress, translation, result_distances,  search_area=25)
+                                                         progress, translation, result_distances,
+                                                         image_paths, index_1, index_2,
+                                                         search_area=25)
             all_results.append((index_1, index_2, final_translation, distance))
 
     #print("Index1, Index2, Translation, Distance")

@@ -207,4 +207,4 @@ def show_image(image, wait=0, name="Damo", save_name=""):
     cv2.waitKey(wait)
     if save_name != "":
         print(f"Trying to save to: {save_name}...")
-        cv2.imwrite(f"output/{save_name}", copy)
+        cv2.imwrite(f"{save_name}", copy)

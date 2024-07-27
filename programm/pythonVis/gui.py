@@ -2,7 +2,7 @@ import math
 import tkinter
 from tkinter import *
 from tkinter import ttk, filedialog
-
+import data_stuff
 import cv2
 import numpy as np
 import time
@@ -375,6 +375,19 @@ for i in range(3):
     image_displays.append(label_image)
 
 set_image_loop()
+
+import matplotlib.pyplot as plt
+
+# data handler
+def do_plots():
+    file = filedialog.askopenfilenames()
+    data_stuff.do_stuff_with_deformation_data(file)
+
+
+
+compare_button = ttk.Button(frm, text="Plot data", command=lambda: do_plots())
+compare_button.grid(column=5, row=4)
+
 
 while True:
     root.update_idletasks()
