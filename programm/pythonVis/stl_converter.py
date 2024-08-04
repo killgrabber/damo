@@ -339,6 +339,10 @@ def compare_images(image_paths: [], progress: [], result_distances: []):
     cons_1 = contours_1[0]
     cons_2 = contours_2[0]
 
+    contourMatcher.display_contours(cons_1, name="without1", wait=0,
+                                    colors=[255, 255, 255],
+                                    save_name=f"contours_{image_paths[0].split('/')[-1]}")
+
     all_results = []
     for index_1 in range(len(cons_1)):
         for index_2 in range(len(cons_2)):
@@ -356,7 +360,8 @@ def compare_images(image_paths: [], progress: [], result_distances: []):
             #colors_1 = [(255, 255, 0)] * len(cons_1)
             #colors_2 = [(0, 255, 255)] * len(cons_2)
             #contourMatcher.display_contours(all_c, name="without1", wait=1,
-            #                                colors=colors_1 + colors_2)
+            #                                colors=colors_1 + colors_2,
+            #                                save_name=f"contours_{image_paths[0].split('/')[-1]}")
 
             translation = (int(x1 - x2), int(y1 - y2))
             #print(f"Translation is: {translation}")

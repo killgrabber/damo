@@ -27,6 +27,7 @@
 \contentsline {section}{\numberline {5.5}Bilder zusammenfügen}{23}{}%
 \contentsline {section}{\numberline {5.6}Probleme und Lösungen im Verfahren}{23}{}%
 \contentsline {chapter}{\numberline {6}Analyse der spannkraftinduzierten Deformation}{27}{}%
+\contentsline {section}{\numberline {6.1}Deformation zwischen zwei Spannungszuständen}{27}{}%
 \contentsline {chapter}{\numberline {7}Algorithmus und Software}{29}{}%
 \contentsline {chapter}{\numberline {8}Validierung}{31}{}%
 \contentsline {subsection}{\numberline {8.0.1}Versuchsaufbau}{31}{}%
