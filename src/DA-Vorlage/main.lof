@@ -20,10 +20,17 @@
 \contentsline {figure}{\numberline {5.5}{\ignorespaces Verfahren im Verlauf dargestellt, a am Anfang, b nach n-durchgängen, c }}{23}{}%
 \contentsline {figure}{\numberline {5.6}{\ignorespaces Zusammengefügtes Bild}}{24}{}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {6.1}{\ignorespaces (a) Zusammengefügtes Bild des FDM Demonstratorbauteils, Spannungsstufe 0 (b) Randgeometrie des Bildes in a}}{28}{}%
+\contentsline {figure}{\numberline {6.1}{\ignorespaces (a) Zusammengefügtes Bild des FDM Demonstratorbauteils, Spannungsstufe 0 (b) Randgeometrie von (a), die zur Erkennung der Deformation genutzt wird}}{28}{}%
+\contentsline {figure}{\numberline {6.2}{\ignorespaces Deformation der inneren Bauteilgeometrie des Demonstratorbauteils visuell dargestellt}}{30}{}%
+\contentsline {figure}{\numberline {6.3}{\ignorespaces Deformation der inneren Bauteilgeometrie des Demonstratorbauteils als Graph}}{30}{}%
+\contentsline {figure}{\numberline {6.4}{\ignorespaces Differenz von zwei Spannungsstufen bei einem FDM Bauteil, äußere Bauteilgeometrie.}}{31}{}%
+\contentsline {figure}{\numberline {6.5}{\ignorespaces Differenz von mehreren Spannungsstufen bei einem FDM Bauteil}}{31}{}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {8.1}{\ignorespaces Versuchsaufbau}}{31}{}%
-\contentsline {figure}{\numberline {8.2}{\ignorespaces Taster}}{32}{}%
-\contentsline {figure}{\numberline {8.3}{\ignorespaces Spannungswandler}}{33}{}%
+\contentsline {figure}{\numberline {8.1}{\ignorespaces Differenz von mehreren Spannungsstufen bei einem AM Metall Bauteil}}{35}{}%
+\contentsline {figure}{\numberline {8.2}{\ignorespaces Versuchsaufbau}}{36}{}%
+\contentsline {figure}{\numberline {8.3}{\ignorespaces Kraft- und Verschiebung der Spannungsstufe fünf bei einem FDM Bauteil}}{37}{}%
+\contentsline {figure}{\numberline {8.4}{\ignorespaces Akkumulierte Kraft- und Verschiebung jedes Bauteils}}{38}{}%
+\contentsline {figure}{\numberline {8.5}{\ignorespaces Taster}}{38}{}%
+\contentsline {figure}{\numberline {8.6}{\ignorespaces Spannungswandler}}{39}{}%
 \addvspace {10\p@ }

@@ -26,14 +26,18 @@
 \contentsline {section}{\numberline {5.4}Visuelle Darstellung des Stitching Prozesses}{23}{}%
 \contentsline {section}{\numberline {5.5}Bilder zusammenfügen}{23}{}%
 \contentsline {section}{\numberline {5.6}Probleme und Lösungen im Verfahren}{23}{}%
-\contentsline {chapter}{\numberline {6}Analyse der spannkraftinduzierten Deformation}{27}{}%
+\contentsline {chapter}{\numberline {6}Spannkraftinduzierten Deformation}{27}{}%
 \contentsline {section}{\numberline {6.1}Deformation zwischen zwei Spannungszuständen}{27}{}%
-\contentsline {chapter}{\numberline {7}Algorithmus und Software}{29}{}%
-\contentsline {chapter}{\numberline {8}Validierung}{31}{}%
-\contentsline {subsection}{\numberline {8.0.1}Versuchsaufbau}{31}{}%
-\contentsline {section}{\numberline {8.1}Zusätzliche Messinstrumente}{32}{}%
-\contentsline {chapter}{\numberline {9}Zusammenfassung und Ausblick}{35}{}%
-\contentsline {chapter}{Abbildungsverzeichnis}{37}{}%
-\contentsline {chapter}{Algorithmenverzeichnis}{39}{}%
-\contentsline {chapter}{Literaturverzeichnis}{42}{}%
-\contentsline {chapter}{Erklärung}{42}{}%
+\contentsline {subsection}{\numberline {6.1.1}Randgeometrien übereinander legen}{28}{}%
+\contentsline {subsection}{\numberline {6.1.2}Deformation messen}{29}{}%
+\contentsline {chapter}{\numberline {7}Algorithmus und Software}{33}{}%
+\contentsline {chapter}{\numberline {8}Validierung}{35}{}%
+\contentsline {section}{\numberline {8.1}Analyse der spannkraftinduzierten Deformation}{35}{}%
+\contentsline {subsection}{\numberline {8.1.1}Versuchsaufbau}{36}{}%
+\contentsline {section}{\numberline {8.2}Zusätzliche Messinstrumente}{36}{}%
+\contentsline {subsection}{\numberline {8.2.1}Messergebnisse}{37}{}%
+\contentsline {chapter}{\numberline {9}Zusammenfassung und Ausblick}{41}{}%
+\contentsline {chapter}{Abbildungsverzeichnis}{44}{}%
+\contentsline {chapter}{Algorithmenverzeichnis}{45}{}%
+\contentsline {chapter}{Literaturverzeichnis}{48}{}%
+\contentsline {chapter}{Erklärung}{48}{}%

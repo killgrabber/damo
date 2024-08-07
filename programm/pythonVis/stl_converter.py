@@ -195,7 +195,7 @@ def get_vertical_distance(con1, con2, image_paths: [], index_1, index_2):
 
     contourMatcher.display_contours([con1, con2], name="with_line", wait=1,
                                     colors=[(255, 255, 0), (255, 0, 255), (0, 255, 255)],
-                                    text=f"Difference {average_top:.2f}, {average_bot:.2f}",
+                                    #text=f"Difference {average_top:.2f}, {average_bot:.2f}",
                                     save_name=f"{file_name}.png")
 
     return all_vectors

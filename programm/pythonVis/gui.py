@@ -9,6 +9,7 @@ import time
 from threading import Thread
 from queue import Queue
 from PIL import ImageTk, Image
+import tdmsHandler
 
 import stl_converter
 import pc2img
@@ -19,6 +20,14 @@ from PIL import ImageTk, Image, ImageDraw
 
 pointclouds = ["", ""]
 images = ["", ""]
+
+def getFolderPath():
+    folder_selected = filedialog.askdirectory()
+    return folder_selected
+
+def get_file_paths():
+    files = filedialog.askopenfilenames()
+    return files
 
 
 def get_file_path_pc(index):
@@ -331,6 +340,13 @@ load_stl_image_button.grid(column=4, row=9)
 
 save_stl_image_button = ttk.Button(frm, text="save overlap image", command=lambda: save_current_overlap_images())
 save_stl_image_button.grid(column=4, row=10)
+
+save_stl_image_button = ttk.Button(frm, text="import tmds data", command=lambda: tdmsHandler.getTDMSdata(getFolderPath()))
+save_stl_image_button.grid(column=0, row=12)
+
+save_stl_image_button = ttk.Button(frm, text="combine tmds data",
+                                   command=lambda: tdmsHandler.get_combined_plot(get_file_paths()))
+save_stl_image_button.grid(column=0, row=13)
 
 # Treshhold slider
 tresh_min_slider = ttk.Scale(
