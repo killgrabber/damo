@@ -2,27 +2,29 @@
 \chapter{Spannkraftinduzierten Deformation}
 
 Im folgenden Kapitel wird die Methode zur Erkennung und Analyse von durch 
-Spannkraft induzierter Deformationen beschrieben. Ziel ist es, 
-aus zwei zusammengefügten Bilder von zwei verschiedenen Spannungsstufen, 
-Deformationen zu erkennen.
-Als Deformation wird eine äußerliche Veränderung des betrachteten Bauteils bezeichnet, 
-die äußere Veränderung ist hierbei über den Unterschied der Ränder der Bauteile definiert.
-Bevor eine Deformation erkannt werden kann, muss die Randgeometrie von beiden
-abgebildeten Bauteilen erfasst werden.
-Vorerst werden in einem Schritt immer nur zwei Spannungsstufen miteinander verglichen 
-und die Deformationsdaten anschließend abgespeichert.
-Die Auswertung der resultierenden Daten erfolgt in einem separaten Schritt, so können auch
-mehrere Spannungsstufen untereinander verglichen werden, ohne das die Komplexität steigt.
+Spannkraft induzierten Deformationen erläutert. Ziel ist es, 
+Deformationen anhand von zwei zusammengefügten Bildern aus unterschiedlichen 
+Spannungsstufen zu identifizieren. Eine Deformation wird als äußerliche 
+Veränderung des betrachteten Bauteils definiert, wobei diese Veränderung 
+durch den Unterschied der Ränder der Bauteile bestimmt wird.
+Bevor eine Deformation erkannt werden kann, muss die Randgeometrie beider 
+abgebildeter Bauteile erfasst werden. 
+Zunächst werden in einem Schritt immer zwei Spannungsstufen miteinander verglichen,
+und die Deformationsdaten werden anschließend gespeichert. 
+Die Auswertung der resultierenden Daten erfolgt in einem separaten Schritt, 
+wodurch es möglich ist, mehrere Spannungsstufen miteinander zu vergleichen,
+ohne dass die Komplexität des Verfahrens ansteigt.
 
 \section{Deformation zwischen zwei Spannungszuständen}
 
-Wie beschrieben, ist die Deformation zwischen zwei Bauteilen als Differenz der 
-Randgeometrie deformiert. Um die Randgeometrie eines Bauteils zu ermitteln, 
-kann erneut die Kontursuche [VERWEIS] angewendet werden. Die gefundenen Konturen bilden dann 
-die Ränder des Bauteils ab. So werden äußere aber auch innere Geometrien 
-abgebildet und ermöglichen die Deformationserkennung. 
-In Abbildung \ref{fig:stichted_contour} ist ein 
-zusammengefügtes Bild und die erkannte Randgeometrie eines Bauteils zu sehen.
+Wie beschrieben, wird die Deformation zwischen zwei Bauteilen als Differenz 
+der Randgeometrie definiert. Um die Randgeometrie eines Bauteils zu ermitteln, 
+kann erneut die Kontursuche [VERWEIS] angewendet werden. 
+Die ermittelten Konturen bilden die Ränder des Bauteils ab und 
+erfassen sowohl äußere als auch innere Geometrien, was 
+die Deformationserkennung ermöglicht. In Abbildung \ref{fig:stichted_contour} 
+ist ein zusammengefügtes Bild sowie die erkannte Randgeometrie eines 
+Bauteils dargestellt.
 
 \begin{figure}[H]
     \centering
@@ -43,25 +45,26 @@ zusammengefügtes Bild und die erkannte Randgeometrie eines Bauteils zu sehen.
 
 \subsection{Randgeometrien übereinander legen}
 
-Um die Differenz zweier Randgeometrien bilden zu können, müssen diese übereinander 
-gelegt werden.
-Dies garantiert, dass die gebildete Differenz minimal ist.
-Der schon beschriebe Ansatz des Konturmatching [VERWEIS] könnte auch hier genutzt worden. 
-allerdings müssen hier die gesamten Konturen betrachtet werden und nicht wie zuvor nur 
-der überlappende Auschnitt. Das schon vorgestellte Verfahren ist für die Konturen eines
-gesamten Bauteils nicht performant genug um eine akzeptable Laufzeit für das Verfahren
-zu gewährleisten. 
-Deswegen wird hier ein anderes Verfahren eingesetzt. Es basiert auf demselben Prinzip,
-Punktepaare zu finden deren euklidischen Distanz gleich null ist. Anstatt das aber 
-jeder Punkt der Zielkontur mit jedem Punkt der Ursprungskontur verglichen wird, 
-wird ein maximaler Radius definiert in dem nach benachbarten Punkten gesucht wird.
-Hierfür muss die Kontur erst in eine zweidimensionale Datenstruktur überführt werden.
-Dieser zusätzliche Aufwand sorgt für eine deutlich verkürzte Laufzeit.
+Um die Differenz zweier Randgeometrien bestimmen zu können, 
+müssen diese präzise übereinander gelegt werden. Dies gewährleistet, 
+dass die resultierende Differenz minimal ist. Der bereits beschriebene Ansatz 
+des Konturmatchings [VERWEIS] könnte auch hier genutzt werden. Allerdings 
+müssen in diesem Fall die gesamten Konturen berücksichtigt werden und nicht 
+nur der überlappende Ausschnitt. Das zuvor vorgestellte Verfahren ist jedoch 
+für die Konturen eines gesamten Bauteils nicht performant genug, um eine 
+akzeptable Laufzeit sicherzustellen.
 
-Ähnlich zu dem schon beschriebenen ICP-Algorithmus [VERWEIS] wird eine Transformation berechnet,
-mit der eine Kontur einer anderen Kontur angenähert werden kann.
-Die Transformation wird mit folgendem Algorithmus berechnet:
-(FRAGE: Hier entweder das, oder latex-pseudocodeblock, oder python screenshot?).
+Deshalb wird in diesem Kontext ein alternatives Verfahren eingesetzt. 
+Es basiert auf dem Prinzip, Punktepaare zu finden, deren euklidische
+Distanz gleich null ist. Anstatt jedoch jeden Punkt der Zielkontur mit 
+jedem Punkt der Ursprungskontur zu vergleichen, wird ein maximaler Radius definiert, 
+innerhalb dessen nach benachbarten Punkten gesucht wird. Hierfür muss die Kontur 
+zunächst in eine zweidimensionale Datenstruktur überführt werden. Dieser zusätzliche 
+Aufwand führt zu einer erheblichen Verkürzung der Laufzeit.
+
+Ähnlich dem bereits beschriebenen ICP-Algorithmus [VERWEIS] wird eine Transformation 
+berechnet, die eine Kontur an eine andere annähert. Die Berechnung der 
+Transformation erfolgt nach folgendem Algorithmus:
 
 \begin{enumerate}
     \item Zu jedem Punkt in der Ursprungskontur wird der Nachbarpunkt
@@ -83,7 +86,28 @@ angewendet und erneut die Transformation berechnet. Dies wird so lange wiederhol
 die Transformation dem Nullvektor entspricht. Wenn dies geschieht, sind beide Konturen, 
 und damit die Randgeometrien der Bauteile angenähert.
 Um Rechenzeit zu sparen werden vor dem Ermitteln der ersten Transformation die 
-Massenmittelpunkte beider Bauteilgeometrien berechnet und übereinader gelegt.
+Massenmittelpunkte beider Bauteilgeometrien berechnet und Übereinader gelegt.
+In Abbildung \ref{fig:stichted_contours_compare} sind die Konturen vor und nach 
+dem Überlappungs-prozess abgebildet.
+
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{images/contours_before_matching.png} % first figure itself
+        \caption*{(a)} 
+    \end{minipage}\hfill
+    \begin{minipage}{0.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{images/AM2_SP0_stitched_AM2_SP3_stitched_0_0.png} % first figure itself
+        \caption*{(b)}
+    \end{minipage}\hfill
+    \caption{(a) Kontur des Bauteils AM2 bei Spannungsstufe null, vor dem übereinanderlegen
+    mit der Kontur von Spannungsstufe drei.
+    (b) Die Konturen von AM2 bei Spannungsstufen null und drei. Vollständig übereinader
+    gelegt.}
+        \label{fig:stichted_contours_compare}
+\end{figure}
 
 \subsection{Deformation messen}
 
@@ -105,7 +129,9 @@ Deformationswerte grafisch dargestellt.
 
 Es wurde ein per FDM gefertigtes Bauteil eingespannt und zwei Spannungsstufen verglichen.
 Die Blau sehende Linie bildet die Randgeometrie des Bauteils ab, dass mit Spannungsstufe
-null eingespannt wurde. Das entspricht hier nur einer lockerer Einspannung bei 
+null eingespannt wurde. Das entspricht hier nur einer lockerer Einspannung in den 
+Schraubstock. Die Magenta gefärbte Linie ist die Spannungsstufe sechs des gleichen
+Bauteils. Hier wurde der Schraubstock mit einer Kraft von ca. 250 nm angezogen.
 
 \begin{figure}[H]
     \centering

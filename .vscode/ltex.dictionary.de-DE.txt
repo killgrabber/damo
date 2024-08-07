@@ -17,3 +17,6 @@ Scandaten
 Akkuranz
 Stitching
 Scanverlaufs
+Konturmatching
+Kontursuche
+Deformationserkennung

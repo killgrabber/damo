@@ -5,16 +5,15 @@
 
 [explizit Unterschiede FDM und additiv herausstellen mit genauen Angaben über die Deformationen]
 
-Mithilfe dieser Funktion können unterschiedliche Bauteilgeometrien und 
-Herstellungsprozesse auf ihre Deformation verglichen werden.
-
-Bei einem additiv gefertigten Metallteil, tritt bei den gleichen Spannungsstufen
-eine deutlich kleinere, aber dennoch eine erkennbare Deformation auf.
-Zusätzlich ist zu sehen, dass bei verschiedenen Herstellungsprozess, trotz
-gleicher Geometrie unterschiedliche Verformungen auftreten.
-
-[vllt expliziter, wo genau tritt die Deformation auf, 
-von wie viel Deformation reden wir, was bedeutet das für das Realbauteil]
+Mithilfe dieser Funktion können unterschiedliche Bauteilgeometrien und
+Herstellungsprozesse auf ihre Deformation hin verglichen werden.
+Bei einem additiv gefertigten Metallteil tritt bei den 
+gleichen Spannungsstufen eine deutlich kleinere, 
+aber dennoch erkennbare Deformation auf. Zusätzlich zeigt sich, 
+dass bei verschiedenen Herstellungsprozessen trotz gleicher 
+Geometrie unterschiedliche Verformungen auftreten.
+Die verschiedenen Verformungen und Auswirkungen werden später in diesem
+Kapitel behandelt.
 
 \begin{figure}[H]
     \centering
@@ -73,9 +72,8 @@ für unseren Einsatzzweck gut geeignet da sie eine hohe Empfindlichkeit bietet
 und in vielfältigen Formen und Größen hergestellt werden kann. Zur Aufbereitung 
 der Ladung, die der piezoelektrische Sensor, liefert wurde ein Ladungsverstärker 
 eingesetzt.\cite{Schwartz.2006}
-Dieser ist in Spannungsverstärker ist in Abbildung \ref{fig:taster} unten zu sehen.
 
-\subsection{Messergebnisse}
+\section{Messergebnisse}
 
 Es wurden fünf Bauteile mit verschiedenen Spannungsstufen gemessen. Für jede 
 Spannungsstufe wurde die Kraft, die auf das Bauteil wirkte sowie die Verschiebung 
@@ -101,29 +99,30 @@ Die Spannkraft wurde an zwei Achsen aufgenommen und zu der Gesamtkraft aufsummie
 \end{figure}
 
 Diese maximalen Werte für die Spannkraft und Auslenkung wurden für jedes Bauteil 
-akkumuliert und sind in Abbildung \ref{fig:akkumulated} dargestellt.
-Die mit dem FDM Prozess hergestellten Bauteile wurden mit jeweils sechs Spannungsstufen 
-gemessen. Zwischen jeder Stufe wurde versucht eine konstante Kraft auf das Bauteil 
-auszuüben. Durch den händischen Prozess des anziehen des Schraubstocks war die jedoch 
-nicht immer möglich. 
-Die Metallbauteile unterscheiden sich durch ihren Aufbau. Alle basieren auf dem gleichen
-3D-Modell, besitzen jedoch Änderungen in der Stützstruktur.
-In dem Bauteil AM0 ist die volle Stützstruktur vorhanden, in den Bauteilen 
-AM1 und AM2 wurde die Stützstruktur mit einem Bohrer in verschiedener Tiefe
-ausgebohrt. Die Bauteile sind in Abbildung \ref{fig:am_parts} dargestellt.
+akkumuliert und sind in Abbildung \ref{fig:akkumulated} dargestellt. 
+Die mit dem FDM-Prozess hergestellten Bauteile wurden jeweils in sechs Spannungsstufen
+gemessen. Zwischen den Stufen wurde versucht, eine konstante Kraft auf das Bauteil 
+auszuüben. Durch den manuellen Prozess des Anziehens des Schraubstocks war dies 
+jedoch nicht immer möglich.
+Die Metallbauteile unterscheiden sich durch ihren Aufbau. 
+Alle basieren auf dem gleichen 3D-Modell, besitzen jedoch unterschiedliche 
+Stützstrukturen. Im Bauteil AM0 ist die vollständige Stützstruktur vorhanden,
+während in den Bauteilen AM1 und AM2 die Stützstruktur in unterschiedlicher 
+Tiefe ausgebohrt wurde. Die Bauteile sind in Abbildung \ref{fig:am_parts} dargestellt.
 
-Das Bauteil AM0 wurde nur mit zwei Spannungsstufen gemessen, da schon bei der zweiten 
-Stufe über 2500 nm Kraft erforderlich war, um das Bauteil nur minimal in x-Richtung 
-zu deformieren. Das ist zeigt, dass die Stützstruktur sich stark auf die Verformbarkeit
-eines Bauteils auswirkt. Bei dem Bauteil AM1 wurden 2500 nm nach vier Spannungsstufen 
-erreicht. Wenn man die Verformung in x-Richtung mit der Verformung von AM2 vergleicht, 
-ist zu sehen, dass das Bauteil ohne Stützstruktur etwa doppelt so weit, bei einer 
-ähnlichen Kraft, in x-Richtung deformiert wurde.
+Das Bauteil AM0 wurde nur mit zwei Spannungsstufen gemessen, 
+da bereits bei der zweiten Stufe über 2500 N Kraft erforderlich war, 
+um das Bauteil nur minimal in x-Richtung zu deformieren. Dies zeigt, 
+dass die Stützstruktur einen erheblichen Einfluss auf die Verformbarkeit 
+eines Bauteils hat. Beim Bauteil AM1 wurden 2500 N erst nach vier Spannungsstufen 
+erreicht. Vergleicht man die Verformung in x-Richtung mit der Verformung von AM2,
+ zeigt sich, dass das Bauteil ohne Stützstruktur bei ähnlicher Krafteinwirkung 
+ etwa doppelt so weit in x-Richtung deformiert wurde.
 
-Die FDM Bauteile wurden mit deutlich weniger Kraft eingespannt. Hier wurde bei ca. 
-250 nm gestoppt, dennoch ist die Verschiebung der Teile deutlich höher als bei den 
-AM Teilen. Diese Werte wurden aufgenommen um die Visuelle Deformationserkennung zu 
-validieren.
+ Die FDM-Bauteile wurden mit deutlich weniger Kraft eingespannt. 
+ Hier wurde bei etwa 250 N gestoppt, dennoch ist die Verschiebung der 
+ Teile deutlich größer als bei den AM-Bauteilen. Diese Werte wurden aufgenommen, 
+ um die visuelle Deformationserkennung zu validieren.
 
 \begin{figure}[H]
     \centering
@@ -154,12 +153,39 @@ validieren.
       (c): AF Bauteil ohne Stützstruktur, Bezeichnung: AM2}
       \label{fig:am_parts}
 \end{figure}
-    
-Zusätzlich werden die Bauteile nach einem Scanvorgang mit einem Taster 
-abgetastet. Hierfür wird der Werkzeugkopf gewechselt und der Scanner entfernt.
-Dann wird der Taster in die CNC-Maschine eingesetzt und das Bauteil abgetastet.
-In Abbildung \ref{fig:taster} ist das Tasterwerkzeug zu sehen. Die rote Kugel 
-am Ende des Tasters erkennt, sobald eine Berührung zu dem Bauteil erfolgt ist 
-und benachrichtigt den Steuerungsrechner. Dieser speichert die aktuelle Position 
-dann in einer Protokolldatei. Durch diese Daten kann die Deformation auch an 
-den Randbereichen der Bauteile validiert werden.
+
+\section{Ergebnisse der optischen Deformationsanalyse}
+
+In Abbildung \ref{fig:am_defos} und Abbildung \ref{fig:fdm_defos} sind die erkannten,
+vertikalen Deformation grafisch dargestellt. Jeweils von Spannungsstufe null bis 
+Spannungsstufen Sechs. Bei dem FDM Bauteil fehlt die Spannungsstufen fünf, 
+diese ist leider bei der händischen Dateiname Vergabe überschrieben worden und konnte 
+deshalb nicht ausgewertet worden. Aus diesem Grund ist eine so große Lücke in der 
+Abbildung \ref{fig:fdm_defos}.
+Außerdem sind große Unterschiede in der absoluten Deformation zu sehen. Zum Beispiel 
+die rote Kurve in Abbildung \ref{fig:am_defos} die den Unterschied der Spannungsstufen 
+null und eins angibt. Diese Kurve sollte näher an null der y-Achse liegen. 
+Dies liegt an Ungenauigkeiten in dem Stitching Verfahren. In den Graphen ist also 
+auf die Steigung der Deformationskurve zu achten. In der Steigung erkannt man das 
+sich die Bauteile in mittleren Bereich nach außen hin deformiert haben und in 
+den Randbereichen sich nach innen und dann wieder nach außen deformieren.
+Außerdem ist im Vergleich der beiden Graphen zu sehen das sich das FDM Bauteil deutlich 
+mehr verformt hat. Hier beträgt die größte Deformation über 150 Pixel.
+Bei dem Metallbauteil, das mit der zehnfachen Kraft eingespannt wurde (250 nm vs. 2500 nm)
+sind es nur knapp 40 Pixel. Trotzdem ist zu sehen das sich die Bauteile, die auch die 
+gleiche Geometrie teilen, auf die gleiche Weise verformt haben.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.95\textwidth]{images/am2_all_defos.png}
+  \caption{Sechs Deformationsstufen bei einem AM Bauteil von 0 bis 2500 nm}
+  \label{fig:am_defos}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.95\textwidth]{images/fdm2_all_defos.png}
+  \caption{Fünf Deformationsstufen bei einem FDM Bauteil von 0 bis 250 nm}
+  \label{fig:fdm_defos}
+\end{figure}
+

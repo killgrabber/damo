@@ -76,31 +76,44 @@ def get_data_from_file(filename):
         rolling_y.append(mean_y)
 
     # Adjust data
-    mean_y = np.median(rolling_y)
-    print(f"Mean y is: {mean_y}")
-    for i in range(len(rolling_y)):
-        rolling_y[i] = rolling_y[i] - mean_y
+    #mean_y = np.median(rolling_y)
+    #print(f"Mean y is: {mean_y}")
+    #for i in range(len(rolling_y)):
+    #    rolling_y[i] = rolling_y[i] - mean_y
 
     return new_x, new_y, rolling_x, rolling_y
 
 
 def do_stuff_with_deformation_data(filenames: []):
     colors = ['b', 'g', 'r', 'c', 'm', 'y', ]
-    plt.rc('font', size=50)
+    plt.rc('font', size=22)
+
+    max_value = 0
+    min_value = sys.maxsize
     for index in range(len(filenames)):
         new_x, new_y, rolling_x, rolling_y = get_data_from_file(filenames[index])
+        min_value = min(min_value, np.min(rolling_y))
+        max_value = max(np.max(rolling_y), max_value)
+
         filename = filenames[index].split('/')[-1].replace("_stitched", "").split('.')[0]
+        label_names = filename.split('_')
+        label_name = label_names[0] + "_" + label_names[1] + "_" +label_names[3]
         #all_rolling_x.append(rolling_x)
         #all_rolling_y.append(rolling_y)
-        plt.plot(rolling_x, rolling_y, label=filename, color=colors[(index + 2) % len(filenames)],
+        plt.plot(rolling_x, rolling_y, label=label_name, color=colors[(index + 2) % len(filenames)],
                  linewidth=1)
         #plt.scatter(x_val, y1_val, label="top_distance", s=1)
         #plt.scatter(x_val, y2_val, label="bot_distance", s=1)
         #plt.scatter(new_x, new_y, s=1)
     plt.grid()
     plt.axhline(0, color='black')
-    plt.legend()
+    plt.legend(
+        loc='upper center',
+        bbox_to_anchor=(0.5, 1.15),
+        ncol=3,
+    )
+
     plt.ylabel('Deformation in Pixel')
     plt.xlabel('Pixel - X-Achse')
-    plt.ylim((-100, 100))
+    plt.ylim((min_value*1.1, max_value*1.1))
     plt.show()

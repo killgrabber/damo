@@ -266,8 +266,9 @@ def move_and_check(con1, con2, progress, init_translation, result_distances: [],
         moved_c = contourMatcher.move_contour(moved_c, translation)
         contour_a2 = convert_to_2d_array(moved_c)
 
-        contourMatcher.display_contours([con1, moved_c], name="matching", wait=1,
-                                        colors=[(255, 255, 0), (255, 0, 255)])
+        #contourMatcher.display_contours([con1, moved_c], name="matching", wait=1,
+         #                               colors=[(255, 255, 0), (255, 0, 255)],
+        #                                save_name="contours_before_matching.png")
 
         result = [0]
         distance, vectors = check_2_contours(contour_a1, contour_a2, progress, search_radius=length_init_t,
@@ -339,9 +340,9 @@ def compare_images(image_paths: [], progress: [], result_distances: []):
     cons_1 = contours_1[0]
     cons_2 = contours_2[0]
 
-    contourMatcher.display_contours(cons_1, name="without1", wait=0,
-                                    colors=[255, 255, 255],
-                                    save_name=f"contours_{image_paths[0].split('/')[-1]}")
+    #contourMatcher.display_contours(cons_1, name="without1", wait=0,
+    #                                colors=[255, 255, 255],
+    #                                save_name=f"contours_{image_paths[0].split('/')[-1]}")
 
     all_results = []
     for index_1 in range(len(cons_1)):

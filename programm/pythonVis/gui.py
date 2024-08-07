@@ -21,9 +21,11 @@ from PIL import ImageTk, Image, ImageDraw
 pointclouds = ["", ""]
 images = ["", ""]
 
+
 def getFolderPath():
     folder_selected = filedialog.askdirectory()
     return folder_selected
+
 
 def get_file_paths():
     files = filedialog.askopenfilenames()
@@ -38,19 +40,25 @@ def get_file_path_pc(index):
 
 
 images_paths_to_compare = ["", ""]
+
+
 def get_compare_files(index):
     global images_paths_to_compare
     file = filedialog.askopenfilename()
     images_paths_to_compare[index] = file
     compare_labels[index].config(text=file.split("/")[-1])
 
+
 compare_progress = [0]
 result_distances = [[]]
+
+
 def compare_images():
     stl_converter.compare_images(images_paths_to_compare, compare_progress, result_distances)
     #comparer_thread = Thread(target=stl_converter.compare_images,
     #                         args=(images_paths_to_compare, compare_progress, result_distances))
     #comparer_thread.start()
+
 
 def show_message(message: str):
     info_label.config(text=message)
@@ -264,6 +272,7 @@ def load_image(result: []):
 stl_points = [np.array]
 stl_con_prog = [0]
 
+
 def load_stl_image():
     img = [np.array]
     load_image(img)
@@ -274,13 +283,14 @@ def load_stl_image():
 def set_image_loop():
     ttk.Button(frm, text="Start loop", command=lambda: show_image_loop()).grid(column=2, row=7)
 
+
 root = Tk()
 root.geometry("1000x500")
 frm = ttk.Frame(root, padding=10, )
 frm.grid()
 
 # Info label
-info_label = ttk.Label(frm, text="Hello :) ")
+info_label = ttk.Label(frm, text="Ready")
 info_label.grid(column=0, row=7)
 
 # point clouds
@@ -333,20 +343,21 @@ stl_save_button = ttk.Button(frm, text="save stl", command=lambda: save_image(st
 stl_save_button.grid(column=3, row=8)
 
 load_stitched_button = ttk.Button(frm, text="load stitched", command=lambda: load_image(stitched_image))
-load_stitched_button.grid(column=4, row=8)
+#load_stitched_button.grid(column=4, row=8)
 
 load_stl_image_button = ttk.Button(frm, text="load stl image and search contours ", command=lambda: load_stl_image())
-load_stl_image_button.grid(column=4, row=9)
+#load_stl_image_button.grid(column=4, row=9)
 
 save_stl_image_button = ttk.Button(frm, text="save overlap image", command=lambda: save_current_overlap_images())
-save_stl_image_button.grid(column=4, row=10)
+#save_stl_image_button.grid(column=4, row=10)
 
-save_stl_image_button = ttk.Button(frm, text="import tmds data", command=lambda: tdmsHandler.getTDMSdata(getFolderPath()))
-save_stl_image_button.grid(column=0, row=12)
+import_tdms_data_button = ttk.Button(frm, text="import tmds data",
+                                     command=lambda: tdmsHandler.getTDMSdata(getFolderPath()))
+import_tdms_data_button.grid(column=4, row=0)
 
-save_stl_image_button = ttk.Button(frm, text="combine tmds data",
-                                   command=lambda: tdmsHandler.get_combined_plot(get_file_paths()))
-save_stl_image_button.grid(column=0, row=13)
+combine_tdms_data_button = ttk.Button(frm, text="combine tmds data",
+                                      command=lambda: tdmsHandler.get_combined_plot(get_file_paths()))
+combine_tdms_data_button.grid(column=4, row=1)
 
 # Treshhold slider
 tresh_min_slider = ttk.Scale(
@@ -355,14 +366,14 @@ tresh_min_slider = ttk.Scale(
     to=500,
     orient='horizontal',  # horizontal
 )
-tresh_min_slider.grid(column=0, row=8)
+#tresh_min_slider.grid(column=0, row=8)
 tresh_max_slider = ttk.Scale(
     frm,
     from_=-500,
     to=500,
     orient='horizontal',  # vertical
 )
-tresh_max_slider.grid(column=1, row=8)
+#tresh_max_slider.grid(column=1, row=8)
 
 # The comparison stuff
 
@@ -390,9 +401,8 @@ for i in range(3):
     label_image.grid(column=i, row=10)
     image_displays.append(label_image)
 
-set_image_loop()
 
-import matplotlib.pyplot as plt
+#set_image_loop()
 
 # data handler
 def do_plots():
@@ -400,10 +410,8 @@ def do_plots():
     data_stuff.do_stuff_with_deformation_data(file)
 
 
-
 compare_button = ttk.Button(frm, text="Plot data", command=lambda: do_plots())
 compare_button.grid(column=5, row=4)
-
 
 while True:
     root.update_idletasks()
