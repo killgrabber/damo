@@ -2,20 +2,17 @@
 \babel@toc {english}{}\relax 
 \babel@toc {german}{}\relax 
 \contentsline {chapter}{\numberline {1}Einleitung}{1}{}%
-\contentsline {section}{\numberline {1.1}Einleitung und Motivation}{1}{}%
-\contentsline {chapter}{\numberline {2}Stand der Technik}{3}{}%
+\contentsline {chapter}{\numberline {2}Grundlagen und Stand der Technik}{3}{}%
 \contentsline {section}{\numberline {2.1}Additive Fertigung}{3}{}%
 \contentsline {section}{\numberline {2.2}Limitierungen von AF}{4}{}%
 \contentsline {section}{\numberline {2.3}Reverse Engineering}{4}{}%
 \contentsline {section}{\numberline {2.4}3D Rekonstruktion}{5}{}%
-\contentsline {subsection}{\numberline {2.4.1}Digitales Abbild}{6}{}%
+\contentsline {subsection}{\numberline {2.4.1}Digitales Abbild}{7}{}%
 \contentsline {subsection}{\numberline {2.4.2}Scanner und Datenerfassung}{7}{}%
-\contentsline {section}{\numberline {2.5}ICP-Algorithmus}{8}{}%
-\contentsline {chapter}{\numberline {3}Ziel der Arbeit}{11}{}%
-\contentsline {section}{\numberline {3.1}Einspannproblematik}{11}{}%
-\contentsline {section}{\numberline {3.2}Erfassung der spannkraftinduzierten Deformation}{11}{}%
-\contentsline {section}{\numberline {3.3}Verfahren zur optische Spannkraftdeformationserkennung}{11}{}%
-\contentsline {section}{\numberline {3.4}Vorgehen}{12}{}%
+\contentsline {section}{\numberline {2.5}ICP-Algorithmus}{9}{}%
+\contentsline {chapter}{\numberline {3}Methodik}{11}{}%
+\contentsline {section}{\numberline {3.1}Verfahren zur optische Spannkraftdeformationserkennung}{11}{}%
+\contentsline {section}{\numberline {3.2}Vorgehen}{12}{}%
 \contentsline {chapter}{\numberline {4}Datenaufbereitung}{13}{}%
 \contentsline {section}{\numberline {4.1}Pointcloud filtern}{13}{}%
 \contentsline {section}{\numberline {4.2}Pointcloud in Bild konvertieren}{14}{}%
@@ -30,14 +27,14 @@
 \contentsline {section}{\numberline {6.1}Deformation zwischen zwei Spannungszuständen}{27}{}%
 \contentsline {subsection}{\numberline {6.1.1}Randgeometrien übereinander legen}{28}{}%
 \contentsline {subsection}{\numberline {6.1.2}Deformation messen}{29}{}%
-\contentsline {chapter}{\numberline {7}Algorithmus und Software}{33}{}%
-\contentsline {chapter}{\numberline {8}Validierung}{35}{}%
-\contentsline {section}{\numberline {8.1}Analyse der spannkraftinduzierten Deformation}{35}{}%
-\contentsline {subsection}{\numberline {8.1.1}Versuchsaufbau}{36}{}%
-\contentsline {section}{\numberline {8.2}Zusätzliche Messinstrumente}{36}{}%
-\contentsline {subsection}{\numberline {8.2.1}Messergebnisse}{37}{}%
-\contentsline {chapter}{\numberline {9}Zusammenfassung und Ausblick}{41}{}%
-\contentsline {chapter}{Abbildungsverzeichnis}{44}{}%
-\contentsline {chapter}{Algorithmenverzeichnis}{45}{}%
+\contentsline {chapter}{\numberline {7}Validierung}{33}{}%
+\contentsline {section}{\numberline {7.1}Analyse der spannkraftinduzierten Deformation}{33}{}%
+\contentsline {subsection}{\numberline {7.1.1}Versuchsaufbau}{34}{}%
+\contentsline {section}{\numberline {7.2}Zusätzliche Messinstrumente}{34}{}%
+\contentsline {section}{\numberline {7.3}Messergebnisse}{35}{}%
+\contentsline {section}{\numberline {7.4}Ergebnisse der optischen Deformationsanalyse}{37}{}%
+\contentsline {chapter}{\numberline {8}Anwendung und Algorithmus}{41}{}%
+\contentsline {section}{\numberline {8.1}Anwendung}{41}{}%
+\contentsline {chapter}{\numberline {9}Zusammenfassung und Ausblick}{43}{}%
+\contentsline {chapter}{Abbildungsverzeichnis}{46}{}%
 \contentsline {chapter}{Literaturverzeichnis}{48}{}%
-\contentsline {chapter}{Erklärung}{48}{}%

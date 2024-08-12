@@ -1,8 +1,10 @@
-\chapter{Stand der Technik}
+\chapter{Grundlagen und Stand der Technik}
+
+[TODO fill me]
 
 \section{Additive Fertigung}
 
-Additive Fertigung (AF), unabhängig von dem Werkstoff, ist ein Bereich im dem viel
+Additive Fertigung (AF), unabhängig von dem Werkstoff, ist ein Bereich in dem viel
 geforscht und innoviert wird. In fast jedem Industriebereich wird versucht ein
 bestehendes Design oder Modell zu optimieren und verbessern.
 Sei es hinsichtlich Qualität oder Kosteneffizienz. AF bietet bei 
@@ -11,7 +13,7 @@ AF einen höheren Grad der Gestaltungsfreiheit bietet.
 AF ist eine Ressource den Benutzern ermöglicht komplexe 
 Bauteilgeometrien zu erstellen ohne die Limitierung von konventionellen spanenden 
 Herstellungsverfahren, wie hoher Materialverschleiß oder die Notwendigkeit von 
-spezialisierten Werkzeugen. \cite{Vafadar.2021} 
+spezialisierten Werkzeugen.\ \cite{Vafadar.2021} 
 
 Außerdem können mit additiver Fertigung Stückzahlen drastisch reduziert werden.
 Werkstücke können bei Bedarf gefertigt werden, was die Notwendigkeit für Lagerstätten
@@ -36,8 +38,8 @@ eingesetzt wird:
 Durch AF könne Teile gefertigt werden die leichter, belastbarer und sicherer sind. 
 Die einfache Anpassbarkeit sorgt für geringen Entwicklungszeiten und Kosten. 
 BWM zum Beispiel benutzt für den i8 Roadster viele AF gefertigte Teile.
-Darunter sind zum Beispiel die Befestigung für das Soft-Top, die 44\% leichter als das Spritzgussteil
-ist, und dennoch 10 Mal steifer. \cite{Vafadar.2021} 
+Darunter sind zum Beispiel die Befestigung für das Soft-Top, die 44 \% leichter als das Spritzgussteil
+ist, und dennoch 10 Mal steifer.\ \cite{Vafadar.2021} 
 Fensterführungen wurde auch additiv gefertigt. Mithilfe des "HP Multi Jet Fusion" 
 konnten 100 Teile in 24 Stunden gefertigt werden. Selbst Teile des Zylinderkopfs für den 
 S58 Motor wurden additiv gefertigt. \cite{Anusci.2019}
@@ -61,9 +63,10 @@ in der Materialvielfalt, hohe Material und Anschaffungskosten, begrenzte
 Bauraumgrößen, verminderte Oberflächenqualität und aufwändige Nachbearbeitungen
 können einen Einsatz von AF verhindern beziehungsweise unwirtschaftlich machen. 
 \cite{inproceedings}
-Einige dieser Limitierungen können umgangen oder gelöst werden. Zum Beispiel die
+Einige dieser Limitierungen können umgangen oder gelöst werden. Zum Beispiel kann die
 verminderte Oberflächenqualität kann durch eine anschließende Fräsbearbeitung
 verbessert werden. 
+[todo was sind supportstrukturen und warum braucht man sie]
 Diese Nachbearbeitung macht eine Fixierung des Bauteils notwendig. Auch für andere
 Nachbearbeitungen wie das Entfernen von Stützstrukturen kann sich das fixieren 
 positiv auswirken und Zeit im Herstellungsprozess eingespart werden.
@@ -71,17 +74,16 @@ positiv auswirken und Zeit im Herstellungsprozess eingespart werden.
 \section{Reverse Engineering}
 
 Reverse Engineering beschreibt den Prozess aus einem bestehenden Produkt 
-oder Objekt ein digitales Abbild zu erzeugen \cite{Helle.2021}.
+oder Objekt ein digitales Abbild zu erzeugen.
 Dabei sind meistens wenig oder keine technischen Details über das Objekt
-verfügbar. \cite{Helle.2021}  
+verfügbar.~\cite{Helle.2021}  
 Auch wenn Baupläne vorhanden sind, kann es trotzdem notwendig sein 
 Reverse Engineering zu betreiben, denn das tatsächliche Produkt kann von
 den Bauplänen abweichen. Produkte und Bauteile können durch die Benutzung 
 abgenutzt werden und entsprechen deswegen unter Umständen nicht mehr den originalen 
 Bauplänen. Zusätzlich können Toleranzen im ursprünglichen Fertigungsprozess 
 für Diskrepanzen sorgen. Wenn technische Details vorhanden sind,
-können diese aber im Reverse Engineering Prozess verwendet werden.
-\cite{Monchinger.2021} 
+können diese aber im Reverse Engineering Prozess verwendet werden.\ \cite{Monchinger.2021} 
 Dieses Paper zeigt, wie Reverse Engineering genutzt werden kann, um 
 bestehende Bauteile passgenau zu erweitern. Konkret geht es um die
 Entwicklung einer Methodik um automatisiert Laser-Scans und originale Baupläne
@@ -102,51 +104,51 @@ Version, ein möglichst genaues Ergebnis zu erzielen.
 \section{3D Rekonstruktion}
 
 Digitale Abbildungen von Flächen, Objekten oder sogar Körperteilen wurden in den
-letzten Jahren mehr und mehr benutzt. Anwendungen sind zum Beispiel in der
-geometrischem Dokumentation, Inspektion, Navigation, Visualisierung und 
-Objekterkennung zu finden \cite{Verykokou.2023}. Je nach Anwendungsfall wird eine
+letzten Jahren mehr benutzt. Anwendungen sind zum Beispiel in der
+geometrischen Dokumentation, Inspektion, Navigation, Visualisierung und 
+Objekterkennung zu finden~\cite{Verykokou.2023}. Je nach Anwendungsfall wird eine
 bestimmte Akkuranz
-der Daten erwartet, im Medizinischen Bereich sind die Ansprüche natürlich ganz 
+der Daten erwartet, im medizinischen Bereich sind die Ansprüche natürlich ganz 
 andere als zum Beispiel in der Dokumentierung von ganzen Gebirgszügen.
 Das Scannen von Gesichtstexturen zeigte Abweichungswerte zwischen 140 $\mu$m und 
 1330 $\mu$m, während die 3D-Rekonstruktion des Kieferknochens Werte zwischen 106 $\mu$m 
 und 760 $\mu$m aufwies. 
-Das Scannen eines bezahnten Bogens durch intraorale und laborbasierte
+Das Scannen eines bezahnten Bogens durch intraorale und Labor-basierte
 Scanner variierte zwischen 17 $\mu$m und 378 $\mu$m und bei der 
 digitalen Abtastung von Zahnimplantaten zwischen 19,32 $\mu$m
-und 112 $\mu$m \cite{Bohner.2019}.
+und 112 $\mu$m~\cite{Bohner.2019}.
 Bei Lidar-Scans eines Sportkomplexes wurde eine Standardabweichung von ±0.10 Metern
 gemessen. Es wurde aus 600 Meter Höhe vermessen und die Scandaten mit 
-Referenzpunkten auf dem Boden verglichen. \cite{Elaksher.2023}
+Referenzpunkten auf dem Boden verglichen.~\cite{Elaksher.2023}
 Aus diesem Grund existieren auch verschiedene Herangehensweisen und Technologien  
 zur 3D-Rekonstruktion.
 
 3D Rekonstruktion-Technologien können in 2 Kategorien eingeteilt werden,
 die bildbasierte Verfahren und die Verfahren die auf Scandaten 
-beruhen. \cite{Verykokou.2023}
+beruhen.~\cite{Verykokou.2023} [todo es existieren noch mind. 2 weitere verfahren]
 Beide Verfahren können auch kombiniert werden. 
-Bei bildbasierten Verfahren, auch Photogrammetrie genannt, wird das 3D Objekt aus
+Bei bildbasierten Verfahren, auch Fotogrammetrie genannt, wird das 3D Objekt aus
 mehreren zweidimensionalen Bildern erstellt, 
 umso mehr Bilder vorhanden sind, desto besser kann das
 3D Objekt rekonstruiert werden. Um das 3D Objekt zu erstellen werden in 
 allen Bildern gemeinsame Punkte gesucht und dann mit der bekannten Kameraposition, 
-die relative Position des Punktes im 3D Objekt ermittelt. Figur x zeigt dies 
+die relative Position des Punktes im 3D Objekt ermittelt. Figur [todo figur einfügen] zeigt dies 
 anschaulich.
-Vorteil bei der Photogrammetrie ist, dass die Daten relativ einfach aufgenommen werden
+Vorteil bei der Fotogrammetrie ist, dass die Daten relativ einfach aufgenommen werden
 können. Die Kamera eines Smartphones kann ausreichend hochauflösende Bilder aufnehmen, um 
 eine 3D-Rekonstruktion zu ermöglichen. Des Weiteren sind viele Softwarelösungen,
 auch kostenlose, vorhanden um automatisiert 3D Objekte zu erzeugen.
-Gründe, sich gegen den Einsatz von Photogrammetrie zu entscheiden, 
+Gründe, sich gegen den Einsatz von Fotogrammetrie zu entscheiden, 
 liegen in der begrenzten Auflösung sowie im signifikant ansteigenden Arbeitsaufwand 
 bei steigenden Anforderungen an die Genauigkeit des Endergebnisses. 
-Photogrammetrie zeigt jedoch ihre Stärken bei großflächigen 3D-Rekonstruktionen, 
+Fotogrammetrie zeigt jedoch ihre Stärken bei großflächigen 3D-Rekonstruktionen, 
 wie sie beispielsweise bei der Erfassung von Gebäuden, Stadtteilen oder geografischen 
 Strukturen erforderlich sind.
 
-\begin{figure}[h]
+\begin{figure}[H]
     \centering
-    \includegraphics[height=150pt]{images/photogammatry_accurancy.PNG}
-    \caption{Accurancy Photogrammetry}
+    \includegraphics[width=\linewidth]{images/photogammatry_accurancy.PNG}
+    \caption{Akkuranz der Fotogrammetrie}
     \label{fig:photogammatryAccuracy}
 \end{figure}
 
@@ -176,7 +178,7 @@ Je kleiner die Oberfläche der Polygonen ist, desto genauer wird die Oberfläche
 abgebildet. Mit kleineren Oberflächen steigt die Anzahl der zu speichernden 
 Eckpunkte, was eine größere Datei zur Folge hat.
 Ein in der akademischen Welt beliebtes Dateiformat für Polygon-Netze ist das 
-Polygon File Format (ply).\cite{KentonMchenry.2008}
+Polygon File Format (ply).\ \cite{KentonMchenry.2008}
 Das Format kann vom Nutzer beliebig angepasst werden. Eine ply-Datei beginnt mit 
 einem Header in dem die Inhaltsstruktur beschrieben wird. 
 Für 3D-Objekte besteht diese meistens aus X, Y und Z Koordinaten. 
@@ -215,6 +217,7 @@ Integer in verschiedener Bit tiefe gewählt.
 \end{figure}
 
 \subsection{Scanner und Datenerfassung}
+[todo verschiedene Scanner differenzieren und vergleichen]
 
 Wie schon beschrieben können dreidimensionale Daten direkt mit einem 
 Scanner aufgenommen werden. 
@@ -224,7 +227,7 @@ Je nach Scannertyp und Modell kann sich der Messbereich ändern.
 In Abbildung \ref{fig:scanner} ist ein Beispiel Messbereich sichtbar. Mittig kann 
 in einer Tiefe von 85 mm eine Linie mit der Länge 25 mm gemessen werden. 
 Der komplette messbare Bereich ist rot markiert. \cite{MESSTECHNIK_2020}
-Bauteile die breiter sind als die maximale Breite der Scanebene, in Abbildung \ref{fig:scanner} mittig 25mm, 
+Bauteile die breiter sind als die maximale Breite der Scanebene, in Abbildung \ref{fig:scanner} mittig 25 mm, 
 können also nicht in einer Pointcloud erfasst werden. 
 Damit eine Digitalisierung von größeren Objekten erfolgen kann, müssen
 also mehrere Scans durchgeführt, und später zusammengefügt werden. Zwischen den 
@@ -242,7 +245,7 @@ wieder zu einem digitalen Abbild zusammengefügt werden.
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.3\textwidth]{images/Scanner.PNG}
-    \caption{Funktionsweise eines Laserscanners}
+    \caption{Funktionsweise eines Laserscanners [todo was ist abgebildet]}
     \label{fig:scanner}
 \end{figure}
 
@@ -251,6 +254,7 @@ wieder zu einem digitalen Abbild zusammengefügt werden.
 Der Iterative-Closest-Point-Algorithmus(ICP-Algorithmus) existiert schon seit dem Beginn der 90er Jahre und ist 
 die klassische Methode, wenn es um die Registrierung von Pointclouds und 
 anderen Punkt-Sets geht. \cite{icp}
+[todo was ist eine Transformation]
 Der Algorithmus errechnet eine lokale, optimale Transformation die ein Datenset
 dem anderen annähern kann. \cite{icp_og}
 Um diese Transformation zu bestimmen werden zuerst die Distanzen von allen 
@@ -264,10 +268,10 @@ Messfehler oder Überlappungen beinhalten kann häufig keine optimale
 Transformation bestimmt werden.
 Deswegen wurden seit der ersten Vorstellung des Algorithmus viele Varianzen
 entwickelt, die mit diesem Schwächen umgehen. 
-Zum Beispiel der 'Sparse Iterative Closest Point' Algorithmus von \cite{Bouaziz.2013}
+Zum Beispiel der 'Sparse Iterative Closest Point' Algorithmus von~\cite{Bouaziz.2013}
 oder die 'Anderson-accelerated' Version die besser mit Ausreißern und nur 
 partiell überlappenden Daten umgehen kann und eine gleichwertige oder bessere 
-Transformation errechnen kann. \cite{icp}
+Transformation errechnen kann.\ \cite{icp}
 Der Algorithmus geht iterativ vor und berechnet immer eine optimale lokale Transformation.
 Die beiden Datensätze sollten schon vor dem Anwenden des ICP-Algorithmus grob angenähert sein, 
 das beschleunigt die Konvergenz und damit die Laufzeit des Algorithmus.
@@ -278,7 +282,7 @@ dargestellt. Die grünen Linien sind jeweils die kürzeste Distanz von Q nach R.
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.3\textwidth]{images/Principle-of-ICP-algorithm.png}
-    \caption{Prinzip des ICP-Algorithmus}
+    \caption{Prinzip des ICP-Algorithmus [todo größe anpassen]}
     \label{fig:ipc_princip}
 \end{figure}
 

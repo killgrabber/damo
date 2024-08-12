@@ -3,8 +3,7 @@
 \chapter{Datenaufbereitung}
 
 Um die Deformation im eingespannten Zustand zu erkennen, muss das komplette Werkstück
-als digitales Modell existieren. Nur so kann es mit einem anderen Modell 
-verglichen werden.
+als digitales Modell existieren, um es mit anderen Modellen vergleichen zu können.
 Das Verfahren soll die Deformation nur in einer zweidimensionalen Ansicht erkennen. 
 Das ist weniger komplex, hat aber zur Folge, dass Bauteile mit unterschiedlichen 
 Oberflächenhöhen nicht korrekt analysiert werden können. 
@@ -91,18 +90,17 @@ da es für die Berechnungen ausreichend ist, wurden
 8-Bit-Single-Channel-Bilder verwendet, die nur Helligkeitswerte abbilden. 
 In diesen Bildern kann jeder Pixel einen Wert zwischen 0 und 255 annehmen. 
 Der entsprechende Helligkeitswert kann wie folgt berechnet werden:
-
-\begin{equation*}\label{calc:brightness}
+\begin{align}\label{calc:brightness}
     value_p = \frac{Z - min_z}{max_z - min_z} \cdot (max_{brightness} - min_{brightness}) + min_{brightness}
-\end{equation*}
-
+\end{align}
 Der resultierende Wert ist die Helligkeit, die dem Pixel zugewiesen wird.
 $Z$ ist die Z-Koordinate des Punktes in der Pointcloud. $min_y$ und $max_y$ sind 
 die Grenzen der Z-Koordinate, diese werden gebraucht um die Helligkeit relativ 
-zu der Höhe zu berechnen. $min_b$ und $max_b$ sind die gewünschten Grenzen der 
-Helligkeit. In unserem Fall sind $min_b = 0$ und $max_b = 255$ da ein 8 Bit Bild
+zu der Höhe zu berechnen. $min_{brightness}$ und $max_{brightness}$ sind die gewünschten Grenzen der 
+Helligkeit. In unserem Fall sind $min_{brightness} = 0$ und $max_{brightness} = 255$ da ein 8 Bit Bild
 verwendet wird.
 
+[todo A und B]
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.5\textwidth]{images/fdm_top_100p.png}

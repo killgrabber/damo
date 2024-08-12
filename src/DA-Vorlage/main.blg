@@ -15,59 +15,57 @@ Reallocating 'name_of_file' (item size: 1) to 25 items.
 A level-1 auxiliary file: kapitel/6_Stitchting.aux
 Reallocating 'name_of_file' (item size: 1) to 26 items.
 A level-1 auxiliary file: kapitel/7_Deformation.aux
-Reallocating 'name_of_file' (item size: 1) to 23 items.
-A level-1 auxiliary file: kapitel/8_Software.aux
 Reallocating 'name_of_file' (item size: 1) to 26 items.
 A level-1 auxiliary file: kapitel/9_Validierung.aux
+Reallocating 'name_of_file' (item size: 1) to 23 items.
+A level-1 auxiliary file: kapitel/8_Software.aux
 Reallocating 'name_of_file' (item size: 1) to 31 items.
 A level-1 auxiliary file: kapitel/10_Zusammenfassung.aux
 Reallocating 'name_of_file' (item size: 1) to 6 items.
 The style file: alpha.bst
 Reallocating 'name_of_file' (item size: 1) to 18 items.
-Reallocating 'name_of_file' (item size: 1) to 23 items.
-A level-1 auxiliary file: kapitel/erklaerung.aux
 Database file #1: literatur/quellen.bib
 Warning--empty booktitle in inproceedings
 Warning--empty publisher in KentonMchenry.2008
-You've used 17 entries,
+You've used 20 entries,
             2543 wiz_defined-function locations,
-            685 strings with 7692 characters,
-and the built_in function-call counts, 7094 in all, are:
-= -- 693
-> -- 374
+            705 strings with 8430 characters,
+and the built_in function-call counts, 8492 in all, are:
+= -- 830
+> -- 463
 < -- 7
-+ -- 133
-- -- 128
-* -- 509
-:= -- 1162
-add.period$ -- 49
-call.type$ -- 17
-change.case$ -- 111
-chr.to.int$ -- 17
-cite$ -- 19
-duplicate$ -- 262
-empty$ -- 509
-format.name$ -- 148
-if$ -- 1450
++ -- 167
+- -- 160
+* -- 624
+:= -- 1407
+add.period$ -- 60
+call.type$ -- 20
+change.case$ -- 135
+chr.to.int$ -- 20
+cite$ -- 22
+duplicate$ -- 304
+empty$ -- 593
+format.name$ -- 182
+if$ -- 1725
 int.to.chr$ -- 1
 int.to.str$ -- 0
-missing$ -- 13
-newline$ -- 85
-num.names$ -- 55
-pop$ -- 121
+missing$ -- 16
+newline$ -- 102
+num.names$ -- 64
+pop$ -- 134
 preamble$ -- 1
-purify$ -- 129
+purify$ -- 156
 quote$ -- 0
-skip$ -- 244
+skip$ -- 279
 stack$ -- 0
-substring$ -- 367
-swap$ -- 46
+substring$ -- 444
+swap$ -- 49
 text.length$ -- 7
 text.prefix$ -- 4
 top$ -- 0
-type$ -- 132
+type$ -- 156
 warning$ -- 2
-while$ -- 68
-width$ -- 19
-write$ -- 212
+while$ -- 80
+width$ -- 23
+write$ -- 255
 (There were 2 warnings)

@@ -3,10 +3,10 @@
 \babel@toc {german}{}\relax 
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {2.1}{\ignorespaces Accurancy Photogrammetry}}{6}{}%
-\contentsline {figure}{\numberline {2.2}{\ignorespaces Akkuranz einer 3D-Datei ist abhängig von der Anzahl der gespeicherten Eckpunkte am Beispiel des Demonstratorbauteils. (a) 1512 Punkte (b) 52 Punkte (c) 30 Punkte}}{7}{}%
-\contentsline {figure}{\numberline {2.3}{\ignorespaces Funktionsweise eines Laserscanners}}{8}{}%
-\contentsline {figure}{\numberline {2.4}{\ignorespaces Prinzip des ICP-Algorithmus}}{9}{}%
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Akkuranz der Fotogrammetrie}}{6}{}%
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Akkuranz einer 3D-Datei ist abhängig von der Anzahl der gespeicherten Eckpunkte am Beispiel des Demonstratorbauteils. (a) 1512 Punkte (b) 52 Punkte (c) 30 Punkte}}{8}{}%
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Funktionsweise eines Laserscanners [todo was ist abgebildet]}}{8}{}%
+\contentsline {figure}{\numberline {2.4}{\ignorespaces Prinzip des ICP-Algorithmus [todo größe anpassen]}}{9}{}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {4.1}{\ignorespaces Auftreten Höhe}}{15}{}%
@@ -21,16 +21,19 @@
 \contentsline {figure}{\numberline {5.6}{\ignorespaces Zusammengefügtes Bild}}{24}{}%
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {6.1}{\ignorespaces (a) Zusammengefügtes Bild des FDM Demonstratorbauteils, Spannungsstufe 0 (b) Randgeometrie von (a), die zur Erkennung der Deformation genutzt wird}}{28}{}%
-\contentsline {figure}{\numberline {6.2}{\ignorespaces Deformation der inneren Bauteilgeometrie des Demonstratorbauteils visuell dargestellt}}{30}{}%
-\contentsline {figure}{\numberline {6.3}{\ignorespaces Deformation der inneren Bauteilgeometrie des Demonstratorbauteils als Graph}}{30}{}%
-\contentsline {figure}{\numberline {6.4}{\ignorespaces Differenz von zwei Spannungsstufen bei einem FDM Bauteil, äußere Bauteilgeometrie.}}{31}{}%
-\contentsline {figure}{\numberline {6.5}{\ignorespaces Differenz von mehreren Spannungsstufen bei einem FDM Bauteil}}{31}{}%
+\contentsline {figure}{\numberline {6.2}{\ignorespaces (a) Kontur des Bauteils AM2 bei Spannungsstufe null, vor dem übereinanderlegen mit der Kontur von Spannungsstufe drei. (b) Die Konturen von AM2 bei Spannungsstufen null und drei. Vollständig übereinader gelegt.}}{29}{}%
+\contentsline {figure}{\numberline {6.3}{\ignorespaces Deformation der inneren Bauteilgeometrie des Demonstratorbauteils visuell dargestellt}}{30}{}%
+\contentsline {figure}{\numberline {6.4}{\ignorespaces Deformation der inneren Bauteilgeometrie des Demonstratorbauteils als Graph}}{31}{}%
+\contentsline {figure}{\numberline {6.5}{\ignorespaces Differenz von zwei Spannungsstufen bei einem FDM Bauteil, äußere Bauteilgeometrie.}}{31}{}%
+\contentsline {figure}{\numberline {6.6}{\ignorespaces Differenz von mehreren Spannungsstufen bei einem FDM Bauteil}}{32}{}%
 \addvspace {10\p@ }
+\contentsline {figure}{\numberline {7.1}{\ignorespaces Differenz von mehreren Spannungsstufen bei einem AM Metall Bauteil}}{33}{}%
+\contentsline {figure}{\numberline {7.2}{\ignorespaces Versuchsaufbau}}{34}{}%
+\contentsline {figure}{\numberline {7.3}{\ignorespaces Kraft- und Verschiebung der Spannungsstufe fünf bei einem FDM Bauteil}}{36}{}%
+\contentsline {figure}{\numberline {7.4}{\ignorespaces Akkumulierte Kraft- und Verschiebung jedes Bauteils}}{37}{}%
+\contentsline {figure}{\numberline {7.5}{\ignorespaces (a): AF Metallbauteil mit voller Stützstruktur, Bezeichnung: AM0. (b): AF Bauteil mit der halben Stützstruktur ausgebohrt, Bezeichnung: AM1. (c): AF Bauteil ohne Stützstruktur, Bezeichnung: AM2}}{37}{}%
+\contentsline {figure}{\numberline {7.6}{\ignorespaces Sechs Deformationsstufen bei einem AM Bauteil von 0 bis 2500 nm}}{38}{}%
+\contentsline {figure}{\numberline {7.7}{\ignorespaces Fünf Deformationsstufen bei einem FDM Bauteil von 0 bis 250 nm}}{39}{}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {8.1}{\ignorespaces Differenz von mehreren Spannungsstufen bei einem AM Metall Bauteil}}{35}{}%
-\contentsline {figure}{\numberline {8.2}{\ignorespaces Versuchsaufbau}}{36}{}%
-\contentsline {figure}{\numberline {8.3}{\ignorespaces Kraft- und Verschiebung der Spannungsstufe fünf bei einem FDM Bauteil}}{37}{}%
-\contentsline {figure}{\numberline {8.4}{\ignorespaces Akkumulierte Kraft- und Verschiebung jedes Bauteils}}{38}{}%
-\contentsline {figure}{\numberline {8.5}{\ignorespaces Taster}}{38}{}%
-\contentsline {figure}{\numberline {8.6}{\ignorespaces Spannungswandler}}{39}{}%
+\contentsline {figure}{\numberline {8.1}{\ignorespaces Anwendungsoberfläche}}{41}{}%
 \addvspace {10\p@ }

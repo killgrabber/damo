@@ -1,5 +1,5 @@
 \newcommand{\etalchar}[1]{$^{#1}$}
-\begin{thebibliography}{VGRH21}
+\begin{thebibliography}{SGLG{\etalchar{+}}19}
 
 \bibitem[AKS15]{inproceedings}
 Bhrigu Ahuja, Michael Karg, and Michael Schmidt.
@@ -14,6 +14,13 @@ Bhrigu Ahuja, Michael Karg, and Michael Schmidt.
 Victor Anusci.
 \newblock Bmw's new s58 engine features cylinder head made with 3d printing,
   2019.
+
+\bibitem[BAB20]{newMethod}
+Vincent Benoist, Lionel Arnaud, and Maher Baili.
+\newblock A new method of design for additive manufacturing including machining
+  constraints.
+\newblock {\em The International Journal of Advanced Manufacturing Technology},
+  111:1--12, 11 2020.
 
 \bibitem[BGH{\etalchar{+}}19]{Bohner.2019}
 Lauren Bohner, Diego~Diaz Gamba, Marcel Hanisch, Bruno~Silva Marcio, Pedro
@@ -55,6 +62,13 @@ Robin~H. Helle and Hirpa~G. Lemu.
   quality control.
 \newblock {\em Materials Today: Proceedings}, 45:5255--5262, 2021.
 
+\bibitem[JJ22]{JADHAV20222094}
+Aniket Jadhav and Vijay~S. Jadhav.
+\newblock A review on 3d printing: An additive manufacturing technology.
+\newblock {\em Materials Today: Proceedings}, 62:2094--2099, 2022.
+\newblock International Conference on Design, Manufacturing and Materials
+  Engineering.
+
 \bibitem[KP08]{KentonMchenry.2008}
 {Kenton Mchenry} and {Peter Bajcsy}.
 \newblock {\em An overview of 3D data content, file formats and viewers}.
@@ -79,6 +93,15 @@ Roman Schwartz.
 \newblock In Hans-J{\"u}rgen Gevatter, editor, {\em Handbuch der Mess- und
   Automatisierungstechnik in der Produktion}, VDI-Buch, pages 55--92. Springer,
   Berlin [u.a.], 2006.
+
+\bibitem[SGLG{\etalchar{+}}19]{SCHNECK201919}
+Matthias Schneck, Matthias Gollnau, Max Lutter-Günther, Benjamin Haller, Georg
+  Schlick, Marius Lakomiec, and Gunther Reinhart.
+\newblock Evaluating the use of additive manufacturing in industry
+  applications.
+\newblock {\em Procedia CIRP}, 81:19--23, 2019.
+\newblock 52nd CIRP Conference on Manufacturing Systems (CMS), Ljubljana,
+  Slovenia, June 12-14, 2019.
 
 \bibitem[VGRH21]{Vafadar.2021}
 Ana Vafadar, Ferdinando Guzzomi, Alexander Rassau, and Kevin Hayward.
