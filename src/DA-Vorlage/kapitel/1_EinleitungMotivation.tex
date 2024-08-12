@@ -9,10 +9,27 @@ Vergleich zu traditionellen Fertigungsverfahren einen höheren Grad an
 Gestaltungsfreiheit. Trotz dieser Vorteile stehen Hersteller vor 
 Herausforderungen bezüglich der Oberflächenqualität und Maßhaltigkeit 
 der gefertigten Werkstücke~\cite{SCHNECK201919}.
+Herausforderungen können die Bauteilgeometrie, die möglichen Materialien oder 
+den Herstellungsprozess betreffen.
+Die Herausforderungen bei der Bauteilgeometrie umfassen die minimalen 
+Wandstärken sowie das maximale Bauteilvolumen, das von den technischen 
+Spezifikationen des verwendeten 3D-Druckers abhängt. Für das (AF) stehen 
+verschiedene Materialien zur Verfügung, 
+die sich jedoch von den in der konventionellen, spanenden Fertigung 
+verwendeten Werkstoffen unterscheiden. In der AF werden hauptsächlich Legierungen 
+auf Basis von Titan, Aluminium, Nickel oder Chrom eingesetzt. Diese Materialien
+müssen zudem in einer für das Verfahren geeigneten Form vorliegen, 
+meistens in Form von Pulver oder Draht. Der Prozess zur Herstellung von 
+Pulver oder Draht aus diesen Materialien ist kostenintensiv und schränkt
+die Auswahl der verwendbaren Materialien ein. Aufgrund der 
+schichtbasierten Natur der AF sind Stützstrukturen 
+notwendig, um Bauteile mit geometrischen Formen, die Überhänge aufweisen, 
+erfolgreich produzieren zu können. \label{drawbacks_af}
+\cite{Vranic.2017}
 
-Um Herausforderungen die bei AF auftreten zu lösen, existieren 
-verschiedene Herangehensweisen. Viele dieser Herangehensweisen basieren 
-auf der Nachbearbeitung des gefertigten Bauteils.
+Einige dieser Herausforderungen, können durch Nachbearbeitung des Bauteils 
+gelöst werden. Dazu gehört das Entfernen der Stützstrukturen und die Verbesserung
+der Oberflächenqualität.
 Für den Nachbearbeitungsschritt muss das Bauteil in seiner Position und Lage im Bauraum
 der Werkzeugmaschine fixiert werden. Die hierzu aufzubringenden Spannkräfte 
 können die filigranen Bauteile elastisch, in Extremfallen auch plastisch, verformen, 
@@ -32,8 +49,9 @@ möglichst wenig Annahmen über die Bauteilgeometrie getroffen.
 Im Verlauf dieser Arbeit werden erst die theoretischen Grundlagen, die für die 
 entwickelte Methodik notwendig sind dargestellt. 
 Anschließend wird das Vorgehen der Methodik vorgestellt und die einzelnen 
-Schritte erläutert. Das Verfahren besteht aus mehreren Schritten die sich Grob in 
-Datenaufbereitung, Stitchting und Deformationserkennung einteilen lassen.
+Schritte erläutert. Das Verfahren besteht aus mehreren Schritten die sich in 
+Datenerfassung, Datenaufbereitung, Stitchting und Deformationserkennung 
+einteilen lassen.
 
 Nach der Vorstellung des Verfahrens wird die Funktion der Methodik anhand eines 
 Demonstratorbauteils das in einem Schraubstock fixiert und mit mehrere Kraftstufen 
@@ -42,8 +60,9 @@ verschiedene Materialien und Herstellungsverfahren verglichen.
 
 Ziel dieser Arbeit ist es zusätzlich, die entwickelte Methodik in einer einfach
 benutzbaren Anwendung um zusetzten. Die Funktionsweise dieser Anwendung wird 
-nach der Validierung der Methodik dokumentiert. Außerdem wird auf Herausforderungen 
-in der Anwendungsentwicklung eingegangen.
+nach der Validierung der Methodik dokumentiert. Außerdem werden verschiedene 
+Optimierungen dargelegt, die das Verfahren Zeit- und Speichereffizienter machen
+und die Genauigkeit der Ergebnisse verbessern.
 
 Zum Abschluss dieser Arbeit wird ein Fazit gezogen, in dem die erzielten 
 Ergebnisse eingehend diskutiert werden. Zudem wird ein Ausblick auf 
