@@ -23,34 +23,37 @@ anschließend ausgewertet werden.
 \section{Verfahren zur optische Spannkraftdeformationserkennung}
 
 Um die Deformation des Bauteils erfassen zu können wird das 3D-Objekt benötigt, 
-dass als Grundlage für die AF diente. Zusätzlich werden optische Daten des Bauteils 
+dass als Grundlage für die AF dient. Zusätzlich werden optische Daten des Bauteils 
 im deformiertem Zustand benötigt. Mit diesen beiden Daten kann der Unterschied 
 ermittelt und ausgegeben werden.
-Um auch minimale Deformationen erkennen zu können müssen die Daten des 
+Um auch minimale Deformationen erkennen zu können, müssen die Daten des 
 eingespannten Bauteils hinreichend genau sein. Deswegen wird ein Laserscanner zur 
 Datenerfassung eingesetzt.
 Wie schon beschrieben ist der Messbereich eines Laserscanners begrenzt. Da das 
 Verfahren nicht auf eine Bauteilgröße beschränkt sein soll, müssen mehrere Scans als 
-Eingabe akzeptiert und damit umgegangen werden.
+Eingabe akzeptiert werden.
 
 \section{Vorgehen}
 [todo Hier beschreibst du noch etwas offener, was umgesetzt werden soll, 
 als wäre es noch nicht umgesetzt, heißt weniger: dann wird, sondern mehr, es soll...]
 
 Das Verfahren, um eine Deformation in einem eingespannten additiv gefertigten
-Bauteil, zu erkennen umfasst folgenden Schritte:
-[Schritt 1 datenaufnahme]
+Bauteil, zu erkennen, umfasst folgenden Schritte:
 \begin{itemize}
+    \item \textbf{Aufnahme der Scandaten}\\
+        Im ersten Schritt werden die Daten aus denen die Deformation erkannt werden soll, 
+        aufgenommen. Hierfür wird ein Laserscanner verwendet und das Bauteil im 
+        eingespannten Zustand gescannt.
     \item \textbf{Digitalisierung des Bauteils:}\\
         In diesem Schritt werden Messfehler und Ausreißer
-        in den Scannerdaten entfernt. Anschließend werden die dreidimensionalen 
+        in den Scandaten entfernt. Anschließend werden die dreidimensionalen 
         Eingangsdaten in eine zweidimensionale Ansicht umgewandelt.
         Nach diesem Schritt liegen für jedes Bauteil mehrere Datensätze als 
         zweidimensionale schwarz weiß Bilder vor.
     \item \textbf{Stitching Methodik}\\
         Diese Bilder müssen nun zu einem einzelnen Bild zusammengefügt werden.
         Hierfür werden Gemeinsamkeiten in den sich 
-        teilweise [todo besser erklären ]überlappenden Bildern gesucht und eine Transformation ermittelt,
+        überlappenden Bildern gesucht und eine Transformation ermittelt,
         die auf eines von zwei Bildern angewendet werden kann, um sie zusammenzufügen.
     \item \textbf{Deformationserkennung}\\
         Sobald ein Bild für ein eingespanntes Bauteil vorliegt, können verschiedene 
@@ -58,9 +61,9 @@ Bauteil, zu erkennen umfasst folgenden Schritte:
         die Länge und Breite des Bauteils verglichen wird, zusätzlich wird der 
         Abstand zwischen den Rändern des Bauteils berechnet. Es können verschiedene
         Spannungszustände verglichen werden, ein Vergleich mit dem initialen 
-        3D-Design ist auch möglich. Hier werden auch Fehler erkannt die im 
-        Fertigungsprozess entstehen erkannt. Der Unterschied zwischen Bauteilzuständen
-        wird auch visuell ausgegeben und als Bild gespeichert.
+        3D-Design ist auch möglich. Hier werden auch Fehler erkannt, die im 
+        Fertigungsprozess entstehen. Der Unterschied zwischen Bauteilzuständen
+        wird visuell ausgegeben und als Bild gespeichert.
         
 \end{itemize}
 

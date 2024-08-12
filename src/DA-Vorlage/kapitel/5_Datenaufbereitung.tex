@@ -4,17 +4,17 @@
 
 Um die Deformation im eingespannten Zustand zu erkennen, muss das komplette Werkstück
 als digitales Modell existieren, um es mit anderen Modellen vergleichen zu können.
-Das Verfahren soll die Deformation nur in einer zweidimensionalen Ansicht erkennen. 
+Das Verfahren soll die Deformation nur in einer zweidimensionalen Perspektive erkennen. 
 Das ist weniger komplex, hat aber zur Folge, dass Bauteile mit unterschiedlichen 
 Oberflächenhöhen nicht korrekt analysiert werden können. 
 Geometrie und Oberflächeninformationen des eingespannten Bauteils liegen 
 in Form von mehreren Pointclouds vor.
 Diese Daten wurden mithilfe eines Laserscanners aufgenommen. Durch diesen Prozess 
 entstehen Messfehler und Ausreißer. Diese Punkte verfälschen das Verfahren da sie 
-nicht auf dem eingespannte Bauteil liegen. Die Akkuranz des Verfahrens profitiert, 
+nicht auf dem eingespannte Bauteil liegen. Die Genauigkeit des Verfahrens profitiert, 
 wenn diese Punkte entfernt werden.
 
-\section{Pointcloud filtern}
+\section{Pointcloud filtern} [TODO Komplett überarbeiten]
 
 Wie in Abbildung \ref{fig:brightness} zu erkennen ist, streuen nicht alle Punktwolken
 gleichmäßig. Abhängig vom Werkstoff des Bauteils reflektieren die Laserstrahlen 
@@ -28,10 +28,10 @@ die die 10 \% am häufigsten auftretenden Höhenwerte bei einem Metallteil berü
 ergibt sich das in Abbildung \ref{fig:metall_image} gezeigte Bild.
 Man sieht vor allem auf der rechten Seite, dass Ränder nicht mehr klar erkennbar sind, 
 da sie durch die Filterung Lücken aufweisen. Praxistests haben gezeigt das ein 
-ausreichend gut funktionierender Filterwert 50 Prozent ist. Damit werden 
+ausreichend gut funktionierender Filterwert 50 \% ist. Damit werden 
 ausreichend viele Messfehler aus dem Bild genommen,
 aber trotzdem bleiben Oberflächenstrukturen und Ränder
-sichtbar genug um ein korrektes Zusammenfügen zu gewährleisten.
+sichtbar, um ein korrektes Zusammenfügen zu gewährleisten.
 Dieses Filtern bezieht sich aber nur auf zweidimensionale Bildinformationen.
 Um bei dem Konvertieren noch weniger Punkte,
 die nicht auf dem Bauteil liegen nicht in das Bild zu übernehmen, 
