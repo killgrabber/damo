@@ -28,45 +28,45 @@ Database file #1: literatur/quellen.bib
 Warning--empty booktitle in inproceedings
 Warning--empty publisher in KentonMchenry.2008
 Warning--empty booktitle in XiaoleiDu.2009
-You've used 27 entries,
+You've used 28 entries,
             2543 wiz_defined-function locations,
-            749 strings with 9807 characters,
-and the built_in function-call counts, 11554 in all, are:
-= -- 1127
-> -- 642
-< -- 10
-+ -- 232
-- -- 223
-* -- 861
-:= -- 1925
-add.period$ -- 81
-call.type$ -- 27
-change.case$ -- 188
-chr.to.int$ -- 27
-cite$ -- 30
-duplicate$ -- 413
-empty$ -- 789
-format.name$ -- 251
-if$ -- 2330
+            753 strings with 9912 characters,
+and the built_in function-call counts, 11810 in all, are:
+= -- 1150
+> -- 650
+< -- 11
++ -- 235
+- -- 225
+* -- 872
+:= -- 1964
+add.period$ -- 83
+call.type$ -- 28
+change.case$ -- 193
+chr.to.int$ -- 28
+cite$ -- 31
+duplicate$ -- 424
+empty$ -- 814
+format.name$ -- 254
+if$ -- 2384
 int.to.chr$ -- 1
 int.to.str$ -- 0
 missing$ -- 23
-newline$ -- 137
-num.names$ -- 85
-pop$ -- 178
+newline$ -- 141
+num.names$ -- 88
+pop$ -- 187
 preamble$ -- 1
-purify$ -- 216
+purify$ -- 222
 quote$ -- 0
-skip$ -- 373
+skip$ -- 386
 stack$ -- 0
-substring$ -- 607
-swap$ -- 65
-text.length$ -- 10
+substring$ -- 615
+swap$ -- 66
+text.length$ -- 11
 text.prefix$ -- 6
 top$ -- 0
-type$ -- 212
+type$ -- 220
 warning$ -- 3
-while$ -- 108
-width$ -- 30
-write$ -- 343
+while$ -- 110
+width$ -- 31
+write$ -- 353
 (There were 3 warnings)

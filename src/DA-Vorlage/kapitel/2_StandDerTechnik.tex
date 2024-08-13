@@ -141,17 +141,29 @@ Referenzpunkten auf dem Boden verglichen.~\cite{Elaksher.2023}
 Aus diesem Grund existieren auch verschiedene Herangehensweisen und Technologien  
 zur 3D-Rekonstruktion.
 
-3D Rekonstruktion-Technologien können in 2 Kategorien eingeteilt werden,
-die bildbasierte Verfahren und die Verfahren die auf Scandaten 
-beruhen.~\cite{Verykokou.2023} [TODO es existieren noch mind. 2 weitere verfahren]
-Beide Verfahren können auch kombiniert werden. 
+3D Rekonstruktion-Technologien können in mehrere Kategorien eingeteilt werden,
+bildbasierte Verfahren und  Verfahren die auf Scandaten 
+beruhen.~\cite{Verykokou.2023} sind zwei davon.
+Es existieren auch andere Verfahren die Sensor- oder Volumen-orientiert sind, 
+diese nehmen eine Bauteilgeometrie auf, indem ein Sensor das Bauteil abtastet 
+und die Berührungspunkte speichert.
+Verschiedene Verfahren können auch kombiniert werden, um das endgültige 3D-Modell
+realitätsgetreuer zu machen.
 Bei bildbasierten Verfahren, auch Fotogrammetrie genannt, wird das 3D Objekt aus
 mehreren zweidimensionalen Bildern erstellt, 
 umso mehr Bilder vorhanden sind, desto besser kann das
 3D Objekt rekonstruiert werden. Um das 3D Objekt zu erstellen werden in 
 allen Bildern gemeinsame Punkte gesucht und dann mit der bekannten Kameraposition, 
-die relative Position des Punktes im 3D Objekt ermittelt. Figur [todo figur einfügen] zeigt dies 
-anschaulich.
+die relative Position des Punktes im 3D Objekt ermittelt. 
+Abbildung \ref{fig:photogammatry} zeigt dies anschaulich.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\linewidth]{images/photogrammetry.jpg}
+    \caption{Funktionsweise der Fotogrammetrie \cite{.13.08.2024}.}
+    \label{fig:photogammatry}
+\end{figure}
+
 Vorteil bei der Fotogrammetrie ist, dass die Daten relativ einfach aufgenommen werden
 können. Die Kamera eines Smartphones kann ausreichend hochauflösende Bilder aufnehmen, um 
 eine 3D-Rekonstruktion zu ermöglichen. Des Weiteren sind viele Softwarelösungen,
@@ -186,7 +198,7 @@ exponentiell sein~\cite{XiaoleiDu.2009}.
 Nachteile von diesem Verfahren sind die hohen initialen Kosten eines Scanners 
 und der begrenzte Messbereich. 
 
-\subsection{Digitales Abbild}
+\section{Digitales Abbild}
 
 Das schon vorhandene oder erstellte 3D Objekt muss für die weitere Nutzung
 in einem geeigneten Datenformat gespeichert werden. Hierfür haben sich mehrere
@@ -237,7 +249,7 @@ Integer in verschiedener Bittiefe gewählt.
     \label{fig:3d_design}
 \end{figure}
 
-\subsection{Scanner und Datenerfassung}
+\section{Scanner und Datenerfassung}
 [todo verschiedene Scanner differenzieren und vergleichen]
 
 Wie schon beschrieben, können dreidimensionale Daten direkt mit einem 
@@ -267,7 +279,9 @@ wieder zu einem digitalen Abbild zusammengefügt werden.
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.3\textwidth]{images/Scanner.PNG}
-    \caption{Funktionsweise eines Laserscanners [todo was ist abgebildet]}
+    \caption{Messbarer Bereich eines Laserscanners vom Typ: ScanControl-LLT30xx.
+    Der messbare Bereich ist rot markiert. Die Dimensionen sind in mm angegeben 
+    und vom Laserursprung gemessen.}
     \label{fig:scanner}
 \end{figure}
 

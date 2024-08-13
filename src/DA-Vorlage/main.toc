@@ -7,35 +7,35 @@
 \contentsline {section}{\numberline {2.2}Limitierungen von AF}{4}{}%
 \contentsline {section}{\numberline {2.3}Reverse Engineering}{5}{}%
 \contentsline {section}{\numberline {2.4}3D Rekonstruktion}{6}{}%
-\contentsline {subsection}{\numberline {2.4.1}Digitales Abbild}{8}{}%
-\contentsline {subsection}{\numberline {2.4.2}Scanner und Datenerfassung}{9}{}%
-\contentsline {section}{\numberline {2.5}Transformationen}{9}{}%
-\contentsline {section}{\numberline {2.6}ICP-Algorithmus}{10}{}%
-\contentsline {chapter}{\numberline {3}Methodik}{11}{}%
-\contentsline {section}{\numberline {3.1}Verfahren zur optische Spannkraftdeformationserkennung}{12}{}%
-\contentsline {section}{\numberline {3.2}Vorgehen}{12}{}%
-\contentsline {chapter}{\numberline {4}Datenaufbereitung}{15}{}%
-\contentsline {section}{\numberline {4.1}Pointcloud filtern}{15}{}%
-\contentsline {section}{\numberline {4.2}Pointcloud in Bild konvertieren}{16}{}%
-\contentsline {chapter}{\numberline {5}Stitching}{21}{}%
-\contentsline {section}{\numberline {5.1}Feature Erkennung}{21}{}%
-\contentsline {section}{\numberline {5.2}Differenzierung von Punkten}{23}{}%
-\contentsline {section}{\numberline {5.3}Transformation bestimmen}{23}{}%
-\contentsline {section}{\numberline {5.4}Visuelle Darstellung des Stitching Prozesses}{25}{}%
-\contentsline {section}{\numberline {5.5}Bilder zusammenfügen}{25}{}%
-\contentsline {section}{\numberline {5.6}Probleme und Lösungen im Verfahren}{26}{}%
-\contentsline {chapter}{\numberline {6}Spannkraftinduzierten Deformation}{29}{}%
-\contentsline {section}{\numberline {6.1}Deformation zwischen zwei Spannungszuständen}{29}{}%
-\contentsline {subsection}{\numberline {6.1.1}Randgeometrien übereinander legen}{30}{}%
-\contentsline {subsection}{\numberline {6.1.2}Deformation messen}{31}{}%
-\contentsline {chapter}{\numberline {7}Validierung}{35}{}%
-\contentsline {section}{\numberline {7.1}Analyse der spannkraftinduzierten Deformation}{35}{}%
-\contentsline {subsection}{\numberline {7.1.1}Versuchsaufbau}{36}{}%
-\contentsline {section}{\numberline {7.2}Zusätzliche Messinstrumente}{36}{}%
-\contentsline {section}{\numberline {7.3}Messergebnisse}{37}{}%
-\contentsline {section}{\numberline {7.4}Ergebnisse der optischen Deformationsanalyse}{39}{}%
-\contentsline {chapter}{\numberline {8}Anwendung und Algorithmus}{43}{}%
-\contentsline {section}{\numberline {8.1}Anwendung}{43}{}%
-\contentsline {chapter}{\numberline {9}Zusammenfassung und Ausblick}{45}{}%
-\contentsline {chapter}{Abbildungsverzeichnis}{48}{}%
-\contentsline {chapter}{Literaturverzeichnis}{51}{}%
+\contentsline {section}{\numberline {2.5}Digitales Abbild}{9}{}%
+\contentsline {section}{\numberline {2.6}Scanner und Datenerfassung}{10}{}%
+\contentsline {section}{\numberline {2.7}Transformationen}{11}{}%
+\contentsline {section}{\numberline {2.8}ICP-Algorithmus}{11}{}%
+\contentsline {chapter}{\numberline {3}Methodik}{13}{}%
+\contentsline {section}{\numberline {3.1}Verfahren zur optische Spannkraftdeformationserkennung}{14}{}%
+\contentsline {section}{\numberline {3.2}Vorgehen}{14}{}%
+\contentsline {chapter}{\numberline {4}Datenaufbereitung}{17}{}%
+\contentsline {section}{\numberline {4.1}Pointcloud filtern}{17}{}%
+\contentsline {section}{\numberline {4.2}Pointcloud in Bild konvertieren}{18}{}%
+\contentsline {chapter}{\numberline {5}Stitching}{23}{}%
+\contentsline {section}{\numberline {5.1}Feature Erkennung}{23}{}%
+\contentsline {section}{\numberline {5.2}Differenzierung von Punkten}{25}{}%
+\contentsline {section}{\numberline {5.3}Transformation bestimmen}{25}{}%
+\contentsline {section}{\numberline {5.4}Visuelle Darstellung des Stitching Prozesses}{27}{}%
+\contentsline {section}{\numberline {5.5}Bilder zusammenfügen}{27}{}%
+\contentsline {section}{\numberline {5.6}Probleme und Lösungen im Verfahren}{28}{}%
+\contentsline {chapter}{\numberline {6}Spannkraftinduzierten Deformation}{31}{}%
+\contentsline {section}{\numberline {6.1}Deformation zwischen zwei Spannungszuständen}{31}{}%
+\contentsline {subsection}{\numberline {6.1.1}Randgeometrien übereinander legen}{32}{}%
+\contentsline {subsection}{\numberline {6.1.2}Deformation messen}{33}{}%
+\contentsline {chapter}{\numberline {7}Validierung}{37}{}%
+\contentsline {section}{\numberline {7.1}Analyse der spannkraftinduzierten Deformation}{37}{}%
+\contentsline {subsection}{\numberline {7.1.1}Versuchsaufbau}{38}{}%
+\contentsline {section}{\numberline {7.2}Zusätzliche Messinstrumente}{38}{}%
+\contentsline {section}{\numberline {7.3}Messergebnisse}{39}{}%
+\contentsline {section}{\numberline {7.4}Ergebnisse der optischen Deformationsanalyse}{41}{}%
+\contentsline {chapter}{\numberline {8}Anwendung und Algorithmus}{45}{}%
+\contentsline {section}{\numberline {8.1}Anwendung}{45}{}%
+\contentsline {chapter}{\numberline {9}Zusammenfassung und Ausblick}{47}{}%
+\contentsline {chapter}{Abbildungsverzeichnis}{50}{}%
+\contentsline {chapter}{Literaturverzeichnis}{53}{}%
