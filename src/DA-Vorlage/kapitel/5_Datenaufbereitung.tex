@@ -61,21 +61,6 @@ hier über dem Bauteil Punkte erkannt hat. Durch das Filtern wurden diese Punkte
 beziehungsweise bei der Konvertierung nicht berücksichtigt. Da diese Punkte dann fehlen
 bleiben sie im resultierenden Bild schwarz.
 
-\begin{figure}
-    \centering
-    \includegraphics[width=0.8\textwidth]{images/height_occurange.png}
-    \includegraphics[width=0.8\textwidth]{images/height_occurange_log.png}
-    \caption{Auftreten Höhe}
-    \label{fig:brightness}
-\end{figure}
-
-\begin{figure}
-    \centering
-    \includegraphics[width=0.8\textwidth]{images/am_sp0_top_10p.png}
-    \caption{Metallteil gefiltert}
-    \label{fig:metall_image}
-\end{figure}
-
 \section{Pointcloud in Bild konvertieren}
 
 Um Rechenzeit zu sparen und die zahlreichen Funktionen bereits bestehender
@@ -100,24 +85,58 @@ zu der Höhe zu berechnen. $min_{brightness}$ und $max_{brightness}$ sind die ge
 Helligkeit. In unserem Fall sind $min_{brightness} = 0$ und $max_{brightness} = 255$ da ein 8 Bit Bild
 verwendet wird.
 
-[todo A und B]
-\begin{figure}[h]
+
+\begin{figure}[H]
     \centering
-    \includegraphics[width=0.5\textwidth]{images/fdm_top_100p.png}
-    \includegraphics[width=0.5\textwidth]{images/fdm_top_10p.png}
-    \caption{Konvertierung Pointcloud zu Bild, Oberhalb ohne Filter, unterhalb 
-    mit den zehn Prozent häufigsten Höhenwerten}
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=0.98\textwidth]{images/fdm_top_100p.png} % first figure itself
+        \caption*{(a)}
+    \end{minipage}\hfill
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=0.98\textwidth]{images/fdm_top_10p.png} % second figure itself
+        \caption*{(b)}
+    \end{minipage}
+    \caption{Resultat der Pointcloud zu Bild Konvertierung. (a) Ohne Filterung der Höhenwerte, (b) Die gleichen 
+    Scandaten, aber nur den zehn Prozent häufigsten Höhenwerten.}
     \label{fig:image_from_pc}
 \end{figure}
 
 Wie man in Abbildung \ref{fig:image_from_pc} sehen kann, sind kaum Helligkeitsveränderungen
-im Bild sichtbar. Das liegt an derselben Problematik, an der der ICP-Algorithmus häufig
-scheitert. Reale Datensets widerspiegeln die Realität nicht absolut korrekt, sondern
+im Bild sichtbar. Das liegt an derselben Problematik, an der der ICP-Algorithmus \ref{icp} häufig
+scheitert. Reale Datensets spiegeln die Realität nicht ganzheitlich korrekt wider, sondern
 beinhalten Messfehler und Streuungen.
 
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{\textwidth}
+        \centering
+        \includegraphics[width=0.8\textwidth]{images/height_occurange.png} % first figure itself
+        \caption*{(a)}
+    \end{minipage}\hfill
+    \begin{minipage}{\textwidth}
+        \centering
+        \includegraphics[width=0.8\textwidth]{images/height_occurange_log.png} % second figure itself
+        \caption*{(b)}
+    \end{minipage}
+    \caption{Auftreten der Höhenwerte in den Scandaten der Demonstratorbauteile. 
+    (a): Das Histogramm ist nicht skaliert. (b): Logarithmische Skalierung der 
+    Höheninformationen. Hier ist zu sehen das viele kleine Werte vorliegen.}
+    \label{fig:brightness}
+\end{figure}
+
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/am_sp0_top_10p.png}
+    \caption{Metallteil gefiltert}
+    \label{fig:metall_image}
+\end{figure}
+
 Abbildung \ref*{fig:brightness} zeigt die Häufigkeit der gleichen Höhenwerte einer
-Pointcloud von dem Demonstratorbauteil. In Blau ist die Verteilung der Punkte auf 
-einem Demonstratorbauteil zu sehen das aus Metall gedruckt wurde, Orange zeigt die 
+Pointcloud von dem Demonstratorbauteil [TODO Erklärung Demonstratorbauteil]. In blau ist die Verteilung der Punkte auf 
+einem Demonstratorbauteil zu sehen, das aus Metall gedruckt wurde, orange zeigt die 
 Verteilung der Punkte auf einem Kunststoffteil.
 In dem oberen Histogramm 
 sind die Häufigkeiten der Höhenwerte zu sehen. Der Datensatz wurde in 500 gleich große
@@ -125,24 +144,24 @@ Teile gruppiert, jeder Balken repräsentiert eine Gruppe.
 Unterhalb ist das Histogramm mit dem gleichen Datensatz, aber mit der y-Achse 
 logarithmisch skaliert um kleine Prozente deutlich zu machen die im
 oberen Diagramm nur schwer oder gar nicht sichtbar sind. 
-Die meisten Höhenwerte treten bei ca. 80 beziehungsweise 85 auf, 
+Die meisten Höhenwerte treten bei ca. 80 mm beziehungsweise 85 mm auf, 
 sie gehören zu den Punkten, die auf dem Demonstratorbauteil liegen, 
 es treten allerdings auch Werte darunter und darüber auf. 
-Die in Abbildung \ref*{calc:brightness} vorgestellte Formel benutzt allerdings 
+Die in \ref*{calc:brightness} vorgestellte Formel benutzt allerdings 
 die absoluten Minimum und Maximum Werte.
 Alle Punkte die tatsächlich auf dem Bauteil werden also entsprechend wenig
-berücksichtigt. Dem kann Abhilfe geschaffen werden, indem Werte, die weniger häufig 
-auftreten entfernt werden. Sortiert man alle Höhenwerte nach der Häufigkeit ihres 
-auftreten in der Pointcloud und entfernt den n-ten Prozentsatz können Ausreißer 
+berücksichtigt. Dies kann verhindert werden, indem Werte, die weniger häufig 
+auftreten, entfernt werden. Sortiert man alle Höhenwerte nach der Häufigkeit ihres 
+Auftretens in der Pointcloud und entfernt den n-ten Prozentsatz können Ausreißer 
 entfernt werden. Wenn nur die häufigsten zehn Prozent übernommen werden erhält man 
 das untere Bild in Abbildung \ref{fig:image_from_pc}
 
-Features auf dem Bauteil können jetzt deutlich besser erkannt werden. Auch zu sehen
-sind jetzt die Markierungen auf der linken und Rechten Seite die bei der Registrierung
+Ränder und Oberflächenstrukturen auf dem Bauteil können jetzt deutlich besser erkannt werden. Auch zu sehen
+sind jetzt die Markierungen auf der linken und rechten Seite, die bei der Registrierung
 helfen sollen. Zusätzlich sind die Spuren und Lücken die durch den FDM 
 Herstellungsprozess entstehen zu sehen.
 
 Durch das Filtern der Höheninformationen sind Oberflächenstrukturen nicht nur besser
 erkennbar, auch die Ränder treten genauer hervor. 
-Dadurch können mehrere Bilder korrekt zusammengefügt werden.
+Dadurch können die Bilder im weiteren Schritt korrekt zusammengefügt werden
 
