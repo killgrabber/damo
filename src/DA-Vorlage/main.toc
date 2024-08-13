@@ -37,5 +37,8 @@
 \contentsline {chapter}{\numberline {8}Anwendung und Algorithmus}{45}{}%
 \contentsline {section}{\numberline {8.1}Anwendung}{45}{}%
 \contentsline {chapter}{\numberline {9}Zusammenfassung und Ausblick}{47}{}%
+\contentsline {section}{\numberline {9.1}Materialunterschiede}{47}{}%
+\contentsline {section}{\numberline {9.2}Verbesserungspotenzial des Verfahrens}{47}{}%
+\contentsline {section}{\numberline {9.3}Ausblick}{48}{}%
 \contentsline {chapter}{Abbildungsverzeichnis}{50}{}%
 \contentsline {chapter}{Literaturverzeichnis}{53}{}%
