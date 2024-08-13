@@ -3,27 +3,31 @@
 
 Für jeden Einspannzustand eines Bauteils können mehrere Bilddateien vorliegen.
 Alle Bilddateien gehören zu dem gleichen Bauteil und müssen 
-zusammengefügt werden, um ein einzelnes digitales Objekt zu erhalten. 
-Als Voraussetzung ist gegeben das alle Bilder Überlappung enthalten.
+zusammengefügt werden, um ein einzelnes Bild zu erhalten. 
+Als Voraussetzung ist gegeben, dass alle Bilder Überlappungen enthalten.
 
-Diese Überlappung kann benutzt werden, um die Bilder zu einem Objekt zusammenzufügen.
-Das Zusammenfügen ist im folgenden auch Stitching genannt.
-Für das Stitching von Bilddateien existieren schon mehrere Verfahren die in Bibliotheken
-für viele Programmiersprachen implementiert sind. Der schon beschriebene ICP-Algorithmus
-ist eines dieser Verfahren. Das Problem mit diesen Verfahren ist das sich zwei 
-Datensätze angenähert werden indem auf ein Datensatz so lange eine 
-Transformation und Rotation, manchmal auch eine Skalierung, angewendet wird, bis
+Diese Überlappung kann benutzt werden, um die Bilder zu einem Bild zusammenzufügen.
+Für das Stitching von Bilddateien existieren schon mehrere Verfahren, die in Bibliotheken
+für viele Programmiersprachen implementiert sind. Der schon beschriebene 
+ICP-Algorithmus \ref{icp}
+ist eines dieser Verfahren. Das Problem mit diesen Verfahren ist, dass zwei 
+Datensätze registriert werden, indem auf ein Datensatz so lange eine 
+Transformation (vgl. \ref*{Transformation}) angewendet wird, bis
 die Distanz der Datensätze unter einen Grenzwert fällt oder nicht mehr verbessert
 werden kann. Die Überlappung in den von dem Laserscanner aufgenommen Daten ist jedoch 
-nur in zwei Achsen verschoben. Durch eine Rotation der Daten wird eine nicht korrekte 
-Distanz berechnet.
-Um die korrekte Transformation zu finden, mit der die beiden Bilder überlappen
-muss nicht der komplette Bereich analysiert werden, sondern nur der überlappende Teil.
-In diesem Bereich müssen Features erkannt werden. 
-Nachdem in beiden Teilbildern Features erkannt wurden können diese miteinander
-verglichen werden.
+nur in zwei Achsen verschoben. Durch eine Rotation kann eine Transformation 
+berechnet werden, die nicht der Realität entspricht, gesucht ist eine Transformation 
+die ausschließlich aus einer Translation in zwei Achsen besteht.
 
-\section{Feature Erkennung}
+Um die korrekte Transformation zu finden, mit der die beiden Bilder überlappen,
+muss nicht der komplette Bereich analysiert werden, sondern nur der überlappende Teil.
+
+In diesem Bildausschnitt müssen gemeinsame Bereiche in beiden Bildern erkannt werden. 
+Diese gemeinsamen Bereiche können anschließend miteinander verglichen werden.
+Bereiche, die verglichen werden können, sind Ränder oder Farbunterschiede im Bild 
+und werden im folgenden als Features bezeichnet.
+
+\section{Feature Erkennung} \label{contoursearching}
 
 Features in einem Bild sind große Unterschiede in benachbarten Pixeln. Die größten
 Features sind die Ränder des Bauteils, kleinere Features können Oberflächenänderungen 
@@ -33,9 +37,9 @@ Features als Liste von Konturen aus. Konturen selbst bestehen aus Listen von
 Punkten, die aus X und Y Koordinaten bestehen. Die Konturerkennung kann verbessert 
 werden, indem das Bild entsprechend präpariert wird. In Abbildung \ref{fig:cons} und
 \ref{fig:image_top} ist ein Ursprungsbild und die extrahierten Konturen zu sehen.
-Mittig am linken und rechten Rand sind in Abbildung \ref{fig:image_top} 
+Mittig am linken und rechten Rand sind in Abbildung\ref{fig:cons}
 Messfehler des Laserscanners zu sehen. Diese werden auch als Features in 
-Abbildung \ref{fig:cons} erkannt. Diese müssen entfernt werden damit die Bilder 
+Abbildung \ref{fig:image_top} erkannt. Diese müssen entfernt werden, damit die Bilder 
 korrekt zusammengefügt werden können. Erfolgt dies nicht werden diese Fehler miteinander
 verglichen was das Ergebnis verfälscht.
 
@@ -49,7 +53,7 @@ verglichen was das Ergebnis verfälscht.
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.8\textwidth]{images/only_con.jpg} % second figure itself
-    \caption{Extrahierte Kontouren des Bildes ohne Pre-Processing}
+    \caption{Extrahierte Kontouren des Bildes ohne Pre-Processing [TODO besseres Bild einfügen]}
     \label{fig:cons}
 \end{figure}
 
@@ -60,14 +64,14 @@ Teil des Bildes kann also entfernt werden. So wird außerdem Rechenzeit gespart.
     \centering
     \includegraphics[width=0.8\textwidth]{images/only_con_cut.jpg} % second figure itself
     \caption{Extrahierte Kontouren des Bildes ohne Pre-Processing, zugeschnitten 
-    auf den (vermutlich) überlappenden Bereich}
+    auf den überlappenden Bereich [TODO besseres Bild einfügen]}
     \label{fig:cons_cut}
 \end{figure}
 
 Dieses Verfahren wird auf beide Bilder angewendet. Daraus resultieren dann zwei 
 zugeschnittene Bilder aus denen Konturen extrahiert wurden. 
-Würden diese beiden Bildteile vollständig überlappen könnte jetzt der ICP-Algorithmus
-angewendet werden. Dieser würde dann die korrekte Transformation berechnen in dem er 
+Würden diese beiden Bildteile vollständig überlappen, könnte jetzt der ICP-Algorithmus
+angewendet werden. Dieser würde dann die korrekte Transformation berechnen, in dem er 
 die Konturen aus dem oberen Bild, mit denen aus dem unteren Bild vergleicht und die 
 Distanz zwischen den Punkten minimiert. 
 Der Grad der Überlappung ist unbekannt und kann nicht im Vorhinein bestimmt werden.
@@ -81,8 +85,8 @@ Die Distanz zwischen zwei Punkten kann über den euklidischen Abstand gemessen w
 \cite{Dokmanic.2015}. Sei A ein Punkt in einer Kontur aus dem oberen Bild und K eine 
 Kontur aus dem unteren Bild.  
 Um den Punkt aus K zu finden, der am nächsten an A liegt, muss A mit jedem Punkt aus 
-K verglichen werden. Das Punktepaar mit dem kleinsten gefunden Euklidischen Abstand 
-wird als 'Best Match' gespeichert. Wenn die Euklidische Distanz null beträgt, kann 
+K verglichen werden. Das Punktepaar mit dem kleinsten gefunden euklidischen Abstand 
+wird als 'Best Match' gespeichert. Wenn die euklidische Distanz null beträgt, kann 
 die Suche abgebrochen werden, da kein kleinerer Wert mehr gefunden werden kann.
 Dieser Ansatz ist dem ICP-Algorithmus ähnlich. Die Differenz zwischen zwei Konturen 
 K1 und K2 kann verglichen werden, indem für jeden Punkt A aus K1 der näheste Punkt aus 
@@ -155,8 +159,8 @@ Metallbauteil.
 \section{Visuelle Darstellung des Stitching Prozesses}
 
 In Abbildung \ref{fig:stitching_all} ist der Prozess des Verfahrens zu sehen.
-K1 ist in Blau dargestellt, K2 in Grün.
-In jeden Bild ist der Grad der Überlappung dargestellt. Es ist dargestellt wie
+K1 ist in blau dargestellt, K2 in grün.
+In jeden Bild ist der Grad der Überlappung dargestellt. Es ist dargestellt, wie
 Kontur K2 über K1 geschoben wird, um den besten Grad der Übereinstimmung zu ermitteln.
 Die Bilder sind repräsentativ ausgewählt, im tatsächlichen Prozess wird K1 komplett 
 über K2 bewegt.
@@ -183,11 +187,11 @@ Die Bilder sind repräsentativ ausgewählt, im tatsächlichen Prozess wird K1 ko
         \includegraphics[width=\textwidth]{images/stitching_end.PNG} % first figure itself
         \caption*{(d)}
     \end{minipage}\hfill
-    \caption{Verfahren im Verlauf dargestellt, a am Anfang, b nach n-durchgängen, c }
-    bei einem guten Match, d Kontur K2 komplett über K1 geschoben.
+    \caption{Verfahren im Verlauf dargestellt, a zu Beginn, b nach n-durchgängen, c }
+    bei einem guten Match, d Kontur K2 komplett über K1 geschoben, 
+    am Ende der Durchgänge.
     \label{fig:stitching_all}
 \end{figure}
-
 
 \section{Bilder zusammenfügen}
 
@@ -207,7 +211,7 @@ Ursprungskoordinaten haben, die auch bei den Konturen K1 und K2 verwendet wurden
 
 \section{Probleme und Lösungen im Verfahren}
 
-Durch die Funktionsweise treten am Randbereich der Scannerdaten vermehrt Messfehler auf, 
+Durch die Funktionsweise treten am Randbereich der Scandaten vermehrt Messfehler auf, 
 die nicht vollständig durch vorheriges Filtern entfernt werden können. 
 Damit diese Messfehler das Stitching nicht verfälschen, werden alle Konturen nochmals 
 gefiltert. Alle Punkte in einer Kontur, die sich in einem konfigurierbaren 
@@ -219,7 +223,7 @@ werden und von der Transformation abgezogen werden.
 Wenn Konturen mit einem großen Längenunterschied verglichen werden, 
 kann eine sehr hohe Übereinstimmung ermittelt werden, die aber keine 
 tatsächliche Übereinstimmung ist. Dies liegt daran, dass es wahrscheinlicher ist 
-eine Sequenz der Länge 5 in einer anderen Sequenz der Länge 500 zu finden.  
+eine Sequenz mit fünf Pixeln in einer anderen Sequenz mit 500 Pixeln zu finden.  
 Das kann zum Beispiel vorkommen, wenn Konturen 
 die am linken und rechten Bildrand in Abbildung \ref{fig:cons} zu sehen sind, 
 verglichen werden. Um dies zu vermeiden wird eine Bedienung eingeführt, dass die Länge

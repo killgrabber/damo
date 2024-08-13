@@ -271,12 +271,24 @@ wieder zu einem digitalen Abbild zusammengefügt werden.
     \label{fig:scanner}
 \end{figure}
 
+\section{Transformationen} \label{Transformation}
+
+Eine Transformation ist eine Funktion, die eine Menge von Punkten in einem
+Raum auf eine andere Menge von Punkten in demselben oder einem anderen Raum abbildet. 
+Diese Transformationen werden verwendet, um die Lage, Form oder Größe von 
+Objekten zu verändern.
+Es gibt drei Basis Arten der Transformationen:
+Translation, Rotation und Skalierung. Die Translation verschiebt alle Punkte 
+um einen bestimmten Vektor in eine bestimmte Richtung. 
+Rotation: Drehen eines Objekts um einen Punkt (in 2D) oder eine Achse (in 3D).
+Veränderung der Größe eines Objekts durch Multiplikation der Koordinaten 
+mit einem Skalierungsfaktor~\cite{XiaoleiDu.2009}.
+
 \section{ICP-Algorithmus} \label{icp}
 
 Der Iterative-Closest-Point-Algorithmus (ICP-Algorithmus) existiert schon seit dem Beginn der 90er Jahre und ist 
 die klassische Methode, wenn es um die Registrierung von Pointclouds und 
 anderen Punkt-Sets geht. \cite{icp}
-[todo was ist eine Transformation]
 Der Algorithmus errechnet eine lokale, optimale Transformation, die ein Daten-Set
 dem anderen annähern kann. \cite{icp_og}
 Um diese Transformation, zu bestimmen werden zuerst die Distanzen von allen 
