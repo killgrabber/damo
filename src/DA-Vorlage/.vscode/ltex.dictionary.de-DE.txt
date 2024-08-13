@@ -1,2 +1,7 @@
 spanende
 Deformationserkennung
+Stitching
+Konturerkennung
+OpenCV
+ICP-Algorithmus
+spanenden

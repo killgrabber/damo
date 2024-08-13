@@ -47,6 +47,12 @@ Horst Czichos and Werner Daum.
   {\em Dubbel Taschenbuch f{\"u}r den Maschinenbau}, pages 693--732. {Springer
   Vieweg}, Berlin, 2020.
 
+\bibitem[CM23]{Calignano.2023}
+Flaviana Calignano and Vincenza Mercurio.
+\newblock An overview of the impact of additive manufacturing on supply chain,
+  reshoring, and sustainability.
+\newblock {\em Cleaner Logistics and Supply Chain}, 7:100103, 2023.
+
 \bibitem[DPRV]{Dokmanic.2015}
 Ivan Dokmanic, Reza Parhizkar, Juri Ranieri, and Martin Vetterli.
 \newblock Euclidean distance matrices: Essential theory, algorithms, and
@@ -55,6 +61,12 @@ Ivan Dokmanic, Reza Parhizkar, Juri Ranieri, and Martin Vetterli.
 \bibitem[EAA23]{Elaksher.2023}
 Ahmed Elaksher, Tarig Ali, and {Abdullatif Alharthy}.
 \newblock A quantitative assessment of lidar data accuracy, 2023.
+
+\bibitem[Gar23]{Gardner.2023}
+Leroy Gardner.
+\newblock Metal additive manufacturing in structural engineering -- review,
+  advances, opportunities and outlook.
+\newblock {\em Structures}, 47:2178--2193, 2023.
 
 \bibitem[HL21]{Helle.2021}
 Robin~H. Helle and Hirpa~G. Lemu.
@@ -74,6 +86,13 @@ Aniket Jadhav and Vijay~S. Jadhav.
 \newblock {\em An overview of 3D data content, file formats and viewers}.
 \newblock 2008.
 
+\bibitem[MCU{\etalchar{+}}22]{Mahmood.2022}
+Muhammad~Arif Mahmood, Diana Chioibasu, Asif {Ur Rehman}, Sabin Mihai, and
+  Andrei~C. Popescu.
+\newblock Post-processing techniques to enhance the quality of metallic parts
+  produced by additive manufacturing.
+\newblock {\em Metals}, 12(1):77, 2022.
+
 \bibitem[MES20]{MESSTECHNIK_2020}
 MICRO-EPSILON MESSTECHNIK.
 \newblock Präzision. - scancontrol // 2d/3d laser-profil-sensoren, 2020.
@@ -86,6 +105,14 @@ Stephan M{\"o}nchinger, Robert Schr{\"o}der, and Rainer Stark.
 \newblock Automated 3d scan based cad-repositioning for design and verification
   in one-off construction.
 \newblock {\em Procedia CIRP}, 100:530--535, 2021.
+
+\bibitem[MZQ{\etalchar{+}}20]{Meng.2020}
+Liang Meng, Weihong Zhang, Dongliang Quan, Guanghui Shi, Lei Tang, Yuliang Hou,
+  Piotr Breitkopf, Jihong Zhu, and Tong Gao.
+\newblock From topology optimization design to additive manufacturing: Today's
+  success and tomorrow's roadmap.
+\newblock {\em Archives of Computational Methods in Engineering},
+  27(3):805--830, 2020.
 
 \bibitem[Sch06]{Schwartz.2006}
 Roman Schwartz.
@@ -103,6 +130,18 @@ Matthias Schneck, Matthias Gollnau, Max Lutter-Günther, Benjamin Haller, Georg
 \newblock 52nd CIRP Conference on Manufacturing Systems (CMS), Ljubljana,
   Slovenia, June 12-14, 2019.
 
+\bibitem[uni23]{unionfab.22.08.2023}
+unionfab.
+\newblock From rough to refined: Post-processing methods to elevate metal
+  parts.
+\newblock {\em Unionfab}, 22.08.2023.
+
+\bibitem[VB{\'C}{\etalchar{+}}17]{Vranic.2017}
+Aleksandar Vrani{\'c}, Nebojsa Bogojevic, Sne{\v{z}}ana {{\'C}iri{\'c}
+  Kosti{\'c}}, D.~Croccolo, and G.~Olmi.
+\newblock Advantages and drawbacks of additive manufacturing.
+\newblock {\em 0354-6829}, 2017.
+
 \bibitem[VGRH21]{Vafadar.2021}
 Ana Vafadar, Ferdinando Guzzomi, Alexander Rassau, and Kevin Hayward.
 \newblock Advances in metal additive manufacturing: A review of common
@@ -114,6 +153,11 @@ Styliani Verykokou and Charalabos Ioannidis.
 \newblock An overview on image-based and scanner-based 3d modeling
   technologies.
 \newblock {\em Sensors}, 23(2):596, 2023.
+
+\bibitem[XY09]{XiaoleiDu.2009}
+{Xiaolei Du} and {Yong Zhuo}.
+\newblock A point cloud data reduction method based on curvature.
+\newblock pages 914--918, 2009.
 
 \bibitem[ZYD22]{icp}
 Juyong Zhang, Yuxin Yao, and Bailin Deng.

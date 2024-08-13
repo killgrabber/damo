@@ -2,23 +2,40 @@
 
 \chapter{Methodik}
 
-[todo umfangreicher schreiben]
+Wie schon im vorherigen Kapitel beschrieben müssen additiv gefertigte Bauteile 
+nachbearbeitet werden bevor sie eingesetzt werden können. In Abbildung \ref{fig:post-pro}
+ist ein additiv gefertigtes Metallbauteil vor und nach der Nachbearbeitung dargestellt.
+In der Nachbearbeitung wurden die Stützstrukturen entfernt und die Güte der Oberfläche 
+verbessert. 
+Der Nachbearbeitungsschritt wird nicht nur zur optischen Verbesserung verwendet, sondern 
+auch zur Verbesserung der physikalischen und mechanischen Eigenschaften. 
+Zum Beispiel kann durch eine Laserbearbeitung der Härtegrad des Bauteils erhöht werden.
+\cite{Mahmood.2022}.
 
-Wie schon beschrieben müssen additiv gefertigte Bauteile nachbearbeitet werden
-bevor sie eingesetzt werden können. 
 Um eine korrekte Nachbearbeitung gewährleisten zu können muss das additiv 
-gefertigte Bauteil fixiert werden. 
-Dies kann vorgenommen werden, indem das Bauteil in einen Schraubstock eingespannt wird.
-Durch eine Einspannung kann das Bauteil so deformiert werden, 
-dass die vorgesehene Nutzung nicht mehr möglich ist. 
+gefertigte Bauteil fixiert werden, so wird verhindert das sich das Bauteil während der 
+Nachbearbeitung räumlich verschiebt. Durch eine Verschiebung kann das Bauteil oder das, für
+die Nachbearbeitung verwendete Werkzeug, beschädigt werden. Bei einer händischen 
+Nachbearbeitung kann sogar die Gesundheit der Arbeitskraft in Mitleidenschaft gezogen werden.
+Eine Option das Bauteil für die Nachbearbeitung zu fixieren, ist ein Schraubstock. 
+Hier wird das Bauteil zwischen zwei Backen eingespannt und so verhindert, dass sich das
+Bauteil während des Nachbearbeitungsprozesses verschiebt. Durch das Einspannen wirkt eine 
+Kraft auf das Bauteil. Diese Spannkraft kann sich auf die Form des Bauteils auswirken, für 
+die weitere Verwendung des Bauteils ist es nötig, dass das Bauteil genau die geforderte 
+Geometrie, also die des CAD-Designs, hat. Falls dies nicht der Fall ist, kann das Bauteil
+unter Umständen nicht mehr wie vorgesehen eingesetzt werden.
 
 Für die Beurteilung, ob ein Bauteil noch eingesetzt werden kann, ist es nötig die 
-Deformation die auf das Objekt gewirkt hat zu erkennen. Wenn das Bauteil in einen 
-Schraubstock eingespannt wird, wirkt eine Spannkraft über die Backen des Schraubstock
-auf das eingespannte Bauteil.
-Diese Kraft induziert eine Deformation auf das Bauteil. 
-Diese Deformation soll optisch in einem Verfahren erkannt, dargestellt und 
-anschließend ausgewertet werden.
+Deformation die auf das Objekt gewirkt hat zu erkennen. Durch die Analyse der Spannkraft 
+und Deformation eines Bauteils kann anschließend zu der Nachbearbeitung ermittelt werden, 
+ob sich das Bauteil nachhaltig deformiert hat.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/post-processing.PNG}
+    \caption{Nachbearbeitung eines AF Metallbauteils \cite{unionfab.22.08.2023}}
+    \label{fig:post-pro}
+\end{figure}
 
 \section{Verfahren zur optische Spannkraftdeformationserkennung}
 
@@ -34,36 +51,34 @@ Verfahren nicht auf eine Bauteilgröße beschränkt sein soll, müssen mehrere S
 Eingabe akzeptiert werden.
 
 \section{Vorgehen}
-[todo Hier beschreibst du noch etwas offener, was umgesetzt werden soll, 
-als wäre es noch nicht umgesetzt, heißt weniger: dann wird, sondern mehr, es soll...]
 
 Das Verfahren, um eine Deformation in einem eingespannten additiv gefertigten
-Bauteil, zu erkennen, umfasst folgenden Schritte:
+Bauteil, zu erkennen, soll folgende Schritte umfassen:
 \begin{itemize}
     \item \textbf{Aufnahme der Scandaten}\\
-        Im ersten Schritt werden die Daten aus denen die Deformation erkannt werden soll, 
-        aufgenommen. Hierfür wird ein Laserscanner verwendet und das Bauteil im 
-        eingespannten Zustand gescannt.
+        Zu Beginn sollen die Daten, aus denen die Deformation erkannt werden soll, 
+        aufgenommen werden. Hierfür soll ein Laserscanner verwendet werden, durch diesen wird 
+        das Bauteil im eingespannten Zustand gescannt.
     \item \textbf{Digitalisierung des Bauteils:}\\
-        In diesem Schritt werden Messfehler und Ausreißer
-        in den Scandaten entfernt. Anschließend werden die dreidimensionalen 
+        In diesem Schritt sollen Messfehler und Ausreißer
+        in den Scandaten entfernt werden. Anschließend werden die dreidimensionalen 
         Eingangsdaten in eine zweidimensionale Ansicht umgewandelt.
-        Nach diesem Schritt liegen für jedes Bauteil mehrere Datensätze als 
-        zweidimensionale schwarz weiß Bilder vor.
+        Nach diesem Schritt sollen für jedes Bauteil mehrere Datensätze als 
+        zweidimensionale schwarz weiß Bilder vorliegen.
     \item \textbf{Stitching Methodik}\\
-        Diese Bilder müssen nun zu einem einzelnen Bild zusammengefügt werden.
+        Die vorliegenden Bilder sollen nun zu einem einzelnen Bild zusammengefügt werden.
         Hierfür werden Gemeinsamkeiten in den sich 
         überlappenden Bildern gesucht und eine Transformation ermittelt,
         die auf eines von zwei Bildern angewendet werden kann, um sie zusammenzufügen.
     \item \textbf{Deformationserkennung}\\
-        Sobald ein Bild für ein eingespanntes Bauteil vorliegt, können verschiedene 
-        Zustände des Bauteils verglichen werden. Deformationen werden erkannt, in dem 
+        Wenn ein Bild für ein eingespanntes Bauteil vorliegt, sollen verschiedene 
+        Zustände des Bauteils verglichen werden. Deformationen können erkannt werden, in dem 
         die Länge und Breite des Bauteils verglichen wird, zusätzlich wird der 
-        Abstand zwischen den Rändern des Bauteils berechnet. Es können verschiedene
-        Spannungszustände verglichen werden, ein Vergleich mit dem initialen 
-        3D-Design ist auch möglich. Hier werden auch Fehler erkannt, die im 
+        Abstand zwischen den Rändern des Bauteils berechnet. Es sollen verschiedene
+        Spannungszustände verglichen werden können. Ein Vergleich mit dem initialen 
+        CAD-Design ist auch möglich, hier sollen auch Fehler erkannt werden, die im 
         Fertigungsprozess entstehen. Der Unterschied zwischen Bauteilzuständen
-        wird visuell ausgegeben und als Bild gespeichert.
+        soll visuell ausgegeben werden und als Bild gespeichert werden.
         
 \end{itemize}
 

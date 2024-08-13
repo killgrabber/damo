@@ -27,45 +27,46 @@ Reallocating 'name_of_file' (item size: 1) to 18 items.
 Database file #1: literatur/quellen.bib
 Warning--empty booktitle in inproceedings
 Warning--empty publisher in KentonMchenry.2008
-You've used 20 entries,
+Warning--empty booktitle in XiaoleiDu.2009
+You've used 27 entries,
             2543 wiz_defined-function locations,
-            705 strings with 8430 characters,
-and the built_in function-call counts, 8492 in all, are:
-= -- 830
-> -- 463
-< -- 7
-+ -- 167
-- -- 160
-* -- 624
-:= -- 1407
-add.period$ -- 60
-call.type$ -- 20
-change.case$ -- 135
-chr.to.int$ -- 20
-cite$ -- 22
-duplicate$ -- 304
-empty$ -- 593
-format.name$ -- 182
-if$ -- 1725
+            749 strings with 9807 characters,
+and the built_in function-call counts, 11554 in all, are:
+= -- 1127
+> -- 642
+< -- 10
++ -- 232
+- -- 223
+* -- 861
+:= -- 1925
+add.period$ -- 81
+call.type$ -- 27
+change.case$ -- 188
+chr.to.int$ -- 27
+cite$ -- 30
+duplicate$ -- 413
+empty$ -- 789
+format.name$ -- 251
+if$ -- 2330
 int.to.chr$ -- 1
 int.to.str$ -- 0
-missing$ -- 16
-newline$ -- 102
-num.names$ -- 64
-pop$ -- 134
+missing$ -- 23
+newline$ -- 137
+num.names$ -- 85
+pop$ -- 178
 preamble$ -- 1
-purify$ -- 156
+purify$ -- 216
 quote$ -- 0
-skip$ -- 279
+skip$ -- 373
 stack$ -- 0
-substring$ -- 444
-swap$ -- 49
-text.length$ -- 7
-text.prefix$ -- 4
+substring$ -- 607
+swap$ -- 65
+text.length$ -- 10
+text.prefix$ -- 6
 top$ -- 0
-type$ -- 156
-warning$ -- 2
-while$ -- 80
-width$ -- 23
-write$ -- 255
-(There were 2 warnings)
+type$ -- 212
+warning$ -- 3
+while$ -- 108
+width$ -- 30
+write$ -- 343
+(There were 3 warnings)
