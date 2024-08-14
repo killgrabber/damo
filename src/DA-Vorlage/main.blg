@@ -9,6 +9,8 @@ Reallocating 'name_of_file' (item size: 1) to 30 items.
 A level-1 auxiliary file: kapitel/2_StandDerTechnik.aux
 Reallocating 'name_of_file' (item size: 1) to 28 items.
 A level-1 auxiliary file: kapitel/3_ZielderArbeit.aux
+Reallocating 'name_of_file' (item size: 1) to 29 items.
+A level-1 auxiliary file: kapitel/4_Datenerfassung.aux
 Reallocating 'name_of_file' (item size: 1) to 32 items.
 A level-1 auxiliary file: kapitel/5_Datenaufbereitung.aux
 Reallocating 'name_of_file' (item size: 1) to 25 items.
@@ -30,43 +32,43 @@ Warning--empty publisher in KentonMchenry.2008
 Warning--empty booktitle in XiaoleiDu.2009
 You've used 28 entries,
             2543 wiz_defined-function locations,
-            753 strings with 9912 characters,
-and the built_in function-call counts, 11810 in all, are:
-= -- 1150
-> -- 650
-< -- 11
-+ -- 235
-- -- 225
-* -- 872
-:= -- 1964
+            754 strings with 9943 characters,
+and the built_in function-call counts, 11870 in all, are:
+= -- 1156
+> -- 661
+< -- 10
++ -- 239
+- -- 229
+* -- 878
+:= -- 1976
 add.period$ -- 83
 call.type$ -- 28
-change.case$ -- 193
+change.case$ -- 194
 chr.to.int$ -- 28
 cite$ -- 31
-duplicate$ -- 424
+duplicate$ -- 423
 empty$ -- 814
-format.name$ -- 254
-if$ -- 2384
+format.name$ -- 258
+if$ -- 2395
 int.to.chr$ -- 1
 int.to.str$ -- 0
 missing$ -- 23
 newline$ -- 141
 num.names$ -- 88
-pop$ -- 187
+pop$ -- 188
 preamble$ -- 1
-purify$ -- 222
+purify$ -- 223
 quote$ -- 0
-skip$ -- 386
+skip$ -- 387
 stack$ -- 0
 substring$ -- 615
 swap$ -- 66
-text.length$ -- 11
+text.length$ -- 10
 text.prefix$ -- 6
 top$ -- 0
 type$ -- 220
 warning$ -- 3
-while$ -- 110
+while$ -- 111
 width$ -- 31
 write$ -- 353
 (There were 3 warnings)

@@ -16,59 +16,72 @@ wenn diese Punkte entfernt werden.
 
 \section{Pointcloud filtern} [TODO Komplett überarbeiten]
 
-Wie in Abbildung \ref{fig:brightness} zu erkennen ist, streuen nicht alle Punktwolken
+Wie in Abbildung~\ref{fig:brightness} zu erkennen ist, streuen nicht alle Pointclouds
 gleichmäßig. Abhängig vom Werkstoff des Bauteils reflektieren die Laserstrahlen 
-unterschiedlich, was zu einer variierenden Anzahl von Ausreißern führt. 
+unterschiedlich, was zu einer variierenden Anzahl von Ausreißern führt. Ausreißer können
+auch durch die Umgebung auftreten, anders einfallendes Licht ist ein Beispiel dafür. 
 Das Metallteil zeigt eine deutlich stärkere Streuung in beide Richtungen, 
 während das FDM-gedruckte Bauteil weniger nach oben, 
 aber mehr nach unten streut. Daher muss eine Filtermethode gewählt werden, 
 die für alle Fertigungsverfahren anwendbar ist und nicht bei einem Verfahren 
 besser funktioniert als bei einem anderen. Wird beispielsweise die Methode angewendet, 
 die die 10 \% am häufigsten auftretenden Höhenwerte bei einem Metallteil berücksichtigt, 
-ergibt sich das in Abbildung \ref{fig:metall_image} gezeigte Bild.
+ergibt sich das in Abbildung~\ref{fig:metall_image} gezeigte Bild.
 Man sieht vor allem auf der rechten Seite, dass Ränder nicht mehr klar erkennbar sind, 
-da sie durch die Filterung Lücken aufweisen. Praxistests haben gezeigt das ein 
+da sie durch die Filterung Lücken aufweisen. Praxistests [TODO Praxistests erklären] haben gezeigt das ein 
 ausreichend gut funktionierender Filterwert 50 \% ist. Damit werden 
 ausreichend viele Messfehler aus dem Bild genommen,
 aber trotzdem bleiben Oberflächenstrukturen und Ränder
 sichtbar, um ein korrektes Zusammenfügen zu gewährleisten.
 Dieses Filtern bezieht sich aber nur auf zweidimensionale Bildinformationen.
-Um bei dem Konvertieren noch weniger Punkte,
-die nicht auf dem Bauteil liegen nicht in das Bild zu übernehmen, 
-kann auch noch die Pointcloud gefiltert werden.
-Hier kann ein einzelner Punkt relativ zu seinen Nachbarn im dreidimensionalen 
-Raum betrachtet werden, um so Ausreißer zu erkennen. Dafür sind in der Open-Source
-Bibliothek 'Open3D' zwei Methoden vorhanden: Radius basierte Entfernung,
-oder auf Basis von statistischen Werten.
+Um das Bauteil klarer in dem resultieren Bild zu erkennen, sollten Ausreißer in 
+der Pointcloud entfernt werden.
+Um Ausreißer zu erkennen, wird ein einzelner Punkt relativ zu seinen Nachbarn
+im dreidimensionalen Raum betrachtet.
+Zur Erkennung und Entfernung von Ausreißern sind in der Open-Source
+Bibliothek 'Open3D' zwei Methoden vorhanden. 
+Die Methode \glqq radius\_outlier\_removal\grqq~entfernt Ausreißer basierend auf 
+einem konfigurierbaren Radius. Punkte die weniger als n andere Punkte in dem Radius 
+haben werden entfernt. Die andere Methode lautet 
+\glqq statistical\_outlier\_removal\grqq~ 
+und entfernt alle Punkte die weiter von ihren Nachbarn entfernt sind als die 
+statistische Varianz aller Entfernungen.
 Die erste Methode eignet sich gut, wenn die Maße des Objekts bekannt
-sind. Hier wird um jeden Punkt eine Kugel gebildet und alle Punkte die weniger als 
-einen konfigurierbare Menge an Punkte in ihrer Kugel haben werden entfernt. Da 
-das hier zu entwickelnde Verfahren sich nicht auf eine Bauteilgeometrie beschränken
-ist dieses Verfahren nicht geeignet. Stattdessen wird das statistische genutzt. 
+sind, dann kann der Radius entsprechend der Größenordnung des Bauteils gewählt werden.
+Da das hier zu entwickelnde Verfahren sich nicht auf eine Bauteilgeometrie 
+beschränken soll, ist dieses Verfahren nicht geeignet. 
+Durch eine Annahme des Radius würden ein Bias 
+zu kleinen oder großen Bauteile entstehen.
+Stattdessen wird die statistische Herangehensweise genutzt. 
 Hier werden alle Punkte entfernt die weiter von ihren benachbarten Punkten entfernt
 sind als der durchschnittliche Abstand der Punkte in der gesamten Pointcloud. 
-Hier kann die Menge der benachbarten Punkte die betrachtet werden sollen und
-ein Limit für den Abstand von der Standardabweichung. 
 Umso mehr benachbarte Punkte betrachtet werden, desto länger dauert der Filterprozess, 
-aber die Filterung wird auch akkurater. Im Praxistest haben sich
+aber die Filterung wird auch genauer. Im Praxistest haben sich
 hier 50 Nachbarpunkte bewährt. Mit diesem Wert werden bei Pointclouds in unserem 
 Datensatz jeweils ca. zwei Prozent aller Punkte entfernt. So kann das resultierende
 Bild ausreichend gut umgewandelt werden, um eine erfolgreiche Zusammenführung 
 von verschiedenen Bildern zu gewährleisten.
-Ein Nachteil bei der Filterung in Abbildung \ref{fig:image_from_pc} links und rechts 
+Ein Nachteil bei der Filterung in Abbildung~\ref{fig:image_from_pc} links und rechts 
 mittig zu sehen. Hier sind schwarze Punkte sichtbar. Diese treten auf, weil der Scanner
 hier über dem Bauteil Punkte erkannt hat. Durch das Filtern wurden diese Punkte entfernt
 beziehungsweise bei der Konvertierung nicht berücksichtigt. Da diese Punkte dann fehlen
 bleiben sie im resultierenden Bild schwarz.
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/am_sp0_top_10p.png}
+    \caption{Metallteil gefiltert}
+    \label{fig:metall_image}
+\end{figure}
+
 \section{Pointcloud in Bild konvertieren}
 
 Um Rechenzeit zu sparen und die zahlreichen Funktionen bereits bestehender
- Bilderkennungsbibliotheken nutzen zu können, wurden die Punktwolken in Bilder 
- konvertiert. Hierfür wird zunächst ein leeres Bild mit den gleichen 
- Maßen der Pointcloud erstellt. Anschließend wird über alle Punkte der
- Pointcloud iteriert und der Pixel an den 
- entsprechenden X- und Y-Koordinaten des Punktes auf einen Helligkeitswert gesetzt.
+Bilderkennungsbibliotheken nutzen zu können, wurden die Pointclouds in Bilder 
+konvertiert. Hierfür wird zunächst ein leeres Bild mit den gleichen 
+Maßen der Pointcloud erstellt. Anschließend wird über alle Punkte der
+Pointcloud iteriert und der Pixel an den 
+entsprechenden X- und Y-Koordinaten des Punktes auf einen Helligkeitswert gesetzt.
 
 Um Rechenzeit und Speicherkapazitäten zu schonen und 
 da es für die Berechnungen ausreichend ist, wurden 
@@ -82,28 +95,26 @@ Der resultierende Wert ist die Helligkeit, die dem Pixel zugewiesen wird.
 $Z$ ist die Z-Koordinate des Punktes in der Pointcloud. $min_y$ und $max_y$ sind 
 die Grenzen der Z-Koordinate, diese werden gebraucht um die Helligkeit relativ 
 zu der Höhe zu berechnen. $min_{brightness}$ und $max_{brightness}$ sind die gewünschten Grenzen der 
-Helligkeit. In unserem Fall sind $min_{brightness} = 0$ und $max_{brightness} = 255$ da ein 8 Bit Bild
+Helligkeit. In unserem Fall sind $min_{brightness} = 0$ und $max_{brightness} = 255$ da ein acht Bit Bild
 verwendet wird.
 
-
 \begin{figure}[H]
-    \centering
-    \begin{minipage}{0.45\textwidth}
+    \begin{minipage}{0.49\textwidth}
         \centering
-        \includegraphics[width=0.98\textwidth]{images/fdm_top_100p.png} % first figure itself
-        \caption*{(a)}
+        \includegraphics[width=\textwidth]{images/fdm_top_100p.png} % first figure itself
+        \caption*{(a)} 
     \end{minipage}\hfill
-    \begin{minipage}{0.45\textwidth}
+    \begin{minipage}{0.49\textwidth}
         \centering
-        \includegraphics[width=0.98\textwidth]{images/fdm_top_10p.png} % second figure itself
+        \includegraphics[width=\textwidth]{images/fdm_top_10p.png} % first figure itself
         \caption*{(b)}
-    \end{minipage}
+    \end{minipage}\hfill
     \caption{Resultat der Pointcloud zu Bild Konvertierung. (a) Ohne Filterung der Höhenwerte, (b) Die gleichen 
-    Scandaten, aber nur den zehn Prozent häufigsten Höhenwerten.}
-    \label{fig:image_from_pc}
+            Scandaten, aber nur den zehn Prozent häufigsten Höhenwerten.}
+        \label{fig:image_from_pc}
 \end{figure}
 
-Wie man in Abbildung \ref{fig:image_from_pc} sehen kann, sind kaum Helligkeitsveränderungen
+Wie in Abbildung \ref{fig:image_from_pc} zu sehen ist, sind kaum Helligkeitsveränderungen
 im Bild sichtbar. Das liegt an derselben Problematik, an der der ICP-Algorithmus \ref{icp} häufig
 scheitert. Reale Datensets spiegeln die Realität nicht ganzheitlich korrekt wider, sondern
 beinhalten Messfehler und Streuungen.
@@ -122,16 +133,8 @@ beinhalten Messfehler und Streuungen.
     \end{minipage}
     \caption{Auftreten der Höhenwerte in den Scandaten der Demonstratorbauteile. 
     (a): Das Histogramm ist nicht skaliert. (b): Logarithmische Skalierung der 
-    Höheninformationen. Hier ist zu sehen das viele kleine Werte vorliegen.}
+    Höheninformationen. Hier ist zu sehen, dass die Höhenhäufigkeiten streuen.}
     \label{fig:brightness}
-\end{figure}
-
-
-\begin{figure}
-    \centering
-    \includegraphics[width=0.8\textwidth]{images/am_sp0_top_10p.png}
-    \caption{Metallteil gefiltert}
-    \label{fig:metall_image}
 \end{figure}
 
 Abbildung \ref*{fig:brightness} zeigt die Häufigkeit der gleichen Höhenwerte einer
