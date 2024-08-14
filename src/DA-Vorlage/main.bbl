@@ -10,10 +10,6 @@ Bhrigu Ahuja, Michael Karg, and Michael Schmidt.
 {AM Expo 365}.
 \newblock 3d-druck: Neues leben f{\"u}r den oldtimer, 03.06.2024.
 
-\bibitem[AM24]{.13.08.2024}
-Carleton~College Austin~Mason.
-\newblock The haskins society - 3d photogrammetry with photoscan, 13.08.2024.
-
 \bibitem[Anu19]{Anusci.2019}
 Victor Anusci.
 \newblock Bmw's new s58 engine features cylinder head made with 3d printing,
@@ -90,6 +86,10 @@ Aniket Jadhav and Vijay~S. Jadhav.
 \newblock {\em An overview of 3D data content, file formats and viewers}.
 \newblock 2008.
 
+\bibitem[MC24]{.13.08.2024}
+Austin Mason and Carleton College.
+\newblock The haskins society - 3d photogrammetry with photoscan, 13.08.2024.
+
 \bibitem[MCU{\etalchar{+}}22]{Mahmood.2022}
 Muhammad~Arif Mahmood, Diana Chioibasu, Asif {Ur Rehman}, Sabin Mihai, and
   Andrei~C. Popescu.
@@ -134,8 +134,8 @@ Matthias Schneck, Matthias Gollnau, Max Lutter-Günther, Benjamin Haller, Georg
 \newblock 52nd CIRP Conference on Manufacturing Systems (CMS), Ljubljana,
   Slovenia, June 12-14, 2019.
 
-\bibitem[uni23]{unionfab.22.08.2023}
-unionfab.
+\bibitem[UNI23]{unionfab.22.08.2023}
+UNIONFAB.
 \newblock From rough to refined: Post-processing methods to elevate metal
   parts.
 \newblock {\em Unionfab}, 22.08.2023.

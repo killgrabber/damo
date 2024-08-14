@@ -19,11 +19,11 @@ ohne dass die Komplexität des Verfahrens ansteigt.
 
 Wie beschrieben, wird die Deformation zwischen zwei Bauteilen als Differenz 
 der Randgeometrie definiert. Um die Randgeometrie eines Bauteils zu ermitteln, 
-kann erneut die Kontursuche (In Kapitel \ref{contoursearching} beschrieben)
+kann erneut die Kontursuche (In Kapitel~\ref{contoursearching} beschrieben)
 angewendet werden. 
 Die ermittelten Konturen bilden die Ränder des Bauteils ab und 
 erfassen sowohl äußere als auch innere Geometrien, was 
-die Deformationserkennung ermöglicht. In Abbildung \ref{fig:stichted_contour} 
+die Deformationserkennung ermöglicht. In Abbildung~\ref{fig:stichted_contour} 
 ist ein zusammengefügtes Bild sowie die erkannte Randgeometrie eines 
 Bauteils dargestellt.
 
@@ -44,7 +44,7 @@ Bauteils dargestellt.
         \label{fig:stichted_contour}
 \end{figure}
 
-\subsection{Randgeometrien übereinander legen}
+\section{Randgeometrien übereinander legen}
 
 Um die Differenz zweier Randgeometrien bestimmen zu können, 
 müssen diese präzise übereinander gelegt werden. Dies gewährleistet, 
@@ -63,7 +63,7 @@ innerhalb dessen nach benachbarten Punkten gesucht wird. Hierfür muss die Kontu
 zunächst in eine zweidimensionale Datenstruktur überführt werden. Dieser zusätzliche 
 Aufwand führt zu einer erheblichen Verkürzung der Laufzeit.
 
-Ähnlich dem bereits beschriebenen ICP-Algorithmus [VERWEIS] wird eine Transformation 
+Ähnlich dem bereits in Kapitel \ref{icp} beschriebenen ICP-Algorithmus wird eine Transformation 
 berechnet, die eine Kontur an eine andere annähert. Die Berechnung der 
 Transformation erfolgt nach folgendem Algorithmus:
 
@@ -88,7 +88,7 @@ die Transformation dem Nullvektor entspricht. Wenn dies geschieht, sind beide Ko
 und damit die Randgeometrien der Bauteile angenähert.
 Um Rechenzeit zu sparen werden vor dem Ermitteln der ersten Transformation die 
 Massenmittelpunkte beider Bauteilgeometrien berechnet und Übereinader gelegt.
-In Abbildung \ref{fig:stichted_contours_compare} sind die Konturen vor und nach 
+In Abbildung~\ref{fig:stichted_contours_compare} sind die Konturen vor und nach 
 dem Überlappungs-prozess abgebildet.
 
 \begin{figure}[H]
@@ -110,21 +110,23 @@ dem Überlappungs-prozess abgebildet.
         \label{fig:stichted_contours_compare}
 \end{figure}
 
-\subsection{Deformation messen}
+\section{Deformation messen}
 
-[Deformation ausführlich beschreiben]
 Nachdem die beschriebenen Schritte erfolgt sind, kann die Deformation bestimmt werden.
-Hierfür wird über die gesamte x-Achse des Bildes iteriert und die kleinste Differenz 
+Mit Deformation ist eine Änderung in der Randgeometrie des Bauteils gemeint.
+Eine Deformierung kann an jedem Rand eines Bauteils auftreten.
+Um die Deformation eines Bauteils zu messen, wird über die 
+gesamte x-Achse des Bildes iteriert und die kleinste Differenz 
 zwischen zwei Punkten gebildet. Diese entspricht dann einer Abweichung. 
 Da innere und äußere Randgeometrie separat betrachtet werden, kann es immer nur zwei
 solcher Punktepaare geben, eins am oberen Ende des Bauteils und eins am unteren Ende.
 Es wird der euklidische Abstand beider Punktepaare gebildet und aufsummiert.
 So entsteht ein Datensatz für ein Bild, 
-dass die Differenz zweier Spannungsstufen ausgibt. In Abbildung \ref{fig:deformation_data}
+dass die Differenz zweier Spannungsstufen ausgibt. In Abbildung~\ref{fig:deformation_data}
 ist ein solcher Datensatz zu sehen. 
 
 Innere und äußere Randgeometrien werden separat betrachtet und analysiert.
-In Abbildung \ref{fig:deformation_data_vis} ist die Deformation des inneren Kreises
+In Abbildung~\ref{fig:deformation_data_vis} ist die Deformation des inneren Kreises
 visuell dargestellt. In Abbildung \ref{fig:deformation_data_graph} sind die 
 Deformationswerte grafisch dargestellt.
 
@@ -142,7 +144,6 @@ Bauteils. Hier wurde der Schraubstock mit einer Kraft von ca. 250 nm angezogen.
     \label{fig:deformation_data_vis}
 \end{figure}
 
-
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.9\textwidth]{images/FDM_sp0_sp4_inner.png}
@@ -155,7 +156,7 @@ Es ist gut zu erkennen, dass sich das Bauteil
 im mittleren Bereich ausgedehnt hat und in den Randbereichen schmaler geworden ist.
 Dieser Datensatz unterliegt einer relativ großen Streuung. Um mehrere Spannungsstufen
 zu vergleichen, wird der Datensatz zu einer Geraden zusammengefasst.
-Diese Gerade ist auch in Abbildung \ref{fig:deformation_data} in blau zu sehen. Sie wird 
+Diese Gerade ist auch in Abbildung~\ref{fig:deformation_data} in blau zu sehen. Sie wird 
 gebildet, indem immer zehn Datenpunkte zu einem zusammengefasst werden. 
 So können auch mehrere Spannungsstufen visuell dargestellt und verglichen werden.
 
