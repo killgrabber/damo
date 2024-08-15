@@ -40,7 +40,7 @@ Beispielsweise die Automobilbranche ist ein Bereich, in der AF schon viel und er
 eingesetzt wird:
 Durch AF könne Teile gefertigt werden, die leichter, belastbarer und sicherer sind. 
 Die einfache Anpassbarkeit sorgt für geringe Entwicklungszeiten und Kosten. 
-BWM zum Beispiel benutzt für den i8 Roadster viele AF gefertigte Teile.
+BWM benutzt für den i8 Roadster viele AF gefertigte Teile.
 Darunter sind zum Beispiel die Befestigung für das Soft-Top, die 44 \% leichter als das Spritzgussteil
 ist, und dennoch zehnmal steifer.\ \cite{Vafadar.2021} 
 Fensterführungen wurden auch additiv gefertigt. Mithilfe des \glqq HP Multi Jet Fusion\grqq~
@@ -76,8 +76,10 @@ Nachbearbeitungen wie das Entfernen von Stützstrukturen kann sich das fixieren
 positiv auswirken und Zeit im Herstellungsprozess eingespart werden.
 Wie schon in Kapitel \ref{drawbacks_af} beschrieben, sind 
 Stützstrukturen notwendig, wenn das zu produzieren Bauteil Überhänge aufweist,
-die eine Steigung von ungefähr 30° unterschreiten. Der Grad des Überhangs 
-variiert je nach verwendetem Material und Verfahren.
+die eine Steigung von ungefähr 30° unterschreiten. In Abbildung \ref{fig:overhang}
+ist ersichtlich, warum Stützstrukturen bei einigen Bauteilgeometrien notwendig
+sind. Der Grad des Überhangs, der ohne Stützstrukturen hergestellt werden kann,
+variiert je nach verwendetem Material und Verfahren.~\cite{Meng.2020} 
 
 \begin{figure}[H]
     \centering
@@ -89,6 +91,8 @@ variiert je nach verwendetem Material und Verfahren.
 
 \section{Reverse Engineering}
 
+[TODO Warum hier?]
+
 Reverse Engineering beschreibt den Prozess aus einem bestehenden Produkt 
 oder Objekt ein digitales Abbild zu erzeugen.
 Dabei sind meistens wenig oder keine technischen Details über das Objekt
@@ -99,9 +103,9 @@ den Bauplänen abweichen. Produkte und Bauteile können durch die Benutzung
 abgenutzt werden und entsprechen deswegen unter Umständen nicht mehr den originalen 
 Bauplänen. Zusätzlich können Toleranzen im ursprünglichen Fertigungsprozess 
 für Diskrepanzen sorgen. Wenn technische Details vorhanden sind,
-können diese aber im Reverse Engineering Prozess verwendet werden.\ \cite{Monchinger.2021} 
-Dieses Paper zeigt, wie Reverse Engineering genutzt werden kann, um 
-bestehende Bauteile passgenau zu erweitern. Konkret geht es um die
+können diese aber im Reverse Engineering Prozess verwendet werden. 
+Reverse Engineering kann genutzt werden, um 
+bestehende Bauteile passgenau zu erweitern. Ein Beispiel hierfür ist, die
 Entwicklung einer Methodik um automatisiert Laser-Scans und originale Baupläne
 zusammenzufügen um ein möglichst detailgetreues Abbild der realen Struktur zu
 erzeugen. Dieses Abbild wird dann benutzt, um die bestehende Struktur zu 
@@ -109,7 +113,7 @@ erweitern und auf ihr aufzubauen. Das wird am Beispiel eines Flugzeugs
 demonstriert, erst wird der Innenraum gescannt und mit dem originalen Plänen
 abgeglichen, dann ein 3D Objekt erstellt. Mithilfe dieses 3D-Objekts können 
 dann passgenaue Bauteile hergestellt werden, die es ermöglichen ein ehemaliges 
-Passierflugzeug in eine Frachtmaschine umzubauen.
+Passierflugzeug in eine Frachtmaschine umzubauen.~\cite{Monchinger.2021}
 Wie schon erwähnt, wird zur erfolgreichen Weiterbearbeitung ein möglichst 
 genaues digitales Abbild benötigt.
 Ist dies nicht der Fall, müssen nicht passende Teile erneut hergestellt werden, 
@@ -173,13 +177,13 @@ Fotogrammetrie zeigt jedoch ihre Stärken bei großflächigen 3D-Rekonstruktione
 wie sie beispielsweise bei der Erfassung von Gebäuden, Stadtteilen oder geografischen 
 Strukturen erforderlich sind.
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=\linewidth]{images/photogammatry_accurancy.PNG}
-    \caption{Genauigkeit der Fotogrammetrie bei Bildern die aus 
-    600 m Höhe aufgenommen wurden \cite{Elaksher.2023}.}
-    \label{fig:photogammatryAccuracy}
-\end{figure}
+%\begin{figure}[H]
+%    \centering
+%    \includegraphics[width=\linewidth]{images/photogammatry_accurancy.PNG}
+%    \caption{Genauigkeit der Fotogrammetrie bei Bildern die aus 
+%    600 m Höhe aufgenommen wurden \cite{Elaksher.2023}.}
+%    \label{fig:photogammatryAccuracy}
+%\end{figure}
 
 Für kleine Objekte, bei deren Rekonstruktion eine hohe Genauigkeit gefordert ist, 
 sollte daher das zweite Verfahren angewendet werden. Bei diesem Verfahren werden
