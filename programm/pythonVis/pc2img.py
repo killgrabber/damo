@@ -11,6 +11,8 @@ import copy
 import math
 import imageAnalyser
 from threading import Thread
+import matplotlib.pyplot as plt
+
 
 
 class imageStructure:
@@ -165,6 +167,24 @@ def get_points_from_pc(file, progress, show_pc, pcds_points):
 
     np_points = np.asarray(pcd.points)
     pcds_points.append(np_points)
+
+def show_pc_graph(files):
+    labelname1 = files[0].split("/")[-1]
+    labelname2 = files[1].split("/")[-1]
+    pcd1 = o3d.io.read_point_cloud(files[0])
+    pcd2 = o3d.io.read_point_cloud(files[1])
+    array1 = np.asarray(pcd1.points)
+    array2 = np.asarray(pcd2.points)
+    plt.rc('font', size=26)  # controls default text sizes
+    plt.rcParams["figure.figsize"] = (12,8)
+    plt.grid()
+    plt.hist(array1[:, 2], density=True, bins=1000, label=f"{labelname1}")
+    plt.hist(array2[:, 2], density=True, bins=1000, label=f"{labelname2}")
+
+    plt.legend()
+    plt.xlabel("Höhe in mm")
+    plt.ylabel("Prozentuales Auftreten")
+    plt.show()
 
 
 # returns image

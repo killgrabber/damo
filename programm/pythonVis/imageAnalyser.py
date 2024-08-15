@@ -357,6 +357,8 @@ def stitch_images(top_image: cv2.Mat, bot_image: cv2.Mat, progress: [], result: 
     blur_size = 2
     top_image_blur = cv2.blur(top_image, (blur_size, blur_size))
     bot_image_blur = cv2.blur(bot_image, (blur_size, blur_size))
+
+    contourMatcher.display_contours(getContours(top_image_blur), [(255, 255, 255)], save_name="contours_of_image.png")
     cut_size = 500
     offset = 200
     crop_top = cropImage(top_image_blur, True, cut_size, offset=offset)
