@@ -91,12 +91,14 @@ variiert je nach verwendetem Material und Verfahren.~\cite{Meng.2020}
 
 \section{Reverse Engineering}
 
-[TODO Warum hier?]
-
 Reverse Engineering beschreibt den Prozess aus einem bestehenden Produkt 
-oder Objekt ein digitales Abbild zu erzeugen.
-Dabei sind meistens wenig oder keine technischen Details über das Objekt
-verfügbar.~\cite{Helle.2021}  
+oder Objekt ein digitales Abbild zu erzeugen. Das im Rahmen dieser Arbeit
+zu entwickelnde Verfahren ist im Prinzip ähnlich, 
+da auch von einem bestehenden Bauteil eine digitale Version
+erzeugt werden soll. Aufgrund des ähnlichen Prinzips ist der Prozess des Reverse Engineering
+eine wichtige Grundlage dieser Arbeit.
+Beim Reverse Engineering sind meistens wenig oder keine technischen Details
+über das Objekt verfügbar.~\cite{Helle.2021}
 Auch wenn Baupläne vorhanden sind, kann es trotzdem notwendig sein, 
 Reverse Engineering zu betreiben, denn das tatsächliche Produkt kann von
 den Bauplänen abweichen. Produkte und Bauteile können durch die Benutzung 
@@ -121,10 +123,72 @@ was die Material- und Personalkosten deutlich erhöht. Es ist also im
 wirtschaftlichen Interesse beim ersten Schritt, dem Erstellen der digitalen 
 Version, ein möglichst genaues Ergebnis zu erzielen. 
 
-\section{3D Rekonstruktion}
+\section{Digitales Abbild}
 
-Digitale Abbildungen von Flächen, Objekten oder sogar Körperteilen wurden in den
-letzten Jahren mehr benutzt. Anwendungen sind zum Beispiel in der
+Für die weitere Verarbeitung ist es von notwendig, dass die erstellten digitalen 
+Abbilder in einem geeigneten Datenformat gespeichert werden. Ansprüche hierbei sind 
+eine, dem Nutzungszweck angepasste, realitätsnahe Abbildung der Objektgeometrie, 
+ohne eine praktikable Dateigröße zu überschreiten.
+Für diese effiziente Speicherung digitaler Abbilder haben sich mehrere
+Dateiformate etabliert.
+Die Geometrie eines Objekts wird häufig als Sammlung von Punkten 
+gespeichert. Die Oberfläche eines Objekts wird als Serie von Polygonen beschrieben. 
+Der Grad des Polygons kann variieren, häufig werden Dreiecke verwendet. 
+Die Genauigkeit, mit der das Polygon-Netz die gewünschte Oberfläche 
+abbildet, kann gewählt werden. 
+Je kleiner die Oberfläche der Polygonen ist, desto genauer wird die Oberfläche 
+abgebildet. Mit kleineren Oberflächen steigt die Anzahl der zu speichernden 
+Eckpunkte, was eine größere Datei zur Folge hat.
+In Abbildung \ref{fig:3d_design} ist der Einfluss der Oberflächengröße der Polygonen
+auf die gespeicherte Bauteilgeometrie zu sehen. Bei kleinen Polygonen 
+wird die reale Bauteilgeometrie abgebildet. Umso weniger Polygone gespeichert 
+werden, umso kantiger wird das Modell.
+
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.32\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{images/image_demo.PNG} % first figure itself
+        \caption*{(a)}
+    \end{minipage}\hfill
+    \begin{minipage}{0.32\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{images/image_demo_medium.PNG} % first figure itself
+        \caption*{(b)}
+    \end{minipage}\hfill
+    \begin{minipage}{0.32\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{images/image_demo_low.PNG} % first figure itself
+        \caption*{(c)}
+    \end{minipage}\hfill
+
+    \caption{Genauigkeit einer 3D-Datei ist abhängig von der Anzahl der gespeicherten
+    Eckpunkte am Beispiel des Demonstratorbauteils. (a) 1512 Punkte
+    (b) 52 Punkte (c) 30 Punkte}
+    \label{fig:3d_design}
+\end{figure}
+
+Ein in der akademischen Welt beliebtes Dateiformat für Polygon-Netze ist das 
+Polygon File Format (ply).\ \cite{KentonMchenry.2008}
+Das Format kann vom Nutzer beliebig angepasst werden. Eine ply-Datei beginnt mit 
+einem Header in dem die Inhaltsstruktur beschrieben wird. 
+Für 3D-Objekte besteht diese meistens aus X, Y und Z Koordinaten. 
+Zusätzlich können weitere Informationen gespeichert werden. Das ply Dateiformat 
+unterstützt standardmäßig: \glqq vertices/edges/faces, vertex colors, textures and
+material\grqq ~\cite{KentonMchenry.2008}. Weitere Informationen können durch den Nutzer 
+hinzugefügt werden, 
+diese können dann aber unter Umständen nicht von anderen Programmen oder Benutzern
+benutzt werden.
+Im Dateiheader wird zu jedem Attribut auch der Datentyp festgelegt. Durch diesen 
+kann die Genauigkeit und Dateigröße beeinflusst werden. Häufig werden hier Floats oder
+Integer in verschiedener Bittiefe gewählt.
+
+\section{3D Rekonstruktion} \label{3d_construction}
+
+Bei der Erstellung von digitalen Abbildern geht es nicht nur darum, wie beim Reverse
+Engineering, Bauteilgeometrie wieder herzustellen. 3D Modelle bieten auch viele 
+Vorteile bei der Analyse von Flächen, Objekten oder sogar Körperteilen. 
+Anwendungen sind zum Beispiel in der
 geometrischen Dokumentation, Inspektion, Navigation, Visualisierung und 
 Objekterkennung zu finden~\cite{Verykokou.2023}. Je nach Anwendungsfall wird eine
 bestimmte Genauigkeit
@@ -200,65 +264,44 @@ exponentiell sein~\cite{XiaoleiDu.2009}.
 Nachteile von diesem Verfahren sind die hohen initialen Kosten eines Scanners 
 und der begrenzte Messbereich. 
 
-\section{Digitales Abbild}
+\section{Scanner und Datenerfassung}
 
-Das schon vorhandene oder erstellte 3D Objekt muss für die weitere Nutzung
-in einem geeigneten Datenformat gespeichert werden. Hierfür haben sich mehrere
-Formate etabliert. Die Geometrie eines Objekts wird häufig als Sammlung von Punkten 
-gespeichert. Die Oberfläche eines Objekts wird als Serie von Polygonen beschrieben. 
-Der Grad des Polygons kann variieren, häufig werden Dreiecke verwendet. 
-Die Genauigkeit, mit der das Polygon-Netz die gewünschte Oberfläche 
-abbildet, kann gewählt werden. 
-Je kleiner die Oberfläche der Polygonen ist, desto genauer wird die Oberfläche 
-abgebildet. Mit kleineren Oberflächen steigt die Anzahl der zu speichernden 
-Eckpunkte, was eine größere Datei zur Folge hat.
-Ein in der akademischen Welt beliebtes Dateiformat für Polygon-Netze ist das 
-Polygon File Format (ply).\ \cite{KentonMchenry.2008}
-Das Format kann vom Nutzer beliebig angepasst werden. Eine ply-Datei beginnt mit 
-einem Header in dem die Inhaltsstruktur beschrieben wird. 
-Für 3D-Objekte besteht diese meistens aus X, Y und Z Koordinaten. 
-Zusätzlich können weitere Informationen gespeichert werden. Das ply Dateiformat 
-unterstützt standardmäßig: \glqq vertices/edges/faces, vertex colors, textures and
-material\grqq ~\cite{KentonMchenry.2008}. Weitere Informationen können durch den Nutzer 
-hinzugefügt werden, 
-diese können dann aber unter Umständen nicht von anderen Programmen oder Benutzern
-benutzt werden.
-Im Dateiheader wird zu jedem Attribut auch der Datentyp festgelegt. Durch diesen 
-kann die Genauigkeit und Dateigröße beeinflusst werden. Häufig werden hier Floats oder
-Integer in verschiedener Bittiefe gewählt.
+Wie in Kapitel \ref{3d_construction} beschrieben, 
+können dreidimensionale Daten direkt durch einen Scanner aufgenommen werden. 
+Es existieren verschiedene Technologien und Methoden um Scandaten aufzunehmen, 
+darunter die schon erwähnte Fotogrammetrie, Laserscanner und 
+strukturiertem-Licht-Scanner~\cite{Ruiz.2022}. 
+Die Funktionsweise der Scanner sind in Abbildung \ref{fig:scanning_theo} dargestellt.
+Der Laserscanner misst die Koordinaten eines Punktes mithilfe der Zeit die zwischen 
+Ausstrahlen des Lasers und Ankunft des reflektierten Strahls liegt.
+Bei einem strukturiertem-Licht-Scanner wird mithilfe eines Projektors ein Muster 
+auf ein Objekt gestrahlt. Durch mehrere Kameras wird dieses Muster auf dem Objekt 
+aufgenommen. Je nach Oberfläche wird das Muster, das auf das Objekt gestrahlt, verzerrt.
+Diese Verzerrung wird genutzt, um die Oberfläche des Objekts 
+abzubilden.~\cite{georgopoulos2010assessing}
 
-\begin{figure}[h]
+\begin{figure}[H]
     \centering
-    \begin{minipage}{0.32\textwidth}
+    \begin{minipage}{\textwidth}
         \centering
-        \includegraphics[width=\linewidth]{images/image_demo.PNG} % first figure itself
-        \caption*{(a)}
+        \includegraphics[width=0.8\textwidth]{images/laser_1.jpg} % first figure itself
+        \caption*{(a)} 
     \end{minipage}\hfill
-    \begin{minipage}{0.32\textwidth}
+    \begin{minipage}{\textwidth}
         \centering
-        \includegraphics[width=\linewidth]{images/image_demo_medium.PNG} % first figure itself
+        \includegraphics[width=0.8\textwidth]{images/structured_light_1.jpg} % first figure itself
         \caption*{(b)}
     \end{minipage}\hfill
-    \begin{minipage}{0.32\textwidth}
-        \centering
-        \includegraphics[width=\linewidth]{images/image_demo_low.PNG} % first figure itself
-        \caption*{(c)}
-    \end{minipage}\hfill
-
-    \caption{Genauigkeit einer 3D-Datei ist abhängig von der Anzahl der gespeicherten
-    Eckpunkte am Beispiel des Demonstratorbauteils. (a) 1512 Punkte
-    (b) 52 Punkte (c) 30 Punkte}
-    \label{fig:3d_design}
+    \caption{Theoretische Funktionsweise von (a) einem Laserscanner und (b) einem 
+    strukturiertem-Licht-Scanner~\cite{V..08.08.2019}.}
+        \label{fig:scanning_theo}
 \end{figure}
 
-\section{Scanner und Datenerfassung}
-[todo verschiedene Scanner differenzieren und vergleichen]
-
-Wie schon beschrieben, können dreidimensionale Daten direkt mit einem 
-Scanner aufgenommen werden. 
+Für die Datenerfassung in dieser Arbeit wird ein Laser-Profilsensor verwendet.
+Laser-Profilsensoren sind Laser-Scanner, die Höhendaten über 
+eine Laserlinie und nicht über einen einzelnen Punkt sammeln. 
 Der Scanner hat, abhängig vom Modell und der angebrachten Höhe einen limitierten
-Bereich, den er erfassen kann. 
-Je nach Scannertyp und Modell kann sich der Messbereich ändern.
+Bereich, den er erfassen kann.
 In Abbildung \ref{fig:scanner} ist ein Messbereich für den Scanner vom Typ 
 ScanControl-LLT30xx sichtbar. Mittig kann 
 in einer Tiefe von 85 mm eine Linie mit der Länge 25 mm gemessen werden. 

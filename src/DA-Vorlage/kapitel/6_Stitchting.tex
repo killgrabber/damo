@@ -53,27 +53,30 @@ verglichen, was das Ergebnis verfälscht.
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.8\textwidth]{images/contours_of_image.png} % second figure itself
-    \caption{Extrahierte Konturen des Bildes ohne vorherige Filterung}
+    \caption{Extrahierte Konturen des Bildes ohne vorherige Filterung, 
+    der überlappende Bereich ist rot markiert.}
     \label{fig:cons}
 \end{figure}
 
-Die Überlappung kann nur im oberen oder unteren Bildbereich auftreten. Der restliche 
-Teil des Bildes kann also entfernt werden. So wird außerdem Rechenzeit gespart.
+Die Überlappung kann aufgrund des Prozesses der Datenaufnahme, 
+nur im oberen oder unteren Bildbereich auftreten. Wenn das Bild 
+aus dem ersten Scan eines Bauteils kommt, ist der überlappende Bereich am 
+oberen Bildrand, anderenfalls am unteren. 
+Der Teil des Bildes, der keine Überlappung enthält, wird nicht weiter betrachtet. 
+Hierdurch wird Rechenzeit gespart.
 
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=0.8\textwidth]{images/only_con_cut.jpg} % second figure itself
-    \caption{Extrahierte Konturen des Bildes ohne vorheriges filtern, zugeschnitten 
-    auf den überlappenden Bereich [TODO besseres Bild einfügen]}
-    \label{fig:cons_cut}
-\end{figure}
+Durch wiederholtes Durchführen des Stitching Verfahrens können beliebig viele Bilder, 
+die Überlappungen enthalten, zusammengefügt werden. In jeder Wiederholung werden genau
+zwei Bilder zusammengefügt, das resultierende Bild kann dann wieder mit dem
+nächsten Bild zusammengeführt werden. Aus diesem Grund beschreibt der folgende 
+Teil die Methode bezogen auf zwei Bilder.
 
-Dieses Verfahren wird auf beide Bilder angewendet. Daraus resultieren dann zwei 
-zugeschnittene Bilder aus denen Konturen extrahiert wurden. 
-Würden diese beiden Bildteile vollständig überlappen, könnte jetzt der ICP-Algorithmus
-angewendet werden. Dieser würde dann die korrekte Transformation berechnen, in dem er 
-die Konturen aus dem oberen Bild, mit denen aus dem unteren Bild vergleicht und die 
-Distanz zwischen den Punkten minimiert. 
+Beide Bilder werden auf den überlappenden Bereich zugeschnitten. 
+Anschließend werden in diesem Bereich Konturen extrahiert. 
+Würden beide Bildteile vollständig überlappen, könnte jetzt der ICP-Algorithmus
+angewendet werden. Dieser würde dann die korrekte Transformation berechnen, in 
+die Konturen aus dem oberen Bild, mit denen aus dem unteren Bild verglichen werden
+und die Distanz zwischen den Punkten minimiert wird. 
 Der Grad der Überlappung ist unbekannt und kann nicht im Vorhinein bestimmt werden.
 Dadurch kann der ICP-Algorithmus nicht eingesetzt werden. 
 Eine andere wichtige Annahme kann getroffen werden: Jeweils eine Kontur aus 
