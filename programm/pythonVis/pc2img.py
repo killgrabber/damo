@@ -13,8 +13,6 @@ import imageAnalyser
 from threading import Thread
 import matplotlib.pyplot as plt
 
-
-
 class imageStructure:
     x: int
     y: int
@@ -76,8 +74,8 @@ def show_pointcloud(pc):
 def remove_outliers(pc):
     print("Statistical outlier removal")
     oldAmount = len(pc.points)
-    cl, ind = pc.remove_statistical_outlier(nb_neighbors=250,
-                                            std_ratio=0.2)
+    cl, ind = pc.remove_statistical_outlier(nb_neighbors=100,
+                                            std_ratio=0.5)
     newAmount = len(pc.select_by_index(ind).points)
     diff = oldAmount - newAmount
     print(f"Reduced from: {oldAmount} to {newAmount}, diff {diff}, percentage: {diff / oldAmount:.2f}")
@@ -88,7 +86,7 @@ def remove_outliers(pc):
 def anaylseZ(pcd):
     MIN_AMOUNT = -1
     counter = collections.Counter(pcd[:, 2])
-    mostCommon = counter.most_common(round(len(counter) * 0.8))
+    mostCommon = counter.most_common(round(len(counter) * 1))
     minFound = sys.maxsize
     maxFound = 0
     for key, val in mostCommon:
@@ -127,7 +125,7 @@ def divide_pointcloud(original, splits: int) -> []:
     return chunked
 
 
-#@nb.njit(parallel=True, fastmath=True)
+@nb.njit(parallel=True, fastmath=True)
 def convert_chunk(array: np.array, max_h, min_h):
     print(f"converting with max: {int(max_h * 1000)} min: {int(min_h * 1000)}...")
     scale = 100
@@ -142,11 +140,11 @@ def convert_chunk(array: np.array, max_h, min_h):
     length = len(array)
     for i in nb.prange(length):
         #print(f"Checking {array[i]}....")
-        if min_h <= array[i][2] <= max_h:
+        if min_h <= array[i][2] <= max_h or True:
             x = int(array[i][0] * scale) + abs_x_min
             y = int(array[i][1] * scale) + abs_y_min
             #print(f"Setting {x},{y} to {255}....")
-            brightness = 255  #math.floor(conversion(array[i][2], min_h, max_h, 0, 255))
+            brightness = 255 #math.floor(conversion(array[i][2], min_h, max_h, 0, 255))
             image[x, y] = brightness
     return image
 
@@ -202,18 +200,13 @@ def convert_point_cloud(files: [], progress: [], result: [], show_pc=False):
     for t in converter_threads:
         t.join()
 
-    max_hs = []
-    min_hs = []
-    for np_points in pcds_points:
-        print("Getting height boundaries....")
-        max_h, min_h = anaylseZ(np_points)
-        progress[0] += 10
-        max_hs.append(max_h)
-        min_hs.append(min_h)
     for i in range(len(pcds_points)):
-        image = convert_chunk(pcds_points[i], np.mean(max_hs), np.mean(min_hs))
+        print("Getting height boundaries....")
+        max_h, min_h = anaylseZ(pcds_points[i])
+        image = convert_chunk(pcds_points[i], max_h, min_h)
         #image = cv2.blur(image, (4, 4))
         #ret, thresh = cv2.threshold(image, 100, 255, 0)
+        result[i] = image
         progress[0] += 10
         imageAnalyser.showAndSaveImage(image)
         result[i] = image
@@ -222,7 +215,6 @@ def convert_point_cloud(files: [], progress: [], result: [], show_pc=False):
     end = time.time()
     progress[0] = 100
     print(f"Converted 2 clouds in: {end - start:.2f}s")
-
 
 import pc_stitcher
 

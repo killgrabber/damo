@@ -173,7 +173,8 @@ def save_current_overlap_images():
 def start_pcd_2_image():
     show_message("Starting Point cloud conversion...")
     show_message("Loading files....")
-    pc2img.show_pc_graph(pointclouds)
+    if show_pointclouds.get():
+        pc2img.show_pc_graph(pointclouds)
     if len(pointclouds) < 1:
         show_message("Please select a file first")
     else:

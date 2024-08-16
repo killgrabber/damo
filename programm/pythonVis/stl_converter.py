@@ -175,7 +175,8 @@ def get_vertical_distance(con1, con2, image_paths: [], index_1, index_2):
     print(f"Smallest distance: {smallest_distance[0][0]}, {smallest_distance[0][1]}")
     y1_val = [x[0] for x in all_vectors]
     y2_val = [x[1] for x in all_vectors]
-    both_val = [x[0]-x[1] for x in all_vectors]
+    # both_val = [x[0]-x[1] for x in all_vectors]
+    both_val = [x[0] for x in all_vectors]
     y_line = [0, len(all_vectors)]
     x_val = [x for x in range(len(all_vectors))]
     # saving data to file:
