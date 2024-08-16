@@ -5,3 +5,4 @@ Konturerkennung
 OpenCV
 ICP-Algorithmus
 spanenden
+Demonstratorbauteil
