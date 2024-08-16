@@ -70,10 +70,11 @@ nebenläufig ausgeführt. Das reduziert die Laufzeit der Prozesse.
 Die Anwendung ist in Python geschrieben, rechenintensive Prozesse wurden aber mithilfe 
 der Bibliothek \glqq Numba\grqq~in optimierten Maschinencode compiliert~\cite{numba}.
 Dadurch ist der Konvertierungs- und Stitching-Prozess deutlich schneller geworden. 
-Abbildung \ref{label} zeigt die Laufzeiten der Anwendung mit und ohne Übersetzung in 
-Maschinencode.
-
-[TODO: Bild laufzeiten einfügen]
+Durch die Optimierungen konnte der Konvertierungsprozess von 49 s auf 41 s verschnellert 
+werden. Bei dem Stitchprozess war die Verbesserung noch deutlicher. Hier 
+beträgt die Laufzeit mit Optimierungen ca. 30 s um zwei Konturen zu vergleichen. 
+Ohne Optimierungen braucht der Vergleich derselben beiden Konturen 
+hochgerechnet 600 Minuten.
 
 
 
