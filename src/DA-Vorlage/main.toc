@@ -6,26 +6,27 @@
 \contentsline {section}{\numberline {2.1}Additive Fertigung}{3}{}%
 \contentsline {section}{\numberline {2.2}Limitierungen von AF}{4}{}%
 \contentsline {section}{\numberline {2.3}Reverse Engineering}{5}{}%
-\contentsline {section}{\numberline {2.4}3D Rekonstruktion}{6}{}%
-\contentsline {section}{\numberline {2.5}Digitales Abbild}{9}{}%
-\contentsline {section}{\numberline {2.6}Scanner und Datenerfassung}{10}{}%
+\contentsline {section}{\numberline {2.4}Digitales Abbild}{6}{}%
+\contentsline {section}{\numberline {2.5}3D Rekonstruktion}{7}{}%
+\contentsline {section}{\numberline {2.6}Scanner und Datenerfassung}{9}{}%
 \contentsline {section}{\numberline {2.7}Transformationen}{11}{}%
-\contentsline {section}{\numberline {2.8}ICP-Algorithmus}{11}{}%
+\contentsline {section}{\numberline {2.8}ICP-Algorithmus}{12}{}%
 \contentsline {chapter}{\numberline {3}Methodik}{13}{}%
 \contentsline {section}{\numberline {3.1}Verfahren zur optische Spannkraftdeformationserkennung}{14}{}%
 \contentsline {section}{\numberline {3.2}Vorgehen}{14}{}%
 \contentsline {chapter}{\numberline {4}Datenerfassung}{17}{}%
 \contentsline {section}{\numberline {4.1}Zusätzliche Messinstrumente}{18}{}%
+\contentsline {section}{\numberline {4.2}Demonstratorbauteil}{18}{}%
 \contentsline {chapter}{\numberline {5}Datenaufbereitung}{19}{}%
 \contentsline {section}{\numberline {5.1}Pointcloud filtern}{19}{}%
-\contentsline {section}{\numberline {5.2}Pointcloud in Bild konvertieren}{21}{}%
+\contentsline {section}{\numberline {5.2}Pointcloud in Bild konvertieren}{20}{}%
 \contentsline {chapter}{\numberline {6}Stitching}{25}{}%
 \contentsline {section}{\numberline {6.1}Feature Erkennung}{25}{}%
 \contentsline {section}{\numberline {6.2}Differenzierung von Punkten}{27}{}%
-\contentsline {section}{\numberline {6.3}Transformation bestimmen}{27}{}%
-\contentsline {section}{\numberline {6.4}Visuelle Darstellung des Stitching Prozesses}{29}{}%
+\contentsline {section}{\numberline {6.3}Transformation bestimmen}{28}{}%
+\contentsline {section}{\numberline {6.4}Visuelle Darstellung des Stitching Prozesses}{28}{}%
 \contentsline {section}{\numberline {6.5}Bilder zusammenfügen}{29}{}%
-\contentsline {section}{\numberline {6.6}Probleme und Lösungen im Verfahren}{30}{}%
+\contentsline {section}{\numberline {6.6}Probleme und Lösungen im Verfahren}{29}{}%
 \contentsline {chapter}{\numberline {7}Spannkraftinduzierten Deformation}{33}{}%
 \contentsline {section}{\numberline {7.1}Deformation zwischen zwei Spannungszuständen}{33}{}%
 \contentsline {section}{\numberline {7.2}Randgeometrien übereinander legen}{34}{}%
@@ -34,11 +35,12 @@
 \contentsline {section}{\numberline {8.1}Analyse der spannkraftinduzierten Deformation}{39}{}%
 \contentsline {section}{\numberline {8.2}Messergebnisse}{40}{}%
 \contentsline {section}{\numberline {8.3}Ergebnisse der optischen Deformationsanalyse}{42}{}%
+\contentsline {section}{\numberline {8.4}Beurteilung der Ergebnisse}{44}{}%
 \contentsline {chapter}{\numberline {9}Anwendung und Algorithmus}{45}{}%
 \contentsline {section}{\numberline {9.1}Anwendung}{45}{}%
-\contentsline {chapter}{\numberline {10}Zusammenfassung und Ausblick}{47}{}%
-\contentsline {section}{\numberline {10.1}Materialunterschiede}{47}{}%
-\contentsline {section}{\numberline {10.2}Verbesserungspotenzial des Verfahrens}{47}{}%
-\contentsline {section}{\numberline {10.3}Ausblick}{48}{}%
-\contentsline {chapter}{Abbildungsverzeichnis}{50}{}%
-\contentsline {chapter}{Literaturverzeichnis}{53}{}%
+\contentsline {chapter}{\numberline {10}Zusammenfassung und Ausblick}{49}{}%
+\contentsline {section}{\numberline {10.1}Materialunterschiede}{49}{}%
+\contentsline {section}{\numberline {10.2}Verbesserungspotenzial des Verfahrens}{49}{}%
+\contentsline {section}{\numberline {10.3}Ausblick}{50}{}%
+\contentsline {chapter}{Abbildungsverzeichnis}{52}{}%
+\contentsline {chapter}{Literaturverzeichnis}{55}{}%

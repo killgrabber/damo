@@ -11,7 +11,7 @@ import difflib
 import random as rng
 from collections import Counter
 from threading import Thread
-
+import time
 
 IMAGES = [
     'pcd_2916383.png',
@@ -332,6 +332,7 @@ def match_all_contours(contours_top, bottom_contours, progress: []):
             matcher_thread = Thread(target=contourMatcher.match_contour,
                                     args=(c_top, c_bot, transitions, progress))
             matcher_thread.start()
+            #matcher_thread.join()
             matcher_threads.append(matcher_thread)
 
     for t in matcher_threads:
@@ -349,6 +350,7 @@ def show_image_and_contours(image, contours, wait=0, window_name="test"):
 
 
 def stitch_images(top_image: cv2.Mat, bot_image: cv2.Mat, progress: [], result: []):
+    start = time.time()
     if isinstance(top_image, str):
         top_image = cv2.imread(top_image)
     if isinstance(bot_image, str):
@@ -358,7 +360,7 @@ def stitch_images(top_image: cv2.Mat, bot_image: cv2.Mat, progress: [], result: 
     top_image_blur = cv2.blur(top_image, (blur_size, blur_size))
     bot_image_blur = cv2.blur(bot_image, (blur_size, blur_size))
 
-    contourMatcher.display_contours(getContours(top_image_blur), [(255, 255, 255)], save_name="contours_of_image.png")
+    #contourMatcher.display_contours(getContours(top_image_blur), [(255, 255, 255)], save_name="contours_of_image.png")
     cut_size = 500
     offset = 200
     crop_top = cropImage(top_image_blur, True, cut_size, offset=offset)
@@ -385,9 +387,13 @@ def stitch_images(top_image: cv2.Mat, bot_image: cv2.Mat, progress: [], result: 
 
     blue = (255, 255, 100)
     green = (200, 255, 200)
-    contourMatcher.display_contours(contours_top + bot_contours, wait=0, colors=[blue, green])
+    #contourMatcher.display_contours(contours_top + bot_contours, wait=0, colors=[blue, green])
 
     transitions = match_all_contours(contours_top, bot_contours, progress)
+    end = time.time()
+    progress[0] = 100
+    print(f"Stitched images in: {end - start:.2f}s")
+
     transitions_dict = Counter(transitions)
 
     print(f"transitions: {transitions_dict}")

@@ -14,13 +14,13 @@ from threading import Thread
 
 
 # Returns the translation needed from a contour to a given point
-@nb.njit(parallel=False, fastmath=True)
+#@nb.njit(parallel=False, fastmath=True)
 def get_translation(source_point: (float, float), target_point: (float, float)) -> (float, float):
     return target_point[0] - source_point[0], target_point[1] - source_point[1]
 
 
 # Moves a contour by a given translation
-@nb.njit(parallel=False, fastmath=True)
+#@nb.njit(parallel=False, fastmath=True)
 def move_contour(contour: [(float, float)], translation: (float, float)) -> []:
     new_contour = []
     for i in nb.prange(len(contour)):
@@ -29,7 +29,7 @@ def move_contour(contour: [(float, float)], translation: (float, float)) -> []:
     return new_contour
 
 
-@nb.njit(parallel=False, fastmath=True)
+#@nb.njit(parallel=False, fastmath=True)
 def match_contour(top: [(float, float)],
                   bot: [(float, float)],
                   transitions: [],
@@ -68,7 +68,7 @@ def match_contour(top: [(float, float)],
         transitions.append(final_transition)
     return final_transition
 
-@nb.njit(parallel=False, fastmath=True)
+#nb.njit(parallel=False, fastmath=True)
 def check_2_contours(top, bot, progress):
     best_match = 0
     matching_pair = (0, 0)
@@ -100,7 +100,7 @@ def display_plots(datas: [[]]):
     plt.show()
 
 
-@nb.njit(parallel=False, fastmath=True)
+#@nb.njit(parallel=False, fastmath=True)
 def collect_distance(source: [(float, float)], target: [(float, float)]):
     distances = []
     length = len(source)
@@ -120,7 +120,7 @@ def find_nearest_point_fast(source, target: []) -> (int, float):
     return x, best_match
 
 
-@nb.njit(parallel=False, fastmath=True)
+#@nb.njit(parallel=False, fastmath=True)
 def find_nearest_point(source, target: []) -> (int, float):
     #print(f"Finding nearest point")
     min_dist = sys.maxsize
@@ -135,7 +135,7 @@ def find_nearest_point(source, target: []) -> (int, float):
     return last_index, min_dist
 
 
-@nb.njit(fastmath=True)
+#@nb.njit(fastmath=True)
 def compare_point(a, b):
     return math.sqrt((b[0] - a[0]) ** 2 + (b[1] - a[1]) ** 2)
 

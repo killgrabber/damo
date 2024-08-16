@@ -141,4 +141,27 @@ gleiche Geometrie teilen, auf die gleiche Weise verformt haben.
 \section{Beurteilung der Ergebnisse}
 
 Grundsätzlich kann mithilfe der Methodik die Deformation erkannt und verglichen 
-werden. [TODO]
+werden.
+Dennoch ist die Deformationserkennung noch nicht perfekt. 
+Fehler im Stitching Prozess führen zu starken Änderungen in der Deformationserkennung. 
+Wie in Abbildung \ref{fig:errors} zu sehen ist, kann sich die Breite des Bauteils 
+zwischen zwei Spannungsstufen unterscheiden. Er ist erkennbar, dass der Rand der einen 
+Kontur, repräsentiert durch die magenta gefärbte Linie, immer größer ist als 
+der Rand der anderen Kontur, hier in blau dargestellt.
+Dieser Versatz entsteht, weil beim Stitching eine Transformation verwendet wurde die sich 
+um wenige Pixel unterscheidet. Dadurch wächst auch die erkannte Deformationen.
+Aus diesem Grund existieren in den Abbildungen \ref{fig:am_defos} und \ref{fig:fdm_defos}
+Linien die nicht dem erwarteten Verhalten entsprechen. 
+In Abbildung \ref{fig:fdm_defos} zum Beispiel, sollte die Deformation zwischen den 
+Spannungsstufen eins und zwei 
+(in rot dargestellt) am kleinsten sein. Stattdessen liegt die Kurve mittig im Graph.
+Genauso liegt die Deformation derselben 
+Spannungsstufen bei dem Metallbauteil im Verhältnis zu den anderen zu hoch. 
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.95\textwidth]{images/FDM_sp0_stitched_FDM_sp1_stitched_0_0.png}
+  \caption{Vergleich von Konturen aus nicht perfekt zusammengefügten Bildern. 
+  Vergleich der Spannungsstufe null mit der Spannungsstufe eins eines FDM Demonstratorbauteils}
+  \label{fig:errors}
+\end{figure}

@@ -68,6 +68,12 @@ Leroy Gardner.
   advances, opportunities and outlook.
 \newblock {\em Structures}, 47:2178--2193, 2023.
 
+\bibitem[GIV10]{georgopoulos2010assessing}
+Andreas Georgopoulos, Charalabos Ioannidis, and Artemis Valanis.
+\newblock Assessing the performance of a structured light scanner.
+\newblock {\em International Archives of Photogrammetry, Remote Sensing and
+  Spatial Information Sciences}, 38(Part 5):251--255, 2010.
+
 \bibitem[HL21]{Helle.2021}
 Robin~H. Helle and Hirpa~G. Lemu.
 \newblock A case study on use of 3d scanning for reverse engineering and
@@ -85,6 +91,12 @@ Aniket Jadhav and Vijay~S. Jadhav.
 {Kenton Mchenry} and {Peter Bajcsy}.
 \newblock {\em An overview of 3D data content, file formats and viewers}.
 \newblock 2008.
+
+\bibitem[LPS15]{numba}
+Siu~Kwan Lam, Antoine Pitrou, and Stanley Seibert.
+\newblock Numba: A llvm-based python jit compiler.
+\newblock In {\em Proceedings of the Second Workshop on the LLVM Compiler
+  Infrastructure in HPC}, pages 1--6, 2015.
 
 \bibitem[MC24]{.13.08.2024}
 Austin Mason and Carleton College.
@@ -118,6 +130,14 @@ Liang Meng, Weihong Zhang, Dongliang Quan, Guanghui Shi, Lei Tang, Yuliang Hou,
 \newblock {\em Archives of Computational Methods in Engineering},
   27(3):805--830, 2020.
 
+\bibitem[RTA22]{Ruiz.2022}
+Rafael~Melendreras Ruiz, Ma~Teresa~Mar{\'i}n Torres, and Paloma~S{\'a}nchez
+  Allegue.
+\newblock Comparative analysis between the main 3d scanning techniques:
+  Photogrammetry, terrestrial laser scanner, and structured light scanner in
+  religious imagery: The case of the holy christ of the blood.
+\newblock {\em Journal on Computing and Cultural Heritage}, 15(1):1--23, 2022.
+
 \bibitem[Sch06]{Schwartz.2006}
 Roman Schwartz.
 \newblock Kraft, masse, drehmoment.
@@ -139,6 +159,11 @@ UNIONFAB.
 \newblock From rough to refined: Post-processing methods to elevate metal
   parts.
 \newblock {\em Unionfab}, 22.08.2023.
+
+\bibitem[V.19]{V..08.08.2019}
+Carlota V.
+\newblock Laser scanner vs structured light scanner: which should you choose?
+\newblock 08.08.2019.
 
 \bibitem[VB{\'C}{\etalchar{+}}17]{Vranic.2017}
 Aleksandar Vrani{\'c}, Nebojsa Bogojevic, Sne{\v{z}}ana {{\'C}iri{\'c}
