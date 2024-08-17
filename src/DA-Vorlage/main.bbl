@@ -58,6 +58,12 @@ Ivan Dokmanic, Reza Parhizkar, Juri Ranieri, and Martin Vetterli.
 \newblock Euclidean distance matrices: Essential theory, algorithms, and
   applications.
 
+\bibitem[Dur18]{durakovic2018design}
+Benjamin Durakovic.
+\newblock Design for additive manufacturing: Benefits, trends and challenges.
+\newblock {\em Periodicals of Engineering and Natural Sciences}, 6(2):179--191,
+  2018.
+
 \bibitem[EAA23]{Elaksher.2023}
 Ahmed Elaksher, Tarig Ali, and {Abdullatif Alharthy}.
 \newblock A quantitative assessment of lidar data accuracy, 2023.
@@ -91,6 +97,13 @@ Aniket Jadhav and Vijay~S. Jadhav.
 {Kenton Mchenry} and {Peter Bajcsy}.
 \newblock {\em An overview of 3D data content, file formats and viewers}.
 \newblock 2008.
+
+\bibitem[LCN{\etalchar{+}}19]{lee2019study}
+Geon-hee Lee, Pyeong-ho Choi, Jeong-hwan Nam, Hwa-seop Han, Seung-hyun Lee, and
+  Soon-chul Kwon.
+\newblock A study on the performance comparison of 3d file formats on the web.
+\newblock {\em International journal of advanced smart convergence},
+  8(1):65--74, 2019.
 
 \bibitem[LPS15]{numba}
 Siu~Kwan Lam, Antoine Pitrou, and Stanley Seibert.
@@ -138,6 +151,11 @@ Rafael~Melendreras Ruiz, Ma~Teresa~Mar{\'i}n Torres, and Paloma~S{\'a}nchez
   religious imagery: The case of the holy christ of the blood.
 \newblock {\em Journal on Computing and Cultural Heritage}, 15(1):1--23, 2022.
 
+\bibitem[Sch05]{schenk2005introduction}
+Toni Schenk.
+\newblock Introduction to photogrammetry.
+\newblock {\em The Ohio State University, Columbus}, 106(1):1, 2005.
+
 \bibitem[Sch06]{Schwartz.2006}
 Roman Schwartz.
 \newblock Kraft, masse, drehmoment.
@@ -153,6 +171,12 @@ Matthias Schneck, Matthias Gollnau, Max Lutter-Günther, Benjamin Haller, Georg
 \newblock {\em Procedia CIRP}, 81:19--23, 2019.
 \newblock 52nd CIRP Conference on Manufacturing Systems (CMS), Ljubljana,
   Slovenia, June 12-14, 2019.
+
+\bibitem[SJL22]{icp_img}
+Haiqing Si, Qiu Jingxuan, and Yao Li.
+\newblock A review of point cloud registration algorithms for laser scanners:
+  Applications in large-scale aircraft measurement.
+\newblock {\em Applied Sciences}, 12:10247, 10 2022.
 
 \bibitem[UNI23]{unionfab.22.08.2023}
 UNIONFAB.
