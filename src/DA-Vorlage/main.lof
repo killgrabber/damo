@@ -10,35 +10,36 @@
 \contentsline {figure}{\numberline {2.5}{\ignorespaces Messbarer Bereich eines Laserscanners vom Typ: ScanControl-LLT30xx. Der messbare Bereich ist rot markiert. Die Dimensionen sind in mm angegeben und vom Laserursprung gemessen.}}{11}{}%
 \contentsline {figure}{\numberline {2.6}{\ignorespaces Prinzip des ICP-Algorithmus~\cite {icp_img}}}{12}{}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces Nachbearbeitung eines AF Metallbauteils~\cite {unionfab.22.08.2023}}}{14}{}%
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Nachbearbeitung eines AF Metallbauteils~\cite {unionfab.22.08.2023}}}{13}{}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Versuchsaufbau}}{17}{}%
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Versuchsaufbau}}{18}{}%
+\contentsline {figure}{\numberline {4.2}{\ignorespaces FDM gedrucktes Demonstratorbauteil.}}{19}{}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {5.1}{\ignorespaces Pointcloud eines Metallbauteils, in (a) ohne Filterung, in (b) mit den Ausreißern entfernt.}}{20}{}%
-\contentsline {figure}{\numberline {5.2}{\ignorespaces Resultat der Pointcloud zu Bild Konvertierung eines FDM Bauteils, ohne zusätzliche Filterung der Höheninformationen.}}{21}{}%
-\contentsline {figure}{\numberline {5.3}{\ignorespaces Auftreten der Höhenwerte in den Scandaten der Demonstratorbauteile. (a): Das Histogramm ist nicht skaliert. (b): Logarithmische Skalierung der Höheninformationen. Hier ist zu sehen, dass die Höhenhäufigkeiten streuen.}}{22}{}%
-\contentsline {figure}{\numberline {5.4}{\ignorespaces Resultat der Pointcloud zu Bild Konvertierung eines FDM Bauteils}}{23}{}%
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Pointcloud eines Metallbauteils, in (a) ohne Filterung, in (b) mit den Ausreißern entfernt.}}{22}{}%
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Resultat der Pointcloud zu Bild Konvertierung eines FDM Bauteils, ohne zusätzliche Filterung der Höheninformationen.}}{23}{}%
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Auftreten der Höhenwerte in den Scandaten der Demonstratorbauteile. (a): Das Histogramm ist nicht skaliert. (b): Logarithmische Skalierung der Höheninformationen. Hier ist zu sehen, dass die Höhenhäufigkeiten streuen.}}{24}{}%
+\contentsline {figure}{\numberline {5.4}{\ignorespaces Resultat der Pointcloud zu Bild Konvertierung eines FDM Bauteils.}}{25}{}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {6.1}{\ignorespaces Oberes Bild eines Scanvorgangs, FDM Bauteil}}{26}{}%
-\contentsline {figure}{\numberline {6.2}{\ignorespaces Extrahierte Konturen des Bildes ohne vorherige Filterung, der überlappende Bereich ist rot markiert.}}{26}{}%
-\contentsline {figure}{\numberline {6.3}{\ignorespaces (a) Konturen K1 und K2 so positioniert wie sie in den Ursprungsbildern gefunden wurde. (b) Konturen, transformiert mit größter Überlappung, Grad der Überlappung: 24,26 \%}}{29}{}%
-\contentsline {figure}{\numberline {6.4}{\ignorespaces Verfahren im Verlauf dargestellt, a zu Beginn, b nach n-durchgängen, c }}{30}{}%
-\contentsline {figure}{\numberline {6.5}{\ignorespaces Zusammengefügtes Bild}}{31}{}%
+\contentsline {figure}{\numberline {6.1}{\ignorespaces Oberes Bild eines Scanvorgangs, FDM Bauteil}}{28}{}%
+\contentsline {figure}{\numberline {6.2}{\ignorespaces Extrahierte Konturen des Bildes ohne vorherige Filterung, der überlappende Bereich ist rot markiert.}}{28}{}%
+\contentsline {figure}{\numberline {6.3}{\ignorespaces (a) Konturen K1 und K2 so positioniert wie sie in den Ursprungsbildern gefunden wurde. (b) Konturen, transformiert mit größter Überlappung, Grad der Überlappung: 24,26 \%}}{31}{}%
+\contentsline {figure}{\numberline {6.4}{\ignorespaces Verfahren im Verlauf dargestellt, a zu Beginn, b nach n-durchgängen, c }}{32}{}%
+\contentsline {figure}{\numberline {6.5}{\ignorespaces Zusammengefügtes Bild}}{33}{}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {7.1}{\ignorespaces (a) Zusammengefügtes Bild des FDM Demonstratorbauteils, Spannungsstufe 0 (b) Randgeometrie von (a), die zur Erkennung der Deformation genutzt wird}}{34}{}%
-\contentsline {figure}{\numberline {7.2}{\ignorespaces (a) Kontur des Bauteils AM2 bei Spannungsstufe null, vor dem übereinanderlegen mit der Kontur von Spannungsstufe drei. (b) Die Konturen von AM2 bei Spannungsstufen null und drei. Vollständig Übereinader gelegt.}}{35}{}%
-\contentsline {figure}{\numberline {7.3}{\ignorespaces Deformation der inneren Bauteilgeometrie des Demonstratorbauteils visuell dargestellt}}{36}{}%
-\contentsline {figure}{\numberline {7.4}{\ignorespaces Deformation der inneren Bauteilgeometrie des Demonstratorbauteils als Graph}}{37}{}%
-\contentsline {figure}{\numberline {7.5}{\ignorespaces Differenz von zwei Spannungsstufen bei einem FDM Bauteil, äußere Bauteilgeometrie.}}{37}{}%
-\contentsline {figure}{\numberline {7.6}{\ignorespaces Differenz von mehreren Spannungsstufen bei einem FDM Bauteil}}{38}{}%
+\contentsline {figure}{\numberline {7.1}{\ignorespaces (a) Zusammengefügtes Bild des FDM Demonstratorbauteils, Spannungsstufe 0 (b) Randgeometrie von (a), die zur Erkennung der Deformation genutzt wird}}{36}{}%
+\contentsline {figure}{\numberline {7.2}{\ignorespaces (a) Kontur des Bauteils AM2 bei Spannungsstufe null, vor dem übereinanderlegen mit der Kontur von Spannungsstufe drei. (b) Die Konturen von AM2 bei Spannungsstufen null und drei. Vollständig Übereinader gelegt.}}{37}{}%
+\contentsline {figure}{\numberline {7.3}{\ignorespaces Deformation der inneren Bauteilgeometrie des Demonstratorbauteils visuell dargestellt}}{38}{}%
+\contentsline {figure}{\numberline {7.4}{\ignorespaces Deformation der inneren Bauteilgeometrie des Demonstratorbauteils als Graph}}{39}{}%
+\contentsline {figure}{\numberline {7.5}{\ignorespaces Differenz von zwei Spannungsstufen bei einem FDM Bauteil, äußere Bauteilgeometrie.}}{39}{}%
+\contentsline {figure}{\numberline {7.6}{\ignorespaces Differenz von mehreren Spannungsstufen bei einem FDM Bauteil}}{40}{}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {8.1}{\ignorespaces Differenz von mehreren Spannungsstufen bei einem AM Metall Bauteil}}{39}{}%
-\contentsline {figure}{\numberline {8.2}{\ignorespaces Kraft- und Verschiebung der Spannungsstufe fünf bei einem FDM Bauteil}}{40}{}%
-\contentsline {figure}{\numberline {8.3}{\ignorespaces Akkumulierte Kraft- und Verschiebung jedes Bauteils}}{41}{}%
-\contentsline {figure}{\numberline {8.4}{\ignorespaces (a): AF Metallbauteil mit voller Stützstruktur, Bezeichnung: AM0. (b): AF Bauteil mit der halben Stützstruktur ausgebohrt, Bezeichnung: AM1. (c): AF Bauteil ohne Stützstruktur, Bezeichnung: AM2}}{42}{}%
-\contentsline {figure}{\numberline {8.5}{\ignorespaces Sechs Deformationsstufen bei einem AM Bauteil von 0 bis 2500 nm}}{43}{}%
-\contentsline {figure}{\numberline {8.6}{\ignorespaces Fünf Deformationsstufen bei einem FDM Bauteil von 0 bis 250 nm}}{43}{}%
-\contentsline {figure}{\numberline {8.7}{\ignorespaces Vergleich von Konturen aus nicht perfekt zusammengefügten Bildern. Vergleich der Spannungsstufe null mit der Spannungsstufe eins eines FDM Demonstratorbauteils}}{44}{}%
+\contentsline {figure}{\numberline {8.1}{\ignorespaces Differenz von mehreren Spannungsstufen bei einem AM Metall Bauteil}}{41}{}%
+\contentsline {figure}{\numberline {8.2}{\ignorespaces Kraft- und Verschiebung der Spannungsstufe fünf bei einem FDM Bauteil}}{42}{}%
+\contentsline {figure}{\numberline {8.3}{\ignorespaces Akkumulierte Kraft- und Verschiebung jedes Bauteils}}{43}{}%
+\contentsline {figure}{\numberline {8.4}{\ignorespaces (a): AF Metallbauteil mit voller Stützstruktur, Bezeichnung: AM0. (b): AF Bauteil mit der halben Stützstruktur ausgebohrt, Bezeichnung: AM1. (c): AF Bauteil ohne Stützstruktur, Bezeichnung: AM2}}{44}{}%
+\contentsline {figure}{\numberline {8.5}{\ignorespaces Sechs Deformationsstufen bei einem AM Bauteil von 0 bis 2500 nm}}{45}{}%
+\contentsline {figure}{\numberline {8.6}{\ignorespaces Fünf Deformationsstufen bei einem FDM Bauteil von 0 bis 250 nm}}{45}{}%
+\contentsline {figure}{\numberline {8.7}{\ignorespaces Vergleich von Konturen aus nicht perfekt zusammengefügten Bildern. Vergleich der Spannungsstufe null mit der Spannungsstufe eins eines FDM Demonstratorbauteils}}{46}{}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {9.1}{\ignorespaces Anwendungsoberfläche}}{46}{}%
+\contentsline {figure}{\numberline {9.1}{\ignorespaces Anwendungsoberfläche}}{48}{}%
 \addvspace {10\p@ }

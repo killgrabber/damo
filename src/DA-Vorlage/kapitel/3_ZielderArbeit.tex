@@ -1,16 +1,23 @@
 \chapter{Methodik}
 
 Wie schon im vorherigen Kapitel beschrieben müssen additiv gefertigte Bauteile 
-nachbearbeitet werden bevor sie eingesetzt werden können. In Abbildung~\ref{fig:post-pro}
+nachbearbeitet werden, bevor sie eingesetzt werden können. In Abbildung~\ref{fig:post-pro}
 ist ein additiv gefertigtes Metallbauteil vor und nach der Nachbearbeitung dargestellt.
 In der Nachbearbeitung wurden die Stützstrukturen entfernt und die Güte der Oberfläche 
 verbessert. 
 Der Nachbearbeitungsschritt wird nicht nur zur optischen Verbesserung verwendet, sondern 
 auch zur Verbesserung der physikalischen und mechanischen Eigenschaften. 
-Zum Beispiel kann durch eine Laserbearbeitung der Härtegrad des Bauteils erhöht werden.
-~\cite{Mahmood.2022}.
+Zum Beispiel kann durch eine Laserbearbeitung der Härtegrad des Bauteils erhöht 
+werden~\cite{Mahmood.2022}.
 
-Um eine korrekte Nachbearbeitung gewährleisten zu können muss das additiv 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/post-processing.PNG}
+    \caption{Nachbearbeitung eines AF Metallbauteils~\cite{unionfab.22.08.2023}}
+    \label{fig:post-pro}
+\end{figure}
+
+Um eine korrekte Nachbearbeitung gewährleisten zu können, muss das additiv 
 gefertigte Bauteil fixiert werden, so wird verhindert das sich das Bauteil während der 
 Nachbearbeitung räumlich verschiebt. Durch eine Verschiebung kann das Bauteil oder das, für
 die Nachbearbeitung verwendete Werkzeug, beschädigt werden. Bei einer händischen 
@@ -28,13 +35,6 @@ Deformation die auf das Objekt gewirkt hat zu erkennen. Durch die Analyse der Sp
 und Deformation eines Bauteils kann anschließend zu der Nachbearbeitung ermittelt werden, 
 ob sich das Bauteil nachhaltig deformiert hat.
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.8\textwidth]{images/post-processing.PNG}
-    \caption{Nachbearbeitung eines AF Metallbauteils~\cite{unionfab.22.08.2023}}
-    \label{fig:post-pro}
-\end{figure}
-
 \section{Verfahren zur optische Spannkraftdeformationserkennung}
 
 Um die Deformation des Bauteils erfassen zu können wird das 3D-Objekt benötigt, 
@@ -42,7 +42,7 @@ dass als Grundlage für die AF dient. Zusätzlich werden optische Daten des Baut
 im deformiertem Zustand benötigt. Mit diesen beiden Daten kann der Unterschied 
 ermittelt und ausgegeben werden.
 Um auch minimale Deformationen erkennen zu können, müssen die Daten des 
-eingespannten Bauteils hinreichend genau sein. Deswegen wird ein Laserscanner zur 
+eingespannten Bauteils hinreichend genau sein. Aus diesem Grund wird ein Laserscanner zur 
 Datenerfassung eingesetzt.
 Wie schon beschrieben ist der Messbereich eines Laserscanners begrenzt. Da das 
 Verfahren nicht auf eine Bauteilgröße beschränkt sein soll, müssen mehrere Scans als 

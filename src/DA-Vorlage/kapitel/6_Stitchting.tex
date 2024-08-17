@@ -9,10 +9,10 @@ Als Voraussetzung ist gegeben, dass alle Bilder Überlappungen enthalten.
 Diese Überlappung kann benutzt werden, um die Bilder zu einem Bild zusammenzufügen.
 Für das Stitching von Bilddateien existieren schon mehrere Verfahren, die in Bibliotheken
 für viele Programmiersprachen implementiert sind. Der schon beschriebene 
-ICP-Algorithmus~\ref{icp}
+ICP-Algorithmus (vgl. Kapitel~\ref{icp})
 ist eines dieser Verfahren. Das Problem mit diesen Verfahren ist, dass zwei 
 Datensätze registriert werden, indem auf ein Datensatz so lange eine 
-Transformation (vgl.~\ref*{Transformation}) angewendet wird, bis
+Transformation (vgl. Kapitel~\ref*{Transformation}) angewendet wird, bis
 die Distanz der Datensätze unter einen Grenzwert fällt oder nicht mehr verbessert
 werden kann. Die Überlappung in den von dem Laserscanner aufgenommen Daten ist jedoch 
 nur in zwei Achsen verschoben. Durch eine Rotation kann eine Transformation 
@@ -21,7 +21,6 @@ die ausschließlich aus einer Translation in zwei Achsen besteht.
 
 Um die korrekte Transformation zu finden, mit der die beiden Bilder überlappen,
 muss nicht der komplette Bereich analysiert werden, sondern nur der überlappende Teil.
-
 In diesem Bildausschnitt müssen gemeinsame Bereiche in beiden Bildern erkannt werden. 
 Diese gemeinsamen Bereiche können anschließend miteinander verglichen werden.
 Bereiche, die verglichen werden können, sind Ränder oder Farbunterschiede im Bild 
@@ -32,19 +31,21 @@ und werden im folgenden als Features bezeichnet.
 Features in einem Bild sind große Unterschiede in benachbarten Pixeln. Die größten
 Features sind die Ränder des Bauteils, kleinere Features können Oberflächenänderungen 
 oder Spuren des Herstellungsprozesses sein. Diese Unterschiede können mithilfe 
-der 'OpenCV' Bibliothek extrahiert werden. Diese Bibliothek gibt die erkannten 
+der Bibliothek 'OpenCV' extrahiert werden. Diese Bibliothek gibt die erkannten 
 Features als Liste von Konturen aus. Konturen selbst bestehen aus Listen von 
 Punkten, die aus X und Y Koordinaten bestehen. Die Konturerkennung kann verbessert 
-werden, indem das Bild entsprechend präpariert wird. In Abbildung~\ref{fig:cons} und
-~\ref{fig:image_top} ist ein Ursprungsbild und die extrahierten Konturen zu sehen.
-Trotz intensiver vorheriger Filterung sind in Abbildung~\ref{fig:cons} immer noch 
-Messfehler in den Konturen zu sehen. Diese müssen entfernt werden, damit die Bilder 
+werden, indem das Bild vor der Kontursuche präpariert wird. In Abbildung~\ref{fig:cons} und
+~\ref{fig:image_top} ist ein Ursprungsbild und die extrahierten Konturen zu sehen, 
+der überlappende Bereich ist rot markiert.
+Trotz intensiver vorheriger Filterung (siehe Kapitel~\ref{prepareData}) sind in 
+Abbildung~\ref{fig:cons} immer noch Messfehler in den Konturen zu sehen. 
+Diese müssen entfernt werden, damit die Bilder 
 korrekt zusammengefügt werden können. Erfolgt dies nicht werden diese Fehler miteinander
 verglichen, was das Ergebnis verfälscht.
-Die fehlerhaften Konturen können über die Länge der Kontur entfernt werden. Es werden 
-nur Konturen weiter betrachtet die aus mehr als 100 Punkten bestehen. Zusätzlich werden 
-Punkte in Konturen entfernt, die zu nah am Bildrand liegen. Dadurch wird verhindert, 
-dass der Bildrand als Kontur erkannt wird.
+Die fehlerhaften Konturen können über die Länge der Kontur identifiziert und entfernt werden. 
+Es werden nur Konturen weiter betrachtet die aus mehr als 100 Punkten bestehen. 
+Zusätzlich werden Punkte in Konturen entfernt, die zu nah am Bildrand liegen. 
+Dadurch wird verhindert, dass der Bildrand als Kontur erkannt wird.
 
 \begin{figure}[h]
     \centering

@@ -212,6 +212,10 @@ Styliani Verykokou and Charalabos Ioannidis.
 \newblock A point cloud data reduction method based on curvature.
 \newblock pages 914--918, 2009.
 
+\bibitem[ZPK]{Zhou.30012018}
+Qian-Yi Zhou, Jaesik Park, and Vladlen Koltun.
+\newblock Open3d: A modern library for 3d data processing.
+
 \bibitem[ZYD22]{icp}
 Juyong Zhang, Yuxin Yao, and Bailin Deng.
 \newblock Fast and robust iterative closest point.
