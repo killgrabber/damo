@@ -4,25 +4,28 @@
 Ziel dieser Arbeit ist es nicht nur eine Methodik zur optische 
 Deformationserkennung zu entwickeln, sondern diese Methodik auch in einer 
 Anwendung einfach nutzbar zu machen. 
-
 Diese Kapitel dokumentiert diese Anwendung und geht auf Herausforderungen 
 in der Entwicklung ein.
 
 \section{Anwendung}
 
 Die Anwendung beinhaltet verschiedene Funktionen, alle Funktionen 
-können separat benutzt werden. Dadurch müssen zeitintensive Vorgänge nicht 
-wiederholt werden, sondern Zwischenergebnisse können abgespeichert und 
+können separat benutzt werden. Dadurch müssen zeitintensive Vorgänge, wie das Stitching,
+nicht wiederholt werden, sondern Zwischenergebnisse können abgespeichert und 
 neu geladen werden.
 Die Anwendung bietet Funktionen, um Resultate in dem entsprechenden Dateiformat zu 
-speichern. Soweit möglich werden Dateinamen Empfehlungen automatisch ermittelt, 
+speichern. Soweit möglich werden Dateinamen automatisch ermittelt, 
 daher ist es zu empfehlen von Anfang an mit einem einheitlichen Namensschema bei
-den 3D-Scannerdaten zu arbeiten. 
-Das Schema \glqq Bauteilbeschreibung \textunderscore Spannungsstufe\grqq~~
-\textunderscore Scannerdurchlauf.ply
-wird empfohlen. Ein Beispiel für die zweite Pointcloud eines FDM-Bauteil bei der
-vierten Spannungsstufen wäre also \glqq FDM0\textunderscore SP4\textunderscore 2.ply\grqq~.
-In Abbildung \ref{fig:software_screenshot} ist die Oberfläche der Anwendung zu sehen.
+den 3D-Scandaten zu arbeiten. 
+Das Schema \glqq Bauteilbeschreibung \textunderscore Spannungsstufe
+\textunderscore Scannerdurchlauf.ply\grqq~
+hat sich bewährt. Ein Beispiel für den zweite Scan eines FDM-Bauteil bei der
+vierten Spannungsstufen wäre also \glqq FDM0\textunderscore SP4\textunderscore 2.ply\grqq.
+
+\newpage
+\section{Dokumentation}
+
+In Abbildung \ref{fig:software_screenshot} ist die Oberfläche der Anwendung dargestellt.
 
 \begin{figure}[H]
     \centering
@@ -31,50 +34,61 @@ In Abbildung \ref{fig:software_screenshot} ist die Oberfläche der Anwendung zu 
     \label{fig:software_screenshot}
 \end{figure}
 
-Über die Buttons \glqq Select Pointcloud\grqq~ können Pointclouds zum Konvertieren in Bilder
-ausgewählt werden. Der Text neben dem Bild zeigt den Dateinamen der ausgewählten 
-Datei an. Die obere Pointcloud sollte hier als erstes ausgewählt werden.
-Der Button \glqq Start PC conversion\grqq~~startet die Konvertierung. Der Balken 
-daneben zeigt den Prozessfortschritt. 
-Wenn \glqq Show Pointclouds\grqq~ gesetzt ist, werden die Pointclouds vor dem 
+Im folgenden werden die verschiedenen Anzeigen und Buttons in ihrer Funktionsweise beschrieben.
+Über die Buttons \glqq Select Pointcloud\grqq~können Scandaten zum Konvertieren in Bilder
+ausgewählt werden. Der Text neben dem Bild zeigt den Namen der ausgewählten 
+Datei an. Die zuerst aufgenommenen Scandaten sollte hier als erstes ausgewählt werden.
+Der Button \glqq Start PC conversion\grqq~startet die Konvertierung. Neben dem Button 
+befindet sich eine Fortschrittsanzeige.
+Wenn \glqq Show Pointclouds\grqq~gesetzt ist, werden die Scandaten vor dem 
 Konvertieren in einem separaten Fenster angezeigt. So kann überprüft werden, ob die 
-korrekte Pointcloud ausgewählt wurde.
+korrekten Scandaten ausgewählt wurde.
 Wenn der Prozess abgeschlossen ist, werden die resultieren Bilder als Vorschau in der 
-Anwendung angezeigt und die Option zum Speichern der Bilder ist nicht mehr ausgegraut.
+Anwendung angezeigt und die Option zum Speichern der Bilder aktiviert.
 Zusätzlich wird nach dem Konvertierungsprozess die Schaltfläche 
-\glqq Stitch converted\grqq~ freigeschaltet. Durch diese Option können die 
+\glqq Stitch converted\grqq~freigeschaltet. Durch diese Option können die 
 Bilder direkt zusammengefügt werden, ohne das die Bilder extra gespeichert und 
 eingeladen werden müssen. Wenn schon existierende Bilder zusammengefügt werden sollen, 
-können die Schaltflächen \glqq Select top image\grqq und \glqq Select bot image\grqq
-ausgewählt werden um das obere und untere Bild auszuwählen. Auch hier wird die 
-ausgewählte Datei als Text angezeigt. Die Dateiauswahl erfolgt über das 
+können die Schaltflächen \glqq Select top image\grqq~und \glqq Select bot image\grqq~
+genutzt werden, um das obere und untere Bild auszuwählen. Auch hier wird der Name der 
+ausgewählten Datei angezeigt. Die Dateiauswahl erfolgt über das 
 Windows-Kontextmenü, der zuletzt verwendete Ordner wird hierbei erhalten, sodass das 
-zweite Bild schneller ausgewählt werden kann. 
-Über den Button \glqq Start stitching\grqq wird der Stitching-Prozess gestartet. 
+zweite Bild schneller ausgewählt werden kann. Dies gilt auch für das Speichern von Daten.
+Über den Button \glqq Start stitching\grqq~wird der Stitching-Prozess gestartet. 
 Auch hier wird der Fortschritt und das Endresultat, sobald es vorliegt, angezeigt.
 
+\section{Visualisierungen}
+
+Die auf der rechten Seite der Software zu sehenden Schaltfläche sind, für die 
+Visualisierung der Ergebnisse zu benutzten. 
+Messdaten, wie die Werte der Kraftmesser im Schraubstock oder die Verschiebung der 
+Schraubstockbacken, können 
+mit dem Button \glqq import tdms data\grqq~importiert werden. Nach dem Importieren 
+können mehrere Datensets, zum Beispiel von verschiedenen Spannkraftstufen, mithilfe 
+des Buttons \glqq combine tdms data\grqq~in einem Graph zusammengefasst werden.
+Die in Kapitel \ref{validation} gezeigten Graphen wurden mithilfe dieser Funktion erzeugt.
+
 Damit auch die CAD-Datei des additiv gefertigten Bauteils verglichen werden kann, 
-existiert der \glqq Convert stl\grqq~ Button. Hier wird eine .stl Datei zu einem Bild 
-konvertiert und kann über \glqq save stl\grqq~ gespeichert werden.
+existiert der \glqq Convert stl\grqq~Button. Hier wird eine .stl-Datei zu einem Bild 
+konvertiert und kann über \glqq save stl\grqq~gespeichert werden.
 
 Mithilfe der rechts zu sehenden Schaltflächen können Bilder auf ihre Deformation hin 
 verglichen werden. Die resultieren Deformationsdaten werden automatisch als Textdatei
-in dem Ordner \glqq deformation\underline data\grqq~ gespeichert. Dieser Ordner wird automatisch 
-in dem Verzeichnis erzeugt, in dem die Anwendung ausgeführt wird. 
-Die erstellten Textdateien können mithilfe des Buttons \glqq Plot data\grqq~ ausgewählt 
-werden, und werden automatisch als Graph angezeigt. 
+in einem Ordner names \glqq deformation\textunderscore data\grqq~gespeichert. 
+Dieser Ordner wird automatisch in dem Verzeichnis erzeugt, in dem die Anwendung ausgeführt wird. 
+Die erstellten Textdateien können mithilfe des Buttons \glqq Plot data\grqq~ausgewählt 
+werden, und werden automatisch als Graph angezeigt.
+Die in Kapitel~\ref{defodata} gezeigten Graphen wurde mit dieser Funktion erstellt.
+
+\section{Optimierungen}
 
 Beim Konvertieren und stitchen werden alle Prozesse, die nicht voneinander abhängig sind,  
 nebenläufig ausgeführt. Das reduziert die Laufzeit der Prozesse.
-
 Die Anwendung ist in Python geschrieben, rechenintensive Prozesse wurden aber mithilfe 
 der Bibliothek \glqq Numba\grqq~in optimierten Maschinencode compiliert~\cite{numba}.
 Dadurch ist der Konvertierungs- und Stitching-Prozess deutlich schneller geworden. 
 Durch die Optimierungen konnte der Konvertierungsprozess von 49 s auf 41 s verschnellert 
-werden. Bei dem Stitchprozess war die Verbesserung noch deutlicher. Hier 
-beträgt die Laufzeit mit Optimierungen ca. 30 s um zwei Konturen zu vergleichen. 
-Ohne Optimierungen braucht der Vergleich derselben beiden Konturen 
-hochgerechnet 600 Minuten.
-
-
-
+werden. Bei dem Stitchprozess war die Verbesserung noch deutlicher. Hier benötigt die 
+Anwendung ca. 30 s um zwei Konturen zu vergleichen.
+Ohne Optimierungen braucht der Vergleich derselben Konturen 
+ungefähr 600 Minuten.

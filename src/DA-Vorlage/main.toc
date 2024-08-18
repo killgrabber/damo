@@ -35,10 +35,15 @@
 \contentsline {section}{\numberline {8.1}Messergebnisse}{41}{}%
 \contentsline {section}{\numberline {8.2}Ergebnisse der optischen Deformationsanalyse}{43}{}%
 \contentsline {section}{\numberline {8.3}Beurteilung der Ergebnisse}{46}{}%
+\contentsline {section}{\numberline {8.4}Limitierung der Deformationerkennung}{47}{}%
 \contentsline {chapter}{\numberline {9}Anwendung und Algorithmus}{49}{}%
 \contentsline {section}{\numberline {9.1}Anwendung}{49}{}%
+\contentsline {section}{\numberline {9.2}Dokumentation}{50}{}%
+\contentsline {section}{\numberline {9.3}Visualisierungen}{51}{}%
+\contentsline {section}{\numberline {9.4}Optimierungen}{51}{}%
 \contentsline {chapter}{\numberline {10}Zusammenfassung und Ausblick}{53}{}%
 \contentsline {section}{\numberline {10.1}Verbesserungspotenzial des Verfahrens}{53}{}%
 \contentsline {section}{\numberline {10.2}Ausblick}{54}{}%
+\contentsline {section}{\numberline {10.3}Forschungsansätze}{54}{}%
 \contentsline {chapter}{Abbildungsverzeichnis}{56}{}%
 \contentsline {chapter}{Literaturverzeichnis}{60}{}%

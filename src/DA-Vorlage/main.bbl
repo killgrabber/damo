@@ -110,6 +110,12 @@ Geon-hee Lee, Pyeong-ho Choi, Jeong-hwan Nam, Hwa-seop Han, Seung-hyun Lee, and
 \newblock {\em International journal of advanced smart convergence},
   8(1):65--74, 2019.
 
+\bibitem[Lin01]{linsen2001point}
+Lars Linsen.
+\newblock {\em Point cloud representation}.
+\newblock Univ., Fak. f{\"u}r Informatik, Bibliothek Technical Report, Faculty
+  of Computer~…, 2001.
+
 \bibitem[LPS15]{numba}
 Siu~Kwan Lam, Antoine Pitrou, and Stanley Seibert.
 \newblock Numba: A llvm-based python jit compiler.

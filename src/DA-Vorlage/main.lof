@@ -34,12 +34,12 @@
 \contentsline {figure}{\numberline {7.5}{\ignorespaces Differenz von zwei Spannungsstufen bei einem FDM Bauteil, äußere Bauteilgeometrie.}}{39}{}%
 \contentsline {figure}{\numberline {7.6}{\ignorespaces Differenz von mehreren Spannungsstufen bei einem FDM Bauteil}}{40}{}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {8.1}{\ignorespaces Kraft- und Verschiebung der Spannungsstufe fünf bei einem FDM Bauteil}}{42}{}%
+\contentsline {figure}{\numberline {8.1}{\ignorespaces Kraft, die auf ein FDM Bauteil wirkt, während es angezogen wird. In diesem wurde von Spannungsstufe vier auf Spannungsstufen fünf erhöht. Zusätzlich ist die Verschiebung der Backen dargestellt.}}{42}{}%
 \contentsline {figure}{\numberline {8.2}{\ignorespaces Akkumulierte Kraft und Verschiebung, mit der jedes Bauteil deformiert wurde.}}{43}{}%
 \contentsline {figure}{\numberline {8.3}{\ignorespaces (a): AF Metallbauteil mit voller Stützstruktur, Bezeichnung: AM0. (b): AF Bauteil mit der halben Stützstruktur ausgebohrt, Bezeichnung: AM1. (c): AF Bauteil ohne Stützstruktur, Bezeichnung: AM2}}{43}{}%
 \contentsline {figure}{\numberline {8.4}{\ignorespaces Sechs Deformationsstufen bei einem additiv gefertigten Metallbauteil ohne Stützstruktur von 0 bis 2500 nm}}{44}{}%
 \contentsline {figure}{\numberline {8.5}{\ignorespaces Fünf Deformationsstufen bei einem FDM Bauteil von 0 bis 250 nm}}{45}{}%
-\contentsline {figure}{\numberline {8.6}{\ignorespaces Differenz von zwei Spannungsstufen bei einem additiv gefertigten Metallbauteil, das zur Hälfte mit Stützstrukturen gefüllt ist (Abbildung~\ref {fig:am_parts (b)}). }}{45}{}%
+\contentsline {figure}{\numberline {8.6}{\ignorespaces Differenz von zwei Spannungsstufen bei einem additiv gefertigten Metallbauteil, das zur Hälfte mit Stützstrukturen gefüllt ist (Abbildung~\ref {fig:am_parts} (b)). }}{45}{}%
 \contentsline {figure}{\numberline {8.7}{\ignorespaces Vergleich von Materialien und Bauteilgeometrien}}{46}{}%
 \contentsline {figure}{\numberline {8.8}{\ignorespaces Vergleich von Konturen aus nicht korrekt zusammengefügten Bildern.}}{47}{}%
 \contentsline {figure}{\numberline {8.9}{\ignorespaces Bild eines Scans von einem Metallbauteil mit Stützstruktur.}}{48}{}%

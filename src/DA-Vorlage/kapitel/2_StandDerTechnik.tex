@@ -186,6 +186,12 @@ Im Dateiheader wird zu jedem Attribut auch der Datentyp festgelegt. Durch diesen
 kann die Genauigkeit und Dateigröße beeinflusst werden. Häufig werden hier Floats oder
 Integer in verschiedener Bittiefe gewählt.
 
+3D-Modelle können auch als Pointclouds gespeichert werden. Hier wird 
+ein Modell durch eine Menge von Punkten, die durch drei Koordinaten beschrieben werden, 
+gespeichert.
+Diese Methode verbraucht mehr speicher, spiegelt die Realität aber genauer wieder.
+Aus diesem Grund liefern Scanner häufig Pointclouds.~\cite{linsen2001point}
+
 \section{3D Rekonstruktion} \label{3d_construction}
 
 Bei der Erstellung von digitalen Abbildern geht es nicht nur darum, wie beim Reverse
