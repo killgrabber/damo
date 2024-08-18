@@ -13,15 +13,13 @@ Diese Daten wurden mithilfe eines Laser-Profilsensors aufgenommen
 (siehe Kapitel \ref{lasers}). Durch diesen Prozess 
 entstehen Messfehler und Ausreißer. Diese Punkte verfälschen das Verfahren da sie 
 nicht auf dem eingespannte Bauteil liegen. Die Genauigkeit des Verfahrens profitiert, 
-wenn diese Punkte entfernt werden. Ausreißer sind in Abbildung \ref{fig:pcs} (a) 
-zu sehen.
-
+wenn diese Punkte entfernt werden.
 \section{Pointcloud filtern}
     
 Ausreißer können aus Pointclouds entfernt werden, indem einzelne Punkte 
 relativ zu ihren Nachbarpunkten im dreidimensionalen Raum betrachtet werden.
 Zur Erkennung und Entfernung von Ausreißern sind in der Open-Source
-Bibliothek 'Open3D' zwei Methoden vorhanden. 
+Bibliothek \glqq Open3D\grqq~ zwei Methoden vorhanden. 
 Die Methode \glqq radius\_outlier\_removal\grqq~entfernt Ausreißer basierend auf 
 einem konfigurierbaren Radius. Punkte die weniger als n andere Punkte in dem Radius 
 haben werden entfernt. Die andere Methode lautet 
@@ -56,8 +54,8 @@ dargestellt.
         \includegraphics[width=\textwidth]{images/pc_without_outliers.PNG} % second figure itself
         \caption*{(b)}
     \end{minipage}
-    \caption{Pointcloud eines Metallbauteils, in (a) ohne Filterung,
-    in (b) mit den Ausreißern entfernt.}
+    \caption{Pointcloud eines Metallbauteils, (a) ohne Filterung der Ausreißer,
+    (b) Die Ausreißer wurden mithilfe der Bibliothek \glqq Open3D\grqq~ entfernt.}
     \label{fig:pcs}
 \end{figure}
 

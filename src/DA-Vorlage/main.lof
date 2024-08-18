@@ -4,23 +4,23 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {2.1}{\ignorespaces Überhangtests mit unterschiedlichen Resultaten und Oberflächenqualitäten in sieben verschiedenen Winkeln \cite {Meng.2020}}}{5}{}%
-\contentsline {figure}{\numberline {2.2}{\ignorespaces Genauigkeit einer 3D-Datei ist abhängig von der Anzahl der gespeicherten Eckpunkte am Beispiel des Demonstratorbauteils. (a) 1512 Punkte (b) 52 Punkte (c) 30 Punkte}}{6}{}%
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Die Genauigkeit einer 3D-Datei ist abhängig von der Anzahl der gespeicherten Eckpunkte am Beispiel des Demonstratorbauteils. (a) 1512 Punkte (b) 52 Punkte (c) 30 Punkte}}{6}{}%
 \contentsline {figure}{\numberline {2.3}{\ignorespaces Funktionsweise der Fotogrammetrie \cite {.13.08.2024}.}}{8}{}%
 \contentsline {figure}{\numberline {2.4}{\ignorespaces Theoretische Funktionsweise von (a) einem Laserscanner und (b) einem strukturiertem-Licht-Scanner~\cite {V..08.08.2019}.}}{10}{}%
 \contentsline {figure}{\numberline {2.5}{\ignorespaces Messbarer Bereich eines Laserscanners vom Typ: ScanControl-LLT30xx. Der messbare Bereich ist rot markiert. Die Dimensionen sind in mm angegeben und vom Laserursprung gemessen.}}{11}{}%
 \contentsline {figure}{\numberline {2.6}{\ignorespaces Prinzip des ICP-Algorithmus~\cite {icp_img}}}{12}{}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces Nachbearbeitung eines AF Metallbauteils~\cite {unionfab.22.08.2023}}}{13}{}%
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Ein additiv gefertigtes Metallbauteil vor und nach der Nachbearbeitung ~\cite {unionfab.22.08.2023}}}{13}{}%
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {4.1}{\ignorespaces Versuchsaufbau}}{18}{}%
-\contentsline {figure}{\numberline {4.2}{\ignorespaces FDM gedrucktes Demonstratorbauteil.}}{19}{}%
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Das Demonstratorbauteil aus Kunststoff per FDM gedruckt.}}{19}{}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {5.1}{\ignorespaces Pointcloud eines Metallbauteils, in (a) ohne Filterung, in (b) mit den Ausreißern entfernt.}}{22}{}%
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Pointcloud eines Metallbauteils, (a) ohne Filterung der Ausreißer, (b) Die Ausreißer wurden mithilfe der Bibliothek \glqq Open3D\grqq ~ entfernt.}}{22}{}%
 \contentsline {figure}{\numberline {5.2}{\ignorespaces Resultat der Pointcloud zu Bild Konvertierung eines FDM Bauteils, ohne zusätzliche Filterung der Höheninformationen.}}{23}{}%
 \contentsline {figure}{\numberline {5.3}{\ignorespaces Auftreten der Höhenwerte in den Scandaten der Demonstratorbauteile. (a): Das Histogramm ist nicht skaliert. (b): Logarithmische Skalierung der Höheninformationen. Hier ist zu sehen, dass die Höhenhäufigkeiten streuen.}}{24}{}%
 \contentsline {figure}{\numberline {5.4}{\ignorespaces Resultat der Pointcloud zu Bild Konvertierung eines FDM Bauteils.}}{25}{}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {6.1}{\ignorespaces Oberes Bild eines Scanvorgangs, FDM Bauteil}}{28}{}%
+\contentsline {figure}{\numberline {6.1}{\ignorespaces Oberes Bild eines Scanvorgangs des FDM Demonstratorbauteils.}}{28}{}%
 \contentsline {figure}{\numberline {6.2}{\ignorespaces Extrahierte Konturen des Bildes ohne vorherige Filterung, der überlappende Bereich ist rot markiert.}}{28}{}%
 \contentsline {figure}{\numberline {6.3}{\ignorespaces Alle Konturen eines oberen Scans, die in~\ref {fig:stitching_all} dargestellten Konturen befinden sich im rot markierten Bereich.}}{30}{}%
 \contentsline {figure}{\numberline {6.4}{\ignorespaces Verfahren im Verlauf dargestellt, (a) zu Beginn, (b) nach 216 durchgängen, (c) }}{30}{}%
@@ -28,20 +28,21 @@
 \contentsline {figure}{\numberline {6.6}{\ignorespaces Zusammengefügtes Bild}}{33}{}%
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {7.1}{\ignorespaces (a) Zusammengefügtes Bild des FDM Demonstratorbauteils, Spannungsstufe 0 (b) Randgeometrie von (a), die zur Erkennung der Deformation genutzt wird}}{36}{}%
-\contentsline {figure}{\numberline {7.2}{\ignorespaces (a) Kontur des Bauteils AM2 bei Spannungsstufe null, vor dem übereinanderlegen mit der Kontur von Spannungsstufe drei. (b) Die Konturen von AM2 bei Spannungsstufen null und drei. Vollständig Übereinader gelegt.}}{37}{}%
+\contentsline {figure}{\numberline {7.2}{\ignorespaces (a) Die Konturen von zwei Bauteilen vor dem übereinanderlegen. (b) Die Konturen, nachdem sie mit dem Vorgestellen Verfahren angenähert wurden.}}{37}{}%
 \contentsline {figure}{\numberline {7.3}{\ignorespaces Deformation der inneren Bauteilgeometrie des Demonstratorbauteils visuell dargestellt}}{38}{}%
 \contentsline {figure}{\numberline {7.4}{\ignorespaces Deformation der inneren Bauteilgeometrie des Demonstratorbauteils als Graph}}{39}{}%
 \contentsline {figure}{\numberline {7.5}{\ignorespaces Differenz von zwei Spannungsstufen bei einem FDM Bauteil, äußere Bauteilgeometrie.}}{39}{}%
 \contentsline {figure}{\numberline {7.6}{\ignorespaces Differenz von mehreren Spannungsstufen bei einem FDM Bauteil}}{40}{}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {8.1}{\ignorespaces Differenz von mehreren Spannungsstufen bei einem AM Metall Bauteil}}{41}{}%
-\contentsline {figure}{\numberline {8.2}{\ignorespaces Kraft- und Verschiebung der Spannungsstufe fünf bei einem FDM Bauteil}}{42}{}%
-\contentsline {figure}{\numberline {8.3}{\ignorespaces Akkumulierte Kraft- und Verschiebung jedes Bauteils}}{43}{}%
-\contentsline {figure}{\numberline {8.4}{\ignorespaces (a): AF Metallbauteil mit voller Stützstruktur, Bezeichnung: AM0. (b): AF Bauteil mit der halben Stützstruktur ausgebohrt, Bezeichnung: AM1. (c): AF Bauteil ohne Stützstruktur, Bezeichnung: AM2}}{44}{}%
-\contentsline {figure}{\numberline {8.5}{\ignorespaces Sechs Deformationsstufen bei einem AM Bauteil von 0 bis 2500 nm}}{45}{}%
-\contentsline {figure}{\numberline {8.6}{\ignorespaces Fünf Deformationsstufen bei einem FDM Bauteil von 0 bis 250 nm}}{45}{}%
-\contentsline {figure}{\numberline {8.7}{\ignorespaces Vergleich von Konturen aus nicht perfekt zusammengefügten Bildern. Vergleich der Spannungsstufe null mit der Spannungsstufe eins eines FDM Demonstratorbauteils}}{46}{}%
+\contentsline {figure}{\numberline {8.1}{\ignorespaces Kraft- und Verschiebung der Spannungsstufe fünf bei einem FDM Bauteil}}{42}{}%
+\contentsline {figure}{\numberline {8.2}{\ignorespaces Akkumulierte Kraft und Verschiebung, mit der jedes Bauteil deformiert wurde.}}{43}{}%
+\contentsline {figure}{\numberline {8.3}{\ignorespaces (a): AF Metallbauteil mit voller Stützstruktur, Bezeichnung: AM0. (b): AF Bauteil mit der halben Stützstruktur ausgebohrt, Bezeichnung: AM1. (c): AF Bauteil ohne Stützstruktur, Bezeichnung: AM2}}{43}{}%
+\contentsline {figure}{\numberline {8.4}{\ignorespaces Sechs Deformationsstufen bei einem additiv gefertigten Metallbauteil ohne Stützstruktur von 0 bis 2500 nm}}{44}{}%
+\contentsline {figure}{\numberline {8.5}{\ignorespaces Fünf Deformationsstufen bei einem FDM Bauteil von 0 bis 250 nm}}{45}{}%
+\contentsline {figure}{\numberline {8.6}{\ignorespaces Differenz von zwei Spannungsstufen bei einem additiv gefertigten Metallbauteil, das zur Hälfte mit Stützstrukturen gefüllt ist (Abbildung~\ref {fig:am_parts (b)}). }}{45}{}%
+\contentsline {figure}{\numberline {8.7}{\ignorespaces Vergleich von Materialien und Bauteilgeometrien}}{46}{}%
+\contentsline {figure}{\numberline {8.8}{\ignorespaces Vergleich von Konturen aus nicht korrekt zusammengefügten Bildern.}}{47}{}%
+\contentsline {figure}{\numberline {8.9}{\ignorespaces Bild eines Scans von einem Metallbauteil mit Stützstruktur.}}{48}{}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {9.1}{\ignorespaces Anwendungsoberfläche}}{48}{}%
+\contentsline {figure}{\numberline {9.1}{\ignorespaces Anwendungsoberfläche}}{50}{}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {10.1}{\ignorespaces Unterschied in der Deformation eines Metallbauteil zu einem Kunststoffteil}}{52}{}%

@@ -1,26 +1,9 @@
 
 \chapter{Validierung}
 
-\section{Analyse der spannkraftinduzierten Deformation}\
-
-[todo explizit Unterschiede FDM und additiv herausstellen mit genauen Angaben über die Deformationen]
-
-Mithilfe dieser Funktion können unterschiedliche Bauteilgeometrien und
-Herstellungsprozesse auf ihre Deformation hin verglichen werden.
-Bei einem additiv gefertigten Metallteil tritt bei den 
-gleichen Spannungsstufen eine deutlich kleinere, 
-aber dennoch erkennbare Deformation auf. Zusätzlich zeigt sich, 
-dass bei verschiedenen Herstellungsprozessen trotz gleicher 
-Geometrie unterschiedliche Verformungen auftreten.
-Die verschiedenen Verformungen und Auswirkungen werden später in diesem
-Kapitel behandelt.
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.9\textwidth]{images/AM_sp0_sp2_defo_plot.png}
-    \caption{Differenz von mehreren Spannungsstufen bei einem AM Metall Bauteil}
-    \label{fig:deformation_data_am}
-\end{figure}
+Im folgenden Kapitel wird die Deformationerkennung analysiert und überprüft.
+Zur Überprüfung werden Materialeigenschaften und aufgenommene Messwerte 
+mit der erkannten Deformation verglichen.
 
 \section{Messergebnisse}
 
@@ -76,7 +59,7 @@ erreicht. Vergleicht man die Verformung in x-Richtung mit der Verformung von AM2
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.99\textwidth]{images/spannkraftstufen_akkumuliert.png}
-    \caption{Akkumulierte Kraft- und Verschiebung jedes Bauteils}
+    \caption{Akkumulierte Kraft und Verschiebung, mit der jedes Bauteil deformiert wurde.}
     \label{fig:akkumulated}
 \end{figure}
 
@@ -121,13 +104,14 @@ den Randbereichen sich nach innen und dann wieder nach außen deformieren.
 Außerdem ist im Vergleich der beiden Graphen zu sehen das sich das FDM Bauteil deutlich 
 mehr verformt hat. Hier beträgt die größte Deformation über 150 Pixel.
 Bei dem Metallbauteil, das mit der zehnfachen Kraft eingespannt wurde (250 nm vs. 2500 nm)
-sind es nur knapp 40 Pixel. Trotzdem ist zu sehen das sich die Bauteile, die auch die 
+sind es nur knapp 40 Pixel, wie in Abbildung~\ref{fig:deformation_data_am} zu sehen. Trotzdem ist zu sehen das sich die Bauteile, die auch die 
 gleiche Geometrie teilen, auf die gleiche Weise verformt haben.
 
 \begin{figure}[H]
   \centering
   \includegraphics[width=0.95\textwidth]{images/am2_all_defos.png}
-  \caption{Sechs Deformationsstufen bei einem AM Bauteil von 0 bis 2500 nm}
+  \caption{Sechs Deformationsstufen bei einem additiv gefertigten Metallbauteil ohne
+  Stützstruktur von 0 bis 2500 nm}
   \label{fig:am_defos}
 \end{figure}
 
@@ -138,10 +122,42 @@ gleiche Geometrie teilen, auf die gleiche Weise verformt haben.
   \label{fig:fdm_defos}
 \end{figure}
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{images/AM_sp0_sp2_defo_plot.png}
+    \caption{Differenz von zwei Spannungsstufen bei einem additiv gefertigten Metallbauteil, 
+    das zur Hälfte mit Stützstrukturen gefüllt ist (Abbildung~\ref{fig:am_parts (b)}). }
+    \label{fig:deformation_data_am}
+\end{figure}
+
 \section{Beurteilung der Ergebnisse}
 
-Grundsätzlich kann mithilfe der Methodik die Deformation erkannt und verglichen 
-werden.
+Grundsätzlich ermöglicht die Methode die Erkennung und den Vergleich von Deformationen 
+eines Bauteils. Die gemessene Deformation eines Bauteils entspricht den erwarteten Werten, 
+abhängig von Material und Geometrie des Bauteils. FDM-gedruckte Kunststoffteile zeigen 
+eine deutlich stärkere Verformung im Vergleich zu Metallteilen.
+Bei den Metallteilen zeigt sich, dass das Vorhandensein einer Stützstruktur die
+Verformung des Bauteils signifikant reduziert. 
+Die unterschiedlichen Deformationen sind in Abbildung \ref{fig:materials} dargestellt. 
+Das in Abbildung \ref{fig:am_parts} (a) gezeigte Bauteil konnte nicht analysiert werden, 
+da durch die Stützstruktur keine korrekte Transformation zur stitchen berechnet werden konnte.
+Bei den FDM-Bauteilen ist festzustellen, dass sie sich deutlich stärker verformen 
+als die Metallteile. Beide FDM-Bauteile zeigen eine ähnliche Verformungsausprägung, 
+jedoch tritt die Deformation, trotz identischer Geometrie, an unterschiedlichen Stellen auf. 
+Dies könnte auf Unterschiede im Druckprozess zurückzuführen sein. 
+Diese Beobachtung zeigt einen weiteren Nutzen der Methodik: Sie ermöglicht
+nicht nur die Bestimmung des Ausmaßes der Deformation, sondern auch die 
+Identifikation von Schwachstellen innerhalb eines Bauteils, die zu einer erhöhten 
+ 
+Deformation führen.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.95\textwidth]{images/compare_materials.png}
+  \caption{Vergleich von Materialien und Bauteilgeometrien}
+  \label{fig:materials}
+\end{figure}
+
 Dennoch ist die Deformationserkennung noch nicht perfekt. 
 Fehler im Stitching Prozess führen zu starken Änderungen in der Deformationserkennung. 
 Wie in Abbildung \ref{fig:errors} zu sehen ist, kann sich die Breite des Bauteils 
@@ -154,14 +170,26 @@ Aus diesem Grund existieren in den Abbildungen \ref{fig:am_defos} und \ref{fig:f
 Linien die nicht dem erwarteten Verhalten entsprechen. 
 In Abbildung \ref{fig:fdm_defos} zum Beispiel, sollte die Deformation zwischen den 
 Spannungsstufen eins und zwei 
-(in rot dargestellt) am kleinsten sein. Stattdessen liegt die Kurve mittig im Graph.
-Genauso liegt die Deformation derselben 
-Spannungsstufen bei dem Metallbauteil im Verhältnis zu den anderen zu hoch. 
+(in rot dargestellt) am kleinsten sein. Stattdessen liegt die Kurve bei -50 Pixeln im Graph.
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.95\textwidth]{images/FDM_sp0_stitched_FDM_sp1_stitched_0_0.png}
-  \caption{Vergleich von Konturen aus nicht perfekt zusammengefügten Bildern. 
-  Vergleich der Spannungsstufe null mit der Spannungsstufe eins eines FDM Demonstratorbauteils}
+  \includegraphics[width=0.95\textwidth]{images/contours_matching_36.png}
+  \caption{Vergleich von Konturen aus nicht korrekt zusammengefügten Bildern.}
   \label{fig:errors}
 \end{figure}
+
+Zusätzlich kann, bei Bildern ohne klare Konturen, das Stitching nicht korrekt durchgeführt
+werden. Dies ist bei den additiv gefertigten Metallbauteil mit Stützstruktur der Fall 
+(Abbildung \ref{fig:am_parts} (a)). Das Bild, das aus dem Scan dieses Bauteils erstellt wurde, 
+ist in Abbildung \ref{fig:errorimage} zu sehen. Es lassen sich keine eindeutigen Konturen 
+erkennen, die für das Stitching genutzt werden könnten.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.95\textwidth]{images/am0.png}
+  \caption{Bild eines Scans von einem Metallbauteil mit Stützstruktur.}
+  \label{fig:errorimage}
+\end{figure}
+
+

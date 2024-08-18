@@ -32,15 +32,13 @@
 \contentsline {section}{\numberline {7.2}Randgeometrien übereinander legen}{36}{}%
 \contentsline {section}{\numberline {7.3}Deformation messen}{37}{}%
 \contentsline {chapter}{\numberline {8}Validierung}{41}{}%
-\contentsline {section}{\numberline {8.1}Analyse der spannkraftinduzierten Deformation}{41}{}%
-\contentsline {section}{\numberline {8.2}Messergebnisse}{42}{}%
-\contentsline {section}{\numberline {8.3}Ergebnisse der optischen Deformationsanalyse}{44}{}%
-\contentsline {section}{\numberline {8.4}Beurteilung der Ergebnisse}{46}{}%
-\contentsline {chapter}{\numberline {9}Anwendung und Algorithmus}{47}{}%
-\contentsline {section}{\numberline {9.1}Anwendung}{47}{}%
-\contentsline {chapter}{\numberline {10}Zusammenfassung und Ausblick}{51}{}%
-\contentsline {section}{\numberline {10.1}Materialunterschiede}{51}{}%
-\contentsline {section}{\numberline {10.2}Verbesserungspotenzial des Verfahrens}{52}{}%
-\contentsline {section}{\numberline {10.3}Ausblick}{52}{}%
+\contentsline {section}{\numberline {8.1}Messergebnisse}{41}{}%
+\contentsline {section}{\numberline {8.2}Ergebnisse der optischen Deformationsanalyse}{43}{}%
+\contentsline {section}{\numberline {8.3}Beurteilung der Ergebnisse}{46}{}%
+\contentsline {chapter}{\numberline {9}Anwendung und Algorithmus}{49}{}%
+\contentsline {section}{\numberline {9.1}Anwendung}{49}{}%
+\contentsline {chapter}{\numberline {10}Zusammenfassung und Ausblick}{53}{}%
+\contentsline {section}{\numberline {10.1}Verbesserungspotenzial des Verfahrens}{53}{}%
+\contentsline {section}{\numberline {10.2}Ausblick}{54}{}%
 \contentsline {chapter}{Abbildungsverzeichnis}{56}{}%
 \contentsline {chapter}{Literaturverzeichnis}{60}{}%

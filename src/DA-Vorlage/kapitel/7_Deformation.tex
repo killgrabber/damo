@@ -10,7 +10,7 @@ durch den Unterschied der Ränder der Bauteile bestimmt wird.
 Bevor eine Deformation erkannt werden kann, muss die Randgeometrie beider 
 abgebildeter Bauteile erfasst werden. 
 Zunächst werden in einem Schritt immer zwei Spannungsstufen miteinander verglichen,
-und die Deformationsdaten werden anschließend gespeichert. 
+und die Deformationsdaten anschließend gespeichert. 
 Die Auswertung der resultierenden Daten erfolgt in einem separaten Schritt, 
 wodurch es möglich ist, mehrere Spannungsstufen miteinander zu vergleichen,
 ohne dass die Komplexität des Verfahrens ansteigt.
@@ -31,12 +31,12 @@ Bauteils dargestellt.
     \centering
     \begin{minipage}{0.49\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{images/FDM_sp0_stitched.jpg} % first figure itself
+        \includegraphics[width=\textwidth]{images/FDM2_SP0_stitched.png} % first figure itself
         \caption*{(a)} 
     \end{minipage}\hfill
     \begin{minipage}{0.49\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{images/contours_FDM_sp0_stitched.jpg} % first figure itself
+        \includegraphics[width=\textwidth]{images/contours_FDM2_SP0_stitched.png} % first figure itself
         \caption*{(b)}
     \end{minipage}\hfill
     \caption{(a) Zusammengefügtes Bild des FDM Demonstratorbauteils, Spannungsstufe 0
@@ -87,7 +87,8 @@ angewendet und erneut die Transformation berechnet. Dies wird so lange wiederhol
 die Transformation dem Nullvektor entspricht. Wenn dies geschieht, sind beide Konturen, 
 und damit die Randgeometrien der Bauteile angenähert.
 Um Rechenzeit zu sparen werden vor dem Ermitteln der ersten Transformation die 
-Massenmittelpunkte beider Bauteilgeometrien berechnet und Übereinader gelegt.
+Massenmittelpunkte beider Bauteilgeometrien berechnet und beide Bilder so transformiert, 
+dass sie den gleichen Massenmittelpunkt haben.
 In Abbildung~\ref{fig:stichted_contours_compare} sind die Konturen vor und nach 
 dem Überlappungs-prozess abgebildet.
 
@@ -95,18 +96,16 @@ dem Überlappungs-prozess abgebildet.
     \centering
     \begin{minipage}{0.49\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{images/contours_before_matching.png} % first figure itself
+        \includegraphics[width=\textwidth]{images/contours_before_matching2.png} % first figure itself
         \caption*{(a)} 
     \end{minipage}\hfill
     \begin{minipage}{0.49\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{images/AM2_SP0_stitched_AM2_SP3_stitched_0_0.png} % first figure itself
+        \includegraphics[width=\textwidth]{images/contours_matching_13.png} % first figure itself
         \caption*{(b)}
     \end{minipage}\hfill
-    \caption{(a) Kontur des Bauteils AM2 bei Spannungsstufe null, vor dem übereinanderlegen
-    mit der Kontur von Spannungsstufe drei.
-    (b) Die Konturen von AM2 bei Spannungsstufen null und drei. Vollständig Übereinader
-    gelegt.}
+    \caption{(a) Die Konturen von zwei Bauteilen vor dem übereinanderlegen. 
+    (b) Die Konturen, nachdem sie mit dem Vorgestellen Verfahren angenähert wurden.}
         \label{fig:stichted_contours_compare}
 \end{figure}
 
