@@ -22,11 +22,11 @@
 \contentsline {section}{\numberline {5.2}Pointcloud in Bild konvertieren}{22}{}%
 \contentsline {chapter}{\numberline {6}Stitching}{27}{}%
 \contentsline {section}{\numberline {6.1}Feature Erkennung}{27}{}%
-\contentsline {section}{\numberline {6.2}Differenzierung von Punkten}{29}{}%
-\contentsline {section}{\numberline {6.3}Transformation bestimmen}{30}{}%
-\contentsline {section}{\numberline {6.4}Visuelle Darstellung des Stitching Prozesses}{30}{}%
-\contentsline {section}{\numberline {6.5}Bilder zusammenfügen}{31}{}%
-\contentsline {section}{\numberline {6.6}Probleme und Lösungen im Verfahren}{31}{}%
+\contentsline {section}{\numberline {6.2}Visuelle Darstellung des Stitching Prozesses}{29}{}%
+\contentsline {section}{\numberline {6.3}Differenzierung von Punkten}{31}{}%
+\contentsline {section}{\numberline {6.4}Transformation bestimmen}{31}{}%
+\contentsline {section}{\numberline {6.5}Bilder zusammenfügen}{33}{}%
+\contentsline {section}{\numberline {6.6}Probleme und Lösungen im Verfahren}{33}{}%
 \contentsline {chapter}{\numberline {7}Spannkraftinduzierten Deformation}{35}{}%
 \contentsline {section}{\numberline {7.1}Deformation zwischen zwei Spannungszuständen}{35}{}%
 \contentsline {section}{\numberline {7.2}Randgeometrien übereinander legen}{36}{}%
@@ -40,7 +40,7 @@
 \contentsline {section}{\numberline {9.1}Anwendung}{47}{}%
 \contentsline {chapter}{\numberline {10}Zusammenfassung und Ausblick}{51}{}%
 \contentsline {section}{\numberline {10.1}Materialunterschiede}{51}{}%
-\contentsline {section}{\numberline {10.2}Verbesserungspotenzial des Verfahrens}{51}{}%
+\contentsline {section}{\numberline {10.2}Verbesserungspotenzial des Verfahrens}{52}{}%
 \contentsline {section}{\numberline {10.3}Ausblick}{52}{}%
-\contentsline {chapter}{Abbildungsverzeichnis}{54}{}%
-\contentsline {chapter}{Literaturverzeichnis}{58}{}%
+\contentsline {chapter}{Abbildungsverzeichnis}{56}{}%
+\contentsline {chapter}{Literaturverzeichnis}{60}{}%

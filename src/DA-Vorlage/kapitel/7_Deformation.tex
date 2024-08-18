@@ -110,7 +110,7 @@ dem Überlappungs-prozess abgebildet.
         \label{fig:stichted_contours_compare}
 \end{figure}
 
-\section{Deformation messen}
+\section{Deformation messen} \label{defoinfo}
 
 Nachdem die beschriebenen Schritte erfolgt sind, kann die Deformation bestimmt werden.
 Mit Deformation ist eine Änderung in der Randgeometrie des Bauteils gemeint.
@@ -128,7 +128,11 @@ ist ein solcher Datensatz zu sehen.
 Innere und äußere Randgeometrien werden separat betrachtet und analysiert.
 In Abbildung~\ref{fig:deformation_data_vis} ist die Deformation des inneren Kreises
 visuell dargestellt. In Abbildung \ref{fig:deformation_data_graph} sind die 
-Deformationswerte grafisch dargestellt.
+Deformationswerte grafisch dargestellt. Ein negativer Deformationswert bedeutet eine 
+Verschiebung nach außen. Ein positiver Wert bedeutet das sich das Bauteil nach 
+innen verformt hat. Das Vorzeichen hängt davon ab, welche Spannungsstufe zuerst ausgewählt
+wird. Wird die größere Spannungsstufe mit einer kleineren verglichen, sind die Ergebnisse
+invertiert.
 
 Es wurde ein per FDM gefertigtes Bauteil eingespannt und zwei Spannungsstufen verglichen.
 Die blaue Linie bildet die Randgeometrie des Bauteils ab, dass mit Spannungsstufe

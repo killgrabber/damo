@@ -28,12 +28,12 @@ The style file: alpha.bst
 Reallocating 'name_of_file' (item size: 1) to 18 items.
 Database file #1: literatur/quellen.bib
 Warning--empty booktitle in inproceedings
-Warning--empty publisher in KentonMchenry.2008
 Warning--empty journal in V..08.08.2019
+Warning--empty publisher in KentonMchenry.2008
 Warning--empty booktitle in XiaoleiDu.2009
 You've used 37 entries,
             2543 wiz_defined-function locations,
-            806 strings with 11655 characters,
+            806 strings with 11646 characters,
 and the built_in function-call counts, 15455 in all, are:
 = -- 1509
 > -- 850

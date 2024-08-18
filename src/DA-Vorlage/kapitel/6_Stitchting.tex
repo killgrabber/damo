@@ -86,9 +86,59 @@ Dadurch kann der ICP-Algorithmus nicht eingesetzt werden.
 Eine andere wichtige Annahme kann getroffen werden: Jeweils eine Kontur aus 
 dem oberen und unteren Bild haben mindestens einen gemeinsamen Punkt.
 
+\section{Visuelle Darstellung des Stitching Prozesses}
+
+Für das bessere Verständnis des Stitching, ist in Abbildung~\ref{fig:stitching_all} 
+der Verlauf visuell dargestellt.
+K1 ist eine Kontur aus dem oberen Bild, K2 die korrespondieren Kontur aus dem 
+unteren Bild. Die Konturen befinden sich im rot markierten Bereich in Abbildung 
+\ref{fig:con_area}.
+K1 ist in blau dargestellt, K2 in gelb. Es ist dargestellt, wie
+Kontur K2 über K1 geschoben wird, um den besten Grad der Übereinstimmung zu ermitteln.
+Die Bilder sind repräsentativ ausgewählt, im tatsächlichen Prozess wird K1 komplett 
+über K2 bewegt.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.9\textwidth]{images/all_cons_top_red.png} % first figure itself
+    \caption{Alle Konturen eines oberen Scans, die in~\ref{fig:stitching_all} dargestellten
+    Konturen befinden sich im rot markierten Bereich.}
+    \label{fig:con_area}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.24\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{images/0_match.png} % first figure itself
+        \caption*{(a)}
+    \end{minipage}\hfill
+    \begin{minipage}{0.24\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{images/216_match.png} % first figure itself
+        \caption*{(b)}
+    \end{minipage}\hfill
+    \begin{minipage}{0.24\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{images/387_match.png} % first figure itself
+        \caption*{(c)}
+    \end{minipage}\hfill
+    \begin{minipage}{0.24\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{images/592_match.png} % first figure itself
+        \caption*{(d)}
+    \end{minipage}\hfill
+    \caption{Verfahren im Verlauf dargestellt, (a) zu Beginn, (b) nach 216 durchgängen, (c) }
+    bei einem guten Match, (d) Kontur K2 komplett über K1 geschoben, 
+    am Ende der Durchgänge.
+    \label{fig:stitching_all}
+\end{figure}
+
 \section{Differenzierung von Punkten}
 
-Die Distanz zwischen zwei Punkten kann über den euklidischen Abstand gemessen werden
+Um diesen gemeinsamen Punkt erkennen zu können, ist es nötig die Distanz 
+zwischen zwei Punkten messen zu können.
+Diese Distanz kann über den euklidischen Abstand gemessen werden
 ~\cite{Dokmanic.2015}. Sei A ein Punkt in einer Kontur aus dem oberen Bild und K eine 
 Kontur aus dem unteren Bild.  
 Um den Punkt aus K zu finden, der am nächsten an A liegt, muss A mit jedem Punkt aus 
@@ -144,60 +194,23 @@ kleineren unterschieden im überlappenden Bereich die korrekte Transformation
 ermittelt werden konnte. Diese Konturen stammen von einem additiv gefertigten 
 Metallbauteil.
 
-\begin{figure}[h]
+\begin{figure}[H]
     \centering
     \begin{minipage}{0.49\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{images/before_matching.png} % first figure itself
+        \includegraphics[width=0.8\textwidth]{images/before_match.png} % first figure itself
         \caption*{(a)} 
     \end{minipage}\hfill
     \begin{minipage}{0.49\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{images/0.24225865209471767contours.png} % first figure itself
+        \includegraphics[width=0.8\textwidth]{images/matched_cons.png} % first figure itself
         \caption*{(b)}
     \end{minipage}\hfill
     \caption{(a) Konturen K1 und K2 so positioniert wie sie in den
     Ursprungsbildern gefunden wurde.
     (b) Konturen, transformiert mit größter Überlappung, 
-        Grad der Überlappung: 24,26 \%}
+        Grad der Überlappung: 20,10 \%}
         \label{fig:k1_and_k2}
-\end{figure}
-
-\section{Visuelle Darstellung des Stitching Prozesses}
-
-In Abbildung~\ref{fig:stitching_all} ist der Prozess des Verfahrens zu sehen.
-K1 ist in blau dargestellt, K2 in grün.
-In jeden Bild ist der Grad der Überlappung dargestellt. Es ist dargestellt, wie
-Kontur K2 über K1 geschoben wird, um den besten Grad der Übereinstimmung zu ermitteln.
-Die Bilder sind repräsentativ ausgewählt, im tatsächlichen Prozess wird K1 komplett 
-über K2 bewegt.
-
-\begin{figure}[h]
-    \centering
-    \begin{minipage}{0.24\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{images/stitching_beginn.PNG} % first figure itself
-        \caption*{(a)}
-    \end{minipage}\hfill
-    \begin{minipage}{0.24\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{images/stitching_middle.PNG} % first figure itself
-        \caption*{(b)}
-    \end{minipage}\hfill
-    \begin{minipage}{0.24\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{images/stitching_match.PNG} % first figure itself
-        \caption*{(c)}
-    \end{minipage}\hfill
-    \begin{minipage}{0.24\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{images/stitching_end.PNG} % first figure itself
-        \caption*{(d)}
-    \end{minipage}\hfill
-    \caption{Verfahren im Verlauf dargestellt, a zu Beginn, b nach n-durchgängen, c }
-    bei einem guten Match, d Kontur K2 komplett über K1 geschoben, 
-    am Ende der Durchgänge.
-    \label{fig:stitching_all}
 \end{figure}
 
 \section{Bilder zusammenfügen}

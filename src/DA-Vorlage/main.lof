@@ -22,9 +22,10 @@
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {6.1}{\ignorespaces Oberes Bild eines Scanvorgangs, FDM Bauteil}}{28}{}%
 \contentsline {figure}{\numberline {6.2}{\ignorespaces Extrahierte Konturen des Bildes ohne vorherige Filterung, der überlappende Bereich ist rot markiert.}}{28}{}%
-\contentsline {figure}{\numberline {6.3}{\ignorespaces (a) Konturen K1 und K2 so positioniert wie sie in den Ursprungsbildern gefunden wurde. (b) Konturen, transformiert mit größter Überlappung, Grad der Überlappung: 24,26 \%}}{31}{}%
-\contentsline {figure}{\numberline {6.4}{\ignorespaces Verfahren im Verlauf dargestellt, a zu Beginn, b nach n-durchgängen, c }}{32}{}%
-\contentsline {figure}{\numberline {6.5}{\ignorespaces Zusammengefügtes Bild}}{33}{}%
+\contentsline {figure}{\numberline {6.3}{\ignorespaces Alle Konturen eines oberen Scans, die in~\ref {fig:stitching_all} dargestellten Konturen befinden sich im rot markierten Bereich.}}{30}{}%
+\contentsline {figure}{\numberline {6.4}{\ignorespaces Verfahren im Verlauf dargestellt, (a) zu Beginn, (b) nach 216 durchgängen, (c) }}{30}{}%
+\contentsline {figure}{\numberline {6.5}{\ignorespaces (a) Konturen K1 und K2 so positioniert wie sie in den Ursprungsbildern gefunden wurde. (b) Konturen, transformiert mit größter Überlappung, Grad der Überlappung: 20,10 \%}}{32}{}%
+\contentsline {figure}{\numberline {6.6}{\ignorespaces Zusammengefügtes Bild}}{33}{}%
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {7.1}{\ignorespaces (a) Zusammengefügtes Bild des FDM Demonstratorbauteils, Spannungsstufe 0 (b) Randgeometrie von (a), die zur Erkennung der Deformation genutzt wird}}{36}{}%
 \contentsline {figure}{\numberline {7.2}{\ignorespaces (a) Kontur des Bauteils AM2 bei Spannungsstufe null, vor dem übereinanderlegen mit der Kontur von Spannungsstufe drei. (b) Die Konturen von AM2 bei Spannungsstufen null und drei. Vollständig Übereinader gelegt.}}{37}{}%
@@ -43,3 +44,4 @@
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {9.1}{\ignorespaces Anwendungsoberfläche}}{48}{}%
 \addvspace {10\p@ }
+\contentsline {figure}{\numberline {10.1}{\ignorespaces Unterschied in der Deformation eines Metallbauteil zu einem Kunststoffteil}}{52}{}%

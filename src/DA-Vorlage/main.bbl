@@ -6,10 +6,6 @@ Bhrigu Ahuja, Michael Karg, and Michael Schmidt.
 \newblock Additive manufacturing in production: challenges and opportunities.
 \newblock page 935304, 03 2015.
 
-\bibitem[{AM }24]{AMExpo365.03.06.2024}
-{AM Expo 365}.
-\newblock 3d-druck: Neues leben f{\"u}r den oldtimer, 03.06.2024.
-
 \bibitem[Anu19]{Anusci.2019}
 Victor Anusci.
 \newblock Bmw's new s58 engine features cylinder head made with 3d printing,
@@ -40,6 +36,11 @@ Sofien Bouaziz, Andrea Tagliasacchi, and Mark Pauly.
 \newblock Sparse iterative closest point.
 \newblock {\em Computer Graphics Forum}, 32(5):113--123, 2013.
 
+\bibitem[Car19]{V..08.08.2019}
+Carlota.
+\newblock Laser scanner vs structured light scanner: which should you choose?
+\newblock 08.08.2019.
+
 \bibitem[CD20]{Czichos.2020}
 Horst Czichos and Werner Daum.
 \newblock Messgr{\"o}{\ss}en und messverfahren.
@@ -67,6 +68,10 @@ Benjamin Durakovic.
 \bibitem[EAA23]{Elaksher.2023}
 Ahmed Elaksher, Tarig Ali, and {Abdullatif Alharthy}.
 \newblock A quantitative assessment of lidar data accuracy, 2023.
+
+\bibitem[Eco24]{AMExpo365.03.06.2024}
+Ecoparts.
+\newblock 3d-druck: Neues leben f{\"u}r den oldtimer, 03.06.2024.
 
 \bibitem[Gar23]{Gardner.2023}
 Leroy Gardner.
@@ -183,11 +188,6 @@ UNIONFAB.
 \newblock From rough to refined: Post-processing methods to elevate metal
   parts.
 \newblock {\em Unionfab}, 22.08.2023.
-
-\bibitem[V.19]{V..08.08.2019}
-Carlota V.
-\newblock Laser scanner vs structured light scanner: which should you choose?
-\newblock 08.08.2019.
 
 \bibitem[VB{\'C}{\etalchar{+}}17]{Vranic.2017}
 Aleksandar Vrani{\'c}, Nebojsa Bogojevic, Sne{\v{z}}ana {{\'C}iri{\'c}
