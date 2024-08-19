@@ -118,6 +118,7 @@ Flugzeugs. Zunächst wird der Innenraum gescannt und mit den originalen Plänen 
 um anschließend ein 3D-Modell zu erstellen. Mithilfe dieses 3D-Modells können passgenaue 
 Bauteile hergestellt werden, die es ermöglichen, ein ehemaliges Passagierflugzeug in eine 
 Frachtmaschine umzubauen.~\cite{Monchinger.2021}
+
 Wie schon erwähnt, wird zur erfolgreichen Weiterbearbeitung ein möglichst 
 genaues digitales Abbild benötigt.
 Ist dies nicht der Fall, müssen nicht passende Teile erneut hergestellt werden, 
@@ -138,14 +139,14 @@ gespeichert. Die Oberfläche eines Objekts wird als Serie von Polygonen beschrie
 Der Grad des Polygons kann variieren, häufig werden Dreiecke verwendet. \cite{lee2019study}
 
 Die Genauigkeit, mit der das Polygon-Netz die gewünschte Oberfläche 
-abbildet, kann gewählt werden. 
+abbildet, kann frei gewählt werden. 
 Je kleiner die Oberfläche der Polygonen ist, desto genauer wird die Oberfläche 
 abgebildet. Mit kleineren Oberflächen steigt die Anzahl der zu speichernden 
 Eckpunkte, was eine größere Datei zur Folge hat.
 In Abbildung \ref{fig:3d_design} ist der Einfluss der Oberflächengröße der Polygonen
-auf die gespeicherte Bauteilgeometrie zu sehen. Bei kleinen Polygonen 
-wird die reale Bauteilgeometrie abgebildet. Umso weniger Polygone gespeichert 
-werden, umso kantiger wird das Modell.
+auf die gespeicherte Bauteilgeometrie abgebildet. Bei kleinen Polygonen 
+wird die Bauteilgeometrie realitätsnah abgebildet. Umso weniger Polygone gespeichert 
+werden, umso kantiger und realitätsferner wird das Modell.
 
 \begin{figure}[H]
     \centering
@@ -211,13 +212,13 @@ Bei der digitalen Abtastung von Zahnimplantaten sind die Abweichungen von
 und 112 $\mu$m groß~\cite{Bohner.2019}.
 Bei Lidar-Scans eines Sportkomplexes wurde eine Standardabweichung von ±0.10 Metern
 gemessen. Es wurde aus 600 Meter Höhe vermessen und die Scandaten mit 
-Referenzpunkten auf dem Boden verglichen.~\cite{Elaksher.2023}
+Referenzpunkten auf dem Boden verglichen~\cite{Elaksher.2023}.
 Aus diesem Grund existieren auch verschiedene Herangehensweisen und Technologien  
 zur 3D-Rekonstruktion.
 
 3D Rekonstruktion-Technologien können in mehrere Kategorien eingeteilt werden,
 bildbasierte Verfahren und  Verfahren die auf Scandaten 
-beruhen sind zwei davon.~\cite{Verykokou.2023}
+beruhen sind zwei davon~\cite{Verykokou.2023}.
 Es existieren auch andere Verfahren die Sensor- oder Volumen-orientiert sind, 
 diese nehmen eine Bauteilgeometrie auf, indem ein Sensor das Bauteil abtastet 
 und die Berührungspunkte speichert.
@@ -228,7 +229,7 @@ mehreren zweidimensionalen Bildern erstellt,
 umso mehr Bilder vorhanden sind, desto besser kann das
 3D Objekt rekonstruiert werden. Um das 3D Objekt zu erstellen werden in 
 allen Bildern gemeinsame Punkte gesucht und dann mit der bekannten Kameraposition, 
-die relative Position des Punktes im 3D Objekt ermittelt.\cite{schenk2005introduction}
+die relative Position des Punktes im 3D Objekt ermittelt~\cite{schenk2005introduction}.
 Abbildung \ref{fig:photogammatry} zeigt dies anschaulich.
 
 \begin{figure}[H]
@@ -272,7 +273,7 @@ exponentiell sein~\cite{XiaoleiDu.2009}.
 Nachteile von diesem Verfahren sind die hohen initialen Kosten eines Scanners 
 und der begrenzte Messbereich. 
 
-\section{Scanner und Datenerfassung} \label{lasers}
+\section{Datenerfassung} \label{lasers}
 
 Wie in Kapitel \ref{3d_construction} beschrieben, 
 können dreidimensionale Daten direkt durch einen Scanner aufgenommen werden. 
@@ -280,11 +281,11 @@ Es existieren verschiedene Technologien und Methoden um Scandaten aufzunehmen,
 darunter die schon erwähnte Fotogrammetrie, Laserscanner und 
 strukturiertem-Licht-Scanner~\cite{Ruiz.2022}. 
 Die Funktionsweise der Scanner sind in Abbildung \ref{fig:scanning_theo} dargestellt.
-Der Laserscanner misst die Koordinaten eines Punktes mithilfe der Zeit die zwischen 
+Ein Laserscanner misst die Koordinaten eines Punktes mithilfe der Zeit die zwischen 
 Ausstrahlen des Lasers und Ankunft des reflektierten Strahls liegt.
 Bei einem strukturiertem-Licht-Scanner wird mithilfe eines Projektors ein Muster 
 auf ein Objekt gestrahlt. Durch mehrere Kameras wird dieses Muster auf dem Objekt 
-aufgenommen. Je nach Oberfläche wird das Muster, das auf das Objekt gestrahlt, verzerrt.
+aufgenommen. Je nach Oberfläche wird das Muster, das auf das Objekt strahlt, verzerrt.
 Diese Verzerrung wird genutzt, um die Oberfläche des Objekts 
 abzubilden.~\cite{georgopoulos2010assessing}
 
@@ -309,8 +310,8 @@ Für die Datenerfassung in dieser Arbeit wird ein Laser-Profilsensor verwendet.
 Laser-Profilsensoren sind Laser-Scanner, die Höhendaten über 
 eine Laserlinie und nicht über einen einzelnen Punkt sammeln. 
 Der Scanner hat, abhängig vom Modell und der angebrachten Höhe einen limitierten
-Bereich, den er erfassen kann.
-In Abbildung \ref{fig:scanner} ist ein Messbereich für den Scanner vom Typ 
+Bereich, der erfasst werden kann.
+In Abbildung \ref{fig:scanner} ist der Messbereich für den Scanner vom Typ 
 ScanControl-LLT30xx sichtbar. Mittig kann 
 in einer Tiefe von 85 mm eine Linie mit der Länge 25 mm gemessen werden. 
 Der komplette messbare Bereich ist rot markiert. \cite{MESSTECHNIK_2020}
@@ -351,7 +352,7 @@ Es gibt drei Basis Arten der Transformationen:
 Translation, Rotation und Skalierung. Die Translation verschiebt alle Punkte 
 um einen bestimmten Vektor in eine bestimmte Richtung. 
 Rotation: Drehen eines Objekts um einen Punkt (in 2D) oder eine Achse (in 3D).
-Veränderung der Größe eines Objekts durch Multiplikation der Koordinaten 
+Die Skalierung beschreibt eine veränderung der Größe eines Objekts durch Multiplikation der Koordinaten 
 mit einem Skalierungsfaktor~\cite{XiaoleiDu.2009}.
 
 \section{ICP-Algorithmus} \label{icp}
@@ -364,11 +365,12 @@ Der Algorithmus errechnet eine lokale, optimale Transformation, die ein Daten-Se
 dem anderen annähern kann. \cite{icp_og}
 
 Um diese Transformation, zu bestimmen werden zuerst die Distanzen von allen 
-Punkten in Daten-Set A zu dem jeweils nächsten Punkt in Daten-Set B aufsummiert 
-werden. Dann wird eins der Daten-Sets verschoben und rotiert und wieder die 
-Distanzen gebildet. Dies wird so lange gemacht bis die Änderung der Distanzen 
-konvergiert. Die entstehende Transformation ist dann optimal.
-Für identische Daten-Sets die sich nur in einer Transformation und Rotation 
+Punkten in Daten-Set A zu dem jeweils nächsten Punkt in Daten-Set B aufsummiert. 
+Dann wird eins der Daten-Sets transformiert und wieder die 
+Distanzen gebildet. Dies wird so lange durchgeführt,
+bis die Änderung der Distanzen konvergiert. 
+Die entstehende Transformation ist dann optimal.
+Für identische Daten-Sets, die sich nur in einer Transformation 
 unterscheiden, funktioniert dieser Algorithmus sehr gut. Bei Daten-Sets die 
 Messfehler oder Überlappungen beinhalten kann häufig keine optimale 
 Transformation bestimmt werden.
@@ -379,8 +381,6 @@ oder die 'Anderson-accelerated' Version.
 Beide Varianten können besser mit Ausreißern und nur 1
 partiell überlappenden Daten umgehen und eine gleichwertige oder bessere 
 Transformation, verglichen mit dem originalen ICP-Algorithmus, errechnen.\ \cite{icp}
-
-Der Algorithmus geht iterativ vor und berechnet immer eine optimale lokale Transformation.
 Die beiden Daten-Set sollten schon vor dem Anwenden des ICP-Algorithmus grob angenähert sein, 
 das beschleunigt die Konvergenz und damit die Laufzeit des Algorithmus.
 Eine grobe Annäherung kann ermittelt werden, indem die Massenmittelpunkte der beiden Daten-Set

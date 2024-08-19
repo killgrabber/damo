@@ -8,7 +8,7 @@
 \contentsline {section}{\numberline {2.3}Reverse Engineering}{5}{}%
 \contentsline {section}{\numberline {2.4}Digitales Abbild}{6}{}%
 \contentsline {section}{\numberline {2.5}3D Rekonstruktion}{7}{}%
-\contentsline {section}{\numberline {2.6}Scanner und Datenerfassung}{9}{}%
+\contentsline {section}{\numberline {2.6}Datenerfassung}{9}{}%
 \contentsline {section}{\numberline {2.7}Transformationen}{11}{}%
 \contentsline {section}{\numberline {2.8}ICP-Algorithmus}{12}{}%
 \contentsline {chapter}{\numberline {3}Methodik}{13}{}%
