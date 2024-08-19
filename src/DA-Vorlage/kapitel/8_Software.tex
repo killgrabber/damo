@@ -4,7 +4,7 @@
 Ziel dieser Arbeit ist es nicht nur eine Methodik zur optische 
 Deformationserkennung zu entwickeln, sondern diese Methodik auch in einer 
 Anwendung einfach nutzbar zu machen. 
-Diese Kapitel dokumentiert diese Anwendung und geht auf Herausforderungen 
+Diese Kapitel dokumentiert diese Anwendung und geht auf Optimierungen 
 in der Entwicklung ein.
 
 \section{Anwendung}
@@ -16,7 +16,7 @@ neu geladen werden.
 Die Anwendung bietet Funktionen, um Resultate in dem entsprechenden Dateiformat zu 
 speichern. Soweit möglich werden Dateinamen automatisch ermittelt, 
 daher ist es zu empfehlen von Anfang an mit einem einheitlichen Namensschema bei
-den 3D-Scandaten zu arbeiten. 
+den Scandaten zu arbeiten. 
 Das Schema \glqq Bauteilbeschreibung \textunderscore Spannungsstufe
 \textunderscore Scannerdurchlauf.ply\grqq~
 hat sich bewährt. Ein Beispiel für den zweite Scan eines FDM-Bauteil bei der
@@ -26,6 +26,8 @@ vierten Spannungsstufen wäre also \glqq FDM0\textunderscore SP4\textunderscore 
 \section{Dokumentation}
 
 In Abbildung \ref{fig:software_screenshot} ist die Oberfläche der Anwendung dargestellt.
+Im folgenden Absatz werden die verschiedenen Anzeigen
+und Buttons in ihrer Funktionsweise beschrieben.
 
 \begin{figure}[H]
     \centering
@@ -34,13 +36,14 @@ In Abbildung \ref{fig:software_screenshot} ist die Oberfläche der Anwendung dar
     \label{fig:software_screenshot}
 \end{figure}
 
-Im folgenden werden die verschiedenen Anzeigen und Buttons in ihrer Funktionsweise beschrieben.
-Über die Buttons \glqq Select Pointcloud\grqq~können Scandaten zum Konvertieren in Bilder
-ausgewählt werden. Der Text neben dem Bild zeigt den Namen der ausgewählten 
-Datei an. Die zuerst aufgenommenen Scandaten sollte hier als erstes ausgewählt werden.
+Über die Buttons \glqq Select Pointcloud\grqq~können Scandaten, 
+die in Bilder konvertiert werden sollen, ausgewählt werden.
+Der Text neben dem Bild zeigt den Namen der ausgewählten 
+Datei an. Die zuerst aufgenommenen Scandaten sollte hier als erstes ausgewählt werden, 
+damit der überlappende Bereich korrekt gesetzt wird.
 Der Button \glqq Start PC conversion\grqq~startet die Konvertierung. Neben dem Button 
 befindet sich eine Fortschrittsanzeige.
-Wenn \glqq Show Pointclouds\grqq~gesetzt ist, werden die Scandaten vor dem 
+Wenn \glqq Show Pointclouds\grqq~ausgewählt ist, werden die Scandaten vor dem 
 Konvertieren in einem separaten Fenster angezeigt. So kann überprüft werden, ob die 
 korrekten Scandaten ausgewählt wurde.
 Wenn der Prozess abgeschlossen ist, werden die resultieren Bilder als Vorschau in der 
@@ -59,7 +62,7 @@ Auch hier wird der Fortschritt und das Endresultat, sobald es vorliegt, angezeig
 
 \section{Visualisierungen}
 
-Die auf der rechten Seite der Software zu sehenden Schaltfläche sind, für die 
+Die auf der rechten Seite der Software zu sehenden Schaltflächen, sind für die 
 Visualisierung der Ergebnisse zu benutzten. 
 Messdaten, wie die Werte der Kraftmesser im Schraubstock oder die Verschiebung der 
 Schraubstockbacken, können 
@@ -68,7 +71,7 @@ können mehrere Datensets, zum Beispiel von verschiedenen Spannkraftstufen, mith
 des Buttons \glqq combine tdms data\grqq~in einem Graph zusammengefasst werden.
 Die in Kapitel \ref{validation} gezeigten Graphen wurden mithilfe dieser Funktion erzeugt.
 
-Damit auch die CAD-Datei des additiv gefertigten Bauteils verglichen werden kann, 
+Damit auch die CAD-Datei eines additiv gefertigten Bauteils verglichen werden kann, 
 existiert der \glqq Convert stl\grqq~Button. Hier wird eine .stl-Datei zu einem Bild 
 konvertiert und kann über \glqq save stl\grqq~gespeichert werden.
 
@@ -86,7 +89,7 @@ Beim Konvertieren und stitchen werden alle Prozesse, die nicht voneinander abhä
 nebenläufig ausgeführt. Das reduziert die Laufzeit der Prozesse.
 Die Anwendung ist in Python geschrieben, rechenintensive Prozesse wurden aber mithilfe 
 der Bibliothek \glqq Numba\grqq~in optimierten Maschinencode compiliert~\cite{numba}.
-Dadurch ist der Konvertierungs- und Stitching-Prozess deutlich schneller geworden. 
+Dadurch wurde der Konvertierungs- und Stitching-Prozess deutlich schneller. 
 Durch die Optimierungen konnte der Konvertierungsprozess von 49 s auf 41 s verschnellert 
 werden. Bei dem Stitchprozess war die Verbesserung noch deutlicher. Hier benötigt die 
 Anwendung ca. 30 s um zwei Konturen zu vergleichen.

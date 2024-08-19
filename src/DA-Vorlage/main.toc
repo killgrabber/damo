@@ -23,14 +23,14 @@
 \contentsline {chapter}{\numberline {6}Stitching}{27}{}%
 \contentsline {section}{\numberline {6.1}Feature Erkennung}{27}{}%
 \contentsline {section}{\numberline {6.2}Visuelle Darstellung des Stitching Prozesses}{29}{}%
-\contentsline {section}{\numberline {6.3}Differenzierung von Punkten}{31}{}%
+\contentsline {section}{\numberline {6.3}Differenzierung von Punkten}{30}{}%
 \contentsline {section}{\numberline {6.4}Transformation bestimmen}{31}{}%
-\contentsline {section}{\numberline {6.5}Bilder zusammenfügen}{33}{}%
+\contentsline {section}{\numberline {6.5}Bilder zusammenfügen}{32}{}%
 \contentsline {section}{\numberline {6.6}Probleme und Lösungen im Verfahren}{33}{}%
 \contentsline {chapter}{\numberline {7}Spannkraftinduzierten Deformation}{35}{}%
 \contentsline {section}{\numberline {7.1}Deformation zwischen zwei Spannungszuständen}{35}{}%
 \contentsline {section}{\numberline {7.2}Randgeometrien übereinander legen}{36}{}%
-\contentsline {section}{\numberline {7.3}Deformation messen}{37}{}%
+\contentsline {section}{\numberline {7.3}Deformationen bestimmen}{37}{}%
 \contentsline {chapter}{\numberline {8}Validierung}{41}{}%
 \contentsline {section}{\numberline {8.1}Messergebnisse}{41}{}%
 \contentsline {section}{\numberline {8.2}Ergebnisse der optischen Deformationsanalyse}{43}{}%

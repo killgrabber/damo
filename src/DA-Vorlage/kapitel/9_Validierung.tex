@@ -16,14 +16,14 @@ Abbildung \ref{fig:single} zu sehen.
 In der Spannungskurve ist ein elastischer Bereich für das 
 Bauteil zu sehen, in dem sich die Spannkraft zurückbewegt, nachdem kein 
 Anzugdrehmoment mehr anliegt. Für die Validierung ist, die maximal anliegende 
-Spannkraft von Interesse. Auf der Grund der Elastizität kann nicht der maximal vorliegende 
+Spannkraft von Interesse. Auf Grund der Elastizität kann nicht der maximal vorliegende 
 Wert der Spannkraft angenommen werden, 
 sondern es muss ein Wert gewählt werden der nach dem maximalen Ausschlag liegt.
-Dieser wurde über die erste Ableitung der Spannkraftkurve gefunden. Sobald der 
+Dieser wurde über die erste Ableitung der Spannkraftkurve ermittelt. Sobald der 
 Absolutwert der Steigung unter 0.0009 N fällt, wir die Spannkraft und Auslenkung an 
 diesem Punkt gewählt. 0.0009 N wurde empirisch ermittelt, um bei allen Bauteilen einen 
 angemessenen Wert zu liefern.
-Die Spannkraft wurde an zwei Achsen gemessen und zu der Gesamtkraft aufsummiert.
+Die Spannkraft wurde an zwei Achsen gemessen und zu einer Gesamtkraft aufsummiert.
 
 \begin{figure}[H]
     \centering
@@ -50,13 +50,14 @@ Das Bauteil AM0 wurde nur mit zwei Spannungsstufen gemessen,
 da bereits bei der zweiten Stufe über 2500 N Kraft erforderlich war, 
 um das Bauteil nur minimal in x-Richtung zu deformieren. Dies zeigt, 
 dass die Stützstruktur einen erheblichen Einfluss auf die Verformbarkeit 
-eines Bauteils hat. Beim Bauteil AM1 wurden 2500 N erst nach vier Spannungsstufen 
+eines Bauteils hat. Bei Bauteil AM1 wurden 2500 N erst nach vier Spannungsstufen 
 erreicht.
 
- Die FDM-Bauteile wurden mit deutlich weniger Kraft eingespannt. 
- Hier wurde bei etwa 250 N gestoppt, dennoch ist die Verschiebung der 
- Teile deutlich größer als bei den Metallbauteilen. Diese Werte wurden aufgenommen, 
- um die visuelle Deformationserkennung zu validieren.
+Die FDM-Bauteile wurden mit deutlich weniger Kraft eingespannt. 
+Hier wurde bei etwa 250 N gestoppt, dennoch ist die Verschiebung der 
+Teile deutlich größer als bei den Metallbauteilen. Diese Werte wurden aufgenommen, 
+um die visuelle Deformationserkennung zu validieren. In Abbildung \ref{fig:akkumulated} 
+ist die Spannkraft und Verschieben der fünf Demonstratorbauteile dargestellt.
 
 \begin{figure}[H]
     \centering
@@ -91,22 +92,21 @@ erreicht.
 \section{Ergebnisse der optischen Deformationsanalyse} \label{defodata}
 
 In Abbildung \ref{fig:am_defos} und Abbildung \ref{fig:fdm_defos} sind die erkannten
-Deformation grafisch dargestellt. Jeweils von Spannungsstufe null bis 
+Deformation dargestellt. Jeweils von Spannungsstufe null bis 
 Spannungsstufen Sechs. Bei dem FDM Bauteil fehlt die Spannungsstufen fünf, 
 diese ist leider bei der händischen Dateiname Vergabe überschrieben worden und konnte 
-deshalb nicht ausgewertet worden. Aus diesem Grund ist eine so große Lücke in der 
+deshalb nicht ausgewertet werden. Aus diesem Grund ist eine so große Lücke in der 
 Abbildung \ref{fig:fdm_defos} zu sehen.
 Außerdem sind große Unterschiede in den y-Werten der Deformation zu sehen. Zum Beispiel 
-die rote Kurve in Abbildung \ref{fig:am_defos} die den Unterschied der Spannungsstufen 
+die rote Kurve in Abbildung \ref{fig:am_defos}, die den Unterschied der Spannungsstufen 
 null und eins angibt, liegt deutlich über den anderen Kurven. 
 Diese Kurve sollte näher an null der y-Achse liegen. 
-Dies liegt an Ungenauigkeiten in dem Stitching Verfahren. In den Graphen ist also 
+Dies liegt an Ungenauigkeiten in dem Stitching Verfahren. In den Graphen ist mehr 
 auf die Steigung der Deformationskurve zu achten und weniger auf ihre Position.
 In der Steigung ist zu erkennen, dass
-sich die Bauteile im mittleren Bereich nach außen hin deformiert haben und in 
-den Randbereichen sich nach innen und dann wieder nach außen deformieren.
+sich die Bauteile im mittleren Bereich nach am stärksten nach außen hin deformiert haben.
 Außerdem ist im Vergleich der beiden Graphen (Abb. \ref{fig:am_defos} und \ref{fig:fdm_defos}) 
-zu sehen, dass sich das FDM Bauteil deutlich mehr verformt hat. 
+zu sehen, dass sich das FDM Bauteil deutlich mehr, als das Metallteil, verformt hat. 
 Hier beträgt die größte Deformation über 150 Pixel.
 Bei dem Metallbauteil, das mit der zehnfachen Kraft eingespannt wurde (250 nm vs. 2500 nm)
 sind es nur knapp 40 Pixel, wie in Abbildung~\ref{fig:am_defos} zu sehen ist.
@@ -153,7 +153,7 @@ welcher Position sich ein Bauteil verformt.
 Die unterschiedlichen Deformationen von verschieden Bauteilen sind in 
 Abbildung~\ref{fig:materials} dargestellt. 
 Das in Abbildung~\ref{fig:am_parts} (a) gezeigte Bauteil konnte nicht analysiert werden, 
-da durch die Stützstruktur keine korrekte Transformation zur stitchen berechnet werden konnte.
+da durch die Stützstruktur keine korrekte Transformation zum stitchen berechnet werden konnte.
 Warum dies der Fall ist, wird im folgenden Kapitel dargelegt.
 Bei den FDM-Bauteilen ist festzustellen, dass sie sich deutlich stärker verformen 
 als die Metallteile. Beide FDM-Bauteile zeigen eine ähnliche Verformungsausprägung, 
@@ -161,8 +161,8 @@ jedoch tritt die Deformation, trotz identischer Geometrie, an unterschiedlichen 
 Dies könnte auf Unterschiede im Druckprozess zurückzuführen sein. 
 Diese Beobachtung zeigt einen weiteren Nutzen der Methodik: Sie ermöglicht
 nicht nur die Bestimmung des Ausmaßes der Deformation, sondern auch die 
-Identifikation von Schwachstellen innerhalb eines Bauteils, die zu einer erhöhten 
-Deformation führen.
+Identifikation von Schwachstellen innerhalb eines Bauteils.
+Diese Schwachstellen führen zu einer punktuell erhöhten Deformation.
 
 \begin{figure}[H]
   \centering

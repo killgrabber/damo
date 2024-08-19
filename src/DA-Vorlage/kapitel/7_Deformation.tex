@@ -90,7 +90,7 @@ Um Rechenzeit zu sparen werden vor dem Ermitteln der ersten Transformation die
 Massenmittelpunkte beider Bauteilgeometrien berechnet und beide Bilder so transformiert, 
 dass sie den gleichen Massenmittelpunkt haben.
 In Abbildung~\ref{fig:stichted_contours_compare} sind die Konturen vor und nach 
-dem Überlappungs-prozess abgebildet.
+dem Überlappungsprozess abgebildet.
 
 \begin{figure}[H]
     \centering
@@ -109,10 +109,9 @@ dem Überlappungs-prozess abgebildet.
         \label{fig:stichted_contours_compare}
 \end{figure}
 
-\section{Deformation messen} \label{defoinfo}
+\section{Deformationen bestimmen} \label{defoinfo}
 
 Nachdem die beschriebenen Schritte erfolgt sind, kann die Deformation bestimmt werden.
-Mit Deformation ist eine Änderung in der Randgeometrie des Bauteils gemeint.
 Eine Deformierung kann an jedem Rand eines Bauteils auftreten.
 Um die Deformation eines Bauteils zu messen, wird über die 
 gesamte x-Achse des Bildes iteriert und die kleinste Differenz 
@@ -127,10 +126,11 @@ ist ein solcher Datensatz zu sehen.
 Innere und äußere Randgeometrien werden separat betrachtet und analysiert.
 In Abbildung~\ref{fig:deformation_data_vis} ist die Deformation des inneren Kreises
 visuell dargestellt. In Abbildung \ref{fig:deformation_data_graph} sind die 
-Deformationswerte grafisch dargestellt. Ein negativer Deformationswert bedeutet eine 
-Verschiebung nach außen. Ein positiver Wert bedeutet das sich das Bauteil nach 
+Deformationswerte dargestellt. Ein negativer Deformationswert bedeutet eine 
+Verschiebung nach außen. Ein positiver Wert bedeutet, dass sich das Bauteil nach 
 innen verformt hat. Das Vorzeichen hängt davon ab, welche Spannungsstufe zuerst ausgewählt
-wird. Wird die größere Spannungsstufe mit einer kleineren verglichen, sind die Ergebnisse
+wurde. Hier wird eine kleinere Spannungsstufen, mit einer größeren verglichen.
+Wird die größere Spannungsstufe mit einer kleineren verglichen, sind die Ergebnisse
 invertiert.
 
 Es wurde ein per FDM gefertigtes Bauteil eingespannt und zwei Spannungsstufen verglichen.
@@ -165,7 +165,7 @@ So können auch mehrere Spannungsstufen visuell dargestellt und verglichen werde
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.7\textwidth]{images/FDM_sp0_sp3_defo_plot.png}
+    \includegraphics[width=0.9\textwidth]{images/FDM_sp0_sp3_defo_plot.png}
     \caption{Differenz von zwei Spannungsstufen bei einem FDM Bauteil, äußere 
     Bauteilgeometrie.}
     \label{fig:deformation_data}

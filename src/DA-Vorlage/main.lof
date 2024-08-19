@@ -4,7 +4,7 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {2.1}{\ignorespaces Überhangtests mit unterschiedlichen Resultaten und Oberflächenqualitäten in sieben verschiedenen Winkeln \cite {Meng.2020}}}{5}{}%
-\contentsline {figure}{\numberline {2.2}{\ignorespaces Die Genauigkeit einer 3D-Datei ist abhängig von der Anzahl der gespeicherten Eckpunkte am Beispiel des Demonstratorbauteils. (a) 1512 Punkte (b) 52 Punkte (c) 30 Punkte}}{6}{}%
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Die Genauigkeit einer 3D-Datei ist abhängig von der Anzahl der gespeicherten Eckpunkte. Am Beispiel des Demonstratorbauteils gezeigt. (a) 1512 Punkte (b) 52 Punkte (c) 30 Punkte}}{6}{}%
 \contentsline {figure}{\numberline {2.3}{\ignorespaces Funktionsweise der Fotogrammetrie \cite {.13.08.2024}.}}{8}{}%
 \contentsline {figure}{\numberline {2.4}{\ignorespaces Theoretische Funktionsweise von (a) einem Laserscanner und (b) einem strukturiertem-Licht-Scanner~\cite {V..08.08.2019}.}}{10}{}%
 \contentsline {figure}{\numberline {2.5}{\ignorespaces Messbarer Bereich eines Laserscanners vom Typ: ScanControl-LLT30xx. Der messbare Bereich ist rot markiert. Die Dimensionen sind in mm angegeben und vom Laserursprung gemessen.}}{11}{}%
@@ -15,14 +15,14 @@
 \contentsline {figure}{\numberline {4.1}{\ignorespaces Versuchsaufbau}}{18}{}%
 \contentsline {figure}{\numberline {4.2}{\ignorespaces Das Demonstratorbauteil aus Kunststoff per FDM gedruckt.}}{19}{}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {5.1}{\ignorespaces Pointcloud eines Metallbauteils, (a) ohne Filterung der Ausreißer, (b) Die Ausreißer wurden mithilfe der Bibliothek \glqq Open3D\grqq ~ entfernt.}}{22}{}%
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Pointcloud eines Metallbauteils, (a) ohne Filterung der Ausreißer, (b) Die Ausreißer wurden mithilfe der Bibliothek \glqq Open3D\grqq ~entfernt.}}{22}{}%
 \contentsline {figure}{\numberline {5.2}{\ignorespaces Resultat der Pointcloud zu Bild Konvertierung eines FDM Bauteils, ohne zusätzliche Filterung der Höheninformationen.}}{23}{}%
 \contentsline {figure}{\numberline {5.3}{\ignorespaces Auftreten der Höhenwerte in den Scandaten der Demonstratorbauteile. (a): Das Histogramm ist nicht skaliert. (b): Logarithmische Skalierung der Höheninformationen. Hier ist zu sehen, dass die Höhenhäufigkeiten streuen.}}{24}{}%
 \contentsline {figure}{\numberline {5.4}{\ignorespaces Resultat der Pointcloud zu Bild Konvertierung eines FDM Bauteils.}}{25}{}%
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {6.1}{\ignorespaces Oberes Bild eines Scanvorgangs des FDM Demonstratorbauteils.}}{28}{}%
 \contentsline {figure}{\numberline {6.2}{\ignorespaces Extrahierte Konturen des Bildes ohne vorherige Filterung, der überlappende Bereich ist rot markiert.}}{28}{}%
-\contentsline {figure}{\numberline {6.3}{\ignorespaces Alle Konturen eines oberen Scans, die in~\ref {fig:stitching_all} dargestellten Konturen befinden sich im rot markierten Bereich.}}{30}{}%
+\contentsline {figure}{\numberline {6.3}{\ignorespaces Alle Konturen eines oberen Scans, die in~\ref {fig:stitching_all} dargestellten Konturen befinden sich im rot markierten Bereich.}}{29}{}%
 \contentsline {figure}{\numberline {6.4}{\ignorespaces Verfahren im Verlauf dargestellt, (a) zu Beginn, (b) nach 216 durchgängen, (c) }}{30}{}%
 \contentsline {figure}{\numberline {6.5}{\ignorespaces (a) Konturen K1 und K2 so positioniert wie sie in den Ursprungsbildern gefunden wurde. (b) Konturen, transformiert mit größter Überlappung, Grad der Überlappung: 20,10 \%}}{32}{}%
 \contentsline {figure}{\numberline {6.6}{\ignorespaces Zusammengefügtes Bild}}{33}{}%
