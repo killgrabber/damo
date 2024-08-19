@@ -33,12 +33,12 @@ Warning--empty publisher in KentonMchenry.2008
 Warning--empty booktitle in XiaoleiDu.2009
 You've used 38 entries,
             2543 wiz_defined-function locations,
-            811 strings with 11787 characters,
-and the built_in function-call counts, 15723 in all, are:
+            811 strings with 11844 characters,
+and the built_in function-call counts, 15705 in all, are:
 = -- 1532
 > -- 858
 < -- 15
-+ -- 309
++ -- 300
 - -- 297
 * -- 1166
 := -- 2620
@@ -62,7 +62,7 @@ purify$ -- 298
 quote$ -- 0
 skip$ -- 509
 stack$ -- 0
-substring$ -- 806
+substring$ -- 797
 swap$ -- 81
 text.length$ -- 15
 text.prefix$ -- 10
