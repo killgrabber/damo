@@ -1,0 +1,186 @@
+%\documentclass[notes, t]{beamer}       % print frame + notes
+% \documentclass[notes=only]{beamer}   % only notes
+% \documentclass[t, aspectratio=169, notes]{beamer}              % only frames
+\documentclass[t, aspectratio=169]{beamer}    
+
+\usepackage{color,xcolor}
+\usetheme{TUD} % Beamer theme v 3.0
+%\setbeamertemplate{note page}[plain]
+
+\usepackage{tikz}
+\usetikzlibrary{positioning,chains,arrows,shadows,fadings,shapes,backgrounds,snakes,matrix,patterns,plotmarks,trees,mindmap, calc}
+\usepackage{pgfpages} 
+\setbeamertemplate{note page}[plain]
+\usepackage{pgfplots}
+\pgfplotsset{compat = 1.3}
+\usepackage{amsmath}% http://ctan.org/pkg/amsmath
+\usepackage{kbordermatrix}% http://www.hss.caltech.edu/~kcb/TeX/kbordermatrix.sty
+%\usepackage[demo]{graphics}
+
+%\setbeameroption{show notes on second screen=right}
+
+\usepackage{caption}
+\captionsetup{font=footnotesize, labelfont=footnotesize, justification=centering
+}
+
+\definecolor{1F77B4}{HTML}{1F77B4}
+\definecolor{FF7F0E}{HTML}{FF7F0E}
+\definecolor{2CA02C}{HTML}{2CA02C}
+\definecolor{D62728}{HTML}{D62728}
+\definecolor{9467BD}{HTML}{9467BD}
+\definecolor{8C564B}{HTML}{8C564B}
+\definecolor{E377C2}{HTML}{E377C2}
+\definecolor{7F7F7F}{HTML}{7F7F7F}
+\definecolor{BCBD22}{HTML}{BCBD22}
+\definecolor{17BECF}{HTML}{17BECF}
+
+\let\marvosymLightning\Lightning
+\usetikzlibrary{calc}
+
+\usepackage{etoolbox,refcount}
+\usepackage{multicol}
+\usepackage{mathtools}
+
+\setbeamertemplate{caption}[numbered]
+\newcounter{countitems}
+\newcounter{nextitemizecount}
+\newcommand{\setupcountitems}{%
+	\stepcounter{nextitemizecount}%
+	\setcounter{countitems}{0}%
+	\preto\item{\stepcounter{countitems}}%
+}
+\makeatletter
+\newcommand{\computecountitems}{%
+	\edef\@currentlabel{\number\c@countitems}%
+	\label{countitems@\number\numexpr\value{nextitemizecount}-1\relax}%
+}
+\newcommand{\nextitemizecount}{%
+	\getrefnumber{countitems@\number\c@nextitemizecount}%
+}
+\newcommand{\previtemizecount}{%
+	\getrefnumber{countitems@\number\numexpr\value{nextitemizecount}-1\relax}%
+}
+\makeatother    
+\newenvironment{AutoMultiColItemize}{%
+	\ifnumcomp{\nextitemizecount}{>}{3}{\begin{multicols}{2}}{}%
+		\setupcountitems\begin{itemize}}%
+		{\end{itemize}%
+		\unskip\computecountitems\ifnumcomp{\previtemizecount}{>}{3}{\end{multicols}}{}}
+		
+\newcommand\irregularcircle[2]{% radius, irregularity
+  \pgfextra {\pgfmathsetmacro\len{(#1)+rand*(#2)}}
+  +(0:\len pt)
+  \foreach \a in {10,20,...,350}{
+    \pgfextra {\pgfmathsetmacro\len{(#1)+rand*(#2)}}
+    -- +(\a:\len pt)
+  } -- cycle
+}
+
+\usepackage{algorithm2e}
+\usepackage{algorithmic}
+% \usepackage{algorithm}
+% \usepackage[noend]{algpseudocode}
+% \usepackage[linesnumbered,ruled,vlined]{algorithm2e}
+% \SetKwInput{KwInput}{Input}                % Set the Input
+% \SetKwInput{KwOutput}{Output}              % set the Output   
+
+%\usepackage[latin1]{inputenc}
+%\usepackage[TS1,T1]{fontenc}
+\usepackage{array}
+\usepackage{lipsum}
+\usepackage{wasysym}
+
+\usepackage{graphicx}
+\usepackage{wrapfig}
+%\usepackage{subfig}
+\usepackage{placeins}
+
+\usepackage{subfiles}
+
+\usepackage[ngerman]{babel}
+
+\usepackage[]{hyperref}
+
+\PassOptionsToPackage{hyphens}{url}\usepackage{hyperref}
+
+\usepackage{subcaption}
+
+\usepackage{movie15}
+
+%\usenavigationsymbols
+
+\graphicspath{{../../cfigures/}{./}{figs/}{figures/}{../logos/}{../cfigures/}{../RTS-2011/figs/}{fig/}{}}
+
+\usepackage[absolute,overlay]{textpos}
+
+%\newcommand{\floor}[1]{\left\lfloor{#1}\right\rfloor}
+\newcommand{\setof}[1]{\left\{{#1}\right\}}
+\newcommand{\set}[2]{\left\{{#1}\mid{#2}\right\}}
+\newcommand{\ceiling}[1]{\left\lceil{#1}\right\rceil}
+\newcommand{\red}[1]{\textcolor{red}{#1}}
+\newcommand{\blue}[1]{\textcolor{blue}{#1}}
+\newcommand{\yellow}[1]{\textcolor{yellow}{#1}}
+\newcommand{\green}[1]{\textcolor{green}{#1}}
+\newcommand{\orange}[1]{\textcolor{orange}{#1}}
+
+\newcommand{\suml}[2]{
+  \sum\limits_{#1}^{#2}
+}
+
+\newcommand{\ceil}[1]{
+  \left\lceil #1 \right\rceil
+}
+
+\newcommand{\floor}[1]{
+  \left\lfloor #1 \right\rfloor
+}
+
+\newenvironment{mynamedtheorem}[1]
+{\begin{beamerboxesrounded}[upper=uppertheoremcol,lower=lowertheoremcol,shadow=true]{Theorem
+#1}} {\end{beamerboxesrounded}}
+
+\tikzset{
+	task/.style={shade, shading=radial, rectangle,minimum height=.08cm,
+		inner color=#1!60, outer color=#1!60},
+	%task1/.style={task=yellow, minimum width=8mm},
+	task1/.style={task=blue, minimum width=8mm},
+	task2/.style={task=orange, minimum width=13mm},
+	task3/.style={task=red, minimum width=13mm},
+	task4/.style={task=green, minimum width=13mm},
+	task5/.style={task=yellow, minimum width=13mm},
+	task6/.style={task=purple, minimum width=13mm},
+	task7/.style={task=cyan, minimum width=13mm},
+	task8/.style={task=pink, minimum width=13mm},
+	task9/.style={task=white, minimum width=1mm, inner color=white, outer
+		color=white},
+	task0/.style={rectangle, task=gray, minimum width=1mm}
+}
+
+\tikzstyle{circleNode}=[circle,thick,draw=blue!75,fill=blue!20,minimum size=6mm]
+\tikzstyle{niceFill}=[thick,draw=blue!75,fill=blue!20,minimum size=6mm]
+
+
+\begin{document}
+
+\title[]{Entwicklung einer Methodik zur optischen Analyse spannkraftinduzierter Deformationen additiv gefertigter Bauteile}
+%\subtitle{Automated 3D scan based CAD-repositioning for design and verification in one-off construction\\by\\Stephan Mönchinger, RobertSchröder, RainerStark}
+\institute[TU Dortmund]{\small Niklas Thieme\\
+	TU Dortmund University, Germany
+}
+\date{\today}
+\begin{frame}
+  \vspace{2cm}
+  \maketitle
+  \vspace{1.5cm}  
+  %{\scriptsize This research is supported in parts by the German Research Foundation (DFG) as part of SFB876 and SPP1500.}
+\end{frame}
+
+\subfile{src/introduction.tex}
+
+\subfile{src/datenerfassung.tex}
+
+\subfile{src/datenaufbereitung.tex}
+
+\subfile{src/stitching.tex}
+
+\end{document} 

@@ -1,0 +1,194 @@
+%
+% TU
+% A Beamer theme with the colors of the TU Dortmund.
+%
+% Author: Kevin Dungs (https://github.com/kdungs)
+% Version: 0.2 2013-05-15
+%
+
+%\usepackage{fontspec}
+%    \setmainfont[Ligatures=TeX]{Tex Gyre Adventor}
+\usepackage{xcolor}
+
+
+% Colors
+\definecolor{TUgreen}{HTML}{649600}
+\definecolor{TUgreenLighter}{HTML}{A5CB5B}
+\definecolor{TUgreenDarker}{HTML}{54711C}
+\definecolor{TUalert}{HTML}{A10000}
+\definecolor{TUalertLighter}{HTML}{D03434}
+\definecolor{TUexample}{HTML}{006496}
+\definecolor{TUexampleLighter}{HTML}{8735B5}
+\definecolor{PeP}{HTML}{565656}
+\definecolor{ltgrey}{HTML}{CCCCCC}
+
+% Titlepage
+%  Title
+\setbeamerfont{title}{size=\Large}
+\setbeamercolor{title}{fg=white, bg=TUgreen}
+%  Subtitle
+\setbeamerfont{subtitle}{size=\large}
+%  Author
+%\setbeamerfont{author}{size=\large}
+%  Institute
+\setbeamerfont{institute}{series=\bfseries, size=\large}
+\setbeamercolor{institute}{fg=PeP}
+
+% Frametitle
+\setbeamerfont{frametitle}{size=\Large}
+\setbeamercolor{frametitle}{fg=black, bg=white}
+
+% Framesubtitle
+\setbeamerfont{framesubtitle}{size=\large}
+\setbeamercolor{framesubtitle}{bg=TUgreenDarker, fg=white}
+
+% Structure
+\setbeamerfont{structure}{size=\large}
+\setbeamercolor{structure}{fg=TUgreen}
+
+% Blocks
+\setbeamertemplate{blocks}[square]
+\setbeamerfont{block title}{size=\large}
+\setbeamercolor{block title}{fg=TUgreen, bg=white}
+\setbeamercolor{block title alerted}{use=alerted text,fg=TUalert, bg=white}
+\setbeamercolor{block title example}{use=example text,fg=TUexample, bg=white}
+
+% Items
+\setbeamertemplate{items}[circle]
+
+% Other
+\setbeamertemplate{navigation symbols}{} %no nav symbols
+
+\newcommand{\LogoLine}{%
+\raisebox{-12mm}[0pt][0pt]{%
+\begin{pgfpicture}{0mm}{0mm}{0mm}{0mm}
+\pgfsetlinewidth{0.28mm}
+\color{TUgreen}
+\pgfline{\pgfpoint{-3mm}{1mm}}{\pgfpoint{14.2cm}{1mm}}
+\end{pgfpicture}}}
+
+\setbeamertemplate{headline}[text line]{\LogoLine}
+
+% Customizations
+\defbeamertemplate*{frametitle}{TU}
+{
+    \vspace*{.5em}
+    \begin{beamercolorbox}[wd=.92\paperwidth, ht=1em, dp=.4em, leftskip=.03em, left]{frametitle}
+        \hspace{.25em}\usebeamercolor{frametitle}\usebeamerfont{frametitle}\insertframetitle
+    \end{beamercolorbox}
+    \vspace*{-0.4em}
+}
+
+\defbeamertemplate*{framesubtitle}{TU}
+{
+    \begin{beamercolorbox}[wd=.92\paperwidth, ht=.7em, dp=.3em, leftskip=.03em, left]{framesubtitle}
+    \hspace{.25em}\usebeamercolor{framesubtitle}\usebeamerfont{framesubtitle}\insertframesubtitle
+    \end{beamercolorbox}
+}
+
+
+
+\defbeamertemplate*{footline}{TU}
+{
+	\leavevmode%
+    \begin{beamercolorbox}[wd=.25\paperwidth, ht=1.8em, dp=1em, left, leftskip=1em]{}%
+%        \textbf{\insertshorttitle}
+%    \includegraphics[width=0.6in, height=20pt, keepaspectratio]{tud-logo.jpg}\hspace{0.05in}
+    \includegraphics[height=0.15in, keepaspectratio]{tu_src/vm_logo.png} \hspace{0.05in} 
+%    \includegraphics[width=0.65in]{sfb.png}\hspace{0.05in}     
+%    \includegraphics[width=0.35in]{DFG.png}\hspace{0.1in} 
+ %  \includegraphics[width=0.2in]{spp1500.png}    
+    \includegraphics[height=0.15in, keepaspectratio]{tu_src/tud-logo.jpg}
+    %\includegraphics[width=0.6in]{tud-cs12.png}
+   
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[wd=.6\paperwidth, ht=1.8em, dp=1em, center]{}%
+        \insertshortauthor\quad(\insertshortinstitute)%
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[wd=.15\paperwidth, ht=1.8em, dp=1em, right, rightskip=1em]{}%
+%        \insertpagenumber{} / \inserttotalframenumber%
+        \insertframenumber{}%
+    \end{beamercolorbox}%
+}
+
+\definecolor{darkblue}{rgb}{0,0,0.6}
+\definecolor{lightblue}{rgb}{0.2,0.2,1}
+
+\newcommand{\emphblue}[1]{\emph{\textcolor{blue}{#1}}}
+\newcommand{\emphred}[1]{\emph{\textcolor{red}{#1}}}
+
+\newenvironment<>{myblock}[1]{%
+\setbeamercolor*{block title}{bg=darkblue,fg=white}% These two lines added
+\setbeamercolor*{block body}{bg=lightblue,fg=white}% to the "block" env. definition
+\begin{actionenv}#2%
+\def\insertblocktitle{#1}%
+\par%
+\usebeamertemplate{block begin}}
+{\par%
+\usebeamertemplate{block end}%
+\end{actionenv}}
+
+\newenvironment<>{myalterblock}[1]{%
+\setbeamercolor*{block title}{bg=darkblue,fg=white}% These two lines added
+\setbeamercolor*{block body}{bg=yellow,fg=black}% to the "block" env. definition
+\begin{actionenv}#2%
+\def\insertblocktitle{#1}%
+\par%
+\usebeamertemplate{block begin}}
+{\par%
+\usebeamertemplate{block end}%
+\end{actionenv}}
+
+\newenvironment<>{myalterblockI}[1]{%
+\setbeamercolor*{block title}{bg=darkblue,fg=white}% These two lines added
+\setbeamercolor*{block body}{bg=yellow,fg=black}% to the "block" env. definition
+\begin{actionenv}#2%
+\def\insertblocktitle{#1}%
+\par%
+\usebeamertemplate{block begin}}
+{\par%
+\usebeamertemplate{block end}%
+\end{actionenv}}
+
+
+\setbeamercolor{upperproofcol}{fg=white,bg=brown}%
+\setbeamercolor{lowerproofcol}{fg=black,bg=lightgray}%
+\setbeamercolor{uppertheoremcol}{fg=white,bg=purple}%
+\setbeamercolor{lowertheoremcol}{fg=black,bg=lightgray}%
+\setbeamercolor{upperdefinitioncol}{fg=white,bg=purple}%
+\setbeamercolor{upperdefinitioncol}{fg=black,bg=orange}%
+
+
+\newenvironment{myproof}
+{\begin{beamerboxesrounded}[upper=upperproofcol,lower=lowerproofcol,shadow=true]{Proof}}
+{\end{beamerboxesrounded}}
+
+\newenvironment{mytheorem}
+{\begin{beamerboxesrounded}[upper=uppertheoremcol,lower=lowertheoremcol,shadow=true]{Theorem}}
+{\end{beamerboxesrounded}}
+
+\newenvironment{mylemma}
+{\begin{beamerboxesrounded}[upper=uppertheoremcol,lower=lowertheoremcol,shadow=true]{Lemma}}
+{\end{beamerboxesrounded}}
+
+
+\newenvironment{question}
+{\begin{beamerboxesrounded}[upper=upperproofcol,lower=lowerproofcol,shadow=true]{Question?}}
+{\end{beamerboxesrounded}}
+
+
+\renewenvironment{definition}
+{\begin{beamerboxesrounded}[upper=upperdefinitioncol,lower=lowerdefinitioncol,shadow=true]{Definition}}
+{\end{beamerboxesrounded}\vskip 0.1in}
+
+
+\newenvironment{proofNoend}
+{\begin{beamerboxesrounded}[upper=upperproofcol,lower=lowerproofcol,shadow=true]{Proof}}
+{\hfill(cont.)\\\end{beamerboxesrounded} }
+
+
+\setbeamercolor{section in toc}{use=structure,parent=structure,fg=red}
+\setbeamercolor{tabular}{use=structure,parent=structure,fg=red}
+
+
+
